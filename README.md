@@ -4,8 +4,8 @@ Stay tuned as this amazing project is about to take off 🚀
 <br/>
 
 ## Intention ✨  
-This project is first and foremorst intended as a demo project.   
-The intention is to gain experience working on a project as a group, while working towards a product built on technologies that are (at the start of the project) both familiar and unfamiliar to the contributing developrs.  
+This project is first and foremost intended as a demo project.   
+The intention is to gain experience working on a project as a group, while working towards a product built on technologies that are (at the start of the project) both familiar and unfamiliar to the contributing developers.  
 <br/>
 
 ## Background ⌛
@@ -13,7 +13,7 @@ The developers on this project have varying backgrounds of self-study, bootcamps
 <br/>
 
 ## The project 💡
-To organise our thoghts, narrow down the scope and give **you** an idea of what we are building, we've composed this table:  
+To organise our thoughts, narrow down the scope and give **you** an idea of what we are building, we've composed this table:  
 |      |      |  
 |------|------|
 |**We are building** | An app that let's users connect around sporting activities in their area |
@@ -34,7 +34,7 @@ To build this app, we intend to use
 |DevOps   | Github Actions|  
 <br/>
 
-## Contributing developers 👑:  
+## Contributing developers 👑
 This project exists thanks to these beautiful people:  
 
 |[![Rostislav Petrenko](https://avatars2.githubusercontent.com/u/46669977?s=100&u=00e511b8b6a6077c560d84bcafbd922e203b852f&v=4 "Rostislav Petrenko")](https://github.com/Rostislav013)|[![Ngan Dao](https://avatars2.githubusercontent.com/u/62238023?s=100&u=f96c09210c30ef29d7b459ce6d1935ebad76d05c&v=4 "Ngan Dao")](https://github.com/nannadao)|[![Marina Froes](https://avatars2.githubusercontent.com/u/45233290?s=100&u=232caa9d52123ee6ba94d0951774cdab10b0bcae&v=4 "Marina Froes")](https://github.com/MarinaFroes)|[![Chiranjibi Chapagain](https://avatars1.githubusercontent.com/u/38856325?s=100&u=fab689158a188b966fdea8e88ceb5a9b95251a8b&v=4 "Chiranjibi Chapagain")](https://github.com/Chiranjibichapagain)|[![Mike Vedsted](https://avatars2.githubusercontent.com/u/44086320?s=100&u=d813fed4d116724772c56c4a2e00e8b3e4b683c0&v=4 "Mike Vedsted")](https://github.com/MikeVedsted)
