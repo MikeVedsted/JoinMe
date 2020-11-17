@@ -2,9 +2,9 @@
 
 ## 🐝🐜 What are we hunting 🐞🐌  
 A clear and concise description of what the bug is for quick overview  
-**[]Where:** Manage my matches pages  
-**[]What:** Match is accepted but chat is not unlocked  
-**[]When:** Clicking "Approve match" after viewing notifications  
+**Where:** Manage my matches pages  
+**What:** Match is accepted but chat is not unlocked  
+**When:** Clicking "Approve match" after viewing notifications  
 
 ## 🐾 How to track it down 🐾
 Steps to reproduce the behavior:
