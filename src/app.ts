@@ -1,8 +1,8 @@
-import express from "express";
-import compression from "compression"; // compresses requests
-import session from "express-session";
-import bodyParser from "body-parser";
-import lusca from "lusca";
+import express from "express"
+import compression from "compression" // compresses requests
+import session from "express-session"
+import bodyParser from "body-parser"
+import lusca from "lusca"
 import {
   SESSION_SECRET,
   PG_USER,
@@ -11,14 +11,14 @@ import {
   PG_PW,
   PG_PORT,
   PG_URI
-} from "./util/secrets";
-import { Client } from "pg";
+} from "./util/secrets"
+import { Client } from "pg"
 
 /**
  * Controllers (route handlers)
  */
-import eventRouter from "./routers/event";
-import userRouter from "./routers/user";
+import eventRouter from "./routers/event"
+import userRouter from "./routers/user"
 
 /**
  * Configure db connection and connect
@@ -28,47 +28,47 @@ const client = new Client({
   ssl: {
     rejectUnauthorized: false
   }
-});
-client.connect();
+})
+client.connect()
 
 /** 
  * Check that connection is established (can be removed once succesful)
  * */ 
 client.query("SELECT table_schema,table_name FROM information_schema.tables;", (err, res) => {
-  if (err) throw err;
+  if (err) throw err
   for (const row of res.rows) {
-    console.log(JSON.stringify(row));
+    console.log(JSON.stringify(row))
   }
-  client.end();
-});
+  client.end()
+})
 
 /**
  * Create Express server
  */
-const app = express();
+const app = express()
 
 /**
  * Express configuration
  */
-app.set("port", process.env.PORT || 3000);
+app.set("port", process.env.PORT || 5000)
 app.use(session({
   secret: SESSION_SECRET,
   resave: false,
   saveUninitialized: false
-}));
+}))
 
 /**
  * 3rd part configuration
  */
-app.use(compression());
-app.use(bodyParser.json());
-app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(lusca.xframe("SAMEORIGIN"));
-app.use(lusca.xssProtection(true));
+app.use(compression())
+app.use(bodyParser.json())
+app.use(express.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(lusca.xframe("SAMEORIGIN"))
+app.use(lusca.xssProtection(true))
 
 // Use routers
-app.use("/users", userRouter);
-app.use("/events", eventRouter);
+app.use("/users", userRouter)
+app.use("/events", eventRouter)
 
-export default app;
+export default app
