@@ -3,7 +3,7 @@ name: "\U0001F41B BUG REPORT"
 about: Found a bug? Report it and help us improve.
 title: "[BUG] - "
 labels: 'Priority: Medium :zap:, Status: Received :inbox_tray:, Type: Bug :bug:'
-assignees: ''
+assignees: nannadao
 
 ---
 
