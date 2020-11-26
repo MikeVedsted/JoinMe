@@ -6,8 +6,8 @@ import { Switch, Route } from 'react-router-dom'
 
 const Routes = () => (
   <Switch>
-    <Route exact path="/" component={} />  
     {/* 
+    <Route exact path="/" component={} />  
     <ProtectedRoute exact path="/cart" component={Cart} />
     <AdminRoute exact path="/admin/create-product" component={CreateProduct} />
     <AdminRoute path="/admin/manage-product/:id" children={<ManageProduct />} /> 
