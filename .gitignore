@@ -30,5 +30,8 @@ Thumbs.db
 # ignore yarn.lock
 yarn.lock
 
+# ignore package-lock
+package-lock.json
+
 # compiled output
 /dist
