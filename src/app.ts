@@ -3,6 +3,7 @@ import compression from "compression" // compresses requests
 import session from "express-session"
 import bodyParser from "body-parser"
 import lusca from "lusca"
+import passport from 'passport'
 import {
   SESSION_SECRET,
   PG_USER,
@@ -19,6 +20,8 @@ import { Client } from "pg"
  */
 import eventRouter from "./routers/event"
 import userRouter from "./routers/user"
+import googleLoginRouter from "./routers/googleLogin"
+
 
 /**
  * Configure db connection and connect
@@ -67,8 +70,13 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(lusca.xframe("SAMEORIGIN"))
 app.use(lusca.xssProtection(true))
 
+// passport initialization and session
+app.use(passport.initialize())
+app.use(passport.session())
+
 // Use routers
 app.use("/users", userRouter)
 app.use("/events", eventRouter)
+app.use("/login", googleLoginRouter)
 
 export default app
