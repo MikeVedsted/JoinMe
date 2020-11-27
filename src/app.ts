@@ -4,6 +4,8 @@ import session from "express-session"
 import bodyParser from "body-parser"
 import lusca from "lusca"
 import passport from 'passport'
+import { Client } from "pg"
+
 import {
   SESSION_SECRET,
   PG_USER,
@@ -13,8 +15,6 @@ import {
   PG_PORT,
   PG_URI
 } from "./util/secrets"
-import { Client } from "pg"
-
 /**
  * Controllers (route handlers)
  */
