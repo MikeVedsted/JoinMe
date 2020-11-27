@@ -1,7 +1,7 @@
 import React from "react";
 
 // import Routes from "./Routes";
-import UserLogin from "./components/UserLogin";
+import GoogleUserLogin from "./components/GoogleUserLogin";
 import "./App.scss";
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
     <>
       <h1>Moro Moro!</h1>
       <p>Now start developing!</p>
-      <UserLogin />
+      <GoogleUserLogin />
     </>
   );
 }

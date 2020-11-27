@@ -3,7 +3,6 @@ import compression from "compression" // compresses requests
 import session from "express-session"
 import bodyParser from "body-parser"
 import lusca from "lusca"
-import passport from 'passport'
 import { Client } from "pg"
 
 import {
@@ -70,9 +69,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(lusca.xframe("SAMEORIGIN"))
 app.use(lusca.xssProtection(true))
 
-// passport initialization and session
-app.use(passport.initialize())
-app.use(passport.session())
 
 // Use routers
 app.use("/users", userRouter)

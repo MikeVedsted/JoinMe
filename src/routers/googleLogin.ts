@@ -1,6 +1,6 @@
 import express from "express"
 
-import {googleLogin } from "../controllers/login"
+import {googleLogin } from "../controllers/googleLogin"
 
 const router = express.Router()
 
