@@ -514,6 +514,7 @@ import { UserService } from '@services/UserService'
 #### Do not commit commented out code or unnecessary `console.log()` :wastebasket:🔇
 
 Version control exists for a reason. Leave old code in your history.
+In addition, `console.log ()` not only makes the code dirty, it can also inadvertently remain in a production environment if it is forgotten.
 
 **Bad** :poop:
 
@@ -524,7 +525,14 @@ type User = {
   // age: number
   // jobPosition: string
 }
-console.log('test')
+
+const user: User = {
+  name: 'John Doe',
+  email: 'johndoe@mail.com',
+}
+
+console.log(user.name)
+console.log(user.email)
 ```
 
 **Good** :heart:
@@ -533,6 +541,11 @@ console.log('test')
 type User = {
   name: string
   email: string
+}
+
+const user: User = {
+  name: 'John Doe',
+  email: 'johndoe@mail.com',
 }
 ```
 
