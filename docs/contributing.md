@@ -172,7 +172,7 @@ Unless it is required, do not use semi colons. The code looks cleaner without th
 
 According to the [React+TypeScript Cheatsheets](https://github.com/typescript-cheatsheets/react), it is recommended to use `type` for React Component Props and State, for consistency and because it is more constrained.
 
-In addition to this basic guidelines, is it also nice to follow the best practices described bellow. _Most of these examples were based on the material available on the [clean-code-typescript](https://github.com/labs42io/clean-code-typescript) repository._
+In addition to these basic guidelines, is it also nice to follow the best practices described bellow. _Most of these examples were based on the material available on the [clean-code-typescript](https://github.com/labs42io/clean-code-typescript) repository._
 
 #### Use meaningful and pronounceable variable names :no_entry_sign::zipper_mouth_face:
 
@@ -546,20 +546,32 @@ Here you can find information specific for React, but most of the guidelines for
 
 #### Components naming convention :name_badge:
 
-When naming React components, follow this pattern:
-`component name` + `what the component does`
+When naming React components try to make related components line up in the directory alphabetically.
+
+Do so by following this pattern:
+`(parent)` + `component function/content` + `component variation/detail`
+
+Component names should use PascalCase.
+
+Exception to the rules above is higher-order components, which should be name `with<Component>`.
 
 **Bad** :poop:
 
 ```javascript
 // Related components are not together
-AdminNavigation
-CreateUser
+AdminNav
+AuthForm
+ButtonNavigation
+Cart
 CreateProduct
+DetailsCart
 DetailsProduct
-DetailsUser
-GuestNavigation
+DisplayProductInCart
+GoogleLogin
+InfoUser
+MakeUser
 Navigation
+NavLink
 Products
 User
 ```
@@ -568,15 +580,21 @@ User
 
 ```javascript
 // Related components are together
+Cart
+CartDetails
+CartDisplayProduct
+LoginForm
+LoginGoogle
 Navigation
-NavigationGuest
 NavigationAdmin
-Products
-ProductDetails
+NavigationButton
+NavigationLink
 ProductCreate
+ProductDetails
+Products
 User
-UserDetails
 UserCreate
+UserDetails
 ```
 
 #### Event handlers and props naming convention :name_badge:
@@ -707,10 +725,10 @@ const Clock = () => {
   const [date, setDate] = useState(new Date())
 
   return (
-    <div>
+    <>
       <h1>Hello, world!</h1>
       <h2>It is {date.toLocaleTimeString()}.</h2>
-    </div>
+    </>
   )
 }
 ```
@@ -823,17 +841,17 @@ We do not recommend using indexes for keys if the order of items may change. Thi
 **Bad** :poop:
 
 ```javascript
-<div>
+<>
   {users.map((user, index) => <p key={index}>{user.name}</p)}
-</div>
+</>
 ```
 
 **Good** :heart:
 
 ```javascript
-<div>
+<>
   {users.map(user => <p key={user.id}>{user.name}</p)}
-</div>
+</>
 ```
 
 #### Avoid inline styles :no_good_man:
