@@ -172,6 +172,10 @@ Unless it is required, do not use semi colons. The code looks cleaner without th
 
 According to the [React+TypeScript Cheatsheets](https://github.com/typescript-cheatsheets/react), it is recommended to use `type` for React Component Props and State, for consistency and because it is more constrained.
 
+7 - **Avoid using `any` type** :package::question:
+
+Using `any` comes at the cost of losing type safety, which is one of the main motivations for using TypeScript. Unless we are dealing with a 3rd party library, avoid using it.
+
 In addition to these basic guidelines, is it also nice to follow the best practices described bellow. _Most of these examples were based on the material available on the [clean-code-typescript](https://github.com/labs42io/clean-code-typescript) repository._
 
 #### Use meaningful and pronounceable variable names :no_entry_sign::zipper_mouth_face:
@@ -555,7 +559,7 @@ _For more examples of clean code in Typescript, please check the repo [clean-cod
 
 ### React Style guide
 
-Here you can find information specific for React, but most of the guidelines for Typescript can be also applied here, especially this [5 basic guidelines](#typescript-style-guide). Make sure to read them.
+Here you can find information specific for React, but most of the guidelines for Typescript can be also applied here, especially these [basic guidelines](#typescript-style-guide). Make sure to read them.
 
 #### Components naming convention :name_badge:
 
@@ -1013,6 +1017,7 @@ Ampersand (**&**) is equal to the selector of the parent selector. We can use it
 
 ### Typescript
 
+- [The TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
 - [React+TypeScript Cheatsheets](https://github.com/typescript-cheatsheets/react)
 - [Clean code typescript](https://github.com/labs42io/clean-code-typescript)
 - [Clean code javascript](https://raw.githubusercontent.com/ryanmcdermott/clean-code-javascript/master/README.md)
