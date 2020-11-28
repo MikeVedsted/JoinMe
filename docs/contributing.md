@@ -257,6 +257,8 @@ const loadPages = (count: number = 10) => {
 
 #### Functions should do one thing :one:
 
+If the function does more than one thing, split it into more functions.
+
 **Bad** :poop:
 
 ```ts
@@ -284,8 +286,6 @@ const isActiveClient = (client: Client) => {
 ```
 
 #### Function names should say what they do :speech_balloon:
-
-This is self-explanatory. If the function does more than one thing, split it into more functions.
 
 **Bad** :poop:
 
