@@ -1,4 +1,4 @@
-# Contributing to Join me :construction_worker: :construction:
+# Contributing to JoinMe :construction_worker: :construction:
 
 The following is a set of style guidelines for contributing to [JoinMe](https://github.com/MikeVedsted/JoinMe) on GitHub to make sure the code and documentation for this project is clean, readable and beautiful.
 
