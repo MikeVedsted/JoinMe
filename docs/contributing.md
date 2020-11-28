@@ -20,9 +20,9 @@ These are mostly guidelines, not rules. Use your best judgment, and feel free to
 
 [References](#references)
 
-## Style guides 🎨
+## Style guides
 
-### :sparkles: Golden Rules :sparkles:
+### Golden Rules
 
 1 - **Don't repeat yourself** :no_entry_sign::repeat:
 
@@ -42,7 +42,7 @@ In general, your code should be self-explanatory. Add comments only when necessa
 
 ---
 
-### Git Commit Messages Style Guide :speech_balloon:
+### Git Commit Messages Style Guide
 
 When contributing to this project, your commit messages should follow these guidelines:
 
@@ -142,9 +142,9 @@ $ git logline
 
 ---
 
-### Typescript Style guide :haircut_woman:
+### Typescript Style guide
 
-Here you can find our guidelines for writing clear, concise and pretty TypeScript. Some of these are also applicable when using React, but make sure to also read the [React specific session](#react-style-guide).
+Here you can find our guidelines for writing clear, concise and pretty TypeScript. Some of these are also applicable when using React, but make sure to also read the [React specific section](#react-style-guide).
 
 Keep in mind these basic guidelines:
 
@@ -540,7 +540,7 @@ _For more examples of clean code in Typescript, please check the repo [clean-cod
 
 ---
 
-### React Style guide :lipstick:
+### React Style guide
 
 Here you can find information specific for React, but most of the guidelines for Typescript can be also applied here, especially this [5 basic guidelines](#typescript-style-guide). Make sure to read them.
 
@@ -844,7 +844,7 @@ For more information about styles, please check the Sass Style guide bellow.
 
 ---
 
-### Sass Style guide :nail_care:
+### Sass Style guide
 
 #### Use BEM methodology
 
