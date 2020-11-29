@@ -68,7 +68,7 @@ app.use(lusca.xframe("SAMEORIGIN"))
 app.use(lusca.xssProtection(true))
 
 // Use routers
-app.use("/users", userRouter)
-app.use("/events", eventRouter)
+app.use("/api/v1/users", userRouter)
+app.use("/api/v1/events", eventRouter)
 
 export default app

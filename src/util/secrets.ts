@@ -23,7 +23,7 @@ export const PG_USER = process.env["PG_USER"]
 export const PG_HOST = process.env["PG_HOST"]
 export const PG_DB = process.env["PG_DB"]
 export const PG_PW = process.env["PG_PW"]
-export const PG_PORT = process.env["PG_PORT"]
+export const PG_PORT = process.env["PG_PORT"] as number | undefined
 export const PG_URI = process.env["PG_URI"]
 
 if (

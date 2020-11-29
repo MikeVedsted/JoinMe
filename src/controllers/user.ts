@@ -1,5 +1,5 @@
-import async from "async"
-import { Request, Response, NextFunction } from "express"
+import { Request, Response, NextFunction, response } from "express"
+
 import UserService from "../services/user"
 
 export const findAllUsers = async (
