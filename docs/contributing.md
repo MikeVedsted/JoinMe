@@ -36,6 +36,8 @@ Follow as much as possible the guidelines on this document and be consistent thr
 
 People will read your code. Although clean and beautiful code is awesome, it is also essential that it is readable.
 
+_Hint: If you are using VS Code, you can also add the extension `Code Spell Checker` to avoid typos on your code._
+
 4 - **Document your code** :page_facing_up::writing_hand:
 
 In general, your code should be self-explanatory. Add comments only when necessary and make sure to be concise and clear, do not add obvious explanations.
