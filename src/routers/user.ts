@@ -19,6 +19,6 @@ router.get("/:userEmail", findUserByEmail)
 router.post("/google-signup", googleCreate)
 router.post("/google-authenticate", googleLogin)
 router.put("/:userId", isAuthenticated, updateUser)
-router.delete("/:userId", isAuthenticated, deleteUser)
-
+//router.delete("/:userId", isAuthenticated, deleteUser)
+router.delete("/:userId", deleteUser)
 export default router

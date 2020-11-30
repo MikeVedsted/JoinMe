@@ -76,11 +76,13 @@ export const updateUser = async (
 
 export const deleteUser = async (
   req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+  res: Response) => {
   try {
-    console.log("something should happen when this is called. Req: ", req)
+    // DELETE FROM users WHERE id=1
+    console.log("something should happen when this is called. Req: ", req.params.userId)
+
+    await UserService.deleteUser(req.params.userId)
+    res.status(204).end()
   } catch (error) {
     console.log(error)
   }
