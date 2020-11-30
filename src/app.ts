@@ -19,7 +19,6 @@ import {
  */
 import eventRouter from "./routers/event"
 import userRouter from "./routers/user"
-import googleLoginRouter from "./routers/googleLogin"
 
 
 /**
@@ -73,6 +72,5 @@ app.use(lusca.xssProtection(true))
 // Use routers
 app.use("/users", userRouter)
 app.use("/events", eventRouter)
-app.use("/login", googleLoginRouter)
 
 export default app
