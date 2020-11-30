@@ -1,5 +1,5 @@
-import async from "async"
 import { Request, Response, NextFunction } from "express"
+
 import UserService from "../services/user"
 
 export const findAllUsers = async (
@@ -56,7 +56,7 @@ export const googleLogin = async (
   next: NextFunction
 ) => {
   try {
-    console.log("something should happen when this is called. Req: ", req)
+    await UserService.googleLogin(req, res)
   } catch (error) {
     console.log(error)
   }
