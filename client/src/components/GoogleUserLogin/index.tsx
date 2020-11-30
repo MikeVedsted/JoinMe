@@ -8,7 +8,7 @@ const GoogleUserLogin = () => {
   const responseSuccessGoogle = async (response: any) => {
     const userToken = await response.tokenObj.id_token;
     axios
-      .post("http://localhost:5000/login/google/authenticate", userToken)
+      .post("http://localhost:5000/api/v1/users/google-authenticate", userToken)
       .then((response: any) => {
         console.log(response);
       });
