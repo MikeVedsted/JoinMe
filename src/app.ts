@@ -31,17 +31,6 @@ const client = new Client({
 })
 client.connect()
 
-/** 
- * Check that connection is established (can be removed once succesful)
- * */ 
-client.query("SELECT table_schema,table_name FROM information_schema.tables;", (err, res) => {
-  if (err) throw err
-  for (const row of res.rows) {
-    console.log(JSON.stringify(row))
-  }
-  client.end()
-})
-
 /**
  * Create Express server
  */
