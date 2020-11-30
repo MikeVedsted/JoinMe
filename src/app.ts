@@ -31,17 +31,6 @@ const client = new Client({
 })
 client.connect()
 
-/** 
- * Check that connection is established (can be removed once succesful)
- * */ 
-client.query("SELECT table_schema,table_name FROM information_schema.tables;", (err, res) => {
-  if (err) throw err
-  for (const row of res.rows) {
-    console.log(JSON.stringify(row))
-  }
-  client.end()
-})
-
 /**
  * Create Express server
  */
@@ -68,7 +57,7 @@ app.use(lusca.xframe("SAMEORIGIN"))
 app.use(lusca.xssProtection(true))
 
 // Use routers
-app.use("/users", userRouter)
-app.use("/events", eventRouter)
+app.use("/api/v1/users", userRouter)
+app.use("/api/v1/events", eventRouter)
 
 export default app
