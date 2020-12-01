@@ -22,11 +22,34 @@ const googleCreate = (user: unknown) => {
 }
 
 const findUserById = async (userId: string) => {
-  console.log('findUserByID fired for id: ', userId)
+  try {
+    const user = await (
+      await pool.query('SELECT * FROM userk WHERE user_id = $1', [userId])
+    ).rows
+    return { user: user }
+  } catch (error) {
+    return { error: error.message }
+  }
 }
 
-const findAllUsers = () => {
-  console.log('findAllUsers fired')
+const findAllUsers = async () => {
+  try {
+    const users = await (await pool.query('SELECT * FROM userk')).rows
+    return { users: users }
+  } catch (error) {
+    return { error: error.message }
+  }
+}
+
+const findUserByEmail = async (userEmail: string) => {
+  try {
+    const user = await (
+      await pool.query('SELECT * FROM userk WHERE email = $1', [userEmail])
+    ).rows
+    return { user: user }
+  } catch (error) {
+    return { error: error.message }
+  }
 }
 
 const updateUser = async (userId: string, update: string) => {
@@ -75,10 +98,6 @@ const googleLogin = async (req: Request, res: Response) => {
       error: error.message
     })
   }
-}
-
-const findUserByEmail = async (userEmail: string) => {
-  console.log('Find user fired for email: ', userEmail)
 }
 
 export default {
