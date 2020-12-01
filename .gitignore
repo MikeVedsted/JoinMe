@@ -40,4 +40,4 @@ package-lock.json
 client/.eslintcache
 
 # vscode settings
-.vscode/*
+.vscode
