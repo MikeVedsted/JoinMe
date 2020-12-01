@@ -1,24 +1,27 @@
-function createEvent(event: any) {
-  console.log("create event fired")
+// FIX: Add correct type to event
+const createEvent = (event: unknown) => {
+  console.log('create event fired')
 }
 
-async function findEventById(eventId: string) {
-  console.log("find by ID fired for id: ", eventId)
+const findEventById = async (eventId: string) => {
+  console.log('find by ID fired for id: ', eventId)
 }
 
-function findAllEvents() {
-  console.log("find all events fired")
+const findAllEvents = () => {
+  console.log('find all events fired')
 }
 
-async function updateEvent(
-  eventId: string,
-  update: string
-){
-  console.log("Update event fired for id: ", eventId, "update(should be changed from string): ", update)
+const updateEvent = async (eventId: string, update: string) => {
+  console.log(
+    'Update event fired for id: ',
+    eventId,
+    'update(should be changed from string): ',
+    update
+  )
 }
 
-function deleteEvent(eventId: string) {
-  console.log("Delete event fired for id: ", eventId)
+const deleteEvent = (eventId: string) => {
+  console.log('Delete event fired for id: ', eventId)
 }
 
 export default {
@@ -26,5 +29,5 @@ export default {
   findEventById,
   findAllEvents,
   updateEvent,
-  deleteEvent,
+  deleteEvent
 }
