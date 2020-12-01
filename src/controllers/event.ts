@@ -1,6 +1,7 @@
 import async from 'async'
 import { Request, Response, NextFunction } from 'express'
 import EventService from '../services/event'
+import {Event} from '../types'
 
 export const findAllEvents = async (
   req: Request,
@@ -8,7 +9,7 @@ export const findAllEvents = async (
   next: NextFunction
 ) => {
   try {
-    console.log('something should happen when this is called. Req: ', req)
+    res.json(await EventService.findAllEvents())
   } catch (error) {
     console.log(error)
   }
@@ -32,7 +33,20 @@ export const createEvent = async (
   next: NextFunction
 ) => {
   try {
-    console.log('something should happen when this is called. Req: ', req)
+    const { title, category, date, time, description, max_participants, address, expires_at, image } = req.body
+    const event:Event = {
+      title,
+      category,
+      date,
+      time,
+      description,
+      max_participants,
+      address,
+      expires_at,
+      image
+    }
+
+    res.json(await EventService.createEvent(event))
   } catch (error) {
     console.log(error)
   }

@@ -1,14 +1,37 @@
-// FIX: Add correct type to event
-const createEvent = (event: unknown) => {
-  console.log('create event fired')
+import { Pool } from 'pg'
+
+import { PG_USER, PG_HOST, PG_DB, PG_PW, PG_PORT } from '../util/secrets'
+
+const pool = new Pool({
+  user: PG_USER,
+  host: PG_HOST,
+  database: PG_DB,
+  password: PG_PW,
+  port: PG_PORT,
+  ssl: {
+    rejectUnauthorized: false
+  }
+})
+import {Event} from '../types'
+
+const createEvent = async (event: Event) => {
+  // const addressId= await pool.query('INSERT')
+  const newEvent = await (
+        await pool.query(
+          'INSERT INTO event (title, category, date, time, description, max_participants, address, expires_at, image) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *',
+          [event.title, event.category, event.date, event.time, event.description, event.max_participants, event.address, event.expires_at, event.image]
+        )
+  )
+  return newEvent.rows
 }
 
 const findEventById = async (eventId: string) => {
   console.log('find by ID fired for id: ', eventId)
 }
 
-const findAllEvents = () => {
-  console.log('find all events fired')
+const findAllEvents = async() => {
+  const data = await (await pool.query('SELECT * FROM event')).rows
+  return data
 }
 
 const updateEvent = async (eventId: string, update: string) => {

@@ -43,8 +43,9 @@ const deleteUser = (userId: string) => {
 }
 
 const googleLogin = async (req: Request, res: Response) => {
-  const googleToken = req.body
-  const decodedToken = jwt.decode(googleToken)
+  const { id_token } = req.body
+  const decodedToken = jwt.decode(id_token)
+  console.log('decoded--',decodedToken)
   const {
     given_name,
     family_name,
@@ -53,12 +54,12 @@ const googleLogin = async (req: Request, res: Response) => {
   } = decodedToken as GoogleToken
   try {
     const user = await (
-      await pool.query('SELECT * FROM users WHERE email = $1', [email])
+      await pool.query('SELECT * FROM userk WHERE email = $1', [email])
     ).rows
     if (user.length === 0) {
       const newUser = await (
         await pool.query(
-          'INSERT INTO users (profile_image, first_name, last_name, email) VALUES ($1, $2, $3, $4) RETURNING *',
+          'INSERT INTO userk (profile_image, first_name, last_name, email) VALUES ($1, $2, $3, $4) RETURNING *',
           [picture, given_name, family_name, email]
         )
       ).rows

@@ -58,7 +58,7 @@ export const googleLogin = async (
   try {
     await UserService.googleLogin(req, res)
   } catch (error) {
-    console.log(error)
+    console.log('error---', error)
   }
 }
 
