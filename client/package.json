@@ -7,6 +7,7 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "@types/axios": "^0.14.0",
     "@types/jest": "^26.0.15",
     "@types/node": "^14.14.10",
     "@types/react": "^17.0.0",
@@ -16,6 +17,7 @@
     "@typescript-eslint/eslint-plugin": "^4.8.2",
     "@typescript-eslint/parser": "^4.8.2",
     "axios": "^0.21.0",
+    "dotenv": "^8.2.0",
     "eslint": "^7.14.0",
     "node-sass": "^4.14.1",
     "react": "^17.0.1",
@@ -33,13 +35,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint --fix '**/*.{ts,tsx}'"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "lint": "eslint --fix '**/*.{ts,tsx}'",
+    "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write"
   },
   "browserslist": {
     "production": [
@@ -52,5 +49,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.2.1"
   }
 }

@@ -18,5 +18,4 @@ export type AppState = {
     user: User
     isAuthenticated: boolean
   }
-  
 }

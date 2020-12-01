@@ -1,15 +1,17 @@
-import React from "react";
+import React from 'react'
 
-// import Routes from "./Routes";
-import "./App.scss";
+// import Routes from './Routes'
+import GoogleUserLogin from './components/GoogleUserLogin'
+import './App.scss'
 
-function App() {
+const App = () => {
   return (
     <>
-      <h1>Moro!</h1>
+      <h1>Moro Moro!</h1>
       <p>Now start developing!</p>
+      <GoogleUserLogin />
     </>
-  );
+  )
 }
 
-export default App;
+export default App
