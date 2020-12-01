@@ -61,9 +61,5 @@ app.use(lusca.xssProtection(true))
 // Use routers
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/events', eventRouter)
-app.use('/api/v1/users/google-authenticate', (req: Request, res: Response) => {
-  console.log('xxx', req.body)
-  console.log('xxx', res)
-})
 
 export default app
