@@ -83,7 +83,7 @@ CREATE TABLE event (
 
 CREATE TABLE event_creator(
   ec_id uuid DEFAULT uuid_generate_v4 () PRIMARY KEY,
-  creator uuid REFERENCES users(user_id) ON DELETE CASCADE,
+  creator uuid REFERENCES userk(user_id) ON DELETE CASCADE,
   event uuid REFERENCES event(event_id) ON DELETE CASCADE
 );
 
@@ -95,24 +95,24 @@ CREATE TABLE event_request(
 
 CREATE TABLE event_participant(
   ep_id uuid DEFAULT uuid_generate_v4 () PRIMARY KEY,
-  participant uuid REFERENCES users(user_id) ON DELETE CASCADE,
+  participant uuid REFERENCES userk(user_id) ON DELETE CASCADE,
   event uuid REFERENCES event(event_id) ON DELETE CASCADE
 );
 
 CREATE TABLE user_interest(
   ui_id uuid DEFAULT uuid_generate_v4 () PRIMARY KEY,
-  userk uuid REFERENCES users(user_id) ON DELETE CASCADE,
+  userk uuid REFERENCES userk(user_id) ON DELETE CASCADE,
   interest int REFERENCES interest(interest_id) ON DELETE CASCADE
 );
 
 CREATE TABLE admin(
   admin_id SERIAL PRIMARY KEY,
-  userk uuid REFERENCES users(user_id) ON DELETE CASCADE
+  userk uuid REFERENCES userk(user_id) ON DELETE CASCADE
 );
 
 CREATE TABLE banned_user(
   banned_user_id SERIAL PRIMARY KEY,
-  userk uuid REFERENCES users(user_id) ON DELETE CASCADE
+  userk uuid REFERENCES userk(user_id) ON DELETE CASCADE
 );
 
 CREATE TABLE comment(
