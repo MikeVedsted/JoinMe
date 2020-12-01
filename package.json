@@ -11,7 +11,10 @@
     "start": "node ./build/server.ts",
     "build": "tsc",
     "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix",
-    "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write"
+    "prettier-format": "prettier --config .prettierrc \"src/**/*.ts\" --write",
+    "format-backend": "npm run prettier-format && npm run lint",
+    "format-client": "cd client && npm run format-client",
+    "format-all": "npm run format-backend && npm run format-client"
   },
   "repository": {
     "type": "git",
@@ -65,7 +68,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run prettier-format && npm run lint"
+      "pre-commit": "npm run format-all"
     }
   },
   "devDependencies": {
