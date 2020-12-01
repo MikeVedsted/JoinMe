@@ -11,7 +11,7 @@ import {
 
 const router = express.Router()
 
-router.post('/', createEvent)
+router.post('/',isAuthenticated, createEvent)
 router.get('/', findAllEvents)
 router.get('/:eventId', findEventById)
 router.put('/:eventId', isOwner, updateEvent)
