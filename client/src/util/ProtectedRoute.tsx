@@ -7,7 +7,7 @@ const ProtectedRoute = ({
   component: Component,
   ...rest
 }: ProtectedRouteProps) => {
-  let { isAuthenticated } = useSelector((state: AppState) => state.auth)
+  const { isAuthenticated } = useSelector((state: AppState) => state.auth)
 
   return (
     <Route
