@@ -36,7 +36,5 @@ package-lock.json
 # compiled output
 /dist
 
-
-/client/.eslintcache
-# test
+# eslintcache
 client/.eslintcache
