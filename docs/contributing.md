@@ -166,7 +166,7 @@ You can save one line of code and make the it more straightforward.
 
 No excuses for using double quotes if not required.
 
-5 - **Semi colons are evil** :see_no_evil::hear_no_evil::speak_no_evil:
+5 - **Semi colons are dirty** :poop::speak_no_evil:
 
 Unless it is required, do not use semi colons. The code looks cleaner without them.
 
@@ -174,7 +174,11 @@ Unless it is required, do not use semi colons. The code looks cleaner without th
 
 According to the [React+TypeScript Cheatsheets](https://github.com/typescript-cheatsheets/react), it is recommended to use `type` for React Component Props and State, for consistency and because it is more constrained.
 
-7 - **Avoid using `any` type** :package::question:
+7 - **Ensure that you are using the workspace version of TS** :warning:
+
+This is necessary to make `eslint` and `prettier` rules to work as expected. To find this configuration on VS Code, use the command `crtl + shift + p` and choose `Typescript: Select Typescript Version` and then choose `Use workspace version`.
+
+8 - **Avoid using `any` type** :package::question:
 
 Using `any` comes at the cost of losing type safety, which is one of the main motivations for using TypeScript. Unless we are dealing with a 3rd party library, avoid using it.
 
@@ -534,7 +538,7 @@ type User = {
 
 const user: User = {
   name: 'John Doe',
-  email: 'johndoe@mail.com',
+  email: 'johndoe@mail.com'
 }
 
 console.log(user.name)
@@ -551,7 +555,7 @@ type User = {
 
 const user: User = {
   name: 'John Doe',
-  email: 'johndoe@mail.com',
+  email: 'johndoe@mail.com'
 }
 ```
 
@@ -664,7 +668,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   cartResetSuccess,
   getCart,
-  removeFromCart,
+  removeFromCart
 } from '../redux/actions/cart'
 import CartProducts from '../components/CartProducts'
 import CartInfo from '../components/CartInfo'
@@ -686,7 +690,7 @@ import LoaderComponent from '../components/LoaderComponent'
 import {
   cartResetSuccess,
   getCart,
-  removeFromCart,
+  removeFromCart
 } from '../redux/actions/cart'
 import './CartPage.css'
 ```
