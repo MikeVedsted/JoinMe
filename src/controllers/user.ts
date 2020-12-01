@@ -80,8 +80,8 @@ export const deleteUser = async (
   next: NextFunction
 ) => {
   try {
-    console.log('something should happen when this is called. Req: ', req)
+    await UserService.deleteUser(req, res)
   } catch (error) {
-    console.log(error)
+    console.log(error.message)
   }
 }
