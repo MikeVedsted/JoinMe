@@ -106,7 +106,7 @@ To create a commit template including the instructions above, add the content be
 To configure the editor for commit messages, use the command:
 `git config --global core.editor <yourEditor>`
 
-_Hint: You can add VS Code as your editor replacing `<yourEditor>` with `code`. Make sure to install `code` command in PATH to be able to use it._
+_Hint: You can add VS Code as your editor replacing `<yourEditor>` with `code --wait`. Make sure to install `code` command in PATH to be able to use it._
 
 Then tell Git to use the template file globally:
 `git config --global commit.template ~/.gitmessage`

@@ -1,9 +1,9 @@
-import { Response, Request } from "express"
-import { Pool } from "pg"
-import jwt from "jsonwebtoken"
+import { Response, Request } from 'express'
+import { Pool } from 'pg'
+import jwt from 'jsonwebtoken'
 
-import { PG_USER, PG_HOST, PG_DB, PG_PW, PG_PORT } from "../util/secrets"
-import { GoogleToken } from "../types"
+import { PG_USER, PG_HOST, PG_DB, PG_PW, PG_PORT } from '../util/secrets'
+import { GoogleToken } from '../types'
 
 const pool = new Pool({
   user: PG_USER,
@@ -12,34 +12,35 @@ const pool = new Pool({
   password: PG_PW,
   port: PG_PORT,
   ssl: {
-    rejectUnauthorized: false,
-  },
+    rejectUnauthorized: false
+  }
 })
 
-function googleCreate(user: any) {
-  console.log("googleCreate fired")
+// FIX: Add correct type to user
+const googleCreate = (user: unknown) => {
+  console.log('googleCreate fired:', user)
 }
 
-async function findUserById(userId: string) {
-  console.log("findUserByID fired for id: ", userId)
+const findUserById = async (userId: string) => {
+  console.log('findUserByID fired for id: ', userId)
 }
 
-function findAllUsers() {
-  console.log("findAllUsers fired")
+const findAllUsers = () => {
+  console.log('findAllUsers fired')
 }
 
-async function updateUser(userId: string, update: string) {
+const updateUser = async (userId: string, update: string) => {
   console.log(
-    "Update user fired for userid: ",
+    'Update user fired for userId: ',
     userId,
-    "update(should be changed from string): ",
+    'update(should be changed from string): ',
     update
   )
 }
 
-function deleteUser(userId: string) {
+const deleteUser = (userId: string) => {
   // FIX CHECK if user id exist
-  pool.query("DELETE FROM users WHERE id = $1;", [userId], (err, res) => {
+  pool.query('DELETE FROM users WHERE id = $1;', [userId], (err, res) => {
     if (err) throw err
     for (const row of res.rows) {
       console.log(JSON.stringify(row))
@@ -47,46 +48,46 @@ function deleteUser(userId: string) {
     pool.end()
   })
 
-  console.log("Delete user fired for id: ", userId)
+  console.log('Delete user fired for id: ', userId)
 }
 
-async function googleLogin(req: Request, res: Response) {
+const googleLogin = async (req: Request, res: Response) => {
   const googleToken = req.body
   const decodedToken = jwt.decode(googleToken)
   const {
     given_name,
     family_name,
     picture,
-    email,
+    email
   } = decodedToken as GoogleToken
   try {
     const user = await (
-      await pool.query("SELECT * FROM users WHERE email = $1", [email])
+      await pool.query('SELECT * FROM users WHERE email = $1', [email])
     ).rows
     if (user.length === 0) {
       const newUser = await (
         await pool.query(
-          "INSERT INTO users (profile_image, first_name, last_name, email) VALUES ($1, $2, $3, $4) RETURNING *",
+          'INSERT INTO users (profile_image, first_name, last_name, email) VALUES ($1, $2, $3, $4) RETURNING *',
           [picture, given_name, family_name, email]
         )
       ).rows
       return res.json({
-        user: newUser[0],
+        user: newUser[0]
       })
     } else {
       return res.json({
-        user: user[0],
+        user: user[0]
       })
     }
   } catch (error) {
     return res.status(404).json({
-      error: error.message,
+      error: error.message
     })
   }
 }
 
-async function findUserByEmail(userEmail: string) {
-  console.log("Find user fired for email: ", userEmail)
+const findUserByEmail = async (userEmail: string) => {
+  console.log('Find user fired for email: ', userEmail)
 }
 
 export default {
@@ -96,5 +97,5 @@ export default {
   findAllUsers,
   updateUser,
   googleLogin,
-  deleteUser,
+  deleteUser
 }
