@@ -45,7 +45,7 @@ const deleteUser = (userId: string) => {
 const googleLogin = async (req: Request, res: Response) => {
   const { id_token } = req.body
   const decodedToken = jwt.decode(id_token)
-  console.log('decoded--',decodedToken)
+  console.log('decoded--', decodedToken)
   const {
     given_name,
     family_name,

@@ -1,7 +1,7 @@
-import async from 'async'
 import { Request, Response, NextFunction } from 'express'
+
 import EventService from '../services/event'
-import {Event} from '../types'
+import { Event } from '../types'
 
 export const findAllEvents = async (
   req: Request,
@@ -33,8 +33,18 @@ export const createEvent = async (
   next: NextFunction
 ) => {
   try {
-    const { title, category, date, time, description, max_participants, address, expires_at, image } = req.body
-    const event:Event = {
+    const {
+      title,
+      category,
+      date,
+      time,
+      description,
+      max_participants,
+      address,
+      expires_at,
+      image
+    } = req.body
+    const event: Event = {
       title,
       category,
       date,
