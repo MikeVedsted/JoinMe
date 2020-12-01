@@ -4,7 +4,7 @@ import createRootReducer from './reducers'
 
 const initState = {}
 
-export default function makeStore(initialState = initState) {
+const makeStore = (initialState = initState) => {
   let composeEnhancers = compose
 
   if (process.env.NODE_ENV === 'development') {
@@ -33,3 +33,5 @@ export default function makeStore(initialState = initState) {
 
   return store
 }
+
+export default makeStore
