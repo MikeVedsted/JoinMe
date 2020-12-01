@@ -3,6 +3,8 @@ import compression from "compression" // compresses requests
 import session from "express-session"
 import bodyParser from "body-parser"
 import lusca from "lusca"
+import { Client } from "pg"
+
 import {
   SESSION_SECRET,
   PG_USER,
@@ -12,8 +14,6 @@ import {
   PG_PORT,
   PG_URI
 } from "./util/secrets"
-import { Client } from "pg"
-
 /**
  * Controllers (route handlers)
  */
@@ -30,17 +30,6 @@ const client = new Client({
   }
 })
 client.connect()
-
-/** 
- * Check that connection is established (can be removed once succesful)
- * */ 
-// client.query("SELECT table_schema,table_name FROM information_schema.tables;", (err, res) => {
-//   if (err) throw err
-//   for (const row of res.rows) {
-//     console.log(JSON.stringify(row))
-//   }
-//   client.end()
-// })
 
 /**
  * Create Express server
@@ -67,8 +56,13 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(lusca.xframe("SAMEORIGIN"))
 app.use(lusca.xssProtection(true))
 
+
 // Use routers
 app.use("/api/v1/users", userRouter)
 app.use("/api/v1/events", eventRouter)
+app.use("/api/v1/users/google-authenticate", (req:any, res:any) => {
+  console.log("xxx", req.body)
+})
+
 
 export default app
