@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 
 import UserService from '../services/user'
+import { NotFoundError } from '../helpers/apiError'
 
 export const findAllUsers = async (
   req: Request,
@@ -82,6 +83,6 @@ export const deleteUser = async (
   try {
     await UserService.deleteUser(req, res)
   } catch (error) {
-    console.log(error.message)
+    next(new NotFoundError('User not found', error))
   }
 }
