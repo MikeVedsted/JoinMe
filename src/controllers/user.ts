@@ -85,8 +85,9 @@ export const deleteUser = async (
   res: Response,
   next: NextFunction
 ) => {
+  const { userId } = req.params
   try {
-    await UserService.deleteUser(req, res)
+    res.json(await UserService.deleteUser(userId))
   } catch (error) {
     next(new NotFoundError('User not found', error))
   }
