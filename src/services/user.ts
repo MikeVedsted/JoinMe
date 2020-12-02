@@ -66,9 +66,7 @@ const deleteUser = async (userId: string) => {
     await pool.query('SELECT * FROM userk WHERE user_id = $1', [userId])
   ).rows
   if (user.length === 0) {
-    return {
-      error: 'User not found'
-    }
+    return { error: 'User not found' }
   } else {
     await pool.query(
       'DELETE FROM userk WHERE user_id = $1;',
