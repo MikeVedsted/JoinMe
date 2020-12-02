@@ -1,5 +1,5 @@
 ---
-name: "\U0001F41B BUG REPORT"
+name: "\U0001F41B Bug report"
 about: Found a bug? Report it and help us improve.
 title: "[BUG] - "
 labels: 'Priority: Medium :zap:, Status: Received :inbox_tray:, Type: Bug :bug:'
@@ -21,7 +21,7 @@ Steps to reproduce the behavior:
 4. See error
 
 ## 🙈🙉🙊 How it behaves
-More detailed description of the behaviour.  
+More detailed description of the behavior.  
 **💩 Actual:**  
 **❤️ Expected:**  
 
@@ -31,7 +31,7 @@ More detailed description of the behaviour.
 
 ## 🌴🌵 It lives in ❄️🌲
 describe the environment you found the bug in.  
-**💻 Device, OS:** [Samsung S10, Andoroid 7]  
+**💻 Device, OS:** [Samsung S10, Android 7]  
 **🌐 Browser, version:** [Chrome, 55]  
 
 ## 📷 What it looks like

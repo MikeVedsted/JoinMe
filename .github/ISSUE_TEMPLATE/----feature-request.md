@@ -11,7 +11,7 @@ assignees: nannadao
 **💡 I would really like to solve or include**   
 Clearly and concisely describe the problem you are trying to solve.   
 
-*Ex. Currently, suggested activities are always presented in the same order, i.e. all previously seen activitis have to do be dismissed before new ones are displayed.*   
+*Ex. Currently, suggested activities are always presented in the same order, i.e. all previously seen activities have to do be dismissed before new ones are displayed.*   
 
 **👶 How would a user describe this?**   
 Describe how users are affected by statements users might make or a user story.  
@@ -48,4 +48,4 @@ Before submitting, please mark if you:
 - [ ] Checked that this feature doesn't already exists  
 - [ ] Checked that a feature request doesn't already exists  
 - [ ] Went through the user flow, and understand the impact  
-- [ ] Made sure the request shows why it is important to users but doesn't exagerates the value
+- [ ] Made sure the request shows why it is important to users but doesn't exaggerate the value
