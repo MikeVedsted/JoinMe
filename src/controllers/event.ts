@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 
-import {NotFoundError, BadRequestError} from '../helpers/apiError'
+import { NotFoundError, BadRequestError } from '../helpers/apiError'
 import EventService from '../services/event'
 import { Event } from '../types'
 
