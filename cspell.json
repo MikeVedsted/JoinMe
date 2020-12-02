@@ -1,0 +1,19 @@
+// cSpell settings. 
+// DO NO CHANGE VERSION NUMBER
+// Keep in mind that cSpell only catches words longer than 3 characters. 
+// Use "words" for words that should always be considered correct. 
+// Use "flagWords" for words that should always be considered incorrect.
+    
+{
+    "version": "0.1",
+    "language": "en",
+    "words": [
+        "nannadao",
+        "MikeVedsted"
+    ],
+    
+    "flagWords": [
+        "aip",
+        "hte"
+    ]
+}
