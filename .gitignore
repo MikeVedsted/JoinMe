@@ -36,5 +36,8 @@ package-lock.json
 # compiled output
 /dist
 
+# eslintcache
+client/.eslintcache
 
-/client/.eslintcache
+# vscode settings
+.vscode
