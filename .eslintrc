@@ -1,22 +1,23 @@
 {
   "parser": "@typescript-eslint/parser",
-  "plugins": [
-    "@typescript-eslint",
-    "prettier"
-  ],
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "prettier"
   ],
-  "parserOptions": {
-    "ecmaVersion": 2020,
-    "sourceType": "module"
-  },
+  "plugins": [
+    "@typescript-eslint",
+    "prettier"
+  ],
   "rules": {
-    "prettier/prettier": 2,
+    "prettier/prettier": "error",
     "arrow-spacing": [
-      "error",
+      "warn",
       {
         "before": true,
         "after": true
@@ -33,8 +34,6 @@
     ],
     "no-var": "error",
     "prefer-const": "error",
-    "quotes": "off",
-    "semi": "off",
     "@typescript-eslint/consistent-type-definitions": [
       "error",
       "type"
@@ -51,18 +50,6 @@
         "ignoreParameters": true
       }
     ],
-    "@typescript-eslint/no-unused-vars": "warn",
-    "@typescript-eslint/semi": [
-      "error",
-      "never"
-    ],
-    "@typescript-eslint/quotes": [
-      "error",
-      "single",
-      {
-        "avoidEscape": true,
-        "allowTemplateLiterals": true
-      }
-    ]
+    "@typescript-eslint/no-unused-vars": "warn"
   }
 }
