@@ -1,6 +1,8 @@
 // cSpell settings. 
-// DO NO CHANGE VERSION NUMBER
-// Keep in mind that cSpell only catches words longer than 3 characters. 
+// DO NOT CHANGE VERSION NUMBER
+// Keep in mind that cSpell only catches words longer than 3 characters.
+// This is a spell checker not a grammar checker. Make sure your sentences makes sense. 
+
 // Use "words" for words that should always be considered correct. 
 // Use "flagWords" for words that should always be considered incorrect.
     
@@ -10,8 +12,7 @@
     "words": [
         "nannadao",
         "MikeVedsted"
-    ],
-    
+    ],    
     "flagWords": [
         "aip",
         "hte"
