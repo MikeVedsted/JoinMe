@@ -44,13 +44,35 @@ const createEvent = async (event: Event) => {
   return newEvent.rows
 }
 
-const findEventById = async (eventId: string) => {
-  console.log('find by ID fired for id: ', eventId)
+const findAllEvents = async () => {
+  try {
+    const events = await (await pool.query('SELECT * FROM event')).rows
+    return events
+  } catch (error) {
+    return error
+  }
 }
 
-const findAllEvents = async () => {
-  const data = (await pool.query('SELECT * FROM event')).rows
-  return data
+const findEventById = async (eventId: string) => {
+  try {
+    const event = await (
+      await pool.query('SELECT * FROM event WHERE event_id = $1', [eventId])
+    ).rows
+    return event
+  } catch (error) {
+    return error
+  }
+}
+
+const findEventByCategory = async (categoryId: number) => {
+  try {
+    const events = await (
+      await pool.query('SELECT * FROM event WHERE category = $1', [categoryId])
+    ).rows
+    return events
+  } catch (error) {
+    return error
+  }
 }
 
 const updateEvent = async (eventId: string, update: string) => {
@@ -79,6 +101,7 @@ export default {
   createEvent,
   findEventById,
   findAllEvents,
+  findEventByCategory,
   updateEvent,
   deleteEvent
 }
