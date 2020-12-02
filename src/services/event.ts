@@ -15,19 +15,10 @@ const pool = new Pool({
 })
 
 const createEvent = async (event: Event) => {
+  const {title, category, date, time, description, max_participants, address, expires_at, image} =event
   const newEvent = await pool.query(
     'INSERT INTO event (title, category, date, time, description, max_participants, address, expires_at, image) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *',
-    [
-      event.title,
-      event.category,
-      event.date,
-      event.time,
-      event.description,
-      event.max_participants,
-      event.address,
-      event.expires_at,
-      event.image
-    ]
+    [title, category, date, time, description, max_participants, address, expires_at, image ]
   )
   return newEvent.rows
 }

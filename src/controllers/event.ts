@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 
+import {NotFoundError, BadRequestError} from '../helpers/apiError'
 import EventService from '../services/event'
 import { Event } from '../types'
 
@@ -11,7 +12,7 @@ export const findAllEvents = async (
   try {
     res.json(await EventService.findAllEvents())
   } catch (error) {
-    console.log(error)
+    next(new NotFoundError('No events found', error))
   }
 }
 
@@ -58,7 +59,7 @@ export const createEvent = async (
 
     res.json(await EventService.createEvent(event))
   } catch (error) {
-    console.log(error)
+    next(new BadRequestError('failed to create event', error))
   }
 }
 
