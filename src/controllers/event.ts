@@ -81,8 +81,8 @@ export const deleteEvent = async (
   next: NextFunction
 ) => {
   try {
-    console.log('something should happen when this is called. Req: ', req)
+    await EventService.deleteEvent(req, res)
   } catch (error) {
-    console.log(error)
+    next(new NotFoundError('Event not found', error))
   }
 }
