@@ -3,7 +3,7 @@ import { Pool } from 'pg'
 import jwt from 'jsonwebtoken'
 
 import { PG_USER, PG_HOST, PG_DB, PG_PW, PG_PORT } from '../util/secrets'
-import { GoogleToken } from '../types'
+import { GoogleToken, User } from '../types'
 
 const pool = new Pool({
   user: PG_USER,
@@ -23,7 +23,7 @@ const googleCreate = (user: unknown) => {
 
 const findUserById = async (userId: string) => {
   try {
-    const user = await (
+    const user: User[] = await (
       await pool.query('SELECT * FROM userk WHERE user_id = $1', [userId])
     ).rows
     return { user: user }
@@ -34,7 +34,7 @@ const findUserById = async (userId: string) => {
 
 const findAllUsers = async () => {
   try {
-    const users = await (await pool.query('SELECT * FROM userk')).rows
+    const users: User[] = await (await pool.query('SELECT * FROM userk')).rows
     return { users: users }
   } catch (error) {
     return { error: error.message }
@@ -43,7 +43,7 @@ const findAllUsers = async () => {
 
 const findUserByEmail = async (userEmail: string) => {
   try {
-    const user = await (
+    const user: User[] = await (
       await pool.query('SELECT * FROM userk WHERE email = $1', [userEmail])
     ).rows
     return { user: user }
@@ -52,13 +52,34 @@ const findUserByEmail = async (userEmail: string) => {
   }
 }
 
-const updateUser = async (userId: string, update: string) => {
-  console.log(
-    'Update user fired for userId: ',
-    userId,
-    'update(should be changed from string): ',
-    update
-  )
+const updateUser = async (userId: string, update: Partial<User>) => {
+  try {
+    const user: User = await (
+      await pool.query('SELECT * FROM userk WHERE user_id = $1', [userId])
+    ).rows[0]
+
+    if (!user) {
+      return new Error('User not found')
+    }
+
+    const {
+      first_name = user.first_name,
+      last_name = user.last_name,
+      profile_image = user.profile_image,
+      profile_text = user.profile_text
+    } = update
+
+    const updatedUser: User[] = await (
+      await pool.query(
+        'UPDATE userk SET first_name = $2, last_name = $3, profile_image = $4, profile_text = $5 WHERE user_id = $1 RETURNING *',
+        [userId, first_name, last_name, profile_image, profile_text]
+      )
+    ).rows
+
+    return { user: updatedUser }
+  } catch (error) {
+    return { error: error.message }
+  }
 }
 
 const deleteUser = async (userId: string) => {
