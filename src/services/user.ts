@@ -61,15 +61,14 @@ const updateUser = async (userId: string, update: string) => {
   )
 }
 
-const deleteUser = async (req: Request, res: Response) => {
-  const userId = req.params.userId
+const deleteUser = async (userId: string) => {
   const user = await (
     await pool.query('SELECT * FROM userk WHERE user_id = $1', [userId])
   ).rows
   if (user.length === 0) {
-    return res.status(404).json({
-      error: 'No user found'
-    })
+    return {
+      error: 'User not found'
+    }
   } else {
     await pool.query(
       'DELETE FROM userk WHERE user_id = $1;',
@@ -78,7 +77,7 @@ const deleteUser = async (req: Request, res: Response) => {
         if (err) throw err
       }
     )
-    return res.status(204).end()
+    return { message: 'User deleted' }
   }
 }
 
