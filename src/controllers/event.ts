@@ -22,7 +22,6 @@ export const findEventById = async (
   next: NextFunction
 ) => {
   const { eventId } = req.params
-  console.log(eventId)
   try {
     res.json(await EventService.findEventById(eventId))
   } catch (error) {
