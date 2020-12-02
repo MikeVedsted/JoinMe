@@ -21,10 +21,25 @@ export const findEventById = async (
   res: Response,
   next: NextFunction
 ) => {
+  const { eventId } = req.params
+  console.log(eventId)
   try {
-    console.log('something should happen when this is called. Req: ', req)
+    res.json(await EventService.findEventById(eventId))
   } catch (error) {
-    console.log(error)
+    next(new NotFoundError('No event found', error))
+  }
+}
+
+export const findEventByCategory = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const categoryId = parseInt(req.params.categoryId)
+  try {
+    res.json(await EventService.findEventByCategory(categoryId))
+  } catch (error) {
+    next(new NotFoundError('No events found', error))
   }
 }
 
