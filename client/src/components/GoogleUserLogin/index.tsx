@@ -7,11 +7,14 @@ const GoogleUserLogin = () => {
 
   const responseSuccessGoogle = async (response: any) => {
     const userToken = await response.tokenObj.id_token
-    axios
-      .post('http://localhost:5000/api/v1/users/google-authenticate', userToken)
-      .then((response: any) => {
-        console.log(response)
+    try {
+      const res = await axios.post('/api/v1/users/google-authenticate', {
+        id_token: userToken
       })
+      console.log(res)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const responseFailGoogle = (response: any) => {

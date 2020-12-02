@@ -9,7 +9,7 @@ export const findAllUsers = async (
   next: NextFunction
 ) => {
   try {
-    console.log('something should happen when this is called. Req: ', req)
+    return res.json(await UserService.findAllUsers())
   } catch (error) {
     console.log(error)
   }
@@ -21,7 +21,8 @@ export const findUserById = async (
   next: NextFunction
 ) => {
   try {
-    console.log('something should happen when this is called. Req: ', req)
+    const { userId } = req.params
+    return res.json(await UserService.findUserById(userId))
   } catch (error) {
     console.log(error)
   }
@@ -33,7 +34,8 @@ export const findUserByEmail = async (
   next: NextFunction
 ) => {
   try {
-    console.log('something should happen when this is called. Req: ', req)
+    const { userEmail } = req.params
+    return res.json(await UserService.findUserByEmail(userEmail))
   } catch (error) {
     console.log(error)
   }
