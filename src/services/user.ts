@@ -22,11 +22,34 @@ const googleCreate = (user: unknown) => {
 }
 
 const findUserById = async (userId: string) => {
-  console.log('findUserByID fired for id: ', userId)
+  try {
+    const user = await (
+      await pool.query('SELECT * FROM userk WHERE user_id = $1', [userId])
+    ).rows
+    return { user: user }
+  } catch (error) {
+    return { error: error.message }
+  }
 }
 
-const findAllUsers = () => {
-  console.log('findAllUsers fired')
+const findAllUsers = async () => {
+  try {
+    const users = await (await pool.query('SELECT * FROM userk')).rows
+    return { users: users }
+  } catch (error) {
+    return { error: error.message }
+  }
+}
+
+const findUserByEmail = async (userEmail: string) => {
+  try {
+    const user = await (
+      await pool.query('SELECT * FROM userk WHERE email = $1', [userEmail])
+    ).rows
+    return { user: user }
+  } catch (error) {
+    return { error: error.message }
+  }
 }
 
 const updateUser = async (userId: string, update: string) => {
@@ -38,14 +61,30 @@ const updateUser = async (userId: string, update: string) => {
   )
 }
 
-const deleteUser = (userId: string) => {
-  console.log('Delete user fired for id: ', userId)
+const deleteUser = async (req: Request, res: Response) => {
+  const userId = req.params.userId
+  const user = await (
+    await pool.query('SELECT * FROM userk WHERE user_id = $1', [userId])
+  ).rows
+  if (user.length === 0) {
+    return res.status(404).json({
+      error: 'No user found'
+    })
+  } else {
+    await pool.query(
+      'DELETE FROM userk WHERE user_id = $1;',
+      [userId],
+      (err) => {
+        if (err) throw err
+      }
+    )
+    return res.status(204).end()
+  }
 }
 
 const googleLogin = async (req: Request, res: Response) => {
   const { id_token } = req.body
   const decodedToken = jwt.decode(id_token)
-  console.log('decoded--', decodedToken)
   const {
     given_name,
     family_name,
@@ -76,10 +115,6 @@ const googleLogin = async (req: Request, res: Response) => {
       error: error.message
     })
   }
-}
-
-const findUserByEmail = async (userEmail: string) => {
-  console.log('Find user fired for email: ', userEmail)
 }
 
 export default {
