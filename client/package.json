@@ -34,7 +34,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "tsc --noEmit && eslint \"**/*.{ts,tsx}\" --quiet --fix",
-    "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
+    "prettier-format": "prettier --config .prettierrc \"src/**/*.{ts,tsx}\" --write",
     "format-client": "npm run lint && npm run prettier-format"
   },
   "browserslist": {

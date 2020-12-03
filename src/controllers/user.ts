@@ -71,9 +71,12 @@ export const updateUser = async (
   next: NextFunction
 ) => {
   try {
-    console.log('something should happen when this is called. Req: ', req)
+    const { userId } = req.params
+    const { update } = req.body
+
+    return res.json(await UserService.updateUser(userId, update))
   } catch (error) {
-    console.log(error)
+    next(new NotFoundError('User not found', error))
   }
 }
 
@@ -82,8 +85,9 @@ export const deleteUser = async (
   res: Response,
   next: NextFunction
 ) => {
+  const { userId } = req.params
   try {
-    await UserService.deleteUser(req, res)
+    res.json(await UserService.deleteUser(userId))
   } catch (error) {
     next(new NotFoundError('User not found', error))
   }
