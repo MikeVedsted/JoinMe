@@ -81,7 +81,7 @@ const updateEvent = async (eventId: string, update: Partial<Event>) => {
       await pool.query('SELECT * FROM event WHERE event_id = $1', [eventId])
     ).rows[0]
     if (!event) {
-      return { error: 'user not found' }
+      throw { error: 'Event not found' }
     }
     const {
       title = event.title,
