@@ -98,7 +98,7 @@ const deleteEvent = async (eventId: string) => {
         if (err) throw err
       }
     )
-    return { message: 'Event successfully deleted!!' }
+    return { message: 'Event Successfully deleted!' }
   }
 }
 
