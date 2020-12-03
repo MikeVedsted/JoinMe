@@ -2,7 +2,6 @@ import { Response, Request } from 'express'
 import { Pool } from 'pg'
 import jwt from 'jsonwebtoken'
 
-import generateToken from '../helpers/generateToken'
 import { PG_USER, PG_HOST, PG_DB, PG_PW, PG_PORT } from '../util/secrets'
 import { GoogleToken, User } from '../types'
 
@@ -101,7 +100,8 @@ const deleteUser = async (userId: string) => {
   }
 }
 
-const googleLogin = async (id_token: string, res: Response) => {
+const googleLogin = async (req: Request, res: Response) => {
+  const { id_token } = req.body
   const decodedToken = jwt.decode(id_token)
   const {
     given_name,
@@ -120,13 +120,13 @@ const googleLogin = async (id_token: string, res: Response) => {
           [picture, given_name, family_name, email]
         )
       ).rows
-      const token = await generateToken(newUser[0].user_id)
-      res.cookie('x-auth-token', token)
-      return newUser[0]
+      return res.json({
+        user: newUser[0]
+      })
     } else {
-      const token = await generateToken(user[0].user_id)
-      res.cookie('x-auth-token', token)
-      return user[0]
+      return res.json({
+        user: user[0]
+      })
     }
   } catch (error) {
     return res.status(404).json({

@@ -3,8 +3,6 @@ import compression from 'compression' // compresses requests
 import session from 'express-session'
 import bodyParser from 'body-parser'
 import lusca from 'lusca'
-import cors from 'cors'
-import cookieparser from 'cookie-parser'
 import { Client } from 'pg'
 
 import {
@@ -51,22 +49,11 @@ app.use(
 )
 
 /**
- * Cors configuration
- */
-app.use(
-  cors({
-    credentials: true,
-    origin: ['http://localhost:3000']
-  })
-)
-
-/**
  * 3rd part configuration
  */
 app.use(compression())
 app.use(bodyParser.json())
 app.use(express.json())
-app.use(cookieparser())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(lusca.xframe('SAMEORIGIN'))
 app.use(lusca.xssProtection(true))
