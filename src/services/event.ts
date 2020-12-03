@@ -84,15 +84,21 @@ const updateEvent = async (eventId: string, update: string) => {
   )
 }
 
-const deleteEvent = async(req:Request, res:Response) => {
+const deleteEvent = async (req: Request, res: Response) => {
   const eventId = req.params.eventId
-  const event = await (await pool.query('SELECT * from event WHERE event_id=$1', [eventId])).rows
+  const event = await (
+    await pool.query('SELECT * from event WHERE event_id=$1', [eventId])
+  ).rows
   if (event.length === 0) {
-    return res.status(404).json({Error:'Event not found'})
+    return res.status(404).json({ Error: 'Event not found' })
   } else {
-    await pool.query('DELETE FROM event WHERE event_id=$1', [eventId], (err) => {
-      if(err) throw err
-    })
+    await pool.query(
+      'DELETE FROM event WHERE event_id=$1',
+      [eventId],
+      (err) => {
+        if (err) throw err
+      }
+    )
     return res.status(204).end()
   }
 }
