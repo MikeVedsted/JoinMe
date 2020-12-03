@@ -83,9 +83,11 @@ export const updateEvent = async (
   next: NextFunction
 ) => {
   try {
-    console.log('something should happen when this is called. Req: ', req)
+    const { eventId } = req.params
+    const update = req.body
+    return res.json(await EventService.updateEvent(eventId, update))
   } catch (error) {
-    console.log(error)
+    next(new NotFoundError('Event not found', error))
   }
 }
 
