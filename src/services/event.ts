@@ -62,7 +62,7 @@ const updateEvent = async (eventId: string, update: string) => {
   )
 }
 
-const deleteEvent = async (req:Request, res:Response) => {
+const deleteEvent = async (req: Request, res: Response) => {
   const eventId = req.params.eventId
   const event = await (
     await pool.query('SELECT * from event WHERE event_id=$1', [eventId])
