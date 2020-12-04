@@ -3,7 +3,8 @@
   "parserOptions": {
     "ecmaVersion": 2020,
     "sourceType": "module",
-    "project": "./tsconfig.json"
+    "project": "./tsconfig.json",
+    "createDefaultProgram": true
   },
   "extends": [
     "eslint:recommended",
@@ -51,5 +52,8 @@
       }
     ],
     "@typescript-eslint/no-unused-vars": "warn"
+  },
+  "env": {
+    "jest": true
   }
 }
