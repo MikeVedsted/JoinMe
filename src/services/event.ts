@@ -75,13 +75,45 @@ const findEventByCategory = async (categoryId: number) => {
   }
 }
 
-const updateEvent = async (eventId: string, update: string) => {
-  console.log(
-    'Update event fired for id: ',
-    eventId,
-    'update(should be changed from string): ',
-    update
-  )
+const updateEvent = async (eventId: string, update: Partial<Event>) => {
+  try {
+    const event: Event = await (
+      await pool.query('SELECT * FROM event WHERE event_id = $1', [eventId])
+    ).rows[0]
+    if (!event) {
+      throw { error: 'Event not found' }
+    }
+
+    const {
+      title = event.title,
+      date = event.date,
+      time = event.time,
+      description = event.description,
+      max_participants = event.max_participants,
+      expires_at = event.expires_at,
+      image = event.image
+    } = update
+
+    const updatedEvent: Event[] = await (
+      await pool.query(
+        'UPDATE event SET title = $2, date = $3, time = $4, description = $5, max_participants=$6, expires_at=$7, image=$8 WHERE event_id = $1 RETURNING *',
+        [
+          eventId,
+          title,
+          date,
+          time,
+          description,
+          max_participants,
+          expires_at,
+          image
+        ]
+      )
+    ).rows
+
+    return updatedEvent
+  } catch (error) {
+    return error
+  }
 }
 
 const deleteEvent = async (eventId: string) => {
@@ -98,7 +130,7 @@ const deleteEvent = async (eventId: string) => {
         if (err) throw err
       }
     )
-    return { message: 'Event Successfully deleted!' }
+return { message: 'Event Successfully deleted!' }
   }
 }
 
