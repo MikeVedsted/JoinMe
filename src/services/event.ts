@@ -83,6 +83,7 @@ const updateEvent = async (eventId: string, update: Partial<Event>) => {
     if (!event) {
       throw { error: 'Event not found' }
     }
+
     const {
       title = event.title,
       date = event.date,
@@ -116,10 +117,11 @@ const updateEvent = async (eventId: string, update: Partial<Event>) => {
 }
 
 const deleteEvent = async (req: Request, res: Response) => {
-  const eventId = req.params.eventId
+  const { eventId } = req.params
   const event = await (
     await pool.query('SELECT * from event WHERE event_id=$1', [eventId])
   ).rows
+
   if (event.length === 0) {
     return res.status(404).json({ Error: 'Event not found' })
   } else {
