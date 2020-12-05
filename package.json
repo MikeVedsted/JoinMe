@@ -4,7 +4,7 @@
   "description": "We're a group of full-stack developers, trying our hand at building a social app.  \r Stay tuned as this amazing project is about to take off 🚀  \r <br/>",
   "main": "server.js",
   "scripts": {
-    "test": "test",
+    "test": "jest --forceExit --coverage --verbose false",
     "client": "cd client && npm run start",
     "server": "nodemon ./src/server.ts",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
@@ -72,12 +72,17 @@
     }
   },
   "devDependencies": {
+    "@types/supertest": "^2.0.10",
     "@typescript-eslint/eslint-plugin": "^4.9.0",
     "@typescript-eslint/parser": "^4.9.0",
     "eslint": "^7.14.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-prettier": "^3.1.4",
     "husky": "^4.3.0",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "supertest": "^6.0.1"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }

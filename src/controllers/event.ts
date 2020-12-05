@@ -96,8 +96,9 @@ export const deleteEvent = async (
   res: Response,
   next: NextFunction
 ) => {
+  const { eventId } = req.params
   try {
-    await EventService.deleteEvent(req, res)
+    res.json(await EventService.deleteEvent(eventId))
   } catch (error) {
     next(new NotFoundError('Event not found', error))
   }
