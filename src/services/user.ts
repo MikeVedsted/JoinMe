@@ -129,9 +129,7 @@ const googleLogin = async (id_token: string, res: Response) => {
       return user[0]
     }
   } catch (error) {
-    return res.status(404).json({
-      error: error.message
-    })
+    return error
   }
 }
 

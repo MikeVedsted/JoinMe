@@ -10,7 +10,7 @@ import {
   PG_PORT,
   JWT_SECRET
 } from '../util/secrets'
-import { JwtDecoded, CustomRequest } from '../types'
+import { JwtDecoded, AuthRequest } from '../types'
 
 const pool = new Pool({
   user: PG_USER,
@@ -24,7 +24,7 @@ const pool = new Pool({
 })
 
 export const isAuthenticated = async (
-  req: CustomRequest,
+  req: AuthRequest,
   res: Response,
   next: NextFunction
 ) => {
