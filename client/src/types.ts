@@ -19,3 +19,13 @@ export type AppState = {
     isAuthenticated: boolean
   }
 }
+
+// Button component types
+
+type ButtonTypes = 'button' | 'submit' | 'reset'
+export type ButtonComponent = {
+  type: ButtonTypes
+  text: string
+  style: string
+  handleClick: () => void
+}
