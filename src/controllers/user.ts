@@ -3,11 +3,7 @@ import { Request, Response, NextFunction } from 'express'
 import UserService from '../services/user'
 import { NotFoundError, BadRequestError } from '../helpers/apiError'
 
-export const googleLogin = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const googleLogin = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id_token } = req.body
     return res.json(await UserService.googleLogin(id_token, res))
@@ -16,11 +12,7 @@ export const googleLogin = async (
   }
 }
 
-export const findAllUsers = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const findAllUsers = async (req: Request, res: Response, next: NextFunction) => {
   try {
     return res.json(await UserService.findAllUsers())
   } catch (error) {
@@ -28,11 +20,7 @@ export const findAllUsers = async (
   }
 }
 
-export const findUserById = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const findUserById = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { userId } = req.params
     return res.json(await UserService.findUserById(userId))
@@ -41,11 +29,7 @@ export const findUserById = async (
   }
 }
 
-export const updateUser = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const updateUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { userId } = req.params
     const update = req.body
@@ -55,11 +39,7 @@ export const updateUser = async (
   }
 }
 
-export const deleteUser = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { userId } = req.params
     return res.json(await UserService.deleteUser(userId))

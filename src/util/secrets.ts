@@ -47,9 +47,7 @@ if (!PG_URI) {
   if (prod) {
     logger.error('No PG connection string. Set PG_URI environment variable.')
   } else {
-    logger.error(
-      'No PG connection string. Set PG_URI_LOCAL environment variable.'
-    )
+    logger.error('No PG connection string. Set PG_URI_LOCAL environment variable.')
   }
   process.exit(1)
 }
