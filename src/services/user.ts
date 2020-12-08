@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken'
 
 import { PG_USER, PG_HOST, PG_DB, PG_PW, PG_PORT } from '../util/secrets'
 import { GoogleToken, User } from '../types'
+import db from '../db/index'
 
 const pool = new Pool({
   user: PG_USER,
@@ -34,7 +35,7 @@ const findUserById = async (userId: string) => {
 
 const findAllUsers = async () => {
   try {
-    const users: User[] = await (await pool.query('SELECT * FROM userk')).rows
+    const users: User[] = await (await db.query('SELECT * FROM userk')).rows
     return { users: users }
   } catch (error) {
     return { error: error.message }
