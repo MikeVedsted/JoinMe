@@ -28,19 +28,6 @@ export const findUserById = async (
   }
 }
 
-export const findUserByEmail = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const { userEmail } = req.params
-    return res.json(await UserService.findUserByEmail(userEmail))
-  } catch (error) {
-    console.log(error)
-  }
-}
-
 export const googleCreate = async (
   req: Request,
   res: Response,
@@ -74,7 +61,6 @@ export const updateUser = async (
   try {
     const { userId } = req.params
     const { update } = req.body
-
     return res.json(await UserService.updateUser(userId, update))
   } catch (error) {
     next(new NotFoundError('User not found', error))

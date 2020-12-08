@@ -1,27 +1,9 @@
 import { Request, Response, NextFunction } from 'express'
 import JWT from 'jsonwebtoken'
-import { Pool } from 'pg'
 
-import {
-  PG_USER,
-  PG_HOST,
-  PG_DB,
-  PG_PW,
-  PG_PORT,
-  JWT_SECRET
-} from '../util/secrets'
 import { JwtDecoded, AuthRequest } from '../types'
-
-const pool = new Pool({
-  user: PG_USER,
-  host: PG_HOST,
-  database: PG_DB,
-  password: PG_PW,
-  port: PG_PORT,
-  ssl: {
-    rejectUnauthorized: false
-  }
-})
+import { JWT_SECRET } from '../util/secrets'
+import db from '../db'
 
 export const isAuthenticated = async (
   req: AuthRequest,
@@ -35,9 +17,7 @@ export const isAuthenticated = async (
     } else {
       const decoded: JwtDecoded = JWT.verify(token, JWT_SECRET) as JwtDecoded
       const authenticatedUser = await (
-        await pool.query('SELECT * FROM userk WHERE user_id = $1', [
-          decoded.sub
-        ])
+        await db.query('SELECT * FROM userk WHERE user_id = $1', [decoded.sub])
       ).rows[0]
       req.user = authenticatedUser
       next()

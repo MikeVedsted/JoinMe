@@ -4,7 +4,6 @@ import { isAuthenticated } from '../middlewares/authentication'
 import {
   googleCreate,
   findUserById,
-  findUserByEmail,
   findAllUsers,
   updateUser,
   googleLogin,
