@@ -130,7 +130,7 @@ const deleteEvent = async (eventId: string) => {
         if (err) throw err
       }
     )
-return { message: 'Event Successfully deleted!' }
+    return { message: 'Event Successfully deleted!' }
   }
 }
 
