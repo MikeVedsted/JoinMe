@@ -29,7 +29,7 @@ const AddressAutoComplete = () => {
         types={['address']}
         componentRestrictions={{ country: 'fi' }}
       />
-      <label>
+      <label className="form__field--readOnly">
         Street:
         <input type="text" id="street" value={street} readOnly />
       </label>
