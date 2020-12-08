@@ -17,50 +17,59 @@ const pool = new Pool({
   }
 })
 
-// FIX: Add correct type to user
-const googleCreate = (user: unknown) => {
-  console.log('googleCreate fired:', user)
+const googleLogin = async (id_token: string, res: Response) => {
+  const decodedToken = jwt.decode(id_token)
+  const { given_name, family_name, picture, email } = decodedToken as GoogleToken
+  try {
+    const DBResponse = await pool.query('SELECT * FROM userk WHERE email = $1', [email])
+    const user: User = DBResponse.rows[0]
+
+    if (!user) {
+      const createUser = await pool.query(
+        'INSERT INTO userk (profile_image, first_name, last_name, email) VALUES ($1, $2, $3, $4) RETURNING *',
+        [picture, given_name, family_name, email]
+      )
+      const newUser = createUser.rows[0]
+      const token = await generateToken(newUser.user_id)
+      res.cookie('x-auth-token', token)
+      return newUser
+    } else {
+      const token = await generateToken(user.user_id)
+      res.cookie('x-auth-token', token)
+      return user
+    }
+  } catch (error) {
+    return error
+  }
 }
 
 const findUserById = async (userId: string) => {
   try {
-    const user: User[] = await (
-      await pool.query('SELECT * FROM userk WHERE user_id = $1', [userId])
-    ).rows
-    return { user: user }
+    const DBResponse = await pool.query('SELECT * FROM userk WHERE user_id = $1', [userId])
+    const user: User = DBResponse.rows[0]
+    return user
   } catch (error) {
-    return { error: error.message }
+    return error
   }
 }
 
 const findAllUsers = async () => {
   try {
-    const users: User[] = await (await pool.query('SELECT * FROM userk')).rows
-    return { users: users }
+    const DBResponse = await pool.query('SELECT * FROM userk')
+    const users: User[] = DBResponse.rows
+    return users
   } catch (error) {
-    return { error: error.message }
-  }
-}
-
-const findUserByEmail = async (userEmail: string) => {
-  try {
-    const user: User[] = await (
-      await pool.query('SELECT * FROM userk WHERE email = $1', [userEmail])
-    ).rows
-    return { user: user }
-  } catch (error) {
-    return { error: error.message }
+    return error
   }
 }
 
 const updateUser = async (userId: string, update: Partial<User>) => {
   try {
-    const user: User = await (
-      await pool.query('SELECT * FROM userk WHERE user_id = $1', [userId])
-    ).rows[0]
+    const DBResponse = await pool.query('SELECT * FROM userk WHERE user_id = $1', [userId])
+    const user: User = DBResponse.rows[0]
 
     if (!user) {
-      return new Error('User not found')
+      throw new Error()
     }
 
     const {
@@ -70,73 +79,33 @@ const updateUser = async (userId: string, update: Partial<User>) => {
       profile_text = user.profile_text
     } = update
 
-    const updatedUser: User[] = await (
-      await pool.query(
-        'UPDATE userk SET first_name = $2, last_name = $3, profile_image = $4, profile_text = $5 WHERE user_id = $1 RETURNING *',
-        [userId, first_name, last_name, profile_image, profile_text]
-      )
-    ).rows
-
-    return { user: updatedUser }
-  } catch (error) {
-    return { error: error.message }
-  }
-}
-
-const deleteUser = async (userId: string) => {
-  const user = await (
-    await pool.query('SELECT * FROM userk WHERE user_id = $1', [userId])
-  ).rows
-  if (user.length === 0) {
-    return { error: 'User not found' }
-  } else {
-    await pool.query(
-      'DELETE FROM userk WHERE user_id = $1;',
-      [userId],
-      (err) => {
-        if (err) throw err
-      }
+    const updateUser = await pool.query(
+      'UPDATE userk SET first_name = $2, last_name = $3, profile_image = $4, profile_text = $5 WHERE user_id = $1 RETURNING *',
+      [userId, first_name, last_name, profile_image, profile_text]
     )
-    return { message: 'User deleted' }
-  }
-}
-
-const googleLogin = async (id_token: string, res: Response) => {
-  const decodedToken = jwt.decode(id_token)
-  const {
-    given_name,
-    family_name,
-    picture,
-    email
-  } = decodedToken as GoogleToken
-  try {
-    const user = await (
-      await pool.query('SELECT * FROM userk WHERE email = $1', [email])
-    ).rows
-    if (user.length === 0) {
-      const newUser = await (
-        await pool.query(
-          'INSERT INTO userk (profile_image, first_name, last_name, email) VALUES ($1, $2, $3, $4) RETURNING *',
-          [picture, given_name, family_name, email]
-        )
-      ).rows
-      const token = await generateToken(newUser[0].user_id)
-      res.cookie('x-auth-token', token)
-      return newUser[0]
-    } else {
-      const token = await generateToken(user[0].user_id)
-      res.cookie('x-auth-token', token)
-      return user[0]
-    }
+    const updatedUser: User = updateUser.rows[0]
+    return updatedUser
   } catch (error) {
     return error
   }
 }
 
+const deleteUser = async (userId: string) => {
+  const DBResponse = await pool.query('SELECT * FROM userk WHERE user_id = $1', [userId])
+  const user: User = DBResponse.rows[0]
+
+  if (!user) {
+    throw new Error()
+  } else {
+    await pool.query('DELETE FROM userk WHERE user_id = $1;', [userId], (err) => {
+      if (err) throw err
+    })
+    return { message: 'User deleted' }
+  }
+}
+
 export default {
-  googleCreate,
   findUserById,
-  findUserByEmail,
   findAllUsers,
   updateUser,
   googleLogin,

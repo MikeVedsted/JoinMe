@@ -2,14 +2,7 @@ import { Request, Response, NextFunction } from 'express'
 import JWT from 'jsonwebtoken'
 import { Pool } from 'pg'
 
-import {
-  PG_USER,
-  PG_HOST,
-  PG_DB,
-  PG_PW,
-  PG_PORT,
-  JWT_SECRET
-} from '../util/secrets'
+import { PG_USER, PG_HOST, PG_DB, PG_PW, PG_PORT, JWT_SECRET } from '../util/secrets'
 import { JwtDecoded, AuthRequest } from '../types'
 
 const pool = new Pool({
@@ -23,27 +16,20 @@ const pool = new Pool({
   }
 })
 
-export const isAuthenticated = async (
-  req: AuthRequest,
-  res: Response,
-  next: NextFunction
-) => {
+export const isAuthenticated = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
     const token = req.cookies['x-auth-token']
     if (!token) {
       throw Error
     } else {
       const decoded: JwtDecoded = JWT.verify(token, JWT_SECRET) as JwtDecoded
-      const authenticatedUser = await (
-        await pool.query('SELECT * FROM userk WHERE user_id = $1', [
-          decoded.sub
-        ])
-      ).rows[0]
+      const DBResponse = await pool.query('SELECT * FROM userk WHERE user_id = $1', [decoded.sub])
+      const authenticatedUser = DBResponse.rows[0]
       req.user = authenticatedUser
       next()
     }
   } catch (error) {
-    res.json({ message: 'Token invalid' })
+    return error
   }
 }
 
