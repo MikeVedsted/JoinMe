@@ -36,7 +36,7 @@ const findUserById = async (userId: string) => {
 const findAllUsers = async () => {
   try {
     const users: User[] = await (await db.query('SELECT * FROM userk')).rows
-    return { users: users }
+    return users
   } catch (error) {
     return { error: error.message }
   }
