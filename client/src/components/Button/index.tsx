@@ -5,7 +5,11 @@ import './Button.scss'
 
 const Button = ({ type, text, style, handleClick }: ButtonComponent) => {
   return (
-    <button onClick={handleClick} type={type} className={`button button--${style}`}>
+    <button
+      onClick={handleClick}
+      type={type}
+      className={`button button--${style}`}
+    >
       {text}
     </button>
   )

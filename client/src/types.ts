@@ -24,6 +24,6 @@ export type AppState = {
 export type ButtonComponent = {
   type: 'button' | 'submit' | 'reset'
   text: string
-  style: 'primary' | 'secondary' | 'default' | 'largeActive' | 'large'
+  style?: 'primary' | 'secondary' | 'large-active' | 'large'
   handleClick: () => void
 }

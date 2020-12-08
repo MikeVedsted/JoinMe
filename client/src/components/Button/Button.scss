@@ -1,83 +1,51 @@
 @import '../../SCSS/config';
 
 .button {
+  font-family: $roboto;
+  border-style: none;
+  border-radius: 4px;
+  background-color: $default;
+  width: 128px;
+  height: 35px;
+  font-size: $text;
+  color: $textLight;
+  transition: 0.3s ease-in-out;
+
     &--primary {
-        background-color: $primary;
-        width:128px;
-        height:35px;
-        font-family: $roboto;
-        border-style: none;
-        border-radius: 4px;
-        font-size: 18px;
-        color:$textLight;
-        transition: 0.3s ease-in-out;
+        background-color: $primary; 
+        font-size: $text;
+        color: $textLight;
     }
 
     &--primary:hover{
         background-color: white;
         border: 1px solid $primary;
-        color:$primary
+        color: $primary
     }
 
     &--secondary {
         background-color: $secondary;
-        width:128px;
-        height:35px;
-        font-family: $roboto;
-        border-style: none;
-        border-radius: 4px;
-        font-size: 18px;
-        color:$textDark;
-        transition: 0.3s ease-in-out;
+        font-size: $text;
+        color: $textDark;
     }
-
-    &--secondary:hover{
-        background-color: white;
-        border: 1px solid $secondary;
-        color:$secondary
-    }
-
-    &--default {
-        background-color: $default;
-        width:128px;
-        height:35px;
-        font-family: $roboto;
-        border-style: none;
-        border-radius: 4px;
-        font-size: 18px;
-        color:$textLight;
-        transition: 0.3s ease-in-out;
-    }
-
-    &--default:hover{
-        background-color: white;
-        border: 1px solid $default;
-        color:$default
-    }
-
-    &--largeActive {
+   
+    &--large-active {
         background-color: $primary;
-        width:327px;
-        height:50px;
-        font-family: $roboto;
-        border-style: none;
-        border-radius: 4px;
-        font-size: 22px;
-        color:$textLight;
+        width: 327px;
+        height: 50px;
+        font-size: $sub-head;
+        color: $textLight;
         text-align: left;
-        padding:0px 10px
+        padding: 0px 10px
     }
 
     &--large {
         background-color: $secondary;
-        width:327px;
-        height:50px;
-        font-family: $roboto;
-        border-style: none;
-        border-radius: 4px;
-        font-size: 22px;
-        color:$textDark;
+        width: 327px;
+        height: 50px;
+        font-size: $sub-head;
+        color: $textDark;
         text-align: left;
-        padding:0px 10px
+        padding: 0px 10px
     }
-}
+} 
