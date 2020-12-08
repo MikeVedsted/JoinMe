@@ -34,6 +34,6 @@ export type JwtDecoded = {
   sub: string
 }
 
-export type CustomRequest = Request & {
+export type AuthRequest = Request & {
   user?: User
 }

@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express'
 
 import UserService from '../services/user'
 import { NotFoundError } from '../helpers/apiError'
-import { CustomRequest } from '../types'
+import { AuthRequest } from '../types'
 
 export const findAllUsers = async (
   req: Request,
@@ -63,7 +63,7 @@ export const googleLogin = async (
     const { id_token } = req.body
     return res.json(await UserService.googleLogin(id_token, res))
   } catch (error) {
-    console.log(error)
+    next(new NotFoundError('Unexpected error', error))
   }
 }
 
