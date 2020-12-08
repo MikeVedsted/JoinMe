@@ -21,11 +21,9 @@ export type AppState = {
 }
 
 // Button component types
-
-type ButtonTypes = 'button' | 'submit' | 'reset'
 export type ButtonComponent = {
-  type: ButtonTypes
+  type: 'button' | 'submit' | 'reset'
   text: string
-  style: string
+  style: 'primary' | 'secondary' | 'default' | 'largeActive' | 'large'
   handleClick: () => void
 }
