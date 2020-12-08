@@ -1,3 +1,5 @@
+import { type } from "os"
+
 export const FETCH_ALL_EVENTS = 'FETCH_ALL_EVENTS'
 export const GET_ERRORS = 'GET_ERRORS'
 export const CLEAR_ERRORS = 'CLEAR_ERRORS'
@@ -18,4 +20,14 @@ export type AppState = {
     user: User
     isAuthenticated: boolean
   }
+}
+
+export type AddressComponents = {
+  address_components: AddressComponent[]
+}
+
+export type AddressComponent = {
+  long_name: string
+  short_name: string
+  types: string[]
 }

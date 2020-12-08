@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import Autocomplete from 'react-google-autocomplete'
 
+import { AddressComponents, AddressComponent } from '../../types'
+
 const AddressAutoComplete = () => {
   const MAPS_KEY = process.env.REACT_APP_GOOGLE_MAPS_KEY
   const [street, setStreet] = useState('')
@@ -9,8 +11,8 @@ const AddressAutoComplete = () => {
   const [postalCode, setPostalCode] = useState('')
   const [country, setCountry] = useState('')
 
-  const handleSelect = (addressComponent: any) => {
-    addressComponent.address_components.map((value: any) => {
+  const handleSelect = (address: AddressComponents) => {
+    address.address_components.map((value: AddressComponent) => {
       if (value.types.includes('street_number')) setNumber(value.long_name)
       if (value.types.includes('route')) setStreet(value.long_name)
       if (value.types.includes('locality')) setCity(value.long_name)
@@ -52,7 +54,3 @@ const AddressAutoComplete = () => {
 }
 
 export default AddressAutoComplete
-
-
-
-
