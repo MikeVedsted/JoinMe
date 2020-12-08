@@ -1,3 +1,5 @@
+import { Request } from 'express'
+
 export type GoogleToken = {
   given_name: string
   family_name: string
@@ -26,4 +28,12 @@ export type User = {
   profile_text?: string
   base_address?: string
   created_at: Date
+}
+
+export type JwtDecoded = {
+  sub: string
+}
+
+export type AuthRequest = Request & {
+  user?: User
 }

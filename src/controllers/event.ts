@@ -83,9 +83,11 @@ export const updateEvent = async (
   next: NextFunction
 ) => {
   try {
-    console.log('something should happen when this is called. Req: ', req)
+    const { eventId } = req.params
+    const update = req.body
+    return res.json(await EventService.updateEvent(eventId, update))
   } catch (error) {
-    console.log(error)
+    next(new NotFoundError('Event not found', error))
   }
 }
 
@@ -94,8 +96,9 @@ export const deleteEvent = async (
   res: Response,
   next: NextFunction
 ) => {
+  const { eventId } = req.params
   try {
-    await EventService.deleteEvent(req, res)
+    res.json(await EventService.deleteEvent(eventId))
   } catch (error) {
     next(new NotFoundError('Event not found', error))
   }
