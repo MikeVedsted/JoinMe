@@ -59,9 +59,10 @@ export const googleLogin = async (
   next: NextFunction
 ) => {
   try {
-    await UserService.googleLogin(req, res)
+    const { id_token } = req.body
+    return res.json(await UserService.googleLogin(id_token, res))
   } catch (error) {
-    console.log(error)
+    next(new NotFoundError('Unexpected error', error))
   }
 }
 
