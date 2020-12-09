@@ -1,4 +1,4 @@
-import { Response, Request } from 'express'
+import { Response } from 'express'
 import { Pool } from 'pg'
 import jwt from 'jsonwebtoken'
 
@@ -29,12 +29,12 @@ const googleLogin = async (id_token: string, res: Response) => {
         'INSERT INTO userk (profile_image, first_name, last_name, email) VALUES ($1, $2, $3, $4) RETURNING *',
         [picture, given_name, family_name, email]
       )
-      const newUser = createUser.rows[0]
-      const token = await generateToken(newUser.user_id)
+      const newUser: User = createUser.rows[0]
+      const token = generateToken(newUser.user_id)
       res.cookie('x-auth-token', token)
       return newUser
     } else {
-      const token = await generateToken(user.user_id)
+      const token = generateToken(user.user_id)
       res.cookie('x-auth-token', token)
       return user
     }
@@ -97,7 +97,7 @@ const deleteUser = async (userId: string) => {
   if (!user) {
     throw new Error()
   } else {
-    await pool.query('DELETE FROM userk WHERE user_id = $1;', [userId], (err) => {
+    pool.query('DELETE FROM userk WHERE user_id = $1;', [userId], (err) => {
       if (err) throw err
     })
     return { message: 'User deleted' }
