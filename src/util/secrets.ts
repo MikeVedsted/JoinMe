@@ -1,6 +1,7 @@
-import logger from './logger'
 import dotenv from 'dotenv'
 import fs from 'fs'
+
+import logger from './logger'
 
 if (fs.existsSync('.env')) {
   logger.debug('Using .env file to supply config environment variables')
@@ -46,9 +47,7 @@ if (!PG_URI) {
   if (prod) {
     logger.error('No PG connection string. Set PG_URI environment variable.')
   } else {
-    logger.error(
-      'No PG connection string. Set PG_URI_LOCAL environment variable.'
-    )
+    logger.error('No PG connection string. Set PG_URI_LOCAL environment variable.')
   }
   process.exit(1)
 }

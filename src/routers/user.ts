@@ -2,7 +2,6 @@ import express from 'express'
 
 import { isAuthenticated } from '../middlewares/authentication'
 import {
-  googleCreate,
   findUserById,
   findAllUsers,
   updateUser,
@@ -14,11 +13,8 @@ const router = express.Router()
 
 router.get('/', findAllUsers)
 router.get('/:userId', findUserById)
-/* router.get('/:userEmail', findUserByEmail) */
-router.post('/google-signup', googleCreate)
 router.post('/google-authenticate', googleLogin)
 router.put('/:userId', isAuthenticated, updateUser)
-// FIX Add isAuthenticated and isOwner to delete route
-router.delete('/:userId', deleteUser)
+router.delete('/:userId', isAuthenticated, deleteUser)
 
 export default router

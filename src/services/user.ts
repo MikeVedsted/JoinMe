@@ -7,16 +7,9 @@ import db from '../db'
 
 const googleLogin = async (id_token: string, res: Response) => {
   const decodedToken = jwt.decode(id_token)
-  const {
-    given_name,
-    family_name,
-    picture,
-    email
-  } = decodedToken as GoogleToken
+  const { given_name, family_name, picture, email } = decodedToken as GoogleToken
   try {
-    const DBResponse = await db.query('SELECT * FROM userk WHERE email = $1', [
-      email
-    ])
+    const DBResponse = await db.query('SELECT * FROM userk WHERE email = $1', [email])
     const user: User = DBResponse.rows[0]
 
     if (!user) {
@@ -24,12 +17,12 @@ const googleLogin = async (id_token: string, res: Response) => {
         'INSERT INTO userk (profile_image, first_name, last_name, email) VALUES ($1, $2, $3, $4) RETURNING *',
         [picture, given_name, family_name, email]
       )
-      const newUser = createUser.rows[0]
-      const token = await generateToken(newUser.user_id)
+      const newUser: User = createUser.rows[0]
+      const token = generateToken(newUser.user_id)
       res.cookie('x-auth-token', token)
       return newUser
     } else {
-      const token = await generateToken(user.user_id)
+      const token = generateToken(user.user_id)
       res.cookie('x-auth-token', token)
       return user
     }
@@ -40,10 +33,7 @@ const googleLogin = async (id_token: string, res: Response) => {
 
 const findUserById = async (userId: string) => {
   try {
-    const DBResponse = await db.query(
-      'SELECT * FROM userk WHERE user_id = $1',
-      [userId]
-    )
+    const DBResponse = await db.query('SELECT * FROM userk WHERE user_id = $1', [userId])
     const user: User = DBResponse.rows[0]
     return user
   } catch (error) {
@@ -63,10 +53,7 @@ const findAllUsers = async () => {
 
 const updateUser = async (userId: string, update: Partial<User>) => {
   try {
-    const DBResponse = await db.query(
-      'SELECT * FROM userk WHERE user_id = $1',
-      [userId]
-    )
+    const DBResponse = await db.query('SELECT * FROM userk WHERE user_id = $1', [userId])
     const user: User = DBResponse.rows[0]
 
     if (!user) {
@@ -92,9 +79,7 @@ const updateUser = async (userId: string, update: Partial<User>) => {
 }
 
 const deleteUser = async (userId: string) => {
-  const DBResponse = await db.query('SELECT * FROM userk WHERE user_id = $1', [
-    userId
-  ])
+  const DBResponse = await db.query('SELECT * FROM userk WHERE user_id = $1', [userId])
   const user: User = DBResponse.rows[0]
 
   if (!user) {

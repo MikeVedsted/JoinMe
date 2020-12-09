@@ -1,29 +1,24 @@
 import { Request, Response, NextFunction } from 'express'
 import JWT from 'jsonwebtoken'
 
-import { JwtDecoded, AuthRequest } from '../types'
+import { JwtDecoded, AuthRequest, User } from '../types'
 import { JWT_SECRET } from '../util/secrets'
 import db from '../db'
 
-export const isAuthenticated = async (
-  req: AuthRequest,
-  res: Response,
-  next: NextFunction
-) => {
+export const isAuthenticated = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
     const token = req.cookies['x-auth-token']
     if (!token) {
       throw Error
     } else {
       const decoded: JwtDecoded = JWT.verify(token, JWT_SECRET) as JwtDecoded
-      const authenticatedUser = await (
-        await db.query('SELECT * FROM userk WHERE user_id = $1', [decoded.sub])
-      ).rows[0]
+      const DBResponse = await db.query('SELECT * FROM userk WHERE user_id = $1', [decoded.sub])
+      const authenticatedUser: User = DBResponse.rows[0]
       req.user = authenticatedUser
       next()
     }
   } catch (error) {
-    res.json({ message: 'Token invalid' })
+    return error
   }
 }
 
