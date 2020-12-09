@@ -3,9 +3,7 @@ import db from '../../src/db/index'
 export const createTempTables = async () => {
   await db.query('CREATE TEMPORARY TABLE userk ( LIKE userk );')
   await db.query('CREATE TEMPORARY TABLE event_request ( LIKE event_request );')
-  await db.query(
-    'CREATE TEMPORARY TABLE event_participant ( LIKE event_participant );'
-  )
+  await db.query('CREATE TEMPORARY TABLE event_participant ( LIKE event_participant );')
   await db.query('CREATE TEMPORARY TABLE user_interest ( LIKE user_interest );')
   await db.query('CREATE TEMPORARY TABLE admin ( LIKE admin );')
   await db.query('CREATE TEMPORARY TABLE banned_user ( LIKE banned_user );')
