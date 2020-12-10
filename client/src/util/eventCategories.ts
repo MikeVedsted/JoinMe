@@ -10,6 +10,7 @@ export const eventCategories = [
   'BMX',
   'Bouldering',
   'Canoeing',
+  'Climbing',
   'Cricket',
   'Cross country skiing',
   'Cycling',
