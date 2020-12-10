@@ -1,24 +1,24 @@
 import { Request, Response, NextFunction } from 'express'
 import JWT from 'jsonwebtoken'
-import { JWT_SECRET } from '../util/secrets'
 
-export const isAuthenticated = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  const token = req.header('x-auth-token')
-  if (!token) {
-    return res.status(401).json({
-      message: 'No id token, authorization denied'
-    })
-  }
+import { JwtDecoded, AuthRequest, User } from '../types'
+import { JWT_SECRET } from '../util/secrets'
+import db from '../db'
+
+export const isAuthenticated = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
-    // const decoded = JWT.verify(token, JWT_SECRET);
-    // req.user = decoded;
-    next()
-  } catch (err) {
-    res.status(400).json({ message: 'Token invalid' })
+    const token = req.cookies['x-auth-token']
+    if (!token) {
+      throw Error
+    } else {
+      const decoded: JwtDecoded = JWT.verify(token, JWT_SECRET) as JwtDecoded
+      const DBResponse = await db.query('SELECT * FROM userk WHERE user_id = $1', [decoded.sub])
+      const authenticatedUser: User = DBResponse.rows[0]
+      req.user = authenticatedUser
+      next()
+    }
+  } catch (error) {
+    return error
   }
 }
 

@@ -19,3 +19,19 @@ export type AppState = {
     isAuthenticated: boolean
   }
 }
+export type ButtonComponent = {
+  type: 'button' | 'submit' | 'reset'
+  text: string
+  style?: 'primary' | 'secondary' | 'large-active' | 'large'
+  handleClick: () => void
+}
+
+export type AddressComponents = {
+  address_components: AddressComponent[]
+}
+
+export type AddressComponent = {
+  long_name: string
+  short_name: string
+  types: string[]
+}
