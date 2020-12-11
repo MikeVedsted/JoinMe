@@ -48,17 +48,24 @@ export const createEvent = async (
   next: NextFunction
 ) => {
   try {
+    // TO DO
+    // Add validation
     const {
       title,
       category,
       date,
       time,
       description,
-      max_participants,
-      address,
+      maxParticipants,
+      created_by,
+      image,
       expires_at,
-      image
+      address
     } = req.body
+    const max_participants = parseInt(maxParticipants)
+    // TO DO
+    // Add user as created_by, once middleware is applied.
+
     const event: Event = {
       title,
       category,
@@ -68,12 +75,13 @@ export const createEvent = async (
       max_participants,
       address,
       expires_at,
+      created_by,
       image
     }
 
     res.json(await EventService.createEvent(event))
   } catch (error) {
-    next(new BadRequestError('failed to create event', error))
+    next(new BadRequestError('Failed to create event', error))
   }
 }
 

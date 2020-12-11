@@ -1,5 +1,3 @@
-import { Request } from 'express'
-
 export type GoogleToken = {
   given_name: string
   family_name: string
@@ -14,9 +12,18 @@ export type Event = {
   time: string
   description: string
   max_participants: number
-  address: string
+  address: {
+    street: string
+    number: number
+    postal_code: number
+    city: string
+    country: string
+    lat: number
+    lng: number
+  }
   expires_at: Date
   image: string
+  created_by: string
 }
 
 export type User = {

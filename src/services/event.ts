@@ -1,4 +1,3 @@
-import { Response, Request } from 'express'
 import { Pool } from 'pg'
 
 import { PG_USER, PG_HOST, PG_DB, PG_PW, PG_PORT } from '../util/secrets'
@@ -25,10 +24,31 @@ const createEvent = async (event: Event) => {
     max_participants,
     address,
     expires_at,
+    created_by,
     image
   } = event
+  const { street, postal_code, city, country, lat, lng } = address
+  let { number } = address
+  !number ? (number = 0) : null
+  let addressId: string
+
+  const DBResponse = await pool.query(
+    'SELECT address_id FROM address WHERE lat = $1 and lng = $2',
+    [lat, lng]
+  )
+
+  if (DBResponse.rowCount === 0) {
+    const newAddress = await pool.query(
+      'INSERT INTO address (street, number, postal_code, city, country, lat, lng) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING address_id',
+      [street, number, postal_code, city, country, lat, lng]
+    )
+    addressId = newAddress.rows[0].address_id
+  } else {
+    addressId = DBResponse.rows[0].address_id
+  }
+
   const newEvent = await pool.query(
-    'INSERT INTO event (title, category, date, time, description, max_participants, address, expires_at, image) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *',
+    'INSERT INTO event (title, category, date, time, description, max_participants, address, expires_at, created_by, image) VALUES ($1, (SELECT category_id FROM category WHERE name = $2), $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *',
     [
       title,
       category,
@@ -36,12 +56,13 @@ const createEvent = async (event: Event) => {
       time,
       description,
       max_participants,
-      address,
+      addressId,
       expires_at,
+      created_by,
       image
     ]
   )
-  return newEvent.rows
+  return newEvent.rows[0]
 }
 
 const findAllEvents = async () => {
@@ -130,7 +151,7 @@ const deleteEvent = async (eventId: string) => {
         if (err) throw err
       }
     )
-return { message: 'Event Successfully deleted!' }
+    return { message: 'Event Successfully deleted!' }
   }
 }
 
