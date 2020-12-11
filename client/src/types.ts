@@ -1,5 +1,3 @@
-import { type } from "os"
-
 export const FETCH_ALL_EVENTS = 'FETCH_ALL_EVENTS'
 export const GET_ERRORS = 'GET_ERRORS'
 export const CLEAR_ERRORS = 'CLEAR_ERRORS'
@@ -20,6 +18,12 @@ export type AppState = {
     user: User
     isAuthenticated: boolean
   }
+}
+export type ButtonComponent = {
+  type: 'button' | 'submit' | 'reset'
+  text: string
+  style?: 'primary' | 'secondary' | 'large-active' | 'large'
+  handleClick: () => void
 }
 
 export type AddressComponents = {

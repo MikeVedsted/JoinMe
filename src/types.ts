@@ -10,6 +10,7 @@ export type Event = {
   category: number
   date: string
   time: string
+  creator: string
   description: string
   max_participants: number
   address: {
