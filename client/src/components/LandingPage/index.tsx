@@ -1,10 +1,16 @@
-import bodyParser from 'body-parser'
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 
 import Button from '../Button'
 import './LandingPage.scss'
 
 const LandingPage = () => {
+  const history = useHistory()
+
+  const handleClick = () => {
+    history.push('/home')
+  }
+
   return (
     <div className="body">
       <div className="body__circles">
@@ -21,7 +27,7 @@ const LandingPage = () => {
             type="button"
             text="Get started!"
             style="secondary"
-            handleClick={() => console.log('button clicked!')}
+            handleClick={handleClick}
           />
         </div>
         <div className="body__circle2">
