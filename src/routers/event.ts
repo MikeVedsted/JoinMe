@@ -12,11 +12,11 @@ import {
 
 const router = express.Router()
 
-router.post('/', createEvent)
+router.post('/', isAuthenticated, createEvent)
 router.get('/', findAllEvents)
 router.get('/:eventId', findEventById)
 router.get('/category/:categoryId', findEventByCategory)
-router.put('/:eventId', isOwner, updateEvent)
-router.delete('/:eventId', deleteEvent)
+router.put('/:eventId', isAuthenticated, isOwner, updateEvent)
+router.delete('/:eventId', isAuthenticated, isOwner, deleteEvent)
 
 export default router

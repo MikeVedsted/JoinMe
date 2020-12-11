@@ -1,6 +1,5 @@
 import React from 'react'
 
-// import Routes from './Routes'
 import GoogleUserLogin from './components/GoogleUserLogin'
 import GoogleAutoComplete from './components/GoogleAutoComplete'
 import EventForm from './components/EventForm'

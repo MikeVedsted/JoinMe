@@ -2,16 +2,22 @@
     "version": "0.1",
     "language": "en",
     "words": [
-        "Dodgeball",
-        "Floorball",
         "MikeVedsted",
         "nannadao",
+        "Dodgeball",
+        "Floorball",
         "Paddleboarding",
         "Padel",
         "Scootering",
         "signup",
         "userk",
         "Waterpolo"
+        "cookieparser",
+        "lusca",
+        "middlewares",
+        "resave",
+        "SAMEORIGIN",
+        "xframe"
     ],
     "flagWords": [
         "aip",
