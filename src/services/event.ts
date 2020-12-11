@@ -16,7 +16,7 @@ const createEvent = async (event: Event) => {
   } = event
   const { street, postal_code, city, country, lat, lng } = address
   let { number } = address
-  !number ? (number = 0) : null
+  !number && (number = 0)
   let addressId: string
 
   const DBResponse = await db.query(
@@ -25,7 +25,7 @@ const createEvent = async (event: Event) => {
   )
 
   if (DBResponse.rowCount === 0) {
-    const newAddress = await pool.query(
+    const newAddress = await db.query(
       'INSERT INTO address (street, number, postal_code, city, country, lat, lng) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING address_id',
       [street, number, postal_code, city, country, lat, lng]
     )
