@@ -2,110 +2,107 @@
 
 .body {
   width: 100vw;
-  height:100vh;
+  height: 100vh;
   background-image: url(../../Assets/football.jpg);
-  background-color: rgb(192, 251, 255);
+  background-color: $textLight;
   background-attachment: fixed;
   background-size: cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flexCenter;
   
   &__circles {
-      width:100vw;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    width: 100vw;
+    @include flexCenter;
   }
-   
-  &__circle1 {
-       width: 350px;
-       height:350px;
-       position: absolute;
-       top:25vh;
-       left:30vw;
-       background-color: #e03400c2;
-       border-radius: 50%;
-       display: flex;
-       flex-direction: column;
-       justify-content: center;
-       align-items: center;
-   }
 
-   &__circle2 {
-       width: 350px;
-       height:350px;
-       position: absolute;
-       top:25vh;
-       left:50vw;
-       background-color: #e03400c2;
-       border-radius: 50%;
-       display: flex;
-       flex-direction: column;
-       justify-content: center;
-       align-items: center;
-   }
+  &__circle {
+    @include flexCenter;
+    flex-direction: column;
+    width: 350px;
+    height: 350px;
+    position: absolute;
+    top: 25vh;
+    background-color: #e03400c2;
+    border-radius: 50%;
 
-   &__highlight {
-       width:250px;
-       text-align: center;
-       font-size: $heading;
-       font-family: $montserrat;
-       line-height: 150%;
-       margin-bottom: 5px;
-       color:$textLight
-   }
+    &--left {
+        left: 28vw;
+    }
+
+    &--right {
+        left: 48vw;
+    }
+  }
 
    &__text {
-       width:230px;
+       width: 230px;
        text-align: center;
        font-size: $sub-head;
        font-family: $nunito;
        line-height: 150%;
-       margin-top: 5px;
-       color:$textDark
+       margin-top: 0px;
+       color: $textDark;
+
+       &--highlight {
+        width: 250px;
+        font-size: $heading;
+        font-family: $montserrat;
+        color: $textLight;
+        margin-top: 35px;
+       }
    }
 
    &__button {
        position: absolute;
-       top:80vh;
-       width:100vw;
-       display:flex;
+       top: 80vh;
+       width: 100vw;
+       display: flex;
        justify-content: center;
    }
 }
-
-
 
 @media only screen and (max-width:1024px) {
     .body {
        background-image: url(../../Assets/bulldog.jpg);
 
-       &__circle1 {
-           left:22vw
-       }
+      &__circle {
 
-       &__button {
-           left:0vw
-       }
+        &--left {
+          top: 50vh;
+          left: 22vw
+        }
+
+        &--right {
+          top: 50vh;
+        }  
+      }
+
+      &__button {
+        left: 0vw
+      }
     }
 }
+
 @media only screen and (max-width:768px) {
     .body {
-       background-image: url(../../Assets/bulldog.jpg);
+      background-image: url(../../Assets/bulldog.jpg);
 
-       &__circle1 {
-           left:10vw
-       }
-       &__circle2 {
-           left:48vw
-       }
+      &__circle {
 
-       &__button {
-           left:0vw
-           
-       }
+        &--left {
+          top: 50vh;
+          left: 10vw
+        }
 
+        &--right {
+          top: 50vh;
+          left: 48vw
+        }
+     }
+
+     &__button {
+        top:90vh;
+        left: 0vw
+       }
     }
 }
 
@@ -114,37 +111,40 @@
        background-image: url(../../Assets/winter.jpg); 
 
        &__circles {
-           flex-direction: column;
-           align-items: center;
+        flex-direction: column;
+        align-items: center;
        }
 
-       &__circle1 {
-        position:static;
-        background-color: rgba(255, 255, 255, 0);
-        border-bottom: 2px solid $primary;
-        width: 250px;
-        height:250px;
+       &__circle {
+          &--left {
+            position:static;
+            background-color: rgba(255, 255, 255, 0);
+            border-bottom: 2px solid $primary;
+            width: 260px;
+            height: 260px;
+          } 
 
+           &--right {
+            position:static;
+            background-color: rgba(255, 255, 255, 0);
+            border-bottom: 2px solid $primary;
+            width: 260px;
+            height: 260px;
+         }     
        }
 
-       &__circle2 {
-        position:static;
-        background-color: rgba(255, 255, 255, 0);
-        border-bottom: 2px solid $primary;
-        width: 250px;
-        height:250px;
-       }
-
-       &__highlight {
-           font-size: $sub-head;
-           color:$secondary
-       }
-
+      
        &__text {
-           color:$textLight;
-           font-size: $text;
-       }
+        color: $textLight;
+        font-size: $text;
+        width: 200px;
 
+          &--highlight {
+            font-size: $sub-head;
+            color: $secondary
+          }
+       }
+     
        &__button {
            position: static;
            display: flex;
@@ -152,9 +152,4 @@
            margin-top: 20px;
        }
     }
-    
 }
-
-
-
-

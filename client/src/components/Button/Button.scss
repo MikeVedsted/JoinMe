@@ -9,7 +9,7 @@
   height: 35px;
   font-size: $text;
   color: $textLight;
-  cursor:pointer;
+  cursor: pointer;
   transition: 0.3s ease-in-out;
 
     &--primary {
@@ -33,7 +33,7 @@
     &--secondary:hover{
         background-color: white;
         border: 1px solid $secondary;
-        color: $textDark
+        color: $textDark;
     }
    
     &--large-active {
@@ -43,7 +43,7 @@
         font-size: $sub-head;
         color: $textLight;
         text-align: left;
-        padding: 0px 10px
+        padding: 0px 10px;
     }
 
     &--large {
@@ -53,20 +53,20 @@
         font-size: $sub-head;
         color: $textDark;
         text-align: left;
-        padding: 0px 10px
+        padding: 0px 10px;
     }
 } 
 
-@media only screen and (min-width: 768px) and (max-width:1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
      .button {
        width: 90vw; 
-       height:65px
+       height:65px;
     }
 }
 
 @media only screen and (max-width: 765px){
     .button {
        width: 90vw; 
-       height:45px
+       height:45px;
     }
 }

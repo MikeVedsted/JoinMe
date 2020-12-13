@@ -14,8 +14,8 @@ const LandingPage = () => {
   return (
     <div className="body">
       <div className="body__circles">
-        <div className="body__circle1">
-          <p className="body__highlight">
+        <div className="body__circle body__circle--left">
+          <p className="body__text body__text--highlight">
             Table Tennis Basketball, Horse Riding
           </p>
           <p className="body__text">
@@ -30,8 +30,8 @@ const LandingPage = () => {
             handleClick={handleClick}
           />
         </div>
-        <div className="body__circle2">
-          <p className="body__highlight">
+        <div className="body__circle body__circle--right">
+          <p className="body__text body__text--highlight">
             50 people already found event partners
           </p>
           <p className="body__text">

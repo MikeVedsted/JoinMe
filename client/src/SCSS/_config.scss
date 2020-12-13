@@ -15,4 +15,12 @@ $roboto:'Roboto', sans-serif;
 // font sizes
 $heading:30px;
 $sub-head:22px;
-$text:18px            
+$text:18px;
+
+//Mixins
+
+@mixin flexCenter {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
