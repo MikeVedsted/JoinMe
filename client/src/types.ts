@@ -19,6 +19,7 @@ export type AppState = {
     isAuthenticated: boolean
   }
 }
+
 export type ButtonComponent = {
   type: 'button' | 'submit' | 'reset'
   text: string

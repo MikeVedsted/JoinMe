@@ -1,24 +1,57 @@
 import React, { useState } from 'react'
 import Autocomplete from 'react-google-autocomplete'
+import axios from 'axios'
 
-import { AddressComponents, AddressComponent } from '../../types'
+import InputField from '../FormInputField'
+import { AddressSelection, AutoCompleteProps } from '../../types'
 
-const AddressAutoComplete = () => {
+const AddressAutoComplete = ({ handleAddress }: AutoCompleteProps) => {
   const MAPS_KEY = process.env.REACT_APP_GOOGLE_MAPS_KEY
-  const [street, setStreet] = useState('')
-  const [number, setNumber] = useState('')
-  const [city, setCity] = useState('')
-  const [postalCode, setPostalCode] = useState('')
-  const [country, setCountry] = useState('')
+  const [formattedAddress, setFormattedAddress] = useState('')
+  let address = {
+    street: '',
+    number: '',
+    city: '',
+    postal_code: '',
+    country: '',
+    lat: '',
+    lng: ''
+  }
 
-  const handleSelect = (address: AddressComponents) => {
-    address.address_components.map((value: AddressComponent) => {
-      if (value.types.includes('street_number')) setNumber(value.long_name)
-      if (value.types.includes('route')) setStreet(value.long_name)
-      if (value.types.includes('locality')) setCity(value.long_name)
-      if (value.types.includes('country')) setCountry(value.long_name)
-      if (value.types.includes('postal_code')) setPostalCode(value.long_name)
+  const resetSelection = async () => {
+    address.street = ''
+    address.number = ''
+    address.city = ''
+    address.postal_code = ''
+    address.country = ''
+    address.lat = ''
+    address.lng = ''
+    setFormattedAddress('')
+  }
+
+  const extractDetails = async (selection: AddressSelection) => {
+    selection.address_components.map((value) => {
+      if (value.types.includes('street_number'))
+        address.number = value.long_name
+      if (value.types.includes('route')) address.street = value.long_name
+      if (value.types.includes('locality')) address.city = value.long_name
+      if (value.types.includes('country')) address.country = value.long_name
+      if (value.types.includes('postal_code'))
+        address.postal_code = value.long_name
     })
+    setFormattedAddress(selection.formatted_address)
+    return address 
+  }
+
+  const handleSelect = async (selection: AddressSelection) => {
+    await resetSelection()
+    const basicDetails = await extractDetails(selection)
+    const getPlaceDetails = await axios.get(
+      `https://maps.googleapis.com/maps/api/geocode/json?place_id=${selection.place_id}&key=${MAPS_KEY}`
+    )
+    const { lat, lng } = getPlaceDetails.data.results[0].geometry.location
+    address = { ...basicDetails, lat, lng }
+    handleAddress(address)
   }
 
   return (
@@ -29,26 +62,14 @@ const AddressAutoComplete = () => {
         types={['address']}
         componentRestrictions={{ country: 'fi' }}
       />
-      <label className="form__field--readOnly">
-        Street:
-        <input type="text" id="street" value={street} readOnly />
-      </label>
-      <label className="form__field--readOnly">
-        Number:
-        <input type="text" id="number" value={number} readOnly />
-      </label>
-      <label className="form__field--readOnly">
-        Postal code:
-        <input type="text" id="postalCode" value={postalCode} readOnly />
-      </label>
-      <label className="form__field--readOnly">
-        City:
-        <input type="text" id="city" value={city} readOnly />
-      </label>
-      <label className="form__field--readOnly">
-        Country:
-        <input type="text" id="country" value={country} readOnly />
-      </label>
+      <InputField
+        label="Address"
+        type="text"
+        id="address"
+        value={formattedAddress}
+        modifier="--read-only"
+        readOnly
+      />
     </>
   )
 }
