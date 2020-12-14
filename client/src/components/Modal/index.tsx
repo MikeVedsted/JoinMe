@@ -5,7 +5,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { ModalProps } from '../../types'
 import './Modal.scss'
 
-const Modal = ({ closeModal, component: Component, ...rest }: any) => {
+const Modal = ({ closeModal, component: Component }: ModalProps) => {
   return (
     <div className="modal">
       <div className="modal__window">
