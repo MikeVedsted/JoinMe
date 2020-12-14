@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
 import { faBell } from '@fortawesome/free-solid-svg-icons'
 import { faComment } from '@fortawesome/free-solid-svg-icons'
-import { faUserAlt } from '@fortawesome/free-solid-svg-icons'
+
 import './Navbar.scss'
 import logo from './logo2.png'
 
