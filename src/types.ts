@@ -12,12 +12,20 @@ export type Event = {
   category: number
   date: string
   time: string
-  creator: string
   description: string
   max_participants: number
-  address: string
+  address: {
+    street: string
+    number: number
+    postal_code: number
+    city: string
+    country: string
+    lat: number
+    lng: number
+  }
   expires_at: Date
   image: string
+  created_by: string
 }
 
 export type User = {

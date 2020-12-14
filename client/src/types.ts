@@ -62,7 +62,6 @@ export type InputFieldProps = {
   readOnly?: boolean
   modifier?: string
 }
-
 export type DropdownProps = {
   label: string
   id: string
