@@ -19,6 +19,7 @@ export type AppState = {
     isAuthenticated: boolean
   }
 }
+
 export type ButtonComponent = {
   type: 'button' | 'submit' | 'reset'
   text: string
@@ -26,14 +27,27 @@ export type ButtonComponent = {
   handleClick: () => void
 }
 
-export type AddressComponents = {
+export type AutoCompleteProps = {
+  handleAddress: (a: any) => void
+}
+
+export type AddressSelection = {
   address_components: AddressComponent[]
+  formatted_address: string
+  place_id: string
 }
 
 export type AddressComponent = {
   long_name: string
-  short_name: string
   types: string[]
+}
+
+export type Address = {
+  number: string
+  street: string
+  city: string
+  postalCode: string
+  country: string
 }
 
 export type InputFieldProps = {

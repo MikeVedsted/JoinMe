@@ -8,7 +8,7 @@
   background-attachment: fixed;
   background-size: cover;
   @include flexCenter;
-  
+
   &__circles {
     width: 100vw;
     @include flexCenter;
@@ -25,131 +25,128 @@
     border-radius: 50%;
 
     &--left {
-        left: 28vw;
+      left: 28vw;
     }
 
     &--right {
-        left: 48vw;
+      left: 48vw;
     }
   }
 
-   &__text {
-       width: 230px;
-       text-align: center;
-       font-size: $sub-head;
-       font-family: $nunito;
-       line-height: 150%;
-       margin-top: 0px;
-       color: $textDark;
+  &__text {
+    width: 230px;
+    text-align: center;
+    font-size: $sub-head;
+    font-family: $nunito;
+    line-height: 150%;
+    margin-top: 0px;
+    color: $textDark;
 
-       &--highlight {
-        width: 250px;
-        font-size: $heading;
-        font-family: $montserrat;
-        color: $textLight;
-        margin-top: 35px;
-       }
-   }
+    &--highlight {
+      width: 250px;
+      font-size: $heading;
+      font-family: $montserrat;
+      color: $textLight;
+      margin-top: 35px;
+    }
+  }
 
-   &__button {
-       position: absolute;
-       top: 80vh;
-       width: 100vw;
-       display: flex;
-       justify-content: center;
-   }
+  &__button {
+    position: absolute;
+    top: 80vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+  }
 }
 
-@media only screen and (max-width:1024px) {
-    .body {
-       background-image: url(../../Assets/bulldog.jpg);
+@media only screen and (max-width: 1024px) {
+  .body {
+    background-image: url(../../Assets/bulldog.jpg);
 
-      &__circle {
-
-        &--left {
-          top: 50vh;
-          left: 22vw
-        }
-
-        &--right {
-          top: 50vh;
-        }  
+    &__circle {
+      &--left {
+        top: 50vh;
+        left: 22vw;
       }
 
-      &__button {
-        left: 0vw
+      &--right {
+        top: 50vh;
       }
     }
+
+    &__button {
+      left: 0vw;
+    }
+  }
 }
 
-@media only screen and (max-width:768px) {
-    .body {
-      background-image: url(../../Assets/bulldog.jpg);
+@media only screen and (max-width: 768px) {
+  .body {
+    background-image: url(../../Assets/bulldog.jpg);
 
-      &__circle {
+    &__circle {
+      &--left {
+        top: 50vh;
+        left: 10vw;
+      }
 
-        &--left {
-          top: 50vh;
-          left: 10vw
-        }
-
-        &--right {
-          top: 50vh;
-          left: 48vw
-        }
-     }
-
-     &__button {
-        top:90vh;
-        left: 0vw
-       }
+      &--right {
+        top: 50vh;
+        left: 48vw;
+      }
     }
+
+    &__button {
+      top: 90vh;
+      left: 0vw;
+    }
+  }
 }
 
-@media only screen and (max-width: 600px){
-    .body {
-       background-image: url(../../Assets/winter.jpg); 
+@media only screen and (max-width: 600px) {
+  .body {
+    background-image: url(../../Assets/winter.jpg);
 
-       &__circles {
-        flex-direction: column;
-        align-items: center;
-       }
-
-       &__circle {
-          &--left {
-            position:static;
-            background-color: rgba(255, 255, 255, 0);
-            border-bottom: 2px solid $primary;
-            width: 260px;
-            height: 260px;
-          } 
-
-           &--right {
-            position:static;
-            background-color: rgba(255, 255, 255, 0);
-            border-bottom: 2px solid $primary;
-            width: 260px;
-            height: 260px;
-         }     
-       }
-
-      
-       &__text {
-        color: $textLight;
-        font-size: $text;
-        width: 200px;
-
-          &--highlight {
-            font-size: $sub-head;
-            color: $secondary
-          }
-       }
-     
-       &__button {
-           position: static;
-           display: flex;
-           justify-content: center;
-           margin-top: 20px;
-       }
+    &__circles {
+      flex-direction: column;
+      align-items: center;
     }
+
+    &__circle {
+      &--left {
+        position: static;
+        background-color: rgba(255, 255, 255, 0);
+        border-bottom: 2px solid $primary;
+        width: 260px;
+        height: 260px;
+      }
+
+      &--right {
+        position: static;
+        background-color: rgba(255, 255, 255, 0);
+        border-bottom: 2px solid $primary;
+        width: 260px;
+        height: 260px;
+      }
+    }
+
+    &__text {
+      color: $textLight;
+      font-size: $text;
+      width: 200px;
+
+      &--highlight {
+        font-size: $sub-head;
+        color: $secondary;
+      }
+    }
+
+    &__button {
+      position: static;
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+  }
 }

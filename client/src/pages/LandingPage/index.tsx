@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 
 import Button from '../../components/Button'
+import { eventCategories } from '../../util/eventCategories'
 import './LandingPage.scss'
 
 const LandingPage = () => {
@@ -39,7 +40,7 @@ const LandingPage = () => {
             Table Tennis Basketball, Horse Riding
           </p>
           <p className="body__text">
-            ..and 28 other events are available in Helsinki which you can join!
+            {`..and ${eventCategories.length} other events are available in Helsinki which you can join!`}
           </p>
         </div>
         <div className="body__button">
