@@ -5,7 +5,7 @@ import GoogleAutoComplete from '../GoogleAutoComplete'
 import InputField from '../FormInputField'
 import DropdownField from '../FormDropdownField'
 import { useFormFields } from '../../hooks/useFormFields'
-import { eventCategories } from '../../util/eventCategories'
+import { eventCategories } from '../../util/constants/eventCategories'
 import './eventForm.scss'
 
 // TO DO
