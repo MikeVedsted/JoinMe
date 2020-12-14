@@ -1,0 +1,131 @@
+@import '../../SCSS/config';
+
+.event {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &__dataBox {
+    display: flex;
+  }
+
+  &__image {
+    width: 230px;
+    height: 194px;
+    border-radius: 6px;
+    margin-right: 25px;
+  }
+
+  &__infoBox {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  &__infoText {
+    font-size: $text;
+    margin: 0px;
+    font-family: $nunito;
+    color: $textDark;
+
+    &--icon {
+      color: $secondary;
+      margin-right: 15px;
+    }
+
+    &--total {
+      color: $textDim;
+    }
+  }
+
+  &__details {
+    padding: 10px;
+
+    &--hide {
+      display: none;
+    }
+  }
+
+  &__dText {
+    width: 90%;
+    font-family: $nunito;
+    font-size: $text;
+    color: $textDark;
+  }
+
+  &__comments {
+    padding: 10px;
+    width: 90%;
+    background-color: $textLight;
+    margin-bottom: 10px;
+  }
+
+  &__actions {
+    width: 90%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__line {
+    border: 0;
+    clear: both;
+    display: block;
+    width: 96%;
+    background-color: $textDim;
+    height: 1.5px;
+    margin-top: 30px;
+  }
+}
+
+.title {
+  display: flex;
+  align-items: center;
+
+  &__text {
+    margin: 5px 0px 10px 0px;
+    &--head {
+      font-family: $montserrat;
+      font-size: $sub-head;
+      color: $textDark;
+    }
+
+    &--time {
+      font-family: $nunito;
+      font-size: $text;
+      color: $textDim;
+      margin-left: 10px;
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .event {
+    &__dataBox {
+      flex-direction: column;
+    }
+
+    &__image {
+      border-radius: 0px;
+      width: 100%;
+      height: 220px;
+    }
+
+    &__infoBox {
+      margin-top: 15px;
+      padding-left: 15px;
+    }
+    &__info {
+      margin-bottom: 10px;
+    }
+
+    &__actions {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}
