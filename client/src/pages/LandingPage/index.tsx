@@ -1,14 +1,34 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
+import axios from 'axios'
 
-import Button from '../Button'
+import Button from '../../components/Button'
 import './LandingPage.scss'
 
 const LandingPage = () => {
+  const [error, setError] = useState('')
+  const [users, setUsers] = useState('')
   const history = useHistory()
+
+  useEffect(() => {
+    userCount()
+  }, [])
 
   const handleClick = () => {
     history.push('/home')
+  }
+
+  const userCount = async () => {
+    try {
+      const response = await axios({
+        method: 'GET',
+        url: 'http://localhost:5000/api/v1/users'
+      })
+      const data = response.data.length
+      setUsers(data)
+    } catch (error) {
+      setError(error.message)
+    }
   }
 
   return (
@@ -32,7 +52,7 @@ const LandingPage = () => {
         </div>
         <div className="body__circle body__circle--right">
           <p className="body__text body__text--highlight">
-            50 people already found event partners
+            {`${users} people already found event partners`}
           </p>
           <p className="body__text">
             ..and hundreds more are waiting for you to create events and play

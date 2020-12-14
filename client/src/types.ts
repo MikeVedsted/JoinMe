@@ -35,3 +35,22 @@ export type AddressComponent = {
   short_name: string
   types: string[]
 }
+
+export type InputFieldProps = {
+  type: string
+  id: string
+  label: string
+  value?: string
+  min?: number
+  step?: number
+  onChange?: () => void
+  placeholder?: string
+  readOnly?: boolean
+  modifier?: string
+}
+export type DropdownProps = {
+  label: string
+  id: string
+  options: string[]
+  onBlur: () => void
+}
