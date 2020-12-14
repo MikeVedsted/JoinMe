@@ -7,7 +7,7 @@ import LandingPage from './pages/LandingPage'
 
 const Routes = () => (
   <Switch>
-    <Route exact path="/" component={LandingPage} />
+    <Route exact path='/' component={LandingPage} />
     {/* 
     <ProtectedRoute exact path="/cart" component={Cart} />
     <AdminRoute exact path="/admin/create-product" component={CreateProduct} />
