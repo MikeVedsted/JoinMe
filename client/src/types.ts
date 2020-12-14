@@ -68,3 +68,7 @@ export type DropdownProps = {
   options: string[]
   onBlur: () => void
 }
+
+export type ModalProps = {
+  closeModal: () => void
+}
