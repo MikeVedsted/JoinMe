@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 
 import Button from '../../components/Button'
-import { eventCategories } from '../../util/eventCategories'
+import { eventCategories } from '../../util/constants/eventCategories'
 import './LandingPage.scss'
 
 const LandingPage = () => {
