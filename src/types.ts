@@ -1,3 +1,5 @@
+import { Request } from 'express'
+
 export type GoogleToken = {
   given_name: string
   family_name: string
