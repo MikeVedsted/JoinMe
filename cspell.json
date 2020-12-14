@@ -2,15 +2,21 @@
     "version": "0.1",
     "language": "en",
     "words": [
+        "MikeVedsted",
+        "nannadao",
+        "Dodgeball",
+        "Floorball",
+        "Paddleboarding",
+        "Padel",
+        "Scootering",
+        "signup",
+        "userk",
+        "Waterpolo"
         "cookieparser",
         "lusca",
         "middlewares",
-        "MikeVedsted",
-        "nannadao",
         "resave",
         "SAMEORIGIN",
-        "signup",
-        "userk",
         "xframe"
     ],
     "flagWords": [
