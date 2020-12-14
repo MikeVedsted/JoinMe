@@ -7,12 +7,19 @@ $default: #401e02;
 $textDark: #2a2a2a;
 $textLight: #f2f2f2;
 
-//fonts
+//Fonts
 $montserrat: 'Montserrat', sans-serif;
 $nunito: 'Nunito', sans-serif;
 $roboto: 'Roboto', sans-serif;
 
-// font sizes
+// Font sizes
 $heading: 30px;
 $sub-head: 22px;
 $text: 18px;
+
+// Mixins
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

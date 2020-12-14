@@ -9,6 +9,7 @@
   height: 35px;
   font-size: $text;
   color: $textLight;
+  cursor: pointer;
   transition: 0.3s ease-in-out;
 
   &--primary {
@@ -29,10 +30,10 @@
     color: $textDark;
   }
 
-  &--primary:hover {
+  &--secondary:hover {
     background-color: white;
     border: 1px solid $secondary;
-    color: $secondary;
+    color: $textDark;
   }
 
   &--large-active {
@@ -53,6 +54,13 @@
     color: $textDark;
     text-align: left;
     padding: 0px 10px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .button {
+    width: 90vw;
+    height: 65px;
   }
 }
 
