@@ -19,10 +19,10 @@ const createEvent = async (event: Event) => {
   !number && (number = 0)
   let addressId: string
 
-  const DBResponse = await db.query(
-    'SELECT address_id FROM address WHERE lat = $1 and lng = $2',
-    [lat, lng]
-  )
+  const DBResponse = await db.query('SELECT address_id FROM address WHERE lat = $1 and lng = $2', [
+    lat,
+    lng
+  ])
 
   if (DBResponse.rowCount === 0) {
     const newAddress = await db.query(
@@ -49,8 +49,8 @@ const createEvent = async (event: Event) => {
       image
     ]
   )
-   const newEvent: Event = createEvent.rows[0]
-   return newEvent
+  const newEvent: Event = createEvent.rows[0]
+  return newEvent
 }
 
 const findAllEvents = async () => {

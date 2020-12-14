@@ -40,7 +40,7 @@ const AddressAutoComplete = ({ handleAddress }: AutoCompleteProps) => {
         address.postal_code = value.long_name
     })
     setFormattedAddress(selection.formatted_address)
-    return address 
+    return address
   }
 
   const handleSelect = async (selection: AddressSelection) => {

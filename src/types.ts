@@ -1,3 +1,5 @@
+import { Request } from 'express'
+
 export type GoogleToken = {
   given_name: string
   family_name: string
@@ -10,7 +12,6 @@ export type Event = {
   category: number
   date: string
   time: string
-  creator: string
   description: string
   max_participants: number
   address: {
