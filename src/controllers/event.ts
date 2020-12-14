@@ -32,24 +32,23 @@ export const findEventByCategory = async (req: Request, res: Response, next: Nex
 
 export const createEvent = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
+    // TO DO
+    // Add validation
     const {
       title,
       category,
       date,
       time,
       description,
-      max_participants,
-      address,
+      maxParticipants,
+      created_by,
+      image,
       expires_at,
-      image
+      address
     } = req.body
-    let creator = ''
-
-    if (req.user) {
-      creator = req.user.user_id
-    } else {
-      throw new Error('Not authorized to do that')
-    }
+    const max_participants = parseInt(maxParticipants)
+    // TO DO
+    // Add user as created_by, once middleware is applied.
 
     const event: Event = {
       title,
@@ -60,8 +59,8 @@ export const createEvent = async (req: AuthRequest, res: Response, next: NextFun
       max_participants,
       address,
       expires_at,
-      image,
-      creator
+      created_by,
+      image
     }
 
     res.json(await EventService.createEvent(event))

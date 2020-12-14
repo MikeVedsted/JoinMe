@@ -2,39 +2,55 @@ import { Event } from '../types'
 import db from '../db'
 
 const createEvent = async (event: Event) => {
-  try {
-    const {
+  const {
+    title,
+    category,
+    date,
+    time,
+    description,
+    max_participants,
+    address,
+    expires_at,
+    created_by,
+    image
+  } = event
+  const { street, postal_code, city, country, lat, lng } = address
+  let { number } = address
+  !number && (number = 0)
+  let addressId: string
+
+  const DBResponse = await db.query(
+    'SELECT address_id FROM address WHERE lat = $1 and lng = $2',
+    [lat, lng]
+  )
+
+  if (DBResponse.rowCount === 0) {
+    const newAddress = await db.query(
+      'INSERT INTO address (street, number, postal_code, city, country, lat, lng) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING address_id',
+      [street, number, postal_code, city, country, lat, lng]
+    )
+    addressId = newAddress.rows[0].address_id
+  } else {
+    addressId = DBResponse.rows[0].address_id
+  }
+
+  const createEvent = await db.query(
+    'INSERT INTO event (title, category, date, time, description, max_participants, address, expires_at, created_by, image) VALUES ($1, (SELECT category_id FROM category WHERE name = $2), $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *',
+    [
       title,
       category,
       date,
       time,
       description,
       max_participants,
-      address,
+      addressId,
       expires_at,
-      image,
-      creator
-    } = event
-    const createEvent = await db.query(
-      'INSERT INTO event (title, category, creator, date, time, description, max_participants, address, expires_at, image) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *',
-      [
-        title,
-        category,
-        creator,
-        date,
-        time,
-        description,
-        max_participants,
-        address,
-        expires_at,
-        image
-      ]
-    )
-    const newEvent: Event = createEvent.rows[0]
-    return newEvent
-  } catch (error) {
-    return error
-  }
+      created_by,
+      image
+    ]
+  )
+   const newEvent: Event = createEvent.rows[0]
+   return newEvent
 }
 
 const findAllEvents = async () => {
