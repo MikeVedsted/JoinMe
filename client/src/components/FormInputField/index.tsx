@@ -11,7 +11,7 @@ const InputField = ({
   ...rest
 }: InputFieldProps) => {
   return (
-    <label className="form__field">
+    <label className='form__field'>
       {label}
       <input
         type={type}
