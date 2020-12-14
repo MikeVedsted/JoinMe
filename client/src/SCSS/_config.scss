@@ -17,6 +17,10 @@ $heading: 30px;
 $sub-head: 22px;
 $text: 18px;
 
+// border-radius
+$borderBig: 8px;
+$borderSmall: 6px;
+
 //Mixins
 @mixin flexCenter {
   display: flex;

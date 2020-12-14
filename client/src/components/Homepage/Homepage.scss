@@ -1,0 +1,22 @@
+@import '../../SCSS/config';
+
+.main {
+  padding: 0.5em 5em;
+  display: flex;
+
+  &__searchBox {
+    width: 30%;
+    padding: 15px;
+    border-radius: $borderBig;
+    @include flexCenter;
+    flex-direction: column;
+    background-color: $textLight;
+    margin-right: 3%;
+  }
+
+  &__events {
+    width: 65%;
+    padding: 15px;
+    background-color: green;
+  }
+}
