@@ -12,12 +12,22 @@
 
   &--active {
     background: rgba(255, 255, 255, 0.96);
-    border-bottom: 2px solid $textLight;
+    box-shadow: 1px 0px 2px $textDark;
   }
 
-  &__logo {
-    height: 60px;
+  &__image {
     cursor: pointer;
+
+    &--logo {
+      height: 60px;
+    }
+
+    &--profile {
+      width: 50px;
+      height: 50px;
+      border-radius: 6px;
+      margin-left: 20px;
+    }
   }
 
   &__icons {
@@ -30,13 +40,8 @@
   &__icon {
     color: $textDark;
     font-size: $heading;
-    margin: 0px 20px;
-  }
-
-  &__profile {
-    width: 50px;
-    height: 50px;
-    border-radius: 6px;
+    margin: 0px 40px;
+    cursor: pointer;
   }
 
   &__login {
@@ -47,6 +52,31 @@
 
     &--hide {
       display: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .header {
+    padding: 0.1em 1.5em;
+    height: 70px;
+
+    &__logo {
+      height: 50px;
+    }
+
+    &__icons {
+      width: 50vw;
+    }
+
+    &__icon {
+      font-size: $text;
+      margin-right: 20px;
+    }
+
+    &__profile {
+      width: 40px;
+      height: 40px;
     }
   }
 }

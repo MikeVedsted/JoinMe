@@ -23,13 +23,17 @@ const Navbar = () => {
 
   return (
     <header className={nav ? 'header' : 'header header--active'}>
-      <img className="header__logo" src={logo} alt="logo" />
+      <img
+        className="header__image header__image--logo"
+        src={logo}
+        alt="logo"
+      />
       {logged ? (
         <div className="header__icons">
           <FontAwesomeIcon className="header__icon" icon={faBell} />
           <FontAwesomeIcon className="header__icon" icon={faComment} />
           <img
-            className="header__profile"
+            className="header__image header__image--profile"
             src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
             alt="profile"
           />
