@@ -6,19 +6,19 @@ import EventForm from './components/EventForm'
 import './App.scss'
 
 const App = () => {
-  const [closeModal, setCloseModal] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   return (
     <>
       <h1>Moro Moro!</h1>
       <p>Now start developing!</p>
-      {closeModal && (
+      {isModalOpen && (
         <Modal
-          closeModal={() => setCloseModal(false)}
+          closeModal={() => setIsModalOpen(false)}
           component={<GoogleUserLogin />}
         />
       )}
-      <button onClick={() => setCloseModal(true)}>
+      <button onClick={() => setIsModalOpen(true)}>
         Click here to try out an amazing modal!
       </button>
       <br />
