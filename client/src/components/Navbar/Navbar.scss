@@ -1,0 +1,83 @@
+@import '../../SCSS/config';
+
+.nav {
+  position: sticky;
+  top: 0;
+  max-width: 100vw;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.2em 2.5em;
+
+  &--active {
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 1px 0px 2px $textDark;
+  }
+
+  &__image {
+    cursor: pointer;
+
+    &--logo {
+      height: 60px;
+    }
+
+    &--profile {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-left: 20px;
+    }
+  }
+
+  &__icons {
+    width: 70vw;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  &__icon {
+    color: $textDark;
+    font-size: $heading;
+    margin: 0px 40px;
+    cursor: pointer;
+  }
+
+  &__login {
+    font-family: $montserrat;
+    font-weight: 900;
+    color: $primary;
+    cursor: pointer;
+
+    &--hide {
+      display: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .header {
+    padding: 0.1em 1.5em;
+    height: 70px;
+
+    &__logo {
+      height: 50px;
+    }
+
+    &__icons {
+      width: 50vw;
+    }
+
+    &__icon {
+      font-size: $text;
+      margin-right: 20px;
+    }
+
+    &__profile {
+      width: 40px;
+      height: 40px;
+    }
+  }
+}

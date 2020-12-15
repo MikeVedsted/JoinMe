@@ -63,13 +63,14 @@ const AddressAutoComplete = ({ handleAddress }: AutoCompleteProps) => {
         componentRestrictions={{ country: 'fi' }}
       />
       <InputField
-        label="Address"
-        type="text"
-        id="address"
+        label='Address'
+        type='text'
+        id='address'
         value={formattedAddress}
-        modifier="--read-only"
+        modifier='--read-only'
         readOnly
       />
+      <p className='testes'>Test </p>
     </>
   )
 }
