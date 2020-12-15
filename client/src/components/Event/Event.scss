@@ -5,18 +5,19 @@
   display: flex;
   flex-direction: column;
 
-  &__dataBox {
+  &__data-box {
     display: flex;
   }
 
   &__image {
     width: 230px;
     height: 194px;
+    object-fit: cover;
     border-radius: 6px;
     margin-right: 25px;
   }
 
-  &__infoBox {
+  &__info-box {
     display: flex;
     flex-direction: column;
   }
@@ -27,7 +28,12 @@
     margin-bottom: 16px;
   }
 
-  &__infoText {
+  &__icon-wrapper {
+    width: 30px;
+    @include flexCenter;
+  }
+
+  &__info-text {
     font-size: $text;
     margin: 0px;
     font-family: $nunito;
@@ -36,11 +42,25 @@
     &--icon {
       color: $secondary;
       margin-right: 15px;
+      font-size: $text;
     }
 
     &--total {
       color: $textDim;
     }
+
+    &--clickable {
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    &--clickable:hover {
+      color: rgb(0, 60, 255);
+    }
+  }
+
+  &__link {
+    text-decoration: none;
   }
 
   &__details {
@@ -51,7 +71,7 @@
     }
   }
 
-  &__dText {
+  &__d-text {
     width: 90%;
     font-family: $nunito;
     font-size: $text;
@@ -105,7 +125,7 @@
 
 @media only screen and (max-width: 600px) {
   .event {
-    &__dataBox {
+    &__data-box {
       flex-direction: column;
     }
 
@@ -115,7 +135,7 @@
       height: 220px;
     }
 
-    &__infoBox {
+    &__info-box {
       margin-top: 15px;
       padding-left: 15px;
     }
@@ -126,6 +146,7 @@
     &__actions {
       width: 100%;
       justify-content: center;
+      margin-top: 15px;
     }
   }
 }

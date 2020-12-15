@@ -1,18 +1,23 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { useCookies } from 'react-cookie'
+import jwt from 'jsonwebtoken'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserShield } from '@fortawesome/free-solid-svg-icons'
-import { faCalendar } from '@fortawesome/free-solid-svg-icons'
-import { faClock } from '@fortawesome/free-solid-svg-icons'
-import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
-import { faUsers } from '@fortawesome/free-solid-svg-icons'
+import {
+  faUserShield,
+  faCalendar,
+  faClock,
+  faMapMarkerAlt,
+  faUser
+} from '@fortawesome/free-solid-svg-icons'
 
 import Button from '../Button'
 import FormInputFiled from '../FormInputField'
+import { calculateEventAge } from '../../util/helperFunctions'
 import { EventType } from '../../types'
 import './Event.scss'
 
 const Event = ({
-  event_id,
   created_by,
   created_at,
   image,
@@ -22,80 +27,81 @@ const Event = ({
   address,
   participants,
   max_participants,
-  description
+  description,
+  handleAddRequest
 }: EventType) => {
-  const [details, setDetails] = useState(true)
+  const [details, setDetails] = useState(false)
+  const [cookies, setCookie] = useCookies(['x-auth-token'])
+  const decodedToken = jwt.decode(cookies['x-auth-token'])
+  const userId = decodedToken?.sub
 
   const changeView = () => {
-    if (details) {
-      setDetails(false)
-    } else {
-      setDetails(true)
-    }
+    setDetails(!details)
   }
 
-  const calculateTime = () => {
-    const diff = new Date().getTime() - new Date(created_at).getTime()
-    const hours = parseInt((diff / 3600000).toFixed(0))
-    if (hours <= 24) {
-      return hours + 'h'
-    } else if (hours > 24 && hours <= 730) {
-      const days = (hours / 24).toFixed(0)
-      return days + 'd'
-    } else if (hours > 730 && hours <= 8640) {
-      const months = (hours / 730).toFixed()
-      return months + 'm'
-    } else {
-      const years = (hours / 8640).toFixed(0)
-      return years + 'y'
-    }
-  }
-  const eventCreatedBefore = calculateTime()
+  const formattedTime = time.slice(0, 5)
+  const formattedDate = date.slice(0, 10).split('-').reverse().join('-')
 
   return (
     <div className='event'>
       <title className='title'>
         <p className='title__text title__text--head'>{title}</p>
-        <p className='title__text title__text--time'>{eventCreatedBefore}</p>
+        <p className='title__text title__text--time'>
+          {calculateEventAge(created_at)}
+        </p>
       </title>
-      <div className='event__dataBox'>
+      <div className='event__data-box'>
         <img className='event__image' src={image} alt={title} />
-        <div className='event__infoBox'>
+        <div className='event__info-box'>
           <div className='event__info'>
-            <FontAwesomeIcon
-              className='event__infoText event__infoText--icon'
-              icon={faUserShield}
-            />
-            <p className='event__infoText'>{created_by}</p>
+            <div className='event__icon-wrapper'>
+              <FontAwesomeIcon
+                className='event__info-text event__info-text--icon'
+                icon={faUserShield}
+              />
+            </div>
+            <Link className='event__link' to={`/${userId}`}>
+              <p className='event__info-text event__info-text--clickable'>
+                {created_by}
+              </p>
+            </Link>
           </div>
           <div className='event__info'>
-            <FontAwesomeIcon
-              className='event__infoText event__infoText--icon'
-              icon={faCalendar}
-            />
-            <p className='event__infoText'>{date}</p>
+            <div className='event__icon-wrapper'>
+              <FontAwesomeIcon
+                className='event__info-text event__info-text--icon'
+                icon={faCalendar}
+              />
+            </div>
+            <p className='event__info-text'>{formattedDate}</p>
           </div>
           <div className='event__info'>
-            <FontAwesomeIcon
-              className='event__infoText event__infoText--icon'
-              icon={faClock}
-            />
-            <p className='event__infoText'>{time}</p>
+            <div className='event__icon-wrapper'>
+              <FontAwesomeIcon
+                className='event__info-text event__info-text--icon'
+                icon={faClock}
+              />
+            </div>
+            <p className='event__info-text'>{formattedTime}</p>
           </div>
           <div className='event__info'>
-            <FontAwesomeIcon
-              className='event__infoText event__infoText--icon'
-              icon={faMapMarkerAlt}
-            />
-            <p className='event__infoText'>{address}</p>
+            <div className='event__icon-wrapper'>
+              <FontAwesomeIcon
+                className='event__info-text event__info-text--icon'
+                icon={faMapMarkerAlt}
+              />
+            </div>
+            <p className='event__info-text'>{address}</p>
           </div>
           <div className='event__info'>
-            <FontAwesomeIcon
-              className='event__infoText event__infoText--icon'
-              icon={faUsers}
-            />
-            <span className='event__infoText'>{`${participants}/`}</span>
-            <span className='event__infoText event__infoText--total'>
+            <div className='event__icon-wrapper'>
+              <FontAwesomeIcon
+                className='event__info-text event__info-text--icon'
+                icon={faUser}
+              />
+            </div>
+            <span className='event__info-text'>{`${participants}/`}</span>
+            <span className='event__info-text event__info-text--total'>
               {max_participants}
             </span>
           </div>
@@ -106,7 +112,7 @@ const Event = ({
           details ? 'event__details' : 'event__details event__details--hide '
         }
       >
-        <p className='event__dText'>{description}</p>
+        <p className='event__d-text'>{description}</p>
         <div className='event__comments'>comments comes here</div>
         <FormInputFiled
           type='text'
@@ -120,7 +126,7 @@ const Event = ({
           type='button'
           text='Ask to join'
           style='primary'
-          handleClick={() => console.log('clicked!!')}
+          handleClick={handleAddRequest}
         />
         <Button
           type='button'
