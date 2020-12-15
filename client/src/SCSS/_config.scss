@@ -23,3 +23,8 @@ $text: 18px;
   justify-content: center;
   align-items: center;
 }
+
+@mixin flexStart {
+  display: flex;
+  justify-content: flex-start;
+}

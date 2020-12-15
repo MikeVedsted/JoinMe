@@ -73,3 +73,7 @@ export type ModalProps = {
   closeModal: () => void
   content?: any
 }
+
+export type ProfilePageParam = {
+  userId: string
+}

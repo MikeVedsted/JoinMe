@@ -1,0 +1,56 @@
+@import '../../SCSS/config';
+
+.profile {
+  padding-top: 95px;
+  margin: 0 2.5em;
+  justify-content: stretch;
+  @include flexStart;
+
+  &__left {
+    @include flexCenter;
+    flex-direction: column;
+  }
+
+  &__left img {
+    width: 327px;
+    height: 384px;
+    margin-bottom: 26px;
+    border-radius: 8px;
+  }
+
+  &__right {
+    @include flexStart;
+    flex-direction: column;
+    margin-left: 40px;
+    flex-basis: 70%;
+  }
+
+  &__header {
+    @include flexCenter;
+    flex-direction: row;
+  }
+
+  &__header h3 {
+    font-family: $montserrat;
+    font-size: $sub-head;
+    font-weight: 600;
+    flex-basis: 25%;
+  }
+
+  &__header hr {
+    border: 1px solid #606060;
+    width: 100%;
+  }
+
+  &__details {
+    display: grid;
+    grid-template-columns: 150px auto;
+    justify-items: start;
+    align-items: center;
+    column-gap: 40px;
+  }
+
+  &__details h4 {
+    font-family: $nunito;
+  }
+}
