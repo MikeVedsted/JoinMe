@@ -44,44 +44,44 @@ const EventForm = () => {
   }
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
+    <form className='form' onSubmit={handleSubmit}>
       <InputField
-        type="text"
-        id="title"
-        label="Title"
+        type='text'
+        id='title'
+        label='Title'
         onChange={handleFields}
       />
       <DropdownField
-        label="Category"
-        id="category"
+        label='Category'
+        id='category'
         options={eventCategories}
         onBlur={handleFields}
       />
-      <InputField type="date" id="date" label="Date" onChange={handleFields} />
-      <InputField type="time" id="time" label="Time" onChange={handleFields} />
+      <InputField type='date' id='date' label='Date' onChange={handleFields} />
+      <InputField type='time' id='time' label='Time' onChange={handleFields} />
       <InputField
-        type="date"
-        id="expires_at"
-        label="Close at"
+        type='date'
+        id='expires_at'
+        label='Close at'
         onChange={handleFields}
       />
       <GoogleAutoComplete handleAddress={setAddress} />
       <InputField
-        type="textarea"
-        id="description"
-        label="Description"
+        type='textarea'
+        id='description'
+        label='Description'
         onChange={handleFields}
       />
       <InputField
-        type="number"
-        id="maxParticipants"
-        label="Maximum participants"
+        type='number'
+        id='maxParticipants'
+        label='Maximum participants'
         onChange={handleFields}
         min={1}
         step={1}
       />
-      <InputField type="url" id="image" label="Image" onChange={handleFields} />
-      <InputField type="submit" value="Submit" id="submit" label="Submit" />
+      <InputField type='url' id='image' label='Image' onChange={handleFields} />
+      <InputField type='submit' value='Submit' id='submit' label='Submit' />
       {error ? <p>{error}</p> : null}
     </form>
   )
