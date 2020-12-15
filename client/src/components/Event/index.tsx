@@ -53,49 +53,49 @@ const Event = ({
   const eventCreatedBefore = calculateTime()
 
   return (
-    <div className="event">
-      <title className="title">
-        <p className="title__text title__text--head">{title}</p>
-        <p className="title__text title__text--time">{eventCreatedBefore}</p>
+    <div className='event'>
+      <title className='title'>
+        <p className='title__text title__text--head'>{title}</p>
+        <p className='title__text title__text--time'>{eventCreatedBefore}</p>
       </title>
-      <div className="event__dataBox">
-        <img className="event__image" src={image} alt={title} />
-        <div className="event__infoBox">
-          <div className="event__info">
+      <div className='event__dataBox'>
+        <img className='event__image' src={image} alt={title} />
+        <div className='event__infoBox'>
+          <div className='event__info'>
             <FontAwesomeIcon
-              className="event__infoText event__infoText--icon"
+              className='event__infoText event__infoText--icon'
               icon={faUserShield}
             />
-            <p className="event__infoText">{created_by}</p>
+            <p className='event__infoText'>{created_by}</p>
           </div>
-          <div className="event__info">
+          <div className='event__info'>
             <FontAwesomeIcon
-              className="event__infoText event__infoText--icon"
+              className='event__infoText event__infoText--icon'
               icon={faCalendar}
             />
-            <p className="event__infoText">{date}</p>
+            <p className='event__infoText'>{date}</p>
           </div>
-          <div className="event__info">
+          <div className='event__info'>
             <FontAwesomeIcon
-              className="event__infoText event__infoText--icon"
+              className='event__infoText event__infoText--icon'
               icon={faClock}
             />
-            <p className="event__infoText">{time}</p>
+            <p className='event__infoText'>{time}</p>
           </div>
-          <div className="event__info">
+          <div className='event__info'>
             <FontAwesomeIcon
-              className="event__infoText event__infoText--icon"
+              className='event__infoText event__infoText--icon'
               icon={faMapMarkerAlt}
             />
-            <p className="event__infoText">{address}</p>
+            <p className='event__infoText'>{address}</p>
           </div>
-          <div className="event__info">
+          <div className='event__info'>
             <FontAwesomeIcon
-              className="event__infoText event__infoText--icon"
+              className='event__infoText event__infoText--icon'
               icon={faUsers}
             />
-            <span className="event__infoText">{`${participants}/`}</span>
-            <span className="event__infoText event__infoText--total">
+            <span className='event__infoText'>{`${participants}/`}</span>
+            <span className='event__infoText event__infoText--total'>
               {max_participants}
             </span>
           </div>
@@ -106,30 +106,30 @@ const Event = ({
           details ? 'event__details' : 'event__details event__details--hide '
         }
       >
-        <p className="event__dText">{description}</p>
-        <div className="event__comments">comments comes here</div>
+        <p className='event__dText'>{description}</p>
+        <div className='event__comments'>comments comes here</div>
         <FormInputFiled
-          type="text"
-          id="comment"
-          label=""
-          placeholder="Write a comment or ask a question to the creator"
+          type='text'
+          id='comment'
+          label=''
+          placeholder='Write a comment or ask a question to the creator'
         />
       </div>
-      <div className="event__actions">
+      <div className='event__actions'>
         <Button
-          type="button"
-          text="Ask to join"
-          style="primary"
+          type='button'
+          text='Ask to join'
+          style='primary'
           handleClick={() => console.log('clicked!!')}
         />
         <Button
-          type="button"
+          type='button'
           text={details ? 'View less' : 'View more'}
-          style="primary"
+          style='primary'
           handleClick={changeView}
         />
       </div>
-      <hr className="event__line" />
+      <hr className='event__line' />
     </div>
   )
 }
