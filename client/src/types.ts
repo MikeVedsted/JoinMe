@@ -71,5 +71,5 @@ export type DropdownProps = {
 
 export type ModalProps = {
   closeModal: () => void
-  component?: any
+  content?: any
 }

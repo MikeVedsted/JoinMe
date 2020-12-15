@@ -5,14 +5,14 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { ModalProps } from '../../types'
 import './Modal.scss'
 
-const Modal = ({ closeModal, component: Component }: ModalProps) => {
+const Modal = ({ closeModal, content: Content }: ModalProps) => {
   return (
     <div className="modal">
       <div className="modal__window">
         <button className="modal__close-button" onClick={closeModal}>
           <FontAwesomeIcon icon={faTimes} />
         </button>
-        {Component}
+        {Content}
       </div>
     </div>
   )

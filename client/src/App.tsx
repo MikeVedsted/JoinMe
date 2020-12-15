@@ -15,7 +15,13 @@ const App = () => {
       {isModalOpen && (
         <Modal
           closeModal={() => setIsModalOpen(false)}
-          component={<GoogleUserLogin />}
+          content={
+            <>
+              <h3>Log in!</h3>
+              <p>Choose your preferred log in method below:</p>
+              <GoogleUserLogin />
+            </>
+          }
         />
       )}
       <button onClick={() => setIsModalOpen(true)}>
