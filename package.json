@@ -16,7 +16,7 @@
     "prettier-format": "prettier --config .prettierrc \"src/**/*.ts\" --write",
     "format-backend": "npm run prettier-format && npm run lint",
     "format-client": "cd client && npm run format-client",
-    "format-all": "npm run format-backend && npm run format-client"
+    "format-all": "npm run format-client && npm run format-backend"
   },
   "repository": {
     "type": "git",
@@ -81,6 +81,7 @@
     "@typescript-eslint/parser": "^4.9.0",
     "eslint": "^7.14.0",
     "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-jest": "^24.1.3",
     "eslint-plugin-prettier": "^3.1.4",
     "husky": "^4.3.0",
     "prettier": "^2.2.1",
