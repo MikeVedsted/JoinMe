@@ -1,0 +1,9 @@
+.form { 
+  &__field {
+    display: block;
+    &--read-only {
+      background-color: #575757;
+      border: none;
+    }
+  }
+}

@@ -1,9 +1,5 @@
 export default class ApiError extends Error {
-  constructor(
-    readonly statusCode: number,
-    readonly message: string,
-    readonly source?: Error
-  ) {
+  constructor(readonly statusCode: number, readonly message: string, readonly source?: Error) {
     super()
   }
 }
@@ -21,19 +17,13 @@ export class ForbiddenError extends ApiError {
 }
 
 export class InternalServerError extends ApiError {
-  constructor(
-    readonly message: string = 'Internal Server Error',
-    source?: Error
-  ) {
+  constructor(readonly message: string = 'Internal Server Error', source?: Error) {
     super(500, message, source)
   }
 }
 
 export class UnauthorizedError extends ApiError {
-  constructor(
-    readonly message: string = 'Unauthorized Request',
-    source?: Error
-  ) {
+  constructor(readonly message: string = 'Unauthorized Request', source?: Error) {
     super(401, message, source)
   }
 }

@@ -1,20 +1,24 @@
-// cSpell settings. 
-// DO NOT CHANGE VERSION NUMBER
-// Keep in mind that cSpell only catches words longer than 3 characters.
-// This is a spell checker not a grammar checker. Make sure your sentences make sense. 
-
-// Use "words" for words that should always be considered correct. 
-// Use "flagWords" for words that should always be considered incorrect.
-    
 {
     "version": "0.1",
     "language": "en",
     "words": [
-        "nannadao",
         "MikeVedsted",
+        "nannadao",
+        "Dodgeball",
+        "Floorball",
+        "Paddleboarding",
+        "Padel",
+        "Scootering",
+        "signup",
         "userk",
-        "signup"
-    ],    
+        "Waterpolo"
+        "cookieparser",
+        "lusca",
+        "middlewares",
+        "resave",
+        "SAMEORIGIN",
+        "xframe"
+    ],
     "flagWords": [
         "aip",
         "hte"

@@ -2,13 +2,9 @@ import { Request, Response, NextFunction } from 'express'
 
 import { NotFoundError, BadRequestError } from '../helpers/apiError'
 import EventService from '../services/event'
-import { Event } from '../types'
+import { AuthRequest, Event } from '../types'
 
-export const findAllEvents = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const findAllEvents = async (req: Request, res: Response, next: NextFunction) => {
   try {
     res.json(await EventService.findAllEvents())
   } catch (error) {
@@ -16,49 +12,44 @@ export const findAllEvents = async (
   }
 }
 
-export const findEventById = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  const { eventId } = req.params
+export const findEventById = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    const { eventId } = req.params
     res.json(await EventService.findEventById(eventId))
   } catch (error) {
     next(new NotFoundError('No event found', error))
   }
 }
 
-export const findEventByCategory = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  const categoryId = parseInt(req.params.categoryId)
+export const findEventByCategory = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    const categoryId = parseInt(req.params.categoryId)
     res.json(await EventService.findEventByCategory(categoryId))
   } catch (error) {
     next(new NotFoundError('No events found', error))
   }
 }
 
-export const createEvent = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const createEvent = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
+    // TO DO
+    // Add validation
     const {
       title,
       category,
       date,
       time,
       description,
-      max_participants,
-      address,
+      maxParticipants,
+      created_by,
+      image,
       expires_at,
-      image
+      address
     } = req.body
+    const max_participants = parseInt(maxParticipants)
+    // TO DO
+    // Add user as created_by, once middleware is applied.
+
     const event: Event = {
       title,
       category,
@@ -68,20 +59,17 @@ export const createEvent = async (
       max_participants,
       address,
       expires_at,
+      created_by,
       image
     }
 
     res.json(await EventService.createEvent(event))
   } catch (error) {
-    next(new BadRequestError('failed to create event', error))
+    next(new BadRequestError('Failed to create event', error))
   }
 }
 
-export const updateEvent = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const updateEvent = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { eventId } = req.params
     const update = req.body
@@ -91,13 +79,9 @@ export const updateEvent = async (
   }
 }
 
-export const deleteEvent = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  const { eventId } = req.params
+export const deleteEvent = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    const { eventId } = req.params
     res.json(await EventService.deleteEvent(eventId))
   } catch (error) {
     next(new NotFoundError('Event not found', error))
