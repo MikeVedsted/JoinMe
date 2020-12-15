@@ -1,9 +1,11 @@
 import React from 'react'
 import { GoogleLogin } from 'react-google-login'
+import { useCookies } from 'react-cookie'
 import axios from 'axios'
 
 const GoogleUserLogin = () => {
   const GOOGLE_CLIENT = process.env.REACT_APP_GOOGLE_API_KEY as string
+  const [cookies, setCookie] = useCookies(['user'])
 
   const responseSuccessGoogle = async (response: any) => {
     const userToken = await response.tokenObj.id_token
@@ -11,7 +13,13 @@ const GoogleUserLogin = () => {
       const res = await axios.post('/api/v1/users/google-authenticate', {
         id_token: userToken
       })
-      console.log(res)
+      const { user_id, first_name, last_name, profile_image } = res.data
+      setCookie('user', {
+        ...user_id,
+        ...first_name,
+        ...last_name,
+        ...profile_image
+      })
     } catch (error) {
       console.log(error)
     }
