@@ -5,7 +5,7 @@ import Routes from './Routes'
 import Navbar from './components/Navbar'
 import Modal from './components/Modal'
 import GoogleUserLogin from './components/GoogleUserLogin'
-// import EventForm from './components/EventForm'
+import EventForm from './components/EventForm'
 import './App.scss'
 
 const App = () => {
@@ -14,7 +14,7 @@ const App = () => {
   return (
     <>
       <Navbar />
-      <h1>Moro Moro!</h1>
+      {/* <h1>Moro Moro!</h1>
       <p>Now start developing!</p>
       {isModalOpen && (
         <Modal
@@ -34,10 +34,9 @@ const App = () => {
       <br />
       <Link to={'/test-regular'}>Regular route</Link>
       <br />
-      <Link to={'/test-protected'}>Auth protected route</Link>
-      {/* <h3>Create event form</h3>
-      <EventForm /> */}
-      <Routes />
+      <Link to={'/test-protected'}>Auth protected route</Link> */}
+      <EventForm />
+      {/* <Routes /> */}
     </>
   )
 }

@@ -1,13 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Autocomplete from 'react-google-autocomplete'
 import axios from 'axios'
 
-import InputField from '../FormInputField'
 import { AddressSelection, AutoCompleteProps } from '../../types'
 
 const AddressAutoComplete = ({ handleAddress }: AutoCompleteProps) => {
   const MAPS_KEY = process.env.REACT_APP_GOOGLE_MAPS_KEY
-  const [formattedAddress, setFormattedAddress] = useState('')
   let address = {
     street: '',
     number: '',
@@ -26,7 +24,6 @@ const AddressAutoComplete = ({ handleAddress }: AutoCompleteProps) => {
     address.country = ''
     address.lat = ''
     address.lng = ''
-    setFormattedAddress('')
   }
 
   const extractDetails = async (selection: AddressSelection) => {
@@ -39,7 +36,6 @@ const AddressAutoComplete = ({ handleAddress }: AutoCompleteProps) => {
       if (value.types.includes('postal_code'))
         address.postal_code = value.long_name
     })
-    setFormattedAddress(selection.formatted_address)
     return address
   }
 
@@ -61,14 +57,7 @@ const AddressAutoComplete = ({ handleAddress }: AutoCompleteProps) => {
         onPlaceSelected={handleSelect}
         types={['address']}
         componentRestrictions={{ country: 'fi' }}
-      />
-      <InputField
-        label='Address'
-        type='text'
-        id='address'
-        value={formattedAddress}
-        modifier='--read-only'
-        readOnly
+        className='form__field'
       />
     </>
   )

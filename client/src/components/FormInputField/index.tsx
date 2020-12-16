@@ -11,12 +11,17 @@ const InputField = ({
   ...rest
 }: InputFieldProps) => {
   return (
-    <label className='form__field'>
+    <label className='form__label'>
       {label}
+      {rest.required ? (
+        <span className='form__label--required'>{'*'}</span>
+      ) : (
+        ''
+      )}
       <input
         type={type}
         id={id}
-        className={`form__field${modifier}`}
+        className={`form__field form__field${modifier}`}
         {...rest}
       />
     </label>
