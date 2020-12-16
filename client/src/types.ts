@@ -81,7 +81,7 @@ export type EventType = {
   participants: number
   max_participants: number
   description: string
-  handleAddRequest: () => void | undefined
+  handleAddRequest: () => void
 }
 
 export type ModalProps = {
