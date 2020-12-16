@@ -9,7 +9,7 @@ import './Navbar.scss'
 
 const Navbar = () => {
   const [navBg, setNavBg] = useState(true)
-  const [cookies, setCookie] = useCookies(['x-auth-token'])
+  const [cookies, setCookies] = useCookies(['user'])
   const { profile_image, user_id } = cookies.user || ''
 
   const changeNavStyle = () => {

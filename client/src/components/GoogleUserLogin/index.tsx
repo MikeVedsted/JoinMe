@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const GoogleUserLogin = () => {
   const GOOGLE_CLIENT = process.env.REACT_APP_GOOGLE_API_KEY as string
-  const [cookies, setCookie] = useCookies(['user'])
+  const [cookies, setCookies] = useCookies(['user'])
 
   const responseSuccessGoogle = async (response: any) => {
     const userToken = await response.tokenObj.id_token
@@ -14,12 +14,7 @@ const GoogleUserLogin = () => {
         id_token: userToken
       })
       const { user_id, first_name, last_name, profile_image } = res.data
-      setCookie('user', {
-        ...user_id,
-        ...first_name,
-        ...last_name,
-        ...profile_image
-      })
+      setCookies('user', { user_id, first_name, last_name, profile_image })
     } catch (error) {
       console.log(error)
     }
