@@ -23,7 +23,7 @@ export type AppState = {
 export type ButtonComponent = {
   type: 'button' | 'submit' | 'reset'
   text: string
-  style?: 'primary' | 'secondary' | 'large-active' | 'large'
+  modifier?: 'primary' | 'secondary' | 'large-active' | 'large'
   handleClick: () => void
 }
 
@@ -61,12 +61,14 @@ export type InputFieldProps = {
   placeholder?: string
   readOnly?: boolean
   modifier?: string
+  required?: boolean
 }
 export type DropdownProps = {
   label: string
   id: string
   options: string[]
   onBlur: () => void
+  required?: boolean
 }
 
 export type ModalProps = {
