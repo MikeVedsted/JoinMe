@@ -1,18 +1,26 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 
-// import ProtectedRoute from './util/ProtectedRoute'
-// import AdminRoute from './util/AdminRoute'
+import ProtectedRoute from './util/ProtectedRoute'
 import LandingPage from './pages/LandingPage'
+
+const RegularComponent = () => {
+  return <h1>regular component 1</h1>
+}
+
+const ProtectedComponent = () => {
+  return <h1>protected component</h1>
+}
 
 const Routes = () => (
   <Switch>
     <Route exact path='/' component={LandingPage} />
-    {/* 
-    <ProtectedRoute exact path="/cart" component={Cart} />
-    <AdminRoute exact path="/admin/create-product" component={CreateProduct} />
-    <AdminRoute path="/admin/manage-product/:id" children={<ManageProduct />} /> 
-    */}
+    <Route exact path='/test-regular' component={RegularComponent} />
+    <ProtectedRoute
+      exact
+      path='/test-protected'
+      component={ProtectedComponent}
+    />
   </Switch>
 )
 
