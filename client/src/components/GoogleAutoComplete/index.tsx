@@ -70,7 +70,6 @@ const AddressAutoComplete = ({ handleAddress }: AutoCompleteProps) => {
         modifier='--read-only'
         readOnly
       />
-      <p className='testes'>Test </p>
     </>
   )
 }

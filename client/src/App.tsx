@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
+import Routes from './Routes'
 import Navbar from './components/Navbar'
 import Modal from './components/Modal'
 import GoogleUserLogin from './components/GoogleUserLogin'
@@ -31,10 +33,13 @@ const App = () => {
         Click here to try out an amazing modal!
       </button>
       <br />
-      {/* 
-      <h3>Create event form</h3>
-      <EventForm /> 
-      */}
+
+      <Link to={'/test-regular'}>Regular route</Link>
+      <br />
+      <Link to={'/test-protected'}>Auth protected route</Link>
+      {/* <h3>Create event form</h3>
+      <EventForm /> */}
+      <Routes />
       <Footer />
     </>
   )
