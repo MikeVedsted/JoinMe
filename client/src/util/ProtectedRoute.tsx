@@ -1,24 +1,22 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
-import { ProtectedRouteProps, AppState } from '../types'
-import { useSelector } from 'react-redux'
+import { useCookies } from 'react-cookie'
+
+import { ProtectedRouteProps } from '../types'
 
 const ProtectedRoute = ({
   component: Component,
   ...rest
 }: ProtectedRouteProps) => {
-  const { isAuthenticated } = useSelector((state: AppState) => state.auth)
-
+  const [cookies, setCookies] = useCookies(['user'])
   return (
     <Route
       {...rest}
       render={(props) =>
-        isAuthenticated ? (
+        cookies.user ? (
           <Component {...props} />
         ) : (
-          <Redirect
-            to={{ pathname: '/login', state: { from: props.location } }}
-          />
+          <Redirect to={{ pathname: '/' }} />
         )
       }
     />
