@@ -2,9 +2,11 @@
 
 .body {
   width: 100vw;
-  height: 100vh;
+  max-width: 100%;
+  min-height: 100vh;
+  padding-top: 100px;
   background-image: url(../../Assets/football.jpg);
-  background-color: $textLight;
+  background-color: $textDark;
   background-attachment: fixed;
   background-size: cover;
   @include flexCenter;
@@ -19,17 +21,19 @@
     flex-direction: column;
     width: 350px;
     height: 350px;
+    padding: 5px;
     position: absolute;
     top: 25vh;
-    background-color: #e03400c2;
     border-radius: 50%;
 
     &--left {
-      left: 28vw;
+      left: 29vw;
+      background-color: #e03400de;
     }
 
     &--right {
-      left: 48vw;
+      left: 49vw;
+      background-color: #e03400de;
     }
   }
 
@@ -42,6 +46,12 @@
     margin-top: 0px;
     color: $textDark;
 
+    &--login-text {
+      width: 95%;
+      color: $textDark;
+      font-size: $text;
+    }
+
     &--highlight {
       width: 250px;
       font-size: $heading;
@@ -52,11 +62,11 @@
   }
 
   &__button {
-    position: absolute;
+    position: fixed;
     top: 80vh;
     width: 100vw;
-    display: flex;
-    justify-content: center;
+    max-width: 100%;
+    @include flexCenter;
   }
 }
 
@@ -66,16 +76,18 @@
 
     &__circle {
       &--left {
-        top: 50vh;
-        left: 22vw;
+        top: 60vh;
+        left: 20vw;
       }
 
       &--right {
-        top: 50vh;
+        top: 60vh;
+        left: 50vw;
       }
     }
 
     &__button {
+      top: 90vh;
       left: 0vw;
     }
   }
@@ -107,6 +119,7 @@
 @media only screen and (max-width: 600px) {
   .body {
     background-image: url(../../Assets/winter.jpg);
+    padding-top: 50px;
 
     &__circles {
       flex-direction: column;
@@ -139,6 +152,11 @@
       &--highlight {
         font-size: $sub-head;
         color: $secondary;
+      }
+
+      &--login-text {
+        color: $textDark;
+        margin-bottom: 30px;
       }
     }
 

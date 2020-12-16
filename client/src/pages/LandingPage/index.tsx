@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 
+import Modal from '../../components/Modal'
+import GoogleUserLogin from '../../components/GoogleUserLogin'
 import Button from '../../components/Button'
 import { eventCategories } from '../../util/constants/eventCategories'
 import './LandingPage.scss'
@@ -9,6 +11,7 @@ import './LandingPage.scss'
 const LandingPage = () => {
   const [error, setError] = useState('')
   const [users, setUsers] = useState('')
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const history = useHistory()
 
   useEffect(() => {
@@ -34,6 +37,20 @@ const LandingPage = () => {
 
   return (
     <div className='body'>
+      {isModalOpen && (
+        <Modal
+          closeModal={() => setIsModalOpen(false)}
+          content={
+            <>
+              <h3>Log in!</h3>
+              <p className='body__text body__text--login-text'>
+                Hi! Login with Google to proceed!
+              </p>
+              <GoogleUserLogin />
+            </>
+          }
+        />
+      )}
       <div className='body__circles'>
         <div className='body__circle body__circle--left'>
           <p className='body__text body__text--highlight'>
@@ -48,7 +65,7 @@ const LandingPage = () => {
             type='button'
             text='Get started!'
             style='secondary'
-            handleClick={handleClick}
+            handleClick={() => setIsModalOpen(true)}
           />
         </div>
         <div className='body__circle body__circle--right'>
