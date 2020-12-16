@@ -61,14 +61,12 @@ export type InputFieldProps = {
   placeholder?: string
   readOnly?: boolean
   modifier?: string
-  required?: boolean
 }
 export type DropdownProps = {
   label: string
   id: string
   options: string[]
   onBlur: () => void
-  required?: boolean
 }
 
 export type ModalProps = {
