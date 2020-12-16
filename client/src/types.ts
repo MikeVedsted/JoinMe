@@ -73,3 +73,11 @@ export type ModalProps = {
   closeModal: () => void
   content?: any
 }
+
+export type FormSliderProps = {
+  labelText: string
+  minRange?: number
+  maxRange?: number
+  steps?: number
+  defaultValue?: number
+}
