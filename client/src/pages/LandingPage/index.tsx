@@ -47,7 +47,7 @@ const LandingPage = () => {
           <Button
             type='button'
             text='Get started!'
-            style='secondary'
+            modifier='secondary'
             handleClick={handleClick}
           />
         </div>
