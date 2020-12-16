@@ -1,10 +1,7 @@
 @import '../../SCSS/config';
 
-.elem {
-}
-
 .footer {
-  background-color: green;
+  background-color: $default;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -16,6 +13,18 @@
     display: flex;
     justify-content: center;
   }
+  &__paragraph {
+    color: $textLight;
+  }
+
+  &__link {
+    color: $textLight;
+    text-decoration: none;
+  }
+
+  &__link:hover {
+    text-decoration: underline;
+  }
 
   &__image {
     &--logo {
@@ -24,7 +33,7 @@
   }
 
   &__icon {
-    color: $textDark;
+    color: $textLight;
     font-size: $heading;
     margin: 0px 40px;
     cursor: pointer;

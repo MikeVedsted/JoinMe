@@ -4,7 +4,6 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons'
 
 import logo from '../../Assets/logo.svg'
 import './Footer.scss'
-import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
@@ -17,16 +16,23 @@ const Footer = () => {
         />
       </div>
       <div className='footer__container'>
-        <p>copyright joinme 2020</p>
+        <p className='footer__paragraph'>&#169; copyright JoinMe 2020</p>
       </div>
       <div className='footer__container'>
-        <p>
+        <p className='footer__paragraph'>
           Contact us:{' '}
-          <a href='mailto: contact.joinme2020@gmail.com'>
+          <a
+            className='footer__link'
+            href='mailto: contact.joinme2020@gmail.com'
+          >
             contact.joinme2020@gmail.com
           </a>
         </p>
-        <a href='https://github.com/MikeVedsted/JoinMe' target='a_blank'>
+        <a
+          className='footer__link'
+          href='https://github.com/MikeVedsted/JoinMe'
+          target='a_blank'
+        >
           <FontAwesomeIcon className='footer__icon' icon={faGithub} />
         </a>
       </div>
