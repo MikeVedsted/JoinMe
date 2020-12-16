@@ -5,6 +5,7 @@ import Modal from './components/Modal'
 import GoogleUserLogin from './components/GoogleUserLogin'
 // import EventForm from './components/EventForm'
 import './App.scss'
+import Footer from './components/Footer'
 
 const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -34,6 +35,7 @@ const App = () => {
       <h3>Create event form</h3>
       <EventForm /> 
       */}
+      <Footer />
     </>
   )
 }

@@ -1,0 +1,32 @@
+@import '../../SCSS/config';
+
+.elem {
+}
+
+.footer {
+  background-color: green;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__container {
+    flex: 1;
+    margin: 0 auto;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__image {
+    &--logo {
+      height: 60px;
+    }
+  }
+
+  &__icon {
+    color: $textDark;
+    font-size: $heading;
+    margin: 0px 40px;
+    cursor: pointer;
+  }
+}

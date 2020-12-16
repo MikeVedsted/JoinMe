@@ -22,16 +22,16 @@ const Navbar = () => {
 
   return (
     <nav className={navBg ? 'nav' : 'nav nav--active'}>
-      <img className="nav__image nav__image--logo" src={logo} alt="logo" />
+      <img className='nav__image nav__image--logo' src={logo} alt='logo' />
       {userId ? (
-        <div className="nav__icons">
-          <FontAwesomeIcon className="nav__icon" icon={faBell} />
-          <FontAwesomeIcon className="nav__icon" icon={faComment} />
+        <div className='nav__icons'>
+          <FontAwesomeIcon className='nav__icon' icon={faBell} />
+          <FontAwesomeIcon className='nav__icon' icon={faComment} />
           <Link to={`/${userId}`}>
             <img
-              className="nav__image nav__image--profile"
-              src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-              alt="profile"
+              className='nav__image nav__image--profile'
+              src='https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
+              alt='profile'
             />
           </Link>
         </div>
