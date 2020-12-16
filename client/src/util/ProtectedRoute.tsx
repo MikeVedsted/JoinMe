@@ -1,7 +1,8 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
-import { ProtectedRouteProps, AppState } from '../types'
 import { useCookies } from 'react-cookie'
+
+import { ProtectedRouteProps } from '../types'
 
 const ProtectedRoute = ({
   component: Component,
