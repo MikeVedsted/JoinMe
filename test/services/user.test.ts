@@ -73,12 +73,12 @@ describe('user controller', () => {
         '2017-05-18 08:21:36.175627+07'
       ]
     )
-    const allUsers = await db.query('SELECT * FROM userk;')
+    const findAllUsers = await db.query('SELECT * FROM userk;')
 
-    expect(allUsers.rows.length).toEqual(2)
+    expect(findAllUsers.rows.length).toEqual(2)
   })
 
-  it('should not get a non-existing book', async () => {
+  it('should not get a non-existing event', async () => {
     const user = await createUser()
     const found = await UserService.findUserById(nonExistingUserId)
 
