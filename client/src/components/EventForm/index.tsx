@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useCookies } from 'react-cookie'
 import axios from 'axios'
 
 import GoogleAutoComplete from '../GoogleAutoComplete'
@@ -8,10 +9,9 @@ import { useFormFields } from '../../hooks/useFormFields'
 import { eventCategories } from '../../util/constants/eventCategories'
 import './eventForm.scss'
 
-// TO DO
-// Get user_id from token and add as created_by instead of hardcoded user_id
-
 const EventForm = () => {
+  const [cookies, setCookies] = useCookies(['user'])
+  const { user_id } = cookies.user
   const [address, setAddress] = useState({})
   const [error, setError] = useState('')
   const [fields, handleFields] = useFormFields({
@@ -21,7 +21,7 @@ const EventForm = () => {
     time: '',
     description: '',
     maxParticipants: 1,
-    created_by: '58c67577-ad16-478f-ac05-6ebc004a2e4f',
+    created_by: user_id,
     image: '',
     expires_at: ''
   })
