@@ -125,13 +125,13 @@ const Event = ({
         <Button
           type='button'
           text='Ask to join'
-          style='primary'
+          modifier='primary'
           handleClick={handleAddRequest}
         />
         <Button
           type='button'
           text={details ? 'View less' : 'View more'}
-          style='primary'
+          modifier='primary'
           handleClick={changeView}
         />
       </div>
