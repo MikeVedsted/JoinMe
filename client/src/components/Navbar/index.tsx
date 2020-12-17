@@ -22,36 +22,34 @@ const Navbar = () => {
   window.addEventListener('scroll', changeNavStyle)
 
   return (
-    <>
-      <nav className={navBg ? 'nav' : 'nav nav--active'}>
-        <img
-          className='nav__image nav__image--logo'
-          src={window.innerWidth > 1024 ? logoDark : logoLight}
-          alt='logo'
-        />
-        {user_id ? (
-          <div className='nav__icons'>
-            <FontAwesomeIcon className='nav__icon' icon={faBell} />
-            <FontAwesomeIcon className='nav__icon' icon={faComment} />
-            <img
-              onClick={() => setDropdownHidden(!dropdownHidden)}
-              className='nav__image nav__image--profile'
-              src={profile_image}
-              alt='profile'
-            />
-          </div>
-        ) : (
-          <div className='nav__login'>
-            <GoogleLogin />
-          </div>
-        )}
-      </nav>
+    <nav className={navBg ? 'nav' : 'nav nav--active'}>
+      <img
+        className='nav__image nav__image--logo'
+        src={window.innerWidth > 1024 ? logoDark : logoLight}
+        alt='logo'
+      />
+      {user_id ? (
+        <div className='nav__icons'>
+          <FontAwesomeIcon className='nav__icon' icon={faBell} />
+          <FontAwesomeIcon className='nav__icon' icon={faComment} />
+          <img
+            onClick={() => setDropdownHidden(!dropdownHidden)}
+            className='nav__image nav__image--profile'
+            src={profile_image}
+            alt='profile'
+          />
+        </div>
+      ) : (
+        <div className='nav__login'>
+          <GoogleLogin />
+        </div>
+      )}
       <NavDropdown
         display={dropdownHidden}
         setDropdownHidden={setDropdownHidden}
         userId={user_id}
       />
-    </>
+    </nav>
   )
 }
 
