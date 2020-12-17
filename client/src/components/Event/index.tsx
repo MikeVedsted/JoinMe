@@ -3,13 +3,6 @@ import { Link } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 import jwt from 'jsonwebtoken'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faUserShield,
-  faCalendar,
-  faClock,
-  faMapMarkerAlt,
-  faUser
-} from '@fortawesome/free-solid-svg-icons'
 
 import Button from '../Button'
 import FormInputFiled from '../FormInputField'
@@ -57,7 +50,7 @@ const Event = ({
             <div className='event__icon-wrapper'>
               <FontAwesomeIcon
                 className='event__info-text event__info-text--icon'
-                icon={faUserShield}
+                icon='user-shield'
               />
             </div>
             <Link className='event__link' to={`/${userId}`}>
@@ -70,7 +63,7 @@ const Event = ({
             <div className='event__icon-wrapper'>
               <FontAwesomeIcon
                 className='event__info-text event__info-text--icon'
-                icon={faCalendar}
+                icon='calendar'
               />
             </div>
             <p className='event__info-text'>{formattedDate}</p>
@@ -79,7 +72,7 @@ const Event = ({
             <div className='event__icon-wrapper'>
               <FontAwesomeIcon
                 className='event__info-text event__info-text--icon'
-                icon={faClock}
+                icon='clock'
               />
             </div>
             <p className='event__info-text'>{formattedTime}</p>
@@ -88,7 +81,7 @@ const Event = ({
             <div className='event__icon-wrapper'>
               <FontAwesomeIcon
                 className='event__info-text event__info-text--icon'
-                icon={faMapMarkerAlt}
+                icon='map-marker-alt'
               />
             </div>
             <p className='event__info-text'>{address}</p>
@@ -97,7 +90,7 @@ const Event = ({
             <div className='event__icon-wrapper'>
               <FontAwesomeIcon
                 className='event__info-text event__info-text--icon'
-                icon={faUser}
+                icon='user'
               />
             </div>
             <span className='event__info-text'>{`${participants}/`}</span>
