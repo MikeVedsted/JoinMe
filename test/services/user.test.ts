@@ -68,7 +68,7 @@ describe('user controller', () => {
     expect(user2.rows[1].email).toEqual('Petrenko@dff.com')
   })
 
-  it('should not get a non-existing event', async () => {
+  it('should not get a non-existing user', async () => {
     const user = await createUser()
     const found = await UserService.findUserById(nonExistingUserId)
 
