@@ -54,7 +54,7 @@ export type InputFieldProps = {
   type: string
   id: string
   label: string
-  value?: string
+  value?: string | number
   min?: number
   step?: number
   onChange?: () => void
