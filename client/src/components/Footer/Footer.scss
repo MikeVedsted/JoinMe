@@ -39,3 +39,18 @@
     cursor: pointer;
   }
 }
+
+@media only screen and (max-width: 600px) {
+  .footer {
+    background-color: $default;
+    display: block;
+    text-align: center;
+    &__container {
+      display: block;
+    }
+
+    &__icon {
+      margin-bottom: 10px;
+    }
+  }
+}
