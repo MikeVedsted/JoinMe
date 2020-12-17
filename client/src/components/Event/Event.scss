@@ -1,0 +1,157 @@
+@import '../../SCSS/config';
+
+.event {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  // box-shadow: 1.5px 0px 1px $textDark;
+
+  &__data-box {
+    display: flex;
+  }
+
+  &__image {
+    width: 230px;
+    height: 194px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-right: 25px;
+  }
+
+  &__info-box {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  &__icon-wrapper {
+    width: 30px;
+    @include flexCenter;
+  }
+
+  &__info-text {
+    font-size: $text;
+    margin: 0px;
+    font-family: $nunito;
+    color: $textDark;
+
+    &--icon {
+      color: $secondary;
+      margin-right: 15px;
+      font-size: $text;
+    }
+
+    &--total {
+      color: $textDim;
+    }
+
+    &--clickable {
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    &--clickable:hover {
+      color: rgb(0, 60, 255);
+    }
+  }
+
+  &__link {
+    text-decoration: none;
+  }
+
+  &__details {
+    padding: 10px;
+
+    &--hide {
+      display: none;
+    }
+  }
+
+  &__d-text {
+    width: 90%;
+    font-family: $nunito;
+    font-size: $text;
+    color: $textDark;
+  }
+
+  &__comments {
+    padding: 10px;
+    width: 90%;
+    background-color: $textLight;
+    margin-bottom: 10px;
+  }
+
+  &__actions {
+    width: 90%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__line {
+    border: 0;
+    clear: both;
+    display: block;
+    width: 100%;
+    background-color: $textDim;
+    height: 1.5px;
+    margin-top: 30px;
+  }
+}
+
+.title {
+  display: flex;
+  align-items: center;
+
+  &__text {
+    margin: 5px 0px 10px 0px;
+    &--head {
+      font-family: $montserrat;
+      font-size: $sub-head;
+      color: $textDark;
+    }
+
+    &--time {
+      font-family: $nunito;
+      font-size: $text;
+      color: $textDim;
+      margin-left: 10px;
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .event {
+    width: 100vw;
+
+    &__data-box {
+      flex-direction: column;
+    }
+
+    &__image {
+      border-radius: 0px;
+      width: 92vw;
+      height: 220px;
+    }
+
+    &__info-box {
+      margin-top: 15px;
+      padding-left: 15px;
+    }
+    &__info {
+      margin-bottom: 10px;
+    }
+
+    &__actions {
+      width: 100%;
+      justify-content: center;
+      flex-direction: column;
+      margin-top: 15px;
+    }
+  }
+}

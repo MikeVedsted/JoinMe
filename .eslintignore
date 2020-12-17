@@ -9,6 +9,6 @@ coverage/*
 # custom definition files
 /src/types/
 # client
-/client
+/client/build/*
 # config
 jest.config.js

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useCookies } from 'react-cookie'
 import axios from 'axios'
 
 import GoogleAutoComplete from '../GoogleAutoComplete'
@@ -8,10 +9,9 @@ import { useFormFields } from '../../hooks/useFormFields'
 import { eventCategories } from '../../util/constants/eventCategories'
 import './eventForm.scss'
 
-// TO DO
-// Get user_id from token and add as created_by instead of hardcoded user_id
-
 const EventForm = () => {
+  const [cookies, setCookies] = useCookies(['user'])
+  const { user_id } = cookies.user
   const [address, setAddress] = useState({})
   const [error, setError] = useState('')
   const [fields, handleFields] = useFormFields({
@@ -21,7 +21,7 @@ const EventForm = () => {
     time: '',
     description: '',
     maxParticipants: 1,
-    created_by: '58c67577-ad16-478f-ac05-6ebc004a2e4f',
+    created_by: user_id,
     image: '',
     expires_at: ''
   })
@@ -44,44 +44,44 @@ const EventForm = () => {
   }
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
+    <form className='form' onSubmit={handleSubmit}>
       <InputField
-        type="text"
-        id="title"
-        label="Title"
+        type='text'
+        id='title'
+        label='Title'
         onChange={handleFields}
       />
       <DropdownField
-        label="Category"
-        id="category"
+        label='Category'
+        id='category'
         options={eventCategories}
         onBlur={handleFields}
       />
-      <InputField type="date" id="date" label="Date" onChange={handleFields} />
-      <InputField type="time" id="time" label="Time" onChange={handleFields} />
+      <InputField type='date' id='date' label='Date' onChange={handleFields} />
+      <InputField type='time' id='time' label='Time' onChange={handleFields} />
       <InputField
-        type="date"
-        id="expires_at"
-        label="Close at"
+        type='date'
+        id='expires_at'
+        label='Close at'
         onChange={handleFields}
       />
       <GoogleAutoComplete handleAddress={setAddress} />
       <InputField
-        type="textarea"
-        id="description"
-        label="Description"
+        type='textarea'
+        id='description'
+        label='Description'
         onChange={handleFields}
       />
       <InputField
-        type="number"
-        id="maxParticipants"
-        label="Maximum participants"
+        type='number'
+        id='maxParticipants'
+        label='Maximum participants'
         onChange={handleFields}
         min={1}
         step={1}
       />
-      <InputField type="url" id="image" label="Image" onChange={handleFields} />
-      <InputField type="submit" value="Submit" id="submit" label="Submit" />
+      <InputField type='url' id='image' label='Image' onChange={handleFields} />
+      <InputField type='submit' value='Submit' id='submit' label='Submit' />
       {error ? <p>{error}</p> : null}
     </form>
   )

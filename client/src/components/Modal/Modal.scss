@@ -1,0 +1,52 @@
+@import '../../SCSS/config';
+
+.modal {
+  @include flexCenter;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+
+  &__window {
+    width: 35%;
+    @include flexCenter;
+    flex-direction: column;
+    border-radius: 8px;
+    padding: 40px;
+    background-color: white;
+    position: relative;
+  }
+
+  &__close-button {
+    background-color: #ffffff00;
+    color: $primary;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 20px 20px 0 0;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .modal {
+    &__window {
+      width: 70%;
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .modal {
+    &__window {
+      width: 70%;
+    }
+  }
+}

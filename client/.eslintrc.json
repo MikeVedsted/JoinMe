@@ -1,0 +1,29 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "env": {
+    "browser": true,
+    "es2020": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "prettier",
+    "prettier/react",
+    "prettier/@typescript-eslint",
+    "react-app"
+  ],
+  "plugins": [
+    "react",
+    "prettier"
+  ],
+  "rules" : { 
+    "prettier/prettier": "error",
+    "array-callback-return": "off",
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error"
+  }
+}
+ 

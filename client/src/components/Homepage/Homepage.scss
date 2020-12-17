@@ -1,22 +1,36 @@
 @import '../../SCSS/config';
 
 .main {
-  padding: 0.5em 5em;
+  width: 100vw;
+  max-width: 100%;
+  padding: 0 3em;
+  box-sizing: border-box;
+  margin-top: 100px;
   display: flex;
+  justify-content: space-between;
 
   &__searchBox {
-    width: 30%;
+    width: 25vw;
     padding: 15px;
-    border-radius: $borderBig;
-    @include flexCenter;
-    flex-direction: column;
+    border-radius: 8px;
     background-color: $textLight;
-    margin-right: 3%;
+    @include flexCenter;
   }
 
   &__events {
-    width: 65%;
+    width: 63vw;
     padding: 15px;
-    background-color: green;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+}
+
+@media only screen and (max-width: 768px) {
+}
+
+@media only screen and (max-width: 600px) {
+  .main {
+    padding: 0em;
   }
 }
