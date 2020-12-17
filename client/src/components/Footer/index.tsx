@@ -2,7 +2,7 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 
-import logo from '../../Assets/logo.svg'
+import logo from '../../Assets/logoLight.svg'
 import './Footer.scss'
 
 const Footer = () => {

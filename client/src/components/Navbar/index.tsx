@@ -4,7 +4,9 @@ import { useCookies } from 'react-cookie'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBell, faComment } from '@fortawesome/free-solid-svg-icons'
 
-import logo from '../../Assets/logo.svg'
+import GoogleLogin from '../GoogleUserLogin'
+import logoDark from '../../Assets/logoDark.svg'
+import logoLight from '../../Assets/logoSecondary.svg'
 import './Navbar.scss'
 
 const Navbar = () => {
@@ -13,14 +15,18 @@ const Navbar = () => {
   const { profile_image, user_id } = cookies.user || ''
 
   const changeNavStyle = () => {
-    window.scrollY >= 80 ? setNavBg(false) : setNavBg(true)
+    window.scrollY >= 50 ? setNavBg(false) : setNavBg(true)
   }
 
   window.addEventListener('scroll', changeNavStyle)
 
   return (
     <nav className={navBg ? 'nav' : 'nav nav--active'}>
-      <img className='nav__image nav__image--logo' src={logo} alt='logo' />
+      <img
+        className='nav__image nav__image--logo'
+        src={window.innerWidth > 1024 ? logoDark : logoLight}
+        alt='logo'
+      />
       {user_id ? (
         <div className='nav__icons'>
           <FontAwesomeIcon className='nav__icon' icon={faBell} />
@@ -34,9 +40,9 @@ const Navbar = () => {
           </Link>
         </div>
       ) : (
-        <h2 className={!user_id ? 'nav__login' : 'nav__login nav__login--hide'}>
-          Login
-        </h2>
+        <div className='nav__login'>
+          <GoogleLogin />
+        </div>
       )}
     </nav>
   )
