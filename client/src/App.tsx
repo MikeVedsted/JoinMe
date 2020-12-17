@@ -34,13 +34,13 @@ const App = () => {
         Click here to try out an amazing modal!
       </button> */}
 
-      <br />
+      {/* <br />
       <Link to={'/test-regular'}>Regular route</Link>
       <br />
-      <Link to={'/test-protected'}>Auth protected route</Link>
+      <Link to={'/test-protected'}>Auth protected route</Link> */}
       {/* <h3>Create event form</h3>
       <EventForm />*/}
-      <Routes />
+      {/* <Routes /> */}
     </>
   )
 }

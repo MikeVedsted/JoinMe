@@ -23,7 +23,7 @@ export type AppState = {
 export type ButtonComponent = {
   type: 'button' | 'submit' | 'reset'
   text: string
-  style?: 'primary' | 'secondary' | 'large-active' | 'large'
+  modifier?: 'primary' | 'secondary' | 'large-active' | 'large'
   handleClick: () => void
 }
 
@@ -67,6 +67,21 @@ export type DropdownProps = {
   id: string
   options: string[]
   onBlur: () => void
+}
+
+export type EventType = {
+  event_id: string
+  created_by: string
+  created_at: string
+  image: string
+  title: string
+  date: string
+  time: string
+  address: string
+  participants: number
+  max_participants: number
+  description: string
+  handleAddRequest: () => void
 }
 
 export type ModalProps = {
