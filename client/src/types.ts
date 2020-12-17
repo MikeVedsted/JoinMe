@@ -1,3 +1,5 @@
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
+
 export const FETCH_ALL_EVENTS = 'FETCH_ALL_EVENTS'
 export const GET_ERRORS = 'GET_ERRORS'
 export const CLEAR_ERRORS = 'CLEAR_ERRORS'
@@ -87,4 +89,16 @@ export type EventType = {
 export type ModalProps = {
   closeModal: () => void
   content?: any
+}
+
+export type NavDropdownLinkProps = {
+  text: string
+  icon: IconProp
+  destination: string
+}
+
+export type NavDropdownFunctionProps = {
+  text: string
+  icon: IconProp
+  handler: () => void
 }
