@@ -69,6 +69,21 @@ export type DropdownProps = {
   onBlur: () => void
 }
 
+export type EventType = {
+  event_id: string
+  created_by: string
+  created_at: string
+  image: string
+  title: string
+  date: string
+  time: string
+  address: string
+  participants: number
+  max_participants: number
+  description: string
+  handleAddRequest: () => void
+}
+
 export type ModalProps = {
   closeModal: () => void
   content?: any

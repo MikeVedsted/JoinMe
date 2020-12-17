@@ -27,7 +27,7 @@ const GoogleUserLogin = () => {
   return (
     <GoogleLogin
       clientId={GOOGLE_CLIENT}
-      buttonText='Login with Google'
+      buttonText='Google Login'
       onSuccess={responseSuccessGoogle}
       onFailure={responseFailGoogle}
       cookiePolicy={'single_host_origin'}
