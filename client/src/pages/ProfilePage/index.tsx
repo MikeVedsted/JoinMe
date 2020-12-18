@@ -41,41 +41,53 @@ const ProfilePage = () => {
       <Navbar />
       <div className='profile'>
         <div className='profile__sidebar'>
-          <img src={userInfo.profile_image} alt='Profile' />
+          <img
+            src={userInfo.profile_image}
+            alt='Profile'
+            className='profile__sidebar--image'
+          />
           <Button
             type='button'
             text='Edit profile'
+            modifier='primary'
             handleClick={handleEditClick}
           />
         </div>
         <div className='profile__main'>
           <div className='profile__header'>
-            <h3> Personal Details </h3>
-            <hr />
+            <hr className='profile__header--divider-optional' />
+            <h3 className='profile__header--text'> Personal Details </h3>
+            <hr className='profile__header--divider' />
           </div>
           <div className='profile__details'>
-            <h4> Full Name: </h4>
-            <p> {`${userInfo.first_name} ${userInfo.last_name}`} </p>
-          </div>
-
-          <div className='profile__details'>
-            <h4> Email: </h4>
-            <p> {userInfo.email} </p>
-          </div>
-
-          <div className='profile__details'>
-            <h4> Interests: </h4>
-            <p> {userInfo.interests?.join(', ')} </p>
+            <h4 className='profile__details--header'> Full Name: </h4>
+            <p className='profile__details--text'>
+              {' '}
+              {`${userInfo.first_name} ${userInfo.last_name}`}{' '}
+            </p>
           </div>
 
           <div className='profile__details'>
-            <h4> Intro: </h4>
-            <p> {userInfo.profile_text} </p>
+            <h4 className='profile__details--header'> Email: </h4>
+            <p className='profile__details--text'> {userInfo.email} </p>
           </div>
 
           <div className='profile__details'>
-            <h4> Address: </h4>
-            <p> {userInfo.base_address} </p>
+            <h4 className='profile__details--header'> Interests: </h4>
+            <p className='profile__details--text'>
+              {' '}
+              {userInfo.interests?.join(', ')}{' '}
+            </p>
+          </div>
+
+          <div className='profile__details'>
+            <h4 className='profile__details--header'> Intro: </h4>
+            <p className='profile__details--text'> {userInfo.profile_text} </p>
+          </div>
+
+          <div className='profile__details'>
+            <h4 className='profile__details--header'> Address: </h4>
+            <p className='profile__details--text'> {userInfo.base_address} </p>
           </div>
         </div>
       </div>
