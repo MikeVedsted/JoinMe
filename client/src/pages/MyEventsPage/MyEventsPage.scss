@@ -1,0 +1,31 @@
+@import '../../SCSS/config';
+
+.my-events {
+  margin-top: 100px;
+  justify-content: space-between;
+  height: 90vh;
+  &__controls {
+    position: fixed;
+    height: fit-content;
+    width: 30vw;
+  }
+
+  &__content {
+    @include flexCenter;
+    width: 70vw;
+    margin-left: auto;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .my-events {
+    &__controls{
+      position: static;
+      width: 100%;
+      margin-bottom: 40px;
+    }
+    &__right-column {
+      width: 100%;
+    }
+  }
+}

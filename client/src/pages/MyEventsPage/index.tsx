@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 import MyEventsSidebar from '../../components/MyEventsSidebar'
 import EventForm from '../../components/EventForm'
@@ -20,10 +20,10 @@ const LandingPage = () => {
 
   return (
     <div className='my-events'>
-      <div className='my-events__left-column'>
+      <div className='my-events__controls'>
         <MyEventsSidebar />
       </div>
-      <div className='my-events__right-column'>{addContent()}</div>
+      <div className='my-events__content'>{addContent()}</div>
     </div>
   )
 }
