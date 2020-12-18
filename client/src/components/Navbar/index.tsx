@@ -1,45 +1,53 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
-import jwt from 'jsonwebtoken'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBell, faComment } from '@fortawesome/free-solid-svg-icons'
 
-import logo from '../../Assets/logo.svg'
+import NavDropdown from '../NavDropdown'
+import GoogleLogin from '../GoogleUserLogin'
+import logoDark from '../../Assets/logoDark.svg'
+import logoLight from '../../Assets/logoSecondary.svg'
 import './Navbar.scss'
 
 const Navbar = () => {
   const [navBg, setNavBg] = useState(true)
-  const [cookies, setCookie] = useCookies(['x-auth-token'])
-  const decodedToken = jwt.decode(cookies['x-auth-token'])
-  const userId = decodedToken?.sub
+  const [dropdownHidden, setDropdownHidden] = useState(true)
+  const [cookies, setCookies] = useCookies(['user'])
+  const { profile_image, user_id } = cookies.user || ''
 
   const changeNavStyle = () => {
-    window.scrollY >= 80 ? setNavBg(false) : setNavBg(true)
+    window.scrollY >= 50 ? setNavBg(false) : setNavBg(true)
   }
 
   window.addEventListener('scroll', changeNavStyle)
 
   return (
     <nav className={navBg ? 'nav' : 'nav nav--active'}>
-      <img className='nav__image nav__image--logo' src={logo} alt='logo' />
-      {userId ? (
+      <img
+        className='nav__image nav__image--logo'
+        src={window.innerWidth > 1024 ? logoDark : logoLight}
+        alt='logo'
+      />
+      {user_id ? (
         <div className='nav__icons'>
-          <FontAwesomeIcon className='nav__icon' icon={faBell} />
-          <FontAwesomeIcon className='nav__icon' icon={faComment} />
-          <Link to={`/${userId}`}>
-            <img
-              className='nav__image nav__image--profile'
-              src='https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-              alt='profile'
-            />
-          </Link>
+          <FontAwesomeIcon className='nav__icon' icon='bell' />
+          <FontAwesomeIcon className='nav__icon' icon='comment' />
+          <img
+            onClick={() => setDropdownHidden(!dropdownHidden)}
+            className='nav__image nav__image--profile'
+            src={profile_image}
+            alt='profile'
+          />
         </div>
       ) : (
-        <h2 className={!userId ? 'nav__login' : 'nav__login nav__login--hide'}>
-          Login
-        </h2>
+        <div className='nav__login'>
+          <GoogleLogin />
+        </div>
       )}
+      <NavDropdown
+        display={dropdownHidden}
+        setDropdownHidden={setDropdownHidden}
+        userId={user_id}
+      />
     </nav>
   )
 }
