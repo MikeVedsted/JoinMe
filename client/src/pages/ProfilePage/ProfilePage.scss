@@ -6,19 +6,19 @@
   justify-content: stretch;
   @include flexStart;
 
-  &__left {
+  &__sidebar {
     @include flexCenter;
     flex-direction: column;
   }
 
-  &__left img {
+  &__sidebar img {
     width: auto;
     height: 30vh;
     margin-bottom: 26px;
     border-radius: 8px;
   }
 
-  &__right {
+  &__main {
     @include flexStart;
     flex-direction: column;
     margin-left: 40px;

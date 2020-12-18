@@ -10,23 +10,21 @@ import './ProfilePage.scss'
 const ProfilePage = () => {
   const history = useHistory()
   const { userId } = useParams<ProfilePageParam>()
-  const [profileImage, setProfileImage] = useState('')
-  const [fullName, setFullName] = useState('')
-  const [email, setEmail] = useState('')
-  const [interests, setInterests] = useState<string[]>()
-  const [profileText, setProfileText] = useState('')
-  const [address, setAddress] = useState('')
+  const [userInfo, setUserInfo] = useState({
+    profile_image: '',
+    first_name: '',
+    last_name: '',
+    email: '',
+    interests: [],
+    profile_text: '',
+    base_address: ''
+  })
 
   useEffect(() => {
     async function getUserInfo() {
       try {
         const { data } = await axios.get(`/api/v1/users/${userId}`)
-        setProfileImage(data.profile_image)
-        setFullName(`${data.first_name} ${data.last_name}`)
-        setEmail(data.email)
-        setProfileText(data.profile_text)
-        setAddress(data.base_address)
-        setInterests(data.interests)
+        setUserInfo(data)
       } catch (error) {
         console.log(error)
       }
@@ -42,42 +40,42 @@ const ProfilePage = () => {
     <>
       <Navbar />
       <div className='profile'>
-        <div className='profile__left'>
-          <img src={profileImage} alt='Profile' />
+        <div className='profile__sidebar'>
+          <img src={userInfo.profile_image} alt='Profile' />
           <Button
             type='button'
             text='Edit profile'
             handleClick={handleEditClick}
           />
         </div>
-        <div className='profile__right'>
+        <div className='profile__main'>
           <div className='profile__header'>
             <h3> Personal Details </h3>
             <hr />
           </div>
           <div className='profile__details'>
             <h4> Full Name: </h4>
-            <p> {fullName} </p>
+            <p> {`${userInfo.first_name} ${userInfo.last_name}`} </p>
           </div>
 
           <div className='profile__details'>
             <h4> Email: </h4>
-            <p> {email} </p>
+            <p> {userInfo.email} </p>
           </div>
 
           <div className='profile__details'>
             <h4> Interests: </h4>
-            <p> {interests?.join(', ')} </p>
+            <p> {userInfo.interests?.join(', ')} </p>
           </div>
 
           <div className='profile__details'>
             <h4> Intro: </h4>
-            <p> {profileText} </p>
+            <p> {userInfo.profile_text} </p>
           </div>
 
           <div className='profile__details'>
             <h4> Address: </h4>
-            <p> {address} </p>
+            <p> {userInfo.base_address} </p>
           </div>
         </div>
       </div>
