@@ -103,3 +103,9 @@ export type NavDropdownFunctionProps = {
   icon: IconProp
   handler: () => void
 }
+
+export type NavDropdownProps = {
+  display: boolean
+  setDropdownHidden: (option: boolean) => void
+  userId: string
+}
