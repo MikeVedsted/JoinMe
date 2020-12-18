@@ -10,17 +10,21 @@ const FormSlider = ({
   initialValue = 20
 }: FormSliderProps) => {
   const [value, setValue] = useState(initialValue)
-  const [leftPosition, setLeftPosition] = useState('')
+  const [relativeValue, setRelativeValue] = useState(initialValue)
+  const [thumbPosition, setThumbPosition] = useState('')
 
   useEffect(() => {
-    const newValue = ((value - minRange) * 100) / (maxRange - minRange)
-    const newPosition = `calc(${newValue}% + (${8 - newValue * 0.15}px))`
-    setLeftPosition(newPosition)
+    const relativeValue = ((value - minRange) * 100) / (maxRange - minRange)
+    setRelativeValue(relativeValue)
+    const newPosition = `calc(${relativeValue}% + (${
+      8 - relativeValue * 0.15
+    }px))`
+    setThumbPosition(newPosition)
   }, [value, maxRange, minRange])
 
   return (
     <div className='slider'>
-      <output style={{ left: `${leftPosition}` }} className='slider__value'>
+      <output style={{ left: `${thumbPosition}` }} className='slider__value'>
         {value}
       </output>
       <input
@@ -32,8 +36,8 @@ const FormSlider = ({
           backgroundImage: `linear-gradient(
             90deg,
             #e03600 0%,
-            #e03600 ${value}%,
-            #f28705 ${value + 1}%,
+            #e03600 ${relativeValue}%,
+            #f28705 ${relativeValue + 1}%,
             #f28705 100%
           )`
         }}
