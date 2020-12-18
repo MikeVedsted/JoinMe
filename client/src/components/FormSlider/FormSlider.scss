@@ -1,10 +1,14 @@
 @import '../../SCSS/config';
 
-.form__slider {
+.slider {
   font-size: $text;
-  font-family: $nunito;
+  font-family: $montserrat;
+  color: $textDark;
+  font-weight: 600;
+  position: relative;
+  padding-top: 10px;
 
-  &--range {
+  &__range {
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
@@ -12,47 +16,48 @@
     background: $secondary;
     outline: none;
     border-radius: 1px;
+    margin: 0;
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 13px;
+      height: 13px;
+      border-radius: 3px;
+      background: $primary;
+      cursor: pointer;
+    }
+
+    &::-moz-range-thumb {
+      appearance: none;
+      width: 13px;
+      height: 13px;
+      border-radius: 3px;
+      background: $primary;
+      cursor: pointer;
+    }
   }
 
-  &--range::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 13px;
-    height: 13px;
-    border-radius: 3px;
-    background: $primary;
-    cursor: pointer;
-  }
-
-  &--range::-moz-range-thumb {
-    appearance: none;
-    width: 13px;
-    height: 13px;
-    border-radius: 3px;
-    background: $primary;
-    cursor: pointer;
-  }
-
-  &--subtitle-container {
+  &__subset-labels {
     display: flex;
     justify-content: space-between;
     font-size: $subtitle;
     font-style: italic;
+
+    &--text {
+      margin: 5px 0;
+    }
   }
 
-  &--subtitle {
-    margin: 0;
-  }
-
-  &--value-container {
-    font-size: $subtitle;
-    position: relative;
-    height: 15px;
-  }
-
-  &--value {
+  &__value {
+    padding: 0;
+    margin: 10px 0;
     position: absolute;
-    margin: 0;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    font-size: $subtitle;
     color: $primary;
+    text-align: center;
   }
 }

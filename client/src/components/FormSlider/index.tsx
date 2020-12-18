@@ -1,53 +1,42 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { FormSliderProps } from '../../types'
 import './FormSlider.scss'
 
 const FormSlider = ({
-  labelText,
   minRange = 0,
   maxRange = 100,
   steps = 5,
-  defaultValue = 20
+  initialValue = 20
 }: FormSliderProps) => {
-  const [distance, setDistance] = useState(defaultValue)
-  const componentRef = useRef<HTMLDivElement>(null)
+  const [value, setValue] = useState(initialValue)
+  const [leftPosition, setLeftPosition] = useState('')
 
   useEffect(() => {
-    if (componentRef.current) {
-      const width = componentRef.current.offsetWidth
-      componentRef.current.style.left = `calc(${distance} * (${
-        width / maxRange
-      }px))`
-    }
-  })
+    const newValue = ((value - minRange) * 100) / (maxRange - minRange)
+    const newPosition = `calc(${newValue}% + (${8 - newValue * 0.15}px))`
+    setLeftPosition(newPosition)
+  }, [value, maxRange, minRange])
 
   return (
-    <div className='form__slider'>
-      <label className='form__slider--label' htmlFor='slider'>
-        {labelText}
-      </label>
-
-      <div ref={componentRef} className='form__slider--value-container'>
-        <p className='form__slider--value'>{distance}</p>
-      </div>
-
+    <div className='slider'>
+      <output style={{ left: `${leftPosition}` }} className='slider__value'>
+        {value}
+      </output>
       <input
         type='range'
         min={minRange}
         max={maxRange}
         step={steps}
-        id='slider'
-        value={distance}
-        className='form__slider--range'
+        value={value}
+        className='slider__range'
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setDistance(e.target.valueAsNumber)
+          setValue(e.target.valueAsNumber)
         }
       />
-
-      <div className='form__slider--subtitle-container'>
-        <p className='form__slider--subtitle'>{minRange} km</p>
-        <p className='form__slider--subtitle'>{maxRange} km</p>
+      <div className='slider__subset-labels'>
+        <p className='slider__subset-labels--text'>{minRange} km</p>
+        <p className='slider__subset-labels--text'>{maxRange} km</p>
       </div>
     </div>
   )

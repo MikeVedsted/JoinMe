@@ -94,11 +94,10 @@ export type ModalProps = {
 }
 
 export type FormSliderProps = {
-  labelText: string
   minRange?: number
   maxRange?: number
   steps?: number
-  defaultValue?: number
+  initialValue?: number
 }
 
 export type NavDropdownLinkProps = {
