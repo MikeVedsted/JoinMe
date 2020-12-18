@@ -166,7 +166,7 @@ INSERT INTO
     date_of_birth,
     profile_image,
     profile_text,
-base_address,
+    base_address,
   )
 VALUES
   (
