@@ -38,11 +38,11 @@ const App = () => {
 
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       {/* <LandingPage /> */}
-      <div style={{ padding: '40px' }}>
+      {/* <div style={{ padding: '40px' }}>
         <MyEventsSidebar />
-      </div>
+      </div> */}
       {/* <h1>Moro Moro!</h1>
       <p>Now start developing!</p>
       {isModalOpen && (
@@ -66,8 +66,8 @@ const App = () => {
       <Link to={'/test-protected'}>Auth protected route</Link> */}
       {/* <h3>Create event form</h3>
       <EventForm />*/}
-      {/* <Routes /> */}
-      {/* <Footer /> */}
+      <Routes />
+      <Footer />
     </>
   )
 }
