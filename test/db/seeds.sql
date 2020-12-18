@@ -1,24 +1,15 @@
 DROP TABLE IF EXISTS event_request;
-
 DROP TABLE IF EXISTS event_participant;
-
 DROP TABLE IF EXISTS user_interest;
-
 DROP TABLE IF EXISTS admin;
-
 DROP TABLE IF EXISTS banned_user;
-
 DROP TABLE IF EXISTS comment;
-
 DROP TABLE IF EXISTS event;
-
 DROP TABLE IF EXISTS category;
-
 DROP TABLE IF EXISTS userk;
-
 DROP TABLE IF EXISTS address;
-
 CREATE TYPE gender AS ENUM ('Female', 'Male', 'Prefer not to say', 'Other');
+
 CREATE TABLE address(
   address_id uuid DEFAULT uuid_generate_v4 () PRIMARY KEY,
   street varchar(50) NOT NULL,
@@ -40,8 +31,8 @@ CREATE TABLE userk(
   first_name varchar(255) NOT NULL,
   last_name varchar(255) NOT NULL,
   email varchar(50) UNIQUE NOT NULL,
-date_of_birth DATE,
-gender gender,
+  date_of_birth DATE,
+  gender gender,
   profile_image varchar(255),
   profile_text varchar(255),
   base_address uuid REFERENCES address(address_id) ON DELETE CASCADE,
@@ -171,8 +162,8 @@ INSERT INTO
     first_name,
     last_name,
     email,
-gender,
-date_of_birth,
+    gender,
+    date_of_birth,
     profile_image,
     profile_text,
 base_address,
@@ -182,8 +173,8 @@ VALUES
     'Chiran',
     'Chapagain',
     'chiran@gmail.com',
-'male',
-'01-01-1100',
+    'male',
+    '01-01-1100',
     'https://example.io/image.jpg',
     'Test user Chiran',
     (
@@ -199,8 +190,8 @@ VALUES
     'Marina',
     'Costa',
     'marina@gmail.com',
-'Female',
-'01-01-1100',
+    'Female',
+    '01-01-1100',
     'https://example.io/image.jpg',
     'Test user Marina',
     (
@@ -216,8 +207,8 @@ VALUES
     'Nanna',
     'Dao',
     'nanna@gmail.com',
-'Female',
-'01-01-1100',
+    'Female',
+    '01-01-1100',
     'https://example.io/image.jpg',
     'Test user Nanna',
     (
@@ -233,8 +224,8 @@ VALUES
     'Mike',
     'Vedsted',
     'mike@gmail.com',
-'Male',
-'01-01-1100',
+    'Male',
+    '01-01-1100',
     'https://example.io/image.jpg',
     'Test user Mike',
     (
@@ -250,8 +241,8 @@ VALUES
     'Rost',
     'Petrenko',
     'rost@gmail.com',
-'Male',
-'01-01-1100',
+    'Male',
+    '01-01-1100',
     'https://example.io/image.jpg',
     'Test user Rost',
     (
