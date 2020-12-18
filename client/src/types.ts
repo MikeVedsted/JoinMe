@@ -1,3 +1,5 @@
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
+
 export const FETCH_ALL_EVENTS = 'FETCH_ALL_EVENTS'
 export const GET_ERRORS = 'GET_ERRORS'
 export const CLEAR_ERRORS = 'CLEAR_ERRORS'
@@ -24,7 +26,7 @@ export type ButtonComponent = {
   type: 'button' | 'submit' | 'reset'
   text: string
   modifier?: 'primary' | 'secondary' | 'large-active' | 'large'
-  handleClick: () => void
+  handleClick?: () => void
 }
 
 export type AutoCompleteProps = {
@@ -54,19 +56,36 @@ export type InputFieldProps = {
   type: string
   id: string
   label: string
-  value?: string
+  value?: string | number
   min?: number
   step?: number
   onChange?: () => void
   placeholder?: string
   readOnly?: boolean
   modifier?: string
+  required?: boolean
 }
 export type DropdownProps = {
   label: string
   id: string
   options: string[]
   onBlur: () => void
+  required?: boolean
+}
+
+export type EventType = {
+  event_id: string
+  created_by: string
+  created_at: string
+  image: string
+  title: string
+  date: string
+  time: string
+  address: string
+  participants: number
+  max_participants: number
+  description: string
+  handleAddRequest: () => void
 }
 
 export type ModalProps = {
@@ -80,4 +99,22 @@ export type FormSliderProps = {
   maxRange?: number
   steps?: number
   defaultValue?: number
+}
+
+export type NavDropdownLinkProps = {
+  text: string
+  icon: IconProp
+  destination: string
+}
+
+export type NavDropdownFunctionProps = {
+  text: string
+  icon: IconProp
+  handler: () => void
+}
+
+export type NavDropdownProps = {
+  display: boolean
+  setDropdownHidden: (option: boolean) => void
+  userId: string
 }

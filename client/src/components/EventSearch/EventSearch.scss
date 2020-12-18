@@ -1,0 +1,7 @@
+@import '../../SCSS/config';
+
+.search-box {
+  &__button {
+    @include flexCenter;
+  }
+}
