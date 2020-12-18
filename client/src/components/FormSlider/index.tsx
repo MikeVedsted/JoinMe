@@ -28,6 +28,15 @@ const FormSlider = ({
         min={minRange}
         max={maxRange}
         step={steps}
+        style={{
+          backgroundImage: `linear-gradient(
+            90deg,
+            #e03600 0%,
+            #e03600 ${value}%,
+            #f28705 ${value + 1}%,
+            #f28705 100%
+          )`
+        }}
         value={value}
         className='slider__range'
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -43,3 +52,22 @@ const FormSlider = ({
 }
 
 export default FormSlider
+/**
+ * `linear-gradient(
+            90deg,
+            $primary 0%,
+            $primary 20%,
+            $secondary 40%,
+            $secondary 100%
+          )`
+ */
+
+/**
+  * // background: linear-gradient(
+    //   90deg,
+    //   blue 0%,
+    //   blue 20%,
+    //   $secondary 21%,
+    //   $secondary 100%
+    // );
+  */
