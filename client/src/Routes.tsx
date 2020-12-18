@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 
 import ProtectedRoute from './util/ProtectedRoute'
 import LandingPage from './pages/LandingPage'
+import MyEventsPage from './pages/MyEventsPage'
 
 const RegularComponent = () => {
   return <h1>regular component 1</h1>
@@ -21,6 +22,7 @@ const Routes = () => (
       path='/test-protected'
       component={ProtectedComponent}
     />
+    <Route path='/my-events/:contentName' component={MyEventsPage} />
   </Switch>
 )
 
