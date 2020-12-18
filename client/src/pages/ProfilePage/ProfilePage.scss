@@ -12,8 +12,8 @@
   }
 
   &__left img {
-    width: 327px;
-    height: 384px;
+    width: auto;
+    height: 30vh;
     margin-bottom: 26px;
     border-radius: 8px;
   }
@@ -38,7 +38,7 @@
   }
 
   &__header hr {
-    border: 1px solid #606060;
+    border: 1px solid $lineDim;
     width: 100%;
   }
 

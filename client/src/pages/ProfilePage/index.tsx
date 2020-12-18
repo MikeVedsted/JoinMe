@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { RouteComponentProps } from 'react-router'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 
 import Button from '../../components/Button'
 import Navbar from '../../components/Navbar'
 import { ProfilePageParam } from '../../types'
 import './ProfilePage.scss'
 
-const ProfilePage = ({ match }: RouteComponentProps<ProfilePageParam>) => {
+const ProfilePage = () => {
   const history = useHistory()
-  const userId = match.params.userId
+  const { userId } = useParams<ProfilePageParam>()
   const [profileImage, setProfileImage] = useState('')
   const [fullName, setFullName] = useState('')
   const [email, setEmail] = useState('')
-  const [interest] = useState('Sport')
+  const [interests, setInterests] = useState<string[]>()
   const [profileText, setProfileText] = useState('')
   const [address, setAddress] = useState('')
 
@@ -27,6 +26,7 @@ const ProfilePage = ({ match }: RouteComponentProps<ProfilePageParam>) => {
         setEmail(data.email)
         setProfileText(data.profile_text)
         setAddress(data.base_address)
+        setInterests(data.interests)
       } catch (error) {
         console.log(error)
       }
@@ -47,7 +47,6 @@ const ProfilePage = ({ match }: RouteComponentProps<ProfilePageParam>) => {
           <Button
             type='button'
             text='Edit profile'
-            style='secondary'
             handleClick={handleEditClick}
           />
         </div>
@@ -68,7 +67,7 @@ const ProfilePage = ({ match }: RouteComponentProps<ProfilePageParam>) => {
 
           <div className='profile__details'>
             <h4> Interests: </h4>
-            <p> {interest} </p>
+            <p> {interests?.join(', ')} </p>
           </div>
 
           <div className='profile__details'>

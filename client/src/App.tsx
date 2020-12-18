@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import Modal from './components/Modal'
 import GoogleUserLogin from './components/GoogleUserLogin'
 // import EventForm from './components/EventForm'
+// import Routes from './Routes'
 import './App.scss'
 
 const App = () => {
@@ -34,6 +35,7 @@ const App = () => {
       <h3>Create event form</h3>
       <EventForm /> 
       */}
+      {/* <Routes /> */}
     </>
   )
 }
