@@ -1,31 +1,29 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-import { EventType } from '../types'
+import { User } from '../types'
 
-const useEventDisplay = () => {
-  const [events, setEvents] = useState<EventType[]>([])
+const useUserDisplay = () => {
+  const [users, setUsers] = useState<any[]>([])
   const [error, setError] = useState('')
 
   useEffect(() => {
     fetchEvents()
   }, [])
 
-  console.log('events--', events)
-
   const fetchEvents = async () => {
     try {
       const response = await axios({
         method: 'GET',
-        url: 'http://localhost:5000/api/v1/events'
+        url: 'http://localhost:5000/api/v1/users'
       })
       const data = response.data
-      setEvents(data)
+      setUsers(data)
     } catch (error) {
       setError(error.message)
     }
   }
-  return [events]
+  return [users]
 }
 
-export default useEventDisplay
+export default useUserDisplay

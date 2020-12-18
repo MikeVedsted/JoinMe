@@ -47,7 +47,7 @@ const App = () => {
 
       <EventForm />*/}
       {/* <Routes /> */}
-      <Footer />
+      {/* <Footer /> */}
     </>
   )
 }

@@ -124,6 +124,25 @@
     }
   }
 }
+@media only screen and (max-width: 1024px) {
+  .event {
+    width: 100vw;
+
+    &__actions {
+      margin-top: 20px;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .event {
+    width: 100vw;
+
+    &__actions {
+      margin-top: 20px;
+    }
+  }
+}
 
 @media only screen and (max-width: 600px) {
   .event {
