@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBell, faComment } from '@fortawesome/free-solid-svg-icons'
 
 import GoogleLogin from '../GoogleUserLogin'
 import logoDark from '../../Assets/logoDark.svg'
@@ -29,8 +28,8 @@ const Navbar = () => {
       />
       {user_id ? (
         <div className='nav__icons'>
-          <FontAwesomeIcon className='nav__icon' icon={faBell} />
-          <FontAwesomeIcon className='nav__icon' icon={faComment} />
+          <FontAwesomeIcon className='nav__icon' icon='bell' />
+          <FontAwesomeIcon className='nav__icon' icon='comment' />
           <Link to={`/${user_id}`}>
             <img
               className='nav__image nav__image--profile'

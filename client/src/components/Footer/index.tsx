@@ -1,6 +1,5 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGithub } from '@fortawesome/free-brands-svg-icons'
 
 import logo from '../../Assets/logoDark.svg'
 import './Footer.scss'
@@ -33,7 +32,7 @@ const Footer = () => {
           href='https://github.com/MikeVedsted/JoinMe'
           target='a_blank'
         >
-          <FontAwesomeIcon className='footer__icon' icon={faGithub} />
+          <FontAwesomeIcon className='footer__icon' icon={['fab', 'github']} />
         </a>
       </div>
     </div>

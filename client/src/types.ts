@@ -1,3 +1,5 @@
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
+
 export const FETCH_ALL_EVENTS = 'FETCH_ALL_EVENTS'
 export const GET_ERRORS = 'GET_ERRORS'
 export const CLEAR_ERRORS = 'CLEAR_ERRORS'
@@ -24,7 +26,7 @@ export type ButtonComponent = {
   type: 'button' | 'submit' | 'reset'
   text: string
   modifier?: 'primary' | 'secondary' | 'large-active' | 'large'
-  handleClick: () => void
+  handleClick?: () => void
 }
 
 export type AutoCompleteProps = {
@@ -54,19 +56,21 @@ export type InputFieldProps = {
   type: string
   id: string
   label: string
-  value?: string
+  value?: string | number
   min?: number
   step?: number
   onChange?: () => void
   placeholder?: string
   readOnly?: boolean
   modifier?: string
+  required?: boolean
 }
 export type DropdownProps = {
   label: string
   id: string
   options: string[]
   onBlur: () => void
+  required?: boolean
 }
 
 export type EventType = {
@@ -86,4 +90,16 @@ export type EventType = {
 export type ModalProps = {
   closeModal: () => void
   content?: any
+}
+
+export type NavDropdownLinkProps = {
+  text: string
+  icon: IconProp
+  destination: string
+}
+
+export type NavDropdownFunctionProps = {
+  text: string
+  icon: IconProp
+  handler: () => void
 }
