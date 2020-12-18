@@ -26,7 +26,7 @@ export type ButtonComponent = {
   type: 'button' | 'submit' | 'reset'
   text: string
   modifier?: 'primary' | 'secondary' | 'large-active' | 'large'
-  handleClick: () => void
+  handleClick?: () => void
 }
 
 export type AutoCompleteProps = {
@@ -56,19 +56,21 @@ export type InputFieldProps = {
   type: string
   id: string
   label: string
-  value?: string
+  value?: string | number
   min?: number
   step?: number
   onChange?: () => void
   placeholder?: string
   readOnly?: boolean
   modifier?: string
+  required?: boolean
 }
 export type DropdownProps = {
   label: string
   id: string
   options: string[]
   onBlur: () => void
+  required?: boolean
 }
 
 export type EventType = {

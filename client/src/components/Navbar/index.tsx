@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBell, faComment } from '@fortawesome/free-solid-svg-icons'
 
 import NavDropdown from '../NavDropdown'
 import GoogleLogin from '../GoogleUserLogin'
@@ -30,8 +29,8 @@ const Navbar = () => {
       />
       {user_id ? (
         <div className='nav__icons'>
-          <FontAwesomeIcon className='nav__icon' icon={faBell} />
-          <FontAwesomeIcon className='nav__icon' icon={faComment} />
+          <FontAwesomeIcon className='nav__icon' icon='bell' />
+          <FontAwesomeIcon className='nav__icon' icon='comment' />
           <img
             onClick={() => setDropdownHidden(!dropdownHidden)}
             className='nav__image nav__image--profile'
