@@ -36,8 +36,8 @@ const findUserById = async (userId: string) => {
     const query = `
     SELECT u.*, a.*, array_agg(c.name) as interests
     FROM userk u
-    INNER JOIN user_interest ui ON u.user_id = ui.userk
-    INNER JOIN category c ON c.category_id = ui.interest
+    LEFT JOIN user_interest ui ON u.user_id = ui.userk
+    LEFT JOIN category c ON c.category_id = ui.interest
     LEFT JOIN address a ON u.base_address = a.address_id
     WHERE u.user_id = $1
     GROUP BY u.user_id, a.address_id;
