@@ -9,8 +9,6 @@ const MyEventsPage = () => {
   const { pathname } = useLocation()
 
   const addContent = () => {
-    console.log(pathname)
-    console.log(window.location.pathname)
     if (pathname.includes('/created')) return <p>My events here</p>
     if (pathname.includes('/interested')) return <p>Requested events here</p>
     if (pathname.includes('/confirmed')) return <p>Confirmed events here</p>
