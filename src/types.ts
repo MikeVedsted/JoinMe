@@ -37,6 +37,17 @@ export type User = {
   profile_text?: string
   base_address?: string
   created_at: Date
+  date_of_birth: Date
+  gender: 'Female' | 'Male' | 'Prefer not to say' | 'Other' | null
+  address_id: string
+  street: string
+  number: number
+  postal_code: number
+  city: string
+  country: string
+  lat: number
+  lng: number
+  interests: string[] | string | null
 }
 
 export type JwtDecoded = {

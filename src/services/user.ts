@@ -43,7 +43,7 @@ const findUserById = async (userId: string) => {
     GROUP BY u.user_id, a.address_id;
     `
     const DBResponse = await db.query(query, [userId])
-    const user: any = DBResponse.rows[0]
+    const user: User = DBResponse.rows[0]
     return user
   } catch (error) {
     return error
