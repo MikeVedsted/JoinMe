@@ -33,8 +33,17 @@ const googleLogin = async (id_token: string, res: Response) => {
 
 const findUserById = async (userId: string) => {
   try {
-    const DBResponse = await db.query('SELECT * FROM userk WHERE user_id = $1', [userId])
-    const user: User = DBResponse.rows[0]
+    const query = `
+    SELECT u.*, a.*, array_agg(c.name) as interests
+    FROM userk u
+    INNER JOIN user_interest ui ON u.user_id = ui.userk
+    INNER JOIN category c ON c.category_id = ui.interest
+    LEFT JOIN address a ON u.base_address = a.address_id
+    WHERE u.user_id = $1
+    GROUP BY u.user_id, a.address_id;
+    `
+    const DBResponse = await db.query(query, [userId])
+    const user: any = DBResponse.rows[0]
     return user
   } catch (error) {
     return error
