@@ -17,7 +17,7 @@ const ProfilePage = () => {
     email: '',
     interests: [],
     profile_text: '',
-    base_address: ''
+    full_address: ''
   })
 
   useEffect(() => {
@@ -87,7 +87,7 @@ const ProfilePage = () => {
 
           <div className='profile__details'>
             <h4 className='profile__details--header'> Address: </h4>
-            <p className='profile__details--text'> {userInfo.base_address} </p>
+            <p className='profile__details--text'> {userInfo.full_address} </p>
           </div>
         </div>
       </div>
