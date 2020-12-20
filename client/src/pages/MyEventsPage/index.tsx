@@ -9,12 +9,12 @@ const MyEventsPage = () => {
   const { pathname } = useLocation()
 
   const addContent = () => {
-    if (pathname === '/my-events/my-events') return <p>My events here</p>
-    if (pathname === '/my-events/interested-events')
-      return <p>Requested events here</p>
-    if (pathname === '/my-events/confirmed-events')
-      return <p>Confirmed events here</p>
-    if (pathname === '/my-events/create-event') return <EventForm />
+    console.log(pathname)
+    console.log(window.location.pathname)
+    if (pathname.includes('/created')) return <p>My events here</p>
+    if (pathname.includes('/interested')) return <p>Requested events here</p>
+    if (pathname.includes('/confirmed')) return <p>Confirmed events here</p>
+    if (pathname.includes('/create-new')) return <EventForm />
     return null
   }
 

@@ -5,7 +5,7 @@ import Button from '../Button'
 import './MyEventsSidebar.scss'
 
 const MyEventsSidebar = () => {
-  const location = useLocation()
+  const { pathname } = useLocation()
   const history = useHistory()
 
   const handleClick = (id: string) => {
@@ -17,35 +17,29 @@ const MyEventsSidebar = () => {
       <Button
         type='button'
         text='My events'
-        id='my-events'
-        modifier={location.pathname === '/my-events' ? 'large-active' : 'large'}
+        id='created'
+        modifier={pathname.includes('/created') ? 'large-active' : 'large'}
         onClick={(e) => handleClick(e.target.id)}
       />
       <Button
         type='button'
         text='Interested events'
-        id='interested-events'
-        modifier={
-          location.pathname === '/interested-events' ? 'large-active' : 'large'
-        }
+        id='interested'
+        modifier={pathname.includes('/interested') ? 'large-active' : 'large'}
         onClick={(e) => handleClick(e.target.id)}
       />
       <Button
         type='button'
         text='Confirmed events'
-        id='confirmed-events'
-        modifier={
-          location.pathname === '/confirmed-events' ? 'large-active' : 'large'
-        }
+        id='confirmed'
+        modifier={pathname.includes('/confirmed') ? 'large-active' : 'large'}
         onClick={(e) => handleClick(e.target.id)}
       />
       <Button
         type='button'
         text='Create event'
-        id='create-event'
-        modifier={
-          location.pathname === '/create-event' ? 'large-active' : 'large'
-        }
+        id='create-new'
+        modifier={pathname.includes('/create-new') ? 'large-active' : 'large'}
         onClick={(e) => handleClick(e.target.id)}
       />
     </div>
