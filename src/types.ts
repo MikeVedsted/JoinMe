@@ -48,6 +48,7 @@ export type User = {
   lat: number
   lng: number
   interests: string[] | string | [null]
+  full_address: string
 }
 
 export type JwtDecoded = {
