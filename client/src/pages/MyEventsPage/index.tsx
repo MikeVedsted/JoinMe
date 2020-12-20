@@ -5,7 +5,7 @@ import MyEventsSidebar from '../../components/MyEventsSidebar'
 import EventForm from '../../components/EventForm'
 import './MyEventsPage.scss'
 
-const LandingPage = () => {
+const MyEventsPage = () => {
   const { pathname } = useLocation()
 
   const addContent = () => {
@@ -28,4 +28,4 @@ const LandingPage = () => {
   )
 }
 
-export default LandingPage
+export default MyEventsPage
