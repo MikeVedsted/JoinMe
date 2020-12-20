@@ -4,6 +4,7 @@
   margin-top: 100px;
   justify-content: space-between;
   height: 90vh;
+
   &__controls {
     position: fixed;
     height: fit-content;
@@ -19,11 +20,13 @@
 
 @media only screen and (max-width: 768px) {
   .my-events {
+    
     &__controls {
       position: static;
       width: 100%;
       margin-bottom: 40px;
     }
+
     &__right-column {
       width: 100%;
     }
