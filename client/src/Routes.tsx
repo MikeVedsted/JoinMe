@@ -12,7 +12,7 @@ const Routes = () => (
     <Route exact path='/' component={LandingPage} />
     {/* <Route exact path='/user/:userId' component={ProfilePage} /> */}
     {/* <Route path='/user/:userId/:contentName' component={MyEventsPage} /> */}
-    <Route path='/:userId/account-setup' component={AccountSetup} />
+    <Route exact path='/user/:userId/account-setup' component={AccountSetup} />
   </Switch>
 )
 
