@@ -12,7 +12,15 @@ export type ProtectedRouteProps = {
 }
 
 export type User = {
-  isAdmin: boolean
+  email: string
+  first_name: string
+  last_name: string
+  profile_image: string
+  base_address?: string
+  date_of_birth?: any
+  gender?: string
+  profile_text?: string
+  user_id: string
 }
 
 export type AppState = {
@@ -65,6 +73,8 @@ export type InputFieldProps = {
   readOnly?: boolean
   modifier?: string
   required?: boolean
+  className?: string
+  name?: string
 }
 export type DropdownProps = {
   label: string
@@ -110,4 +120,8 @@ export type NavDropdownProps = {
   display: boolean
   setDropdownHidden: (option: boolean) => void
   userId: string
+}
+
+export type AccountFormProps = {
+  user: User
 }
