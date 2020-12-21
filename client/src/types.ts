@@ -1,4 +1,5 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
+import { Dispatch, SetStateAction } from 'react'
 
 export const FETCH_ALL_EVENTS = 'FETCH_ALL_EVENTS'
 export const GET_ERRORS = 'GET_ERRORS'
@@ -66,6 +67,7 @@ export type InputFieldProps = {
   modifier?: string
   required?: boolean
 }
+
 export type DropdownProps = {
   label: string
   id: string
@@ -95,10 +97,13 @@ export type ModalProps = {
 }
 
 export type FormSliderProps = {
+  id: string
+  value: string
   minRange?: number
   maxRange?: number
   steps?: number
   initialValue?: number
+  onChange: () => void
 }
 
 export type NavDropdownLinkProps = {
@@ -117,4 +122,12 @@ export type NavDropdownProps = {
   display: boolean
   setDropdownHidden: (option: boolean) => void
   userId: string
+}
+
+export type EventSearchProps = {
+  handleSubmit: () => void
+  handleFields: () => void
+  distance: string
+  fields: { [key: string]: any }
+  setAddress: Dispatch<SetStateAction<{}>>
 }
