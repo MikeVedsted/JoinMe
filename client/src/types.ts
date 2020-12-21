@@ -103,6 +103,13 @@ export type ModalProps = {
   content?: any
 }
 
+export type FormSliderProps = {
+  minRange?: number
+  maxRange?: number
+  steps?: number
+  initialValue?: number
+}
+
 export type NavDropdownLinkProps = {
   text: string
   icon: IconProp
