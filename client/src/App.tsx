@@ -63,7 +63,7 @@ const App = () => {
       {/* <h3>Create event form</h3>
       <EventForm />*/}
       {/* <Routes /> */}
-      <Footer />
+      {/* <Footer /> */}
     </>
   )
 }
