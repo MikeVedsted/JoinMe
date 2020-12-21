@@ -21,7 +21,7 @@ const EventSearch = () => {
           type='button'
           text='Search'
           modifier='primary'
-          handleClick={() => console.log('clicked')}
+          onClick={() => console.log('clicked')}
         />
       </div>
     </div>

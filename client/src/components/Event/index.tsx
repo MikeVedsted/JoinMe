@@ -119,13 +119,13 @@ const Event = ({
           type='button'
           text='Ask to join'
           modifier='primary'
-          handleClick={handleAddRequest}
+          onClick={handleAddRequest}
         />
         <Button
           type='button'
           text={details ? 'View less' : 'View more'}
           modifier='primary'
-          handleClick={changeView}
+          onClick={changeView}
         />
       </div>
       <hr className='event__line' />

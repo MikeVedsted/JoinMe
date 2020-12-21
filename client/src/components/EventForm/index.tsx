@@ -8,7 +8,7 @@ import DropdownField from '../FormDropdownField'
 import GoogleAutoComplete from '../GoogleAutoComplete'
 import { useFormFields } from '../../hooks/useFormFields'
 import { eventCategories } from '../../util/constants/eventCategories'
-import './EventForm.scss'
+import './eventForm.scss'
 
 const EventForm = () => {
   const [cookies, setCookies] = useCookies(['user'])

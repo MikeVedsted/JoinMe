@@ -65,7 +65,7 @@ const LandingPage = () => {
             type='button'
             text='Get started!'
             modifier='secondary'
-            handleClick={() => setIsModalOpen(true)}
+            onClick={() => setIsModalOpen(true)}
           />
         </div>
         <div className='body__circle body__circle--right'>
