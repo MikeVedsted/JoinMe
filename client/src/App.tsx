@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import {
@@ -14,8 +14,8 @@ import {
 
 import Routes from './Routes'
 import Navbar from './components/Navbar'
-import Modal from './components/Modal'
-import GoogleUserLogin from './components/GoogleUserLogin'
+// import Modal from './components/Modal'
+// import GoogleUserLogin from './components/GoogleUserLogin'
 // import EventForm from './components/EventForm'
 import LandingPage from './pages/LandingPage'
 import Footer from './components/Footer'
@@ -34,8 +34,6 @@ library.add(
 )
 
 const App = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
   return (
     <>
       <Navbar />
