@@ -21,7 +21,9 @@ const GoogleUserLogin = () => {
   }
 
   const responseFailGoogle = (response: any) => {
-    console.log(response)
+    alert(
+      'Sorry, something went wrong.\nPlease try again.\n\nIf the issue persists, let us know at contact.joinme2020@gmail.com'
+    )
   }
 
   return (
