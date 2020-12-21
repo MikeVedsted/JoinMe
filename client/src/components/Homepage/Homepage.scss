@@ -10,11 +10,12 @@
   justify-content: space-between;
 
   &__filter-icon {
+    @include flexCenter;
     color: $primary;
     position: fixed;
-    left: 10px;
-    top: 85px;
-    padding: 5px;
+    top: 120px;
+    left: 15px;
+    padding: 7px;
     background-color: rgba(255, 255, 255, 0.836);
     box-shadow: 0px 0px 2px $textDark;
     border-radius: 2px;
@@ -31,8 +32,6 @@
     border-radius: 8px;
     margin-top: 25px;
     background-color: $textLight;
-    @include flexCenter;
-    flex-direction: column;
 
     &--hide {
       display: none;
@@ -40,8 +39,10 @@
 
     &--modal {
       position: fixed;
-      max-width: 90vw;
-      background-color: rgba(255, 255, 255, 0.884);
+      width: 90vw;
+      top: 150px;
+      border-radius: 0px;
+      background-color: rgba(255, 255, 255, 0.932);
       border-top: 0.5px solid $textDark;
       border-bottom: 0.5px solid $textDark;
     }
@@ -62,6 +63,13 @@
 }
 
 @media only screen and (max-width: 768px) {
+  .main {
+    padding: 0em 0.5em;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
 }
 
 @media only screen and (max-width: 600px) {

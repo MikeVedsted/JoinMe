@@ -1,6 +1,14 @@
 @import '../../SCSS/config';
 
 .search-box {
+  width: 100%;
+
+  &__title {
+    text-align: center;
+    color: $textDark;
+    font-size: $sub-head;
+  }
+
   &__button {
     @include flexCenter;
   }

@@ -3,26 +3,26 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilter } from '@fortawesome/free-solid-svg-icons'
 
 import Event from '../Event'
-import DropDownField from '../FormDropdownField'
-import GoogleAutoComplete from '../GoogleAutoComplete'
+import EventSearch from '../EventSearch'
 import useEventDisplay from '../../hooks/useEventDisplay'
-import { eventCategories } from '../../util/constants/eventCategories'
-import Button from '../Button'
 import './Homepage.scss'
 import { EventType } from '../../types'
 
 const Homepage = () => {
+  const [events] = useEventDisplay()
   const [fullScreen, setFullScreen] = useState<boolean>(
-    window.innerWidth > 1024 ? true : false
+    window.innerWidth > 600 ? true : false
   )
   const [displayFilter, setDisplayFilter] = useState(false)
-  const [events] = useEventDisplay()
 
   const handleAddRequest = () => {
     console.log('requested!!')
   }
   const toggleFilterBox = () => {
     setDisplayFilter(!displayFilter)
+  }
+  const handleSearch = () => {
+    setDisplayFilter(false)
   }
 
   return (
@@ -44,19 +44,7 @@ const Homepage = () => {
             : 'main__search.box main__search-box--hide'
         }
       >
-        <DropDownField
-          label='Category'
-          id='category'
-          options={eventCategories}
-          onBlur={() => console.log('blurr!!')}
-        />
-        <GoogleAutoComplete handleAddress={() => console.log('handled!!')} />
-        <Button
-          type='button'
-          text='Search'
-          modifier='primary'
-          handleClick={() => console.log('button clicked')}
-        />
+        <EventSearch handleSearch={handleSearch} />
       </div>
       {/* Filter box for small screens */}
       <div
@@ -66,32 +54,20 @@ const Homepage = () => {
             : 'main__search.box main__search-box--hide'
         }
       >
-        <DropDownField
-          label='Category'
-          id='category'
-          options={eventCategories}
-          onBlur={() => console.log('blurr!!')}
-        />
-        <GoogleAutoComplete handleAddress={() => console.log('handled!!')} />
-        <Button
-          type='button'
-          text='Search'
-          modifier='primary'
-          handleClick={() => console.log('button clicked')}
-        />
+        <EventSearch handleSearch={handleSearch} />
       </div>
       {events ? (
         <div className='main__events'>
           {events.map((event: EventType) => (
             <Event
-              key='676'
+              key={event.created_at}
               created_at={event.created_at}
-              created_by={'Chiranjibi Chapagain'}
+              created_by={event.created_by}
               image='https://ichef.bbci.co.uk/news/624/cpsprodpb/1384/production/_111769940_whatsubject.jpg'
               title={event.title}
               date={event.date}
               time={event.time}
-              address={'Markkinatie 15 00700 Helsinki'}
+              address={event.address}
               participants={11}
               max_participants={event.max_participants}
               description={event.description}

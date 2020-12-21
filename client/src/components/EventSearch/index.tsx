@@ -6,9 +6,10 @@ import { eventCategories } from '../../util/constants/eventCategories'
 import Button from '../Button'
 import './EventSearch.scss'
 
-const EventSearch = () => {
+const EventSearch = ({ handleSearch }: any) => {
   return (
     <div className='search-box'>
+      <p className='search-box__title'>Search Event</p>
       <FormDropdownFileld
         label='Category'
         id='category'
@@ -21,7 +22,7 @@ const EventSearch = () => {
           type='button'
           text='Search'
           modifier='primary'
-          handleClick={() => console.log('clicked')}
+          handleClick={handleSearch}
         />
       </div>
     </div>

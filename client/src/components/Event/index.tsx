@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Button from '../Button'
 import FormInputFiled from '../FormInputField'
+import useUserDisplay from '../../hooks/useUserDisplay'
 import { calculateEventAge } from '../../util/helperFunctions'
 import { EventType } from '../../types'
 import './Event.scss'
@@ -24,16 +25,20 @@ const Event = ({
   handleAddRequest
 }: EventType) => {
   const [details, setDetails] = useState(false)
-  const [cookies, setCookie] = useCookies(['x-auth-token'])
-  const decodedToken = jwt.decode(cookies['x-auth-token'])
-  const userId = decodedToken?.sub
+  // const [cookies, setCookie] = useCookies(['x-auth-token'])
+  // const decodedToken = jwt.decode(cookies['x-auth-token'])
+  // const userId = decodedToken?.sub
+
+  const [users] = useUserDisplay()
 
   const changeView = () => {
     setDetails(!details)
   }
-
   const formattedTime = time.slice(0, 5)
   const formattedDate = date.slice(0, 10).split('-').reverse().join('-')
+
+  const eventCreator = users.find((user: any) => user.user_id === created_by)
+  console.log('find perosn-', eventCreator)
 
   return (
     <div className='event'>
@@ -53,9 +58,9 @@ const Event = ({
                 icon='user-shield'
               />
             </div>
-            <Link className='event__link' to={`/${userId}`}>
+            <Link className='event__link' to={`/${eventCreator}`}>
               <p className='event__info-text event__info-text--clickable'>
-                {created_by}
+                {`${eventCreator.first_name}  ${eventCreator.last_name}`}
               </p>
             </Link>
           </div>

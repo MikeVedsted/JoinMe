@@ -74,6 +74,7 @@ export type DropdownProps = {
 }
 
 export type EventType = {
+  key: string
   created_by: string
   created_at: string
   image: string
