@@ -3,13 +3,9 @@ import React from 'react'
 import { ButtonComponent } from '../../types'
 import './Button.scss'
 
-const Button = ({ type, text, modifier, handleClick }: ButtonComponent) => {
+const Button = ({ type, text, modifier, ...rest }: ButtonComponent) => {
   return (
-    <button
-      onClick={handleClick}
-      type={type}
-      className={`button button--${modifier}`}
-    >
+    <button type={type} className={`button button--${modifier}`} {...rest}>
       {text}
     </button>
   )
