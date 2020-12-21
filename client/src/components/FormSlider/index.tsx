@@ -14,13 +14,12 @@ const FormSlider = ({
   const [thumbPosition, setThumbPosition] = useState('')
 
   useEffect(() => {
-    const relativeValue = ((value - minRange) * 100) / (maxRange - minRange)
-    setRelativeValue(relativeValue)
+    setRelativeValue(((value - minRange) * 100) / (maxRange - minRange))
     const newPosition = `calc(${relativeValue}% + (${
       8 - relativeValue * 0.15
     }px))`
     setThumbPosition(newPosition)
-  }, [value, maxRange, minRange])
+  }, [value, maxRange, minRange, relativeValue])
 
   return (
     <div className='slider'>
