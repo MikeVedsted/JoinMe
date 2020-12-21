@@ -122,7 +122,7 @@ export type NavDropdownProps = {
 }
 
 export type AccountFormProps = {
-  user: User
+  userId: string
 }
 
 export type InputTextAreaProps = {
