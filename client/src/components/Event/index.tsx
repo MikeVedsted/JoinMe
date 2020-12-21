@@ -25,10 +25,6 @@ const Event = ({
   handleAddRequest
 }: EventType) => {
   const [details, setDetails] = useState(false)
-  // const [cookies, setCookie] = useCookies(['x-auth-token'])
-  // const decodedToken = jwt.decode(cookies['x-auth-token'])
-  // const userId = decodedToken?.sub
-
   const [users] = useUserDisplay()
 
   const changeView = () => {
@@ -58,7 +54,7 @@ const Event = ({
                 icon='user-shield'
               />
             </div>
-            <Link className='event__link' to={`/${eventCreator}`}>
+            <Link className='event__link' to={`/${eventCreator.user_id}`}>
               <p className='event__info-text event__info-text--clickable'>
                 {`${eventCreator.first_name}  ${eventCreator.last_name}`}
               </p>
@@ -124,13 +120,13 @@ const Event = ({
           type='button'
           text='Ask to join'
           modifier='primary'
-          handleClick={handleAddRequest}
+          onClick={handleAddRequest}
         />
         <Button
           type='button'
           text={details ? 'View less' : 'View more'}
           modifier='primary'
-          handleClick={changeView}
+          onClick={changeView}
         />
       </div>
       <hr className='event__line' />
