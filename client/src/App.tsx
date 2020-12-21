@@ -12,14 +12,14 @@ import {
   faUser
 } from '@fortawesome/free-solid-svg-icons'
 
-// import Routes from './Routes'
-// import Navbar from './components/Navbar'
+import Routes from './Routes'
+import Navbar from './components/Navbar'
 // import Modal from './components/Modal'
 // import GoogleUserLogin from './components/GoogleUserLogin'
 // import EventForm from './components/EventForm'
-// import LandingPage from './pages/LandingPage'
-// import Footer from './components/Footer'
-import FormSlider from './components/FormSlider'
+import LandingPage from './pages/LandingPage'
+import Footer from './components/Footer'
+import MyEventsSidebar from './components/MyEventsSidebar'
 import './App.scss'
 
 library.add(
@@ -36,8 +36,11 @@ library.add(
 const App = () => {
   return (
     <>
-      {/* <Navbar />
-      <LandingPage /> */}
+      <Navbar />
+      {/* <LandingPage /> */}
+      {/* <div style={{ padding: '40px' }}>
+        <MyEventsSidebar />
+      </div> */}
       {/* <h1>Moro Moro!</h1>
       <p>Now start developing!</p>
       {isModalOpen && (
@@ -61,11 +64,8 @@ const App = () => {
       <Link to={'/test-protected'}>Auth protected route</Link> */}
       {/* <h3>Create event form</h3>
       <EventForm />*/}
-      {/* <Routes /> */}
-      {/* <Footer /> */}
-      <div style={{ width: '400px', margin: '20px' }}>
-        <FormSlider />
-      </div>
+      <Routes />
+      <Footer />
     </>
   )
 }
