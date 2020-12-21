@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { InputFieldProps } from '../../types'
+import { InputTextAreaProps } from '../../types'
 import './Textarea.scss'
 
-const Textarea = ({ type, id, label, modifier, ...rest }: InputFieldProps) => {
+const Textarea = ({ id, label, modifier, ...rest }: InputTextAreaProps) => {
   return (
     <label className='form__label'>
       {label}

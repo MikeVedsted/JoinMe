@@ -74,7 +74,6 @@ export type InputFieldProps = {
   modifier?: string
   required?: boolean
   className?: string
-  name?: string
 }
 export type DropdownProps = {
   label: string
@@ -124,4 +123,17 @@ export type NavDropdownProps = {
 
 export type AccountFormProps = {
   user: User
+}
+
+export type InputTextAreaProps = {
+  id: string
+  label: string
+  value?: string | number
+  onChange?: () => void
+  placeholder?: string
+  readOnly?: boolean
+  modifier?: string
+  required?: boolean
+  className?: string
+  rows?: number
 }

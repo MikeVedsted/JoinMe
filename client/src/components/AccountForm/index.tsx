@@ -89,11 +89,11 @@ const AccountForm = ({ user }: AccountFormProps) => {
         />
         <GoogleAutoComplete handleAddress={setAddress} />
         <FormInputTextArea
-          type='text'
           id='profile_text'
           label='Profile text'
           value={fields.profile_text}
           onChange={handleFieldChange}
+          rows={1}
         />
         <div className='image-upload'>
           <FormInputField
