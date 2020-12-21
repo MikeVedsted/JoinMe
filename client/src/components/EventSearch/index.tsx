@@ -1,6 +1,6 @@
 import React from 'react'
 
-import FormDropdownFileld from '../FormDropdownField'
+import FormDropdownField from '../FormDropdownField'
 import GoogleAutoComplete from '../GoogleAutoComplete'
 import { eventCategories } from '../../util/constants/eventCategories'
 import Button from '../Button'
@@ -9,13 +9,13 @@ import './EventSearch.scss'
 const EventSearch = () => {
   return (
     <div className='search-box'>
-      <FormDropdownFileld
+      <FormDropdownField
         label='Category'
         id='category'
         options={eventCategories}
         onBlur={() => console.log('blurred!!')}
       />
-      <GoogleAutoComplete handleAddress={() => console.log('handlled!!')} />
+      <GoogleAutoComplete handleAddress={() => console.log('handled!!')} />
       <div className='search-box__button'>
         <Button
           type='button'
