@@ -27,15 +27,15 @@ const AccountForm = ({ userId }: AccountFormProps) => {
   const handleSubmit = async (event: any) => {
     event.preventDefault()
     try {
-      console.log(fields, 'fields')
-      console.log(address, 'address')
       const update = { ...fields, address }
       const res = await axios({
         method: 'PUT',
         url: `http://localhost:5000/api/v1/users/${userId}`,
         data: update
       })
-      console.log(res.data, 'res.data')
+      alert(
+        'Thank you!\nThe changes have been saved and you can now safely leave this page, or make further changes if you spotted a mistake.'
+      )
     } catch (error) {
       console.log(error)
     }
