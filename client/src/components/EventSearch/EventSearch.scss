@@ -1,7 +1,19 @@
 @import '../../SCSS/config';
 
 .search-box {
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  padding: 20px;
+  width: 400px;
+  margin: 20px;
+
   &__button {
     @include flexCenter;
+  }
+
+  &__title {
+    font-size: $sub-head;
+    text-align: center;
+    margin-top: 0;
   }
 }
