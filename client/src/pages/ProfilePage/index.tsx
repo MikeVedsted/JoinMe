@@ -17,7 +17,13 @@ const ProfilePage = () => {
     email: '',
     interests: [],
     profile_text: '',
-    full_address: ''
+    full_address: '',
+    base_address: '',
+    street: '',
+    number: '',
+    postal_code: '',
+    city: '',
+    country: ''
   })
 
   useEffect(() => {
@@ -38,7 +44,6 @@ const ProfilePage = () => {
 
   return (
     <>
-      <Navbar />
       <div className='profile'>
         <div className='profile__sidebar'>
           <img
@@ -50,7 +55,7 @@ const ProfilePage = () => {
             type='button'
             text='Edit profile'
             modifier='primary'
-            handleClick={handleEditClick}
+            onClick={handleEditClick}
           />
         </div>
         <div className='profile__main'>
@@ -87,7 +92,14 @@ const ProfilePage = () => {
 
           <div className='profile__details'>
             <h4 className='profile__details--header'> Address: </h4>
-            <p className='profile__details--text'> {userInfo.full_address} </p>
+            {userInfo.base_address ? (
+              <p className='profile__details--text'>
+                `${userInfo.street} ${userInfo.number}, ${userInfo.postal_code}{' '}
+                ${userInfo.city}, ${userInfo.country}`
+              </p>
+            ) : (
+              <p className='profile__details--text'> - </p>
+            )}
           </div>
         </div>
       </div>
