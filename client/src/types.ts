@@ -26,7 +26,8 @@ export type ButtonComponent = {
   type: 'button' | 'submit' | 'reset'
   text: string
   modifier?: 'primary' | 'secondary' | 'large-active' | 'large'
-  handleClick?: () => void
+  onClick?: (() => void) | ((id: any) => void)
+  id?: string
 }
 
 export type AutoCompleteProps = {
@@ -95,6 +96,13 @@ export type ModalProps = {
 
 export type ProfilePageParam = {
   userId: string
+}
+
+export type FormSliderProps = {
+  minRange?: number
+  maxRange?: number
+  steps?: number
+  initialValue?: number
 }
 
 export type NavDropdownLinkProps = {

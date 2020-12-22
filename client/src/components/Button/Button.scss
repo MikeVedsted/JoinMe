@@ -1,13 +1,13 @@
 @import '../../SCSS/config';
 
 .button {
+  width: 100%;
   font-family: $roboto;
   border-style: none;
   border-radius: 4px;
   background-color: $default;
-  width: 128px;
-  height: 35px;
-  margin: 0px 10px;
+  padding: 5px 10px;
+  margin: 10px 10px;
   font-size: $text;
   color: $textLight;
   cursor: pointer;
@@ -39,35 +39,29 @@
 
   &--large-active {
     background-color: $primary;
-    width: 327px;
-    height: 50px;
     font-size: $sub-head;
     color: $textLight;
     text-align: left;
-    padding: 0px 10px;
   }
 
   &--large {
     background-color: $secondary;
-    width: 327px;
-    height: 50px;
     font-size: $sub-head;
     color: $textDark;
     text-align: left;
-    padding: 0px 10px;
   }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
   .button {
-    width: 90vw;
-    height: 65px;
+    min-width: 90%;
+    height: 55px;
   }
 }
 
 @media only screen and (max-width: 765px) {
   .button {
-    width: 90vw;
+    min-width: 90%;
     height: 45px;
   }
 }
