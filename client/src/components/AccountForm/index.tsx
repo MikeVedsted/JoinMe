@@ -102,11 +102,13 @@ const AccountForm = ({ userId }: AccountFormProps) => {
           value={fields.profile_image}
           onChange={handleFieldChange}
         />
-        <img
-          className='image-upload__image'
-          src={fields.profile_image}
-          alt='What we currently display'
-        />
+        {fields.profile_image && (
+          <img
+            className='image-upload__image'
+            src={fields.profile_image}
+            alt='What we currently display'
+          />
+        )}
       </div>
       <Button type='submit' text='Submit' />
     </form>
