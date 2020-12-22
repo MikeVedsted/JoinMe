@@ -53,8 +53,8 @@ const findAllUsers = async () => {
 
 const updateUser = async (userId: string, update: Partial<User>) => {
   try {
-    const DBResponse = await db.query('SELECT * FROM userk WHERE user_id = $1', [userId])
-    const user: User = DBResponse.rows[0]
+    const userResponse = await db.query('SELECT * FROM userk WHERE user_id = $1', [userId])
+    const user: User = userResponse.rows[0]
 
     if (!user) {
       throw new Error()
@@ -64,12 +64,43 @@ const updateUser = async (userId: string, update: Partial<User>) => {
       first_name = user.first_name,
       last_name = user.last_name,
       profile_image = user.profile_image,
-      profile_text = user.profile_text
+      profile_text = user.profile_text,
+      address = {
+        street: '',
+        number: 0,
+        postal_code: 12345,
+        city: '',
+        country: '',
+        lat: 0,
+        lng: 0
+      },
+      date_of_birth = user.date_of_birth,
+      gender = user.gender
     } = update
 
+    const { street, postal_code, city, country, lat, lng } = address
+    let { number } = address
+    !number && (number = 0)
+    let addressId: string
+
+    const addressResponse = await db.query(
+      'SELECT address_id FROM address WHERE lat = $1 and lng = $2',
+      [lat, lng]
+    )
+
+    if (addressResponse.rowCount === 0) {
+      const newAddress = await db.query(
+        'INSERT INTO address (street, number, postal_code, city, country, lat, lng) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING address_id',
+        [street, number, postal_code, city, country, lat, lng]
+      )
+      addressId = newAddress.rows[0].address_id
+    } else {
+      addressId = addressResponse.rows[0].address_id
+    }
+
     const updateUser = await db.query(
-      'UPDATE userk SET first_name = $2, last_name = $3, profile_image = $4, profile_text = $5 WHERE user_id = $1 RETURNING *',
-      [userId, first_name, last_name, profile_image, profile_text]
+      'UPDATE userk SET first_name = $2, last_name = $3, profile_image = $4, profile_text = $5, base_address = $6, date_of_birth = $7, gender = $8 WHERE user_id = $1 RETURNING *',
+      [userId, first_name, last_name, profile_image, profile_text, addressId, date_of_birth, gender]
     )
     const updatedUser: User = updateUser.rows[0]
     return updatedUser
