@@ -64,8 +64,7 @@
   &__button {
     position: fixed;
     top: 80vh;
-    width: 100vw;
-    max-width: 100%;
+    width: 10%;
     @include flexCenter;
   }
 }
@@ -87,8 +86,9 @@
     }
 
     &__button {
+      width: 30%;
       top: 90vh;
-      left: 0vw;
+      left: 38vw;
     }
   }
 }
@@ -110,8 +110,9 @@
     }
 
     &__button {
+      width: 30%;
       top: 90vh;
-      left: 0vw;
+      left: 35vw;
     }
   }
 }
@@ -161,6 +162,7 @@
     }
 
     &__button {
+      width: 95%;
       position: static;
       display: flex;
       justify-content: center;
