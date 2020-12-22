@@ -1,6 +1,7 @@
 @import '../../SCSS/config';
 
 .button {
+  width: 100%;
   font-family: $roboto;
   border-style: none;
   border-radius: 4px;
@@ -54,7 +55,7 @@
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
   .button {
     min-width: 90%;
-    height: 65px;
+    height: 55px;
   }
 }
 
