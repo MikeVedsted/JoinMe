@@ -35,7 +35,6 @@ const findUserById = async (userId: string) => {
   try {
     const query = `
     SELECT u.*, a.*, array_agg(c.name) as interests
-    EXCEPT u.base_address, a.address_id
     FROM userk u
     LEFT JOIN user_interest ui ON u.user_id = ui.userk
     LEFT JOIN category c ON c.category_id = ui.interest
