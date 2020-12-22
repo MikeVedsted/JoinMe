@@ -5,6 +5,7 @@ import ProtectedRoute from './util/ProtectedRoute'
 import LandingPage from './pages/LandingPage'
 // import HomePage from './pages/HomePage'
 // import ProfilePage from './pages/ProfilePage'
+import AccountSetup from './pages/AccountSetup'
 import MyEventsPage from './pages/MyEventsPage'
 
 const Routes = () => (
@@ -16,6 +17,8 @@ const Routes = () => (
       component={MyEventsPage}
     />
     <Route path='/' component={LandingPage} />
+    <Route exact path='/user/:userId/account-setup' component={AccountSetup} />
+    <Route path='/user/:userId/:contentName' component={MyEventsPage} />
   </Switch>
 )
 

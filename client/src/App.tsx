@@ -14,8 +14,8 @@ import {
   faSignOutAlt
 } from '@fortawesome/free-solid-svg-icons'
 
-import Routes from './Routes'
 import Navbar from './components/Navbar'
+import Routes from './Routes'
 import Footer from './components/Footer'
 import './App.scss'
 

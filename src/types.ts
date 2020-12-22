@@ -14,15 +14,7 @@ export type Event = {
   time: string
   description: string
   max_participants: number
-  address: {
-    street: string
-    number: number
-    postal_code: number
-    city: string
-    country: string
-    lat: number
-    lng: number
-  }
+  address: Address
   expires_at: Date
   image: string
   created_by: string
@@ -35,8 +27,21 @@ export type User = {
   email: string
   profile_image: string
   profile_text?: string
-  base_address?: string
-  created_at: Date
+  address?: Address
+  base_address?: string | Address
+  created_at?: Date
+  date_of_birth?: Date
+  gender?: 'Female' | 'Male' | 'Prefer not to say' | 'Other' | null
+  address_id?: string
+  street?: string
+  number?: number
+  postal_code?: number
+  city?: string
+  country?: string
+  lat?: number
+  lng?: number
+  interests?: string[] | string | [null]
+  full_address?: string
 }
 
 export type JwtDecoded = {
@@ -45,4 +50,14 @@ export type JwtDecoded = {
 
 export type AuthRequest = Request & {
   user?: User
+}
+
+export type Address = {
+  street: string
+  number: number
+  postal_code: number
+  city: string
+  country: string
+  lat: number
+  lng: number
 }
