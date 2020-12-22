@@ -12,16 +12,14 @@ import {
   faUser
 } from '@fortawesome/free-solid-svg-icons'
 
-// import Routes from './Routes'
-// import Navbar from './components/Navbar'
+import Routes from './Routes'
+import Navbar from './components/Navbar'
 // import Modal from './components/Modal'
 // import GoogleUserLogin from './components/GoogleUserLogin'
 // import EventForm from './components/EventForm'
-// import LandingPage from './pages/LandingPage'
-// import Footer from './components/Footer'
-// import MyEventsSidebar from './components/MyEventsSidebar'
-import { useFormFields } from './hooks/useFormFields'
-import EventSearch from './components/EventSearch'
+import LandingPage from './pages/LandingPage'
+import Footer from './components/Footer'
+import MyEventsSidebar from './components/MyEventsSidebar'
 import './App.scss'
 
 library.add(
@@ -36,20 +34,9 @@ library.add(
 )
 
 const App = () => {
-  const [address, setAddress] = useState({})
-  const [fields, handleFields] = useFormFields({
-    category: '',
-    distance: '20'
-  })
-
-  const handleSubmit = () => {
-    console.log(fields)
-    console.log(address)
-  }
-
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       {/* <LandingPage /> */}
       {/* <div style={{ padding: '40px' }}>
         <MyEventsSidebar />
@@ -77,15 +64,8 @@ const App = () => {
       <Link to={'/test-protected'}>Auth protected route</Link> */}
       {/* <h3>Create event form</h3>
       <EventForm />*/}
-      {/* <Routes />
-      <Footer /> */}
-      <EventSearch
-        distance={fields.distance}
-        fields={fields}
-        handleFields={handleFields}
-        handleSubmit={handleSubmit}
-        setAddress={setAddress}
-      />
+      <Routes />
+      <Footer />
     </>
   )
 }

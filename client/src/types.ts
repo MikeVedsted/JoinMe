@@ -126,8 +126,7 @@ export type NavDropdownProps = {
 
 export type EventSearchProps = {
   handleSubmit: () => void
-  handleFields: () => void
+  handleFieldChange: () => void
   distance: string
-  fields: { [key: string]: any }
   setAddress: Dispatch<SetStateAction<{}>>
 }

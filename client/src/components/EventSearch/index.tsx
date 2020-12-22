@@ -9,8 +9,8 @@ import Button from '../Button'
 import './EventSearch.scss'
 
 const EventSearch = ({
-  fields,
-  handleFields,
+  distance,
+  handleFieldChange,
   handleSubmit,
   setAddress
 }: EventSearchProps) => {
@@ -21,7 +21,7 @@ const EventSearch = ({
         label='Category'
         id='category'
         options={eventCategories}
-        onBlur={handleFields}
+        onBlur={handleFieldChange}
       />
       <label className='form__label'>
         Location
@@ -31,8 +31,8 @@ const EventSearch = ({
         Distance from location
         <FormSlider
           id='distance'
-          value={fields.distance}
-          onChange={handleFields}
+          value={distance}
+          onChange={handleFieldChange}
         />
       </label>
       <div className='search-box__button'>
