@@ -1,6 +1,6 @@
 @import '../../SCSS/config';
 
-.body {
+.landing-page {
   width: 100vw;
   max-width: 100%;
   min-height: 100vh;
@@ -70,7 +70,7 @@
 }
 
 @media only screen and (max-width: 1024px) {
-  .body {
+  .landing-page {
     background-image: url(../../Assets/bulldog.jpg);
 
     &__circle {
@@ -94,7 +94,7 @@
 }
 
 @media only screen and (max-width: 768px) {
-  .body {
+  .landing-page {
     background-image: url(../../Assets/bulldog.jpg);
 
     &__circle {
@@ -118,7 +118,7 @@
 }
 
 @media only screen and (max-width: 600px) {
-  .body {
+  .landing-page {
     background-image: url(../../Assets/winter.jpg);
     padding-top: 50px;
 

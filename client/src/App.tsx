@@ -6,9 +6,12 @@ import {
   faComment,
   faUserShield,
   faCalendar,
+  faTimes,
   faClock,
   faMapMarkerAlt,
-  faUser
+  faListUl,
+  faUser,
+  faSignOutAlt
 } from '@fortawesome/free-solid-svg-icons'
 
 import Navbar from './components/Navbar'
@@ -22,9 +25,12 @@ library.add(
   faComment,
   faUserShield,
   faCalendar,
+  faTimes,
   faClock,
   faMapMarkerAlt,
-  faUser
+  faListUl,
+  faUser,
+  faSignOutAlt
 )
 
 const App = () => {

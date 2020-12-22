@@ -32,11 +32,12 @@
     padding: 10px 5px;
 
     &:hover {
+      cursor: pointer;
       background-color: $secondary;
     }
 
     &--icon {
-      margin: 0 5px;
+      margin: 0 15px 0 5px;
     }
   }
 }
