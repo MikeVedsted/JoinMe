@@ -118,3 +118,7 @@ export type NavDropdownProps = {
   setDropdownHidden: (option: boolean) => void
   userId: string
 }
+
+export type ProfilePageParamProps = {
+  userId: string
+}
