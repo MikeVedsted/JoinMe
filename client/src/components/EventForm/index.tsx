@@ -8,7 +8,7 @@ import DropdownField from '../FormDropdownField'
 import GoogleAutoComplete from '../GoogleAutoComplete'
 import { useFormFields } from '../../hooks/useFormFields'
 import { eventCategories } from '../../util/constants/eventCategories'
-import './eventForm.scss'
+import './EventForm.scss'
 
 const EventForm = () => {
   const [cookies, setCookies] = useCookies(['user'])
@@ -34,9 +34,10 @@ const EventForm = () => {
       const data = { ...fields, address }
       const res = await axios({
         method: 'POST',
-        url: 'http://localhost:5000/api/v1/events',
+        url: '/api/v1/events',
         data: data
       })
+      setError('')
       alert(
         `Success! Event: ${res.data.title} was created with ID ${res.data.event_id}`
       )
@@ -115,6 +116,7 @@ const EventForm = () => {
         <Button type='reset' text='Reset' modifier='secondary' />
         <Button type='submit' text='Create' modifier='primary' />
       </div>
+      {error && <p>{error}</p>}
     </form>
   )
 }

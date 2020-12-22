@@ -3,14 +3,19 @@ import { Switch, Route } from 'react-router-dom'
 
 import ProtectedRoute from './util/ProtectedRoute'
 import LandingPage from './pages/LandingPage'
+// import HomePage from './pages/HomePage'
 // import ProfilePage from './pages/ProfilePage'
 import MyEventsPage from './pages/MyEventsPage'
 
 const Routes = () => (
   <Switch>
-    <Route exact path='/' component={LandingPage} />
+    <ProtectedRoute exact path='/home' component={<p>home page here</p>} />
     {/* <Route exact path='/user/:userId' component={ProfilePage} /> */}
-    <Route path='/user/:userId/:contentName' component={MyEventsPage} />
+    <ProtectedRoute
+      path='/user/:userId/:contentName'
+      component={MyEventsPage}
+    />
+    <Route path='/' component={LandingPage} />
   </Switch>
 )
 

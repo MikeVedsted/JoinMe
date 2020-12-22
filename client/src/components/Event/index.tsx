@@ -24,13 +24,8 @@ const Event = ({
   handleAddRequest
 }: EventType) => {
   const [details, setDetails] = useState(false)
-  const [cookies, setCookie] = useCookies(['x-auth-token'])
-  const decodedToken = jwt.decode(cookies['x-auth-token'])
-  const userId = decodedToken?.sub
-
-  const changeView = () => {
-    setDetails(!details)
-  }
+  const [cookies, setCookie] = useCookies(['user'])
+  const { user_id } = cookies.user
 
   const formattedTime = time.slice(0, 5)
   const formattedDate = date.slice(0, 10).split('-').reverse().join('-')
@@ -53,7 +48,7 @@ const Event = ({
                 icon='user-shield'
               />
             </div>
-            <Link className='event__link' to={`/${userId}`}>
+            <Link className='event__link' to={`/${user_id}`}>
               <p className='event__info-text event__info-text--clickable'>
                 {created_by}
               </p>
@@ -125,7 +120,7 @@ const Event = ({
           type='button'
           text={details ? 'View less' : 'View more'}
           modifier='primary'
-          onClick={changeView}
+          onClick={() => setDetails(!details)}
         />
       </div>
       <hr className='event__line' />
