@@ -1,7 +1,7 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import logo from '../../Assets/logoDark.svg'
+import logo from '../../Assets/logoLight.svg'
 import './Footer.scss'
 
 const Footer = () => {

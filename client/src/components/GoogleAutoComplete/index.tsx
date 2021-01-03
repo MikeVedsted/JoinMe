@@ -51,15 +51,13 @@ const AddressAutoComplete = ({ handleAddress }: AutoCompleteProps) => {
   }
 
   return (
-    <>
-      <Autocomplete
-        apiKey={MAPS_KEY}
-        onPlaceSelected={handleSelect}
-        types={['address']}
-        componentRestrictions={{ country: 'fi' }}
-        className='form__field'
-      />
-    </>
+    <Autocomplete
+      apiKey={MAPS_KEY}
+      onPlaceSelected={handleSelect}
+      types={['address']}
+      componentRestrictions={{ country: 'fi' }}
+      className='form__field'
+    />
   )
 }
 

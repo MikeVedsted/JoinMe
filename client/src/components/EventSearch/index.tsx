@@ -2,26 +2,45 @@ import React from 'react'
 
 import FormDropdownField from '../FormDropdownField'
 import GoogleAutoComplete from '../GoogleAutoComplete'
+import FormSlider from '../FormSlider'
 import { eventCategories } from '../../util/constants/eventCategories'
+import { EventSearchProps } from '../../types'
 import Button from '../Button'
 import './EventSearch.scss'
 
-const EventSearch = ({ handleSearch }: any) => {
+const EventSearch = ({
+  distance,
+  handleFieldChange,
+  handleSubmit,
+  setAddress
+}: EventSearchProps) => {
   return (
     <div className='search-box'>
+      <h2 className='search-box__title'>Search events</h2>
       <FormDropdownField
         label='Category'
         id='category'
         options={eventCategories}
-        onBlur={() => console.log('blurred!!')}
+        onBlur={handleFieldChange}
       />
-      <GoogleAutoComplete handleAddress={() => console.log('handled!!')} />
+      <label className='form__label'>
+        Location
+        <GoogleAutoComplete handleAddress={setAddress} />
+      </label>
+      <label className='form__label'>
+        Distance from location
+        <FormSlider
+          id='distance'
+          value={distance}
+          onChange={handleFieldChange}
+        />
+      </label>
       <div className='search-box__button'>
         <Button
-          type='button'
+          type='submit'
           text='Search'
           modifier='primary'
-          onClick={() => console.log('clicked')}
+          onClick={handleSubmit}
         />
       </div>
     </div>

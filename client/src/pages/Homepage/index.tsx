@@ -2,60 +2,61 @@ import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilter } from '@fortawesome/free-solid-svg-icons'
 
-import Event from '../Event'
-import EventSearch from '../EventSearch'
+import Event from '../../components/Event'
+import EventSearch from '../../components/EventSearch'
+import Modal from '../../components/Modal'
 import useEventDisplay from '../../hooks/useEventDisplay'
 import './Homepage.scss'
 import { EventType } from '../../types'
 
 const Homepage = () => {
   const [events] = useEventDisplay()
-  const [fullScreen, setFullScreen] = useState<boolean>(
-    window.innerWidth > 600 ? true : false
-  )
-  const [displayFilter, setDisplayFilter] = useState(false)
+  const [address, setAddress] = useState({})
+
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleAddRequest = () => {
     console.log('requested!!')
   }
-  const toggleFilterBox = () => {
-    setDisplayFilter(!displayFilter)
+
+  const toggleSearchModal = () => {
+    setIsModalOpen(!isModalOpen)
   }
+
   const handleSearch = () => {
-    setDisplayFilter(false)
+    setIsModalOpen(false)
   }
 
   return (
     <div className='main'>
-      <div
-        className={
-          !fullScreen
-            ? 'main__filter-icon'
-            : 'main__filter-icon main__filter-icon--hide'
-        }
-        onClick={toggleFilterBox}
-      >
+      <div className='main__filter-icon' onClick={toggleSearchModal}>
         <FontAwesomeIcon icon={faFilter} />
       </div>
-      <div
-        className={
-          fullScreen
-            ? 'main__search-box'
-            : 'main__search.box main__search-box--hide'
-        }
-      >
-        <EventSearch handleSearch={handleSearch} />
+
+      <div className='main__search-box'>
+        <EventSearch
+          distance='100'
+          handleFieldChange={() => console.log('handled')}
+          handleSubmit={handleSearch}
+          setAddress={setAddress}
+        />
       </div>
-      {/* Filter box for small screens */}
-      <div
-        className={
-          displayFilter
-            ? 'main__search-box main__search-box--modal'
-            : 'main__search.box main__search-box--hide'
-        }
-      >
-        <EventSearch handleSearch={handleSearch} />
-      </div>
+
+      {/* Search box modal for small screens */}
+      {isModalOpen && (
+        <Modal
+          closeModal={() => setIsModalOpen(false)}
+          content={
+            <EventSearch
+              distance='30'
+              handleFieldChange={() => console.log('handled')}
+              handleSubmit={handleSearch}
+              setAddress={setAddress}
+            />
+          }
+        />
+      )}
+
       {events ? (
         <div className='main__events'>
           {events.map((event: EventType) => (
@@ -67,7 +68,7 @@ const Homepage = () => {
               title={event.title}
               date={event.date}
               time={event.time}
-              address={event.address}
+              address={'markkinatie 15 00700 Helsinki'}
               participants={11}
               max_participants={event.max_participants}
               description={event.description}

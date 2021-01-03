@@ -1,6 +1,6 @@
 @import '../../SCSS/config';
 
-.body {
+.landing-page {
   width: 100vw;
   max-width: 100%;
   min-height: 100vh;
@@ -64,14 +64,13 @@
   &__button {
     position: fixed;
     top: 80vh;
-    width: 100vw;
-    max-width: 100%;
+    width: 10%;
     @include flexCenter;
   }
 }
 
 @media only screen and (max-width: 1024px) {
-  .body {
+  .landing-page {
     background-image: url(../../Assets/bulldog.jpg);
 
     &__circle {
@@ -87,14 +86,15 @@
     }
 
     &__button {
+      width: 30%;
       top: 90vh;
-      left: 0vw;
+      left: 38vw;
     }
   }
 }
 
 @media only screen and (max-width: 768px) {
-  .body {
+  .landing-page {
     background-image: url(../../Assets/bulldog.jpg);
 
     &__circle {
@@ -110,14 +110,15 @@
     }
 
     &__button {
+      width: 30%;
       top: 90vh;
-      left: 0vw;
+      left: 35vw;
     }
   }
 }
 
 @media only screen and (max-width: 600px) {
-  .body {
+  .landing-page {
     background-image: url(../../Assets/winter.jpg);
     padding-top: 50px;
 
@@ -161,6 +162,7 @@
     }
 
     &__button {
+      width: 95%;
       position: static;
       display: flex;
       justify-content: center;

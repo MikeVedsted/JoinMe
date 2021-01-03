@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-import { User } from '../types'
+import { UserType } from '../types'
 
 const useUserDisplay = () => {
-  const [users, setUsers] = useState<any[]>([])
+  const [users, setUsers] = useState<UserType[]>([])
   const [error, setError] = useState('')
 
   useEffect(() => {
-    fetchEvents()
+    fetchUsers()
   }, [])
 
-  const fetchEvents = async () => {
+  const fetchUsers = async () => {
     try {
       const response = await axios({
         method: 'GET',

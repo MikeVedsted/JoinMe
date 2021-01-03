@@ -11,8 +11,6 @@ const useEventDisplay = () => {
     fetchEvents()
   }, [])
 
-  console.log('events--', events)
-
   const fetchEvents = async () => {
     try {
       const response = await axios({

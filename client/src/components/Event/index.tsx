@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useCookies } from 'react-cookie'
-import jwt from 'jsonwebtoken'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Button from '../Button'
@@ -9,6 +7,7 @@ import FormInputFiled from '../FormInputField'
 import useUserDisplay from '../../hooks/useUserDisplay'
 import { calculateEventAge } from '../../util/helperFunctions'
 import { EventType } from '../../types'
+import { UserType } from '../../types'
 import './Event.scss'
 
 const Event = ({
@@ -27,14 +26,12 @@ const Event = ({
   const [details, setDetails] = useState(false)
   const [users] = useUserDisplay()
 
-  const changeView = () => {
-    setDetails(!details)
-  }
   const formattedTime = time.slice(0, 5)
   const formattedDate = date.slice(0, 10).split('-').reverse().join('-')
 
-  const eventCreator = users.find((user: any) => user.user_id === created_by)
-  console.log('find perosn-', eventCreator)
+  const eventCreator = users.find(
+    (user: UserType) => user.user_id === created_by
+  )
 
   return (
     <div className='event'>
@@ -54,11 +51,13 @@ const Event = ({
                 icon='user-shield'
               />
             </div>
-            <Link className='event__link' to={`/${eventCreator.user_id}`}>
-              <p className='event__info-text event__info-text--clickable'>
-                {`${eventCreator.first_name}  ${eventCreator.last_name}`}
-              </p>
-            </Link>
+            {eventCreator && (
+              <Link className='event__link' to={`/${eventCreator.user_id}`}>
+                <p className='event__info-text event__info-text--clickable'>
+                  {`${eventCreator.first_name}  ${eventCreator.last_name}`}
+                </p>
+              </Link>
+            )}
           </div>
           <div className='event__info'>
             <div className='event__icon-wrapper'>
@@ -126,7 +125,7 @@ const Event = ({
           type='button'
           text={details ? 'View less' : 'View more'}
           modifier='primary'
-          onClick={changeView}
+          onClick={() => setDetails(!details)}
         />
       </div>
       <hr className='event__line' />
