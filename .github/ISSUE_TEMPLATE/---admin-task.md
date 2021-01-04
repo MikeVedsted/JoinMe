@@ -3,7 +3,7 @@ name: "\U0001F3A9 Admin task"
 about: Something needs doing? It isn't strictly coding related? Send it to an admin!
 title: "[ADMIN]"
 labels: 'Priority: Medium :zap:, Status: Received :inbox_tray:, Type: Admin :tophat:'
-assignees: MikeVedsted, Rostislav013
+assignees: Chiranjibichapagain, MikeVedsted
 
 ---
 
