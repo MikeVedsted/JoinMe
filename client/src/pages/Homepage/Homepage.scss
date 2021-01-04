@@ -1,9 +1,9 @@
 @import '../../SCSS/config';
 
-.main {
+.homepage {
   width: 100vw;
   max-width: 100%;
-  padding: 0 3em;
+  padding: 0 50px;
   box-sizing: border-box;
   margin-top: 100px;
   display: flex;
@@ -13,7 +13,7 @@
     @include flexCenter;
     color: $primary;
     position: fixed;
-    top: 120px;
+    top: 80px;
     left: 15px;
     padding: 7px;
     background-color: rgba(255, 255, 255, 0.836);
@@ -33,18 +33,12 @@
 
   &__events {
     width: 60vw;
-  }
-}
-
-@media only screen and (max-width: 1024px) {
-  .main {
-    padding: 0em 0.5em;
+    margin-top: 12px;
   }
 }
 
 @media only screen and (max-width: 768px) {
-  .main {
-    padding: 0em 0.5em;
+  .homepage {
     justify-content: center;
 
     &__filter-icon {
@@ -66,8 +60,8 @@
 }
 
 @media only screen and (max-width: 600px) {
-  .main {
-    padding: 0em;
+  .homepage {
+    padding: 0;
 
     &__events {
       width: 100vw;

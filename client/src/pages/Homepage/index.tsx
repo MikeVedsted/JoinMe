@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFilter } from '@fortawesome/free-solid-svg-icons'
 
 import Event from '../../components/Event'
 import EventSearch from '../../components/EventSearch'
 import Modal from '../../components/Modal'
 import useEventDisplay from '../../hooks/useEventDisplay'
-import './Homepage.scss'
 import { EventType } from '../../types'
+import './Homepage.scss'
 
 const Homepage = () => {
   const [events] = useEventDisplay()
@@ -28,12 +27,12 @@ const Homepage = () => {
   }
 
   return (
-    <div className='main'>
-      <div className='main__filter-icon' onClick={toggleSearchModal}>
-        <FontAwesomeIcon icon={faFilter} />
+    <div className='homepage'>
+      <div className='homepage__filter-icon' onClick={toggleSearchModal}>
+        <FontAwesomeIcon icon={'filter'} />
       </div>
 
-      <div className='main__search-box'>
+      <div className='homepage__search-box'>
         <EventSearch
           distance='100'
           handleFieldChange={() => console.log('handled')}
@@ -58,7 +57,7 @@ const Homepage = () => {
       )}
 
       {events ? (
-        <div className='main__events'>
+        <div className='homepage__events'>
           {events.map((event: EventType) => (
             <Event
               key={event.created_at}

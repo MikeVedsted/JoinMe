@@ -15,12 +15,12 @@ const useUserDisplay = () => {
     try {
       const response = await axios({
         method: 'GET',
-        url: 'http://localhost:5000/api/v1/users'
+        url: '/api/v1/users'
       })
       const data = response.data
       setUsers(data)
     } catch (error) {
-      setError(error.message)
+      throw error
     }
   }
   return [users]

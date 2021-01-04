@@ -6,8 +6,7 @@ import Button from '../Button'
 import FormInputFiled from '../FormInputField'
 import useUserDisplay from '../../hooks/useUserDisplay'
 import { calculateEventAge } from '../../util/helperFunctions'
-import { EventType } from '../../types'
-import { UserType } from '../../types'
+import { EventType, UserType } from '../../types'
 import './Event.scss'
 
 const Event = ({
