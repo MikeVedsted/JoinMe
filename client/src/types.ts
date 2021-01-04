@@ -149,6 +149,7 @@ export type InputTextAreaProps = {
   required?: boolean
   className?: string
   rows?: number
+}
 
 export type EventSearchProps = {
   handleSubmit: () => void
