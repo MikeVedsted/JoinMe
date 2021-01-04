@@ -149,10 +149,15 @@ export type InputTextAreaProps = {
   required?: boolean
   className?: string
   rows?: number
+}
 
 export type EventSearchProps = {
   handleSubmit: () => void
   handleFieldChange: () => void
   distance: string
   setAddress: Dispatch<SetStateAction<{}>>
+}
+
+export type NotfoundProps = {
+  message: string
 }

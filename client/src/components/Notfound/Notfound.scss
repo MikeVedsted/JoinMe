@@ -1,0 +1,30 @@
+@import '../../SCSS/config';
+
+.notfound {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__message {
+    text-align: center;
+    font-family: $montserrat;
+    color: $secondary;
+    margin: 10px 0px 40px;
+  }
+
+  &__image {
+    width: 300px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .notfound {
+    &__message {
+      font-size: $sub-head;
+    }
+
+    &__image {
+      width: 180px;
+    }
+  }
+}
