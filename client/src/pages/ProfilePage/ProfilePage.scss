@@ -87,10 +87,12 @@
     > * {
       width: calc(100% / 3);
     }
+
     &--text {
       font-size: 20px;
       text-align: center;
     }
+
     &--divider-optional {
       display: block;
       border: 1px solid $lineDim;
