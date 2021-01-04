@@ -1,10 +1,11 @@
+/* eslint-disable jest/no-disabled-tests */
 import request from 'supertest'
 
 import app from '../../src/app'
 import db from '../../src/db/index'
 import * as dbHelper from '../db/db-helper'
 
-describe('user controller', () => {
+describe.skip('user controller', () => {
   beforeEach(async () => {
     // console.log(await (await db.query('SELECT * FROM userk;')).rows)
     //await dbHelper.createTempTables()
