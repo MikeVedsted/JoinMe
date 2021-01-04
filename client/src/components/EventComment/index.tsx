@@ -6,7 +6,7 @@ import './EventComment.scss'
 const EventComment = ({ image, user, text, date }: CommentProps) => {
   return (
     <div className='comment'>
-      <img src={image} alt='commenter' className='comment__image' />
+      <img src={image} alt={user} className='comment__image' />
       <div className='comment__text'>
         <h3 className='comment__text--user'>
           {user + ' '}
