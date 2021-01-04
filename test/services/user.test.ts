@@ -24,7 +24,7 @@ async function createUser(override?: Partial<User>) {
   return await db.query('SELECT * FROM userk;')
 }
 
-describe('user controller', () => {
+describe('user service', () => {
   beforeEach(async () => {
     await dbHelper.createTempTables()
   })

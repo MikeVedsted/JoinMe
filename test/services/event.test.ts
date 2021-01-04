@@ -3,7 +3,6 @@ import { v4 as uuidv4 } from 'uuid'
 import EventService from '../../src/services/event'
 import db from '../../src/db/index'
 import * as dbHelper from '../db/db-helper'
-//import { Event } from '../../src/types'
 
 type Event = {
   title: string
@@ -74,7 +73,6 @@ describe('event service', () => {
   it('should create a new event', async () => {
     await createEvent()
     const event = await db.query('SELECT * FROM event;')
-
     expect(event.rows.length).toEqual(1)
     expect(event.rows[0]).toHaveProperty('event_id')
     expect(event.rows[0]).toHaveProperty('title', 'My test event')
@@ -108,33 +106,43 @@ describe('event service', () => {
     expect(found).toEqual(undefined)
   })
 
-  //   it('should update an existing event', async () => {
-  //     // const event = await createEvent()
-  //     // const update: Partial<Event> = {
-  //     //   title: 'New updated event',
-  //     //   description: 'New updated description'
-  //     // }
-  //     // const updated = await EventService.updateEvent(event.rows[0].event_id, update)
-  //     // expect(updated).toHaveProperty('event_id', event.rows[0].event_id)
-  //     // expect(updated).toHaveProperty('title', 'New updated event')
-  //     // expect(updated).toHaveProperty('description', 'New updated description')
-  //   })
+  it('should update an existing event', async () => {
+    const event = await createEvent()
+    const update: any = {
+      title: 'New updated event',
+      date: '2020-12-12',
+      time: '13:00',
+      description: 'New updated description',
+      max_participants: 15,
+      expires_at: new Date('2021-06-11'),
+      image: 'www.photo.com'
+    }
+    const updated = await EventService.updateEvent(event.rows[0].event_id, update)
+    expect(updated).toHaveProperty('event_id', event.rows[0].event_id)
+    expect(updated).toHaveProperty('title', 'New updated event')
+    expect(updated).toHaveProperty('description', 'New updated description')
+  })
 
-  //   it('should not update non existing event', async () => {
-  //     // const user = await createUser()
-  //     // const update: Partial<User> = {
-  //     //   first_name: 'Kesha',
-  //     //   last_name: 'Stepanov'
-  //     // }
-  //     // const updated = await UserService.updateUser(nonExistingEventId, update)
-  //     // expect(user.rows.length).toEqual(1)
-  //     // expect(updated).toBeInstanceOf(Error)
-  //   })
+  it('should not update non existing event', async () => {
+    const event = await createEvent()
+    const update: any = {
+      title: 'New updated event',
+      date: '2020-12-12',
+      time: '13:00',
+      description: 'New updated description',
+      max_participants: 15,
+      expires_at: new Date('2021-06-11'),
+      image: 'www.photo.com'
+    }
+    const updated = await EventService.updateEvent(nonExistingEventId, update)
+    expect(event.rows.length).toEqual(1)
+    expect(updated.error).toEqual('Event not found')
+  })
 
   it('should delete existing event', async () => {
     const event = await createEvent()
-    console.log(event.rows[0])
     const deleted = await EventService.deleteEvent(event.rows[0].event_id)
+    console.log('----------------------', deleted)
     expect(event.rows.length).toEqual(1)
     expect(deleted.message).toEqual('Event Successfully deleted!')
   })
