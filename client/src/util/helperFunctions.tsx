@@ -14,3 +14,10 @@ export const calculateEventAge = (eventDate: string) => {
     return years + 'y'
   }
 }
+
+export const convertDate = (date: string) => {
+  const birthYear = new Date(date).getFullYear()
+  const birthMonth = new Date(date).getMonth() + 1
+  const birthDay = new Date(date).getDate()
+  return birthYear + '-' + birthMonth + '-' + birthDay
+}

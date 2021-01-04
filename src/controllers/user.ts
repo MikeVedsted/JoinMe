@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express'
 
 import UserService from '../services/user'
 import { NotFoundError, BadRequestError } from '../helpers/apiError'
+import { User } from '../types'
 
 export const googleLogin = async (req: Request, res: Response, next: NextFunction) => {
   try {

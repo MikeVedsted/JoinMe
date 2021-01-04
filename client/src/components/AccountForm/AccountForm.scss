@@ -1,0 +1,20 @@
+@import '../../SCSS/config';
+
+.form {
+  border: 2px solid $secondary;
+  border-radius: 8px;
+  padding: 0 40px 40px;
+  margin: auto;
+  width: fit-content;
+
+  &__title {
+    font-family: $montserrat;
+    font-size: $heading;
+    width: fit-content;
+    position: relative;
+    top: -20px;
+    background-color: white;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+}

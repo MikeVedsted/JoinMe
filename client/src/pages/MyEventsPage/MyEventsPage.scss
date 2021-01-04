@@ -9,12 +9,14 @@
     position: fixed;
     height: fit-content;
     width: 20vw;
+    padding-left: 40px;
   }
 
   &__content {
     @include flexCenter;
     width: 80vw;
-    margin-left: auto;
+    margin-left: 3vw;
+    height: fit-content;
   }
 }
 
@@ -24,6 +26,7 @@
       position: static;
       width: 100%;
       margin-bottom: 40px;
+      padding: 0;
     }
 
     &__content {

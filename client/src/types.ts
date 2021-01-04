@@ -1,4 +1,5 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
+import { Dispatch, SetStateAction } from 'react'
 
 export const FETCH_ALL_EVENTS = 'FETCH_ALL_EVENTS'
 export const GET_ERRORS = 'GET_ERRORS'
@@ -11,13 +12,21 @@ export type ProtectedRouteProps = {
   children?: any
 }
 
-export type User = {
-  isAdmin: boolean
+export type UserType = {
+  email: string
+  first_name: string
+  last_name: string
+  profile_image: string
+  base_address?: string
+  date_of_birth?: any
+  gender?: string
+  profile_text?: string
+  user_id: string
 }
 
 export type AppState = {
   auth: {
-    user: User
+    user: UserType
     isAuthenticated: boolean
   }
 }
@@ -65,17 +74,20 @@ export type InputFieldProps = {
   readOnly?: boolean
   modifier?: string
   required?: boolean
+  className?: string
 }
+
 export type DropdownProps = {
   label: string
   id: string
   options: string[]
   onBlur: () => void
+  modifier?: string
   required?: boolean
 }
 
 export type EventType = {
-  event_id: string
+  key: string
   created_by: string
   created_at: string
   image: string
@@ -95,10 +107,13 @@ export type ModalProps = {
 }
 
 export type FormSliderProps = {
+  id: string
+  value: string
   minRange?: number
   maxRange?: number
   steps?: number
   initialValue?: number
+  onChange: () => void
 }
 
 export type NavDropdownLinkProps = {
@@ -122,3 +137,28 @@ export type NavDropdownProps = {
 export type ProfilePageParamProps = {
   userId: string
 }
+
+export type AccountFormProps = {
+  userId: string
+}
+
+export type InputTextAreaProps = {
+  id: string
+  label: string
+  value?: string | number
+  onChange?: () => void
+  placeholder?: string
+  readOnly?: boolean
+  modifier?: string
+  required?: boolean
+  className?: string
+  rows?: number
+}
+
+export type EventSearchProps = {
+  handleSubmit: () => void
+  handleFieldChange: () => void
+  distance: string
+  setAddress: Dispatch<SetStateAction<{}>>
+}
+
