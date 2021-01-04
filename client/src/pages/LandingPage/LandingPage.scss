@@ -19,28 +19,28 @@
   &__circle {
     @include flexCenter;
     flex-direction: column;
-    width: 350px;
-    height: 350px;
-    padding: 5px;
+    width: 30vw;
+    height: 30vw;
+    padding: 8px;
     position: absolute;
-    top: 25vh;
+    top: 18vh;
     border-radius: 50%;
 
     &--left {
-      left: 29vw;
+      left: 21vw;
       background-color: #e03400bb;
     }
 
     &--right {
-      left: 49vw;
+      left: 48vw;
       background-color: #e03400bb;
     }
   }
 
   &__text {
-    width: 230px;
+    width: 80%;
     text-align: center;
-    font-size: $sub-head;
+    font-size: 1.2rem;
     font-family: $nunito;
     line-height: 150%;
     margin-top: 0px;
@@ -53,8 +53,7 @@
     }
 
     &--highlight {
-      width: 250px;
-      font-size: $heading;
+      font-size: 1.8rem;
       font-family: $montserrat;
       color: $textLight;
       margin-top: 35px;
@@ -62,57 +61,89 @@
   }
 
   &__button {
+    z-index: 2;
     position: fixed;
     top: 80vh;
-    width: 10%;
+    min-width: 10vw;
     @include flexCenter;
+  }
+}
+
+@media only screen and (max-width: 1120px) {
+  .landing-page {
+    &__text {
+      font-size: 1rem;
+
+      &--highlight {
+        font-size: 1.5rem;
+      }
+    }
   }
 }
 
 @media only screen and (max-width: 1024px) {
   .landing-page {
-    background-image: url(../../Assets/bulldog.jpg);
+    background-image: url(../../Assets/bicycle.jpg);
 
     &__circle {
+      width: 45vw;
+      height: 45vw;
+      top: 20vh;
+
       &--left {
-        top: 60vh;
-        left: 20vw;
+        left: 7vw;
       }
 
       &--right {
-        top: 60vh;
-        left: 50vw;
+        left: 47vw;
+      }
+    }
+
+    &__text {
+      width: 75%;
+
+      &--highlight {
+        margin-top: 10px;
+        font-size: 1.8rem;
       }
     }
 
     &__button {
-      width: 30%;
-      top: 90vh;
-      left: 38vw;
+      width: 30vw;
+      top: 85vh;
     }
   }
 }
 
 @media only screen and (max-width: 768px) {
   .landing-page {
-    background-image: url(../../Assets/bulldog.jpg);
+    background-image: url(../../Assets/bicycle.jpg);
 
     &__circle {
+      width: 45vw;
+      height: 45vw;
+      top: 30vh;
+
       &--left {
-        top: 50vh;
-        left: 10vw;
+        left: 7vw;
       }
 
       &--right {
-        top: 50vh;
-        left: 48vw;
+        left: 47vw;
+      }
+    }
+
+    &__text {
+      font-size: 1rem;
+
+      &--highlight {
+        font-size: 1.2em;
       }
     }
 
     &__button {
-      width: 30%;
-      top: 90vh;
-      left: 35vw;
+      width: 30vw;
+      top: 80vh;
     }
   }
 }

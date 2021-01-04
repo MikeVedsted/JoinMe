@@ -1,7 +1,8 @@
 @import '../../SCSS/config';
 
 .event {
-  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
 
@@ -86,7 +87,7 @@
   }
 
   &__actions {
-    width: 90%;
+    margin-left: 240px;
     display: flex;
     justify-content: flex-end;
   }
@@ -95,7 +96,7 @@
     border: 0;
     clear: both;
     display: block;
-    width: 96%;
+    width: 100%;
     background-color: $textDim;
     height: 1.5px;
     margin-top: 30px;
@@ -123,30 +124,51 @@
   }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1024px) {
   .event {
+    &__actions {
+      margin-left: 300px;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .event {
+    width: 100vw;
+
     &__data-box {
       flex-direction: column;
     }
 
     &__image {
       border-radius: 0px;
-      width: 100%;
-      height: 220px;
+      width: 100vw;
+      height: 320px;
+      margin-right: 0px;
     }
 
     &__info-box {
       margin-top: 15px;
       padding-left: 15px;
     }
+
     &__info {
       margin-bottom: 10px;
     }
 
     &__actions {
-      width: 100%;
-      justify-content: center;
-      margin-top: 15px;
+      width: 90%;
+      flex-direction: column;
+      align-items: center;
+      margin: 15px;
+    }
+  }
+
+  .title {
+    &__text {
+      &--head {
+        margin-left: 10px;
+      }
     }
   }
 }
