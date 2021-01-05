@@ -10,7 +10,7 @@ import MyEventsPage from './pages/MyEventsPage'
 
 const Routes = () => (
   <Switch>
-    <Route exact path='/' component={HomePage} />
+    <ProtectedRoute exact path='/' component={HomePage} />
     <Route exact path='/user/:userId' component={ProfilePage} />
     <Route exact path='/get-started' component={LandingPage} />
     <ProtectedRoute

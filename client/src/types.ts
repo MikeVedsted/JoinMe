@@ -161,4 +161,3 @@ export type EventSearchProps = {
   distance: string
   setAddress: Dispatch<SetStateAction<{}>>
 }
-
