@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useHistory } from 'react-router-dom'
+import { useCookies } from 'react-cookie'
 
 import Event from '../../components/Event'
 import EventSearch from '../../components/EventSearch'
@@ -11,8 +13,14 @@ import './Homepage.scss'
 const Homepage = () => {
   const [events] = useEventDisplay()
   const [address, setAddress] = useState({})
-
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const history = useHistory()
+  const [cookies] = useCookies(['user'])
+  const { user_id } = cookies.user || ''
+
+  useEffect(() => {
+    !user_id && history.push('/get-started')
+  })
 
   const handleAddRequest = () => {
     console.log('requested!!')

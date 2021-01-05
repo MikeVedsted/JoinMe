@@ -17,8 +17,9 @@ const LandingPage = () => {
   const { user_id } = cookies.user || ''
 
   useEffect(() => {
+    user_id && history.push('/')
     userCount()
-  }, [])
+  }, [history, user_id])
 
   const userCount = async () => {
     try {
@@ -34,8 +35,7 @@ const LandingPage = () => {
   }
 
   const handleGetStartedButton = () => {
-    console.log('hi')
-    user_id ? history.push('/home') : setIsModalOpen(true)
+    user_id ? history.push('/') : setIsModalOpen(true)
   }
 
   return (
