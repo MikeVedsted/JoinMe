@@ -5,7 +5,6 @@ import { UserType } from '../types'
 
 const useUserDisplay = () => {
   const [users, setUsers] = useState<UserType[]>([])
-  const [error, setError] = useState('')
 
   useEffect(() => {
     fetchUsers()

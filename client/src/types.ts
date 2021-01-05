@@ -162,3 +162,7 @@ export type EventSearchProps = {
   setAddress: Dispatch<SetStateAction<{}>>
 }
 
+export type EventParticipantProps = {
+  user: UserType
+  handleDelete: () => void
+}
