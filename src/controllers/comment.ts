@@ -25,3 +25,13 @@ export const findCommentsByEventId = async (req: Request, res: Response, next: N
     next(new NotFoundError('No comments found', error))
   }
 }
+
+export const updateComment = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { commentId } = req.params
+    const update = req.body
+    return res.json(await CommentService.updateComment(commentId, update))
+  } catch (error) {
+    next(new NotFoundError('Comment not found', error))
+  }
+}
