@@ -99,6 +99,7 @@ export type EventType = {
   max_participants: number
   description: string
   handleAddRequest: () => void
+  event_id: EventId
 }
 
 export type ModalProps = {
@@ -131,11 +132,11 @@ export type NavDropdownFunctionProps = {
 export type NavDropdownProps = {
   display: boolean
   setDropdownHidden: (option: boolean) => void
-  userId: string
+  userId: UserId
 }
 
 export type AccountFormProps = {
-  userId: string
+  userId: UserId
 }
 
 export type InputTextAreaProps = {
@@ -164,3 +165,12 @@ export type CommentProps = {
   text: string
   date: string
 }
+
+export type CommentSectionProps = {
+  eventId: EventId
+}
+
+export type UserId = string
+export type EventId = string
+
+export type Comment = any

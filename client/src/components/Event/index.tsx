@@ -8,8 +8,10 @@ import useUserDisplay from '../../hooks/useUserDisplay'
 import { calculateEventAge } from '../../util/helperFunctions'
 import { EventType, UserType } from '../../types'
 import './Event.scss'
+import EventCommentSection from '../EventCommentSection'
 
 const Event = ({
+  event_id,
   created_by,
   created_at,
   image,
@@ -105,7 +107,7 @@ const Event = ({
         }
       >
         <p className='event__d-text'>{description}</p>
-        <div className='event__comments'>comments comes here</div>
+        <EventCommentSection eventId={event_id} />
         <FormInputFiled
           type='text'
           id='comment'
