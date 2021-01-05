@@ -12,7 +12,8 @@ import {
   faListUl,
   faUser,
   faSignOutAlt,
-  faFilter
+  faFilter,
+  faTrash
 } from '@fortawesome/free-solid-svg-icons'
 
 import Navbar from './components/Navbar'
@@ -32,7 +33,8 @@ library.add(
   faListUl,
   faUser,
   faSignOutAlt,
-  faFilter
+  faFilter,
+  faTrash
 )
 
 const App = () => {

@@ -1,0 +1,34 @@
+@import '../../SCSS/config';
+
+.participant {
+  width: 30%;
+  margin: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__image {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+
+  &__link {
+    text-decoration: none;
+  }
+
+  &__name {
+    width: 220px;
+    text-align: left;
+    color: $link;
+    font-family: $nunito;
+    font-size: $text;
+    font-weight: bold;
+  }
+
+  &__delete {
+    color: $primary;
+    cursor: pointer;
+  }
+}
