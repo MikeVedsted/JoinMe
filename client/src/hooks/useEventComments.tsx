@@ -5,7 +5,6 @@ import { EventId, Comment } from '../types'
 
 const useEventComments = (eventId: EventId) => {
   const [comments, setComments] = useState<Comment[]>([])
-  const [error, setError] = useState()
 
   useEffect(() => {
     fetchComments()
@@ -13,17 +12,14 @@ const useEventComments = (eventId: EventId) => {
 
   const fetchComments = async () => {
     try {
-      const response = await axios({
-        method: 'GET',
-        url: `/api/v1/comments/${eventId}`
-      })
+      const response = await axios.get(`/api/v1/comments/${eventId}`)
       const data = response.data
       setComments(data)
     } catch (error) {
-      setError(error)
+      console.log(error)
     }
   }
-  return [comments, error]
+  return [comments]
 }
 
 export default useEventComments

@@ -34,7 +34,7 @@ export type AppState = {
 export type ButtonComponent = {
   type: 'button' | 'submit' | 'reset'
   text: string
-  modifier?: 'primary' | 'secondary' | 'large-active' | 'large'
+  modifier?: 'primary' | 'secondary' | 'large-active' | 'large' | 'inline'
   onClick?: (() => void) | ((id: any) => void)
   id?: string
 }
@@ -167,6 +167,10 @@ export type CommentProps = {
 }
 
 export type CommentSectionProps = {
+  eventId: EventId
+}
+
+export type EventCommentInputProps = {
   eventId: EventId
 }
 

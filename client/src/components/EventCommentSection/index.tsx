@@ -1,13 +1,16 @@
 import React from 'react'
 
 import EventComment from '../EventComment'
+import EventCommentInput from '../EventCommentInput'
 import useEventComments from '../../hooks/useEventComments'
 import { CommentSectionProps } from '../../types'
 
 const EventCommentSection = ({ eventId }: CommentSectionProps) => {
-  const [comments, error] = useEventComments(eventId)
+  const [comments] = useEventComments(eventId)
+
   return (
-    <>
+    <div className='comment-section'>
+      <h3 className='comment-section__title'>Comments</h3>
       {comments &&
         comments.map((comment) => (
           <EventComment
@@ -18,7 +21,8 @@ const EventCommentSection = ({ eventId }: CommentSectionProps) => {
             date={comment.commented_at}
           />
         ))}
-    </>
+      <EventCommentInput eventId={eventId} />
+    </div>
   )
 }
 

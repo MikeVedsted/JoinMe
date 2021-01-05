@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Button from '../Button'
-import FormInputFiled from '../FormInputField'
 import useUserDisplay from '../../hooks/useUserDisplay'
 import { calculateEventAge } from '../../util/helperFunctions'
 import { EventType, UserType } from '../../types'
@@ -108,12 +107,6 @@ const Event = ({
       >
         <p className='event__d-text'>{description}</p>
         <EventCommentSection eventId={event_id} />
-        <FormInputFiled
-          type='text'
-          id='comment'
-          label=''
-          placeholder='Write a comment or ask a question to the creator'
-        />
       </div>
       <div className='event__actions'>
         <Button
