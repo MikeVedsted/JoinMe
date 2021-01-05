@@ -1,7 +1,7 @@
 @import '../../SCSS/config';
 
 .participant {
-  width: 100%;
+  width: 30%;
   margin: 10px 15px;
   display: flex;
   justify-content: space-between;
@@ -9,6 +9,7 @@
 
   &__image {
     width: 30px;
+    height: 30px;
     object-fit: cover;
     border-radius: 4px;
   }
@@ -18,7 +19,7 @@
   }
 
   &__name {
-    width: 200px;
+    width: 220px;
     text-align: left;
     color: $link;
     font-family: $nunito;
