@@ -2,11 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { EventParticipantProps, UserType } from '../../types'
+import { EventParticipantProps } from '../../types'
 import './EventParticipant.scss'
 
 const EventParticipant = ({ user, handleDelete }: EventParticipantProps) => {
-  const { profile_image, user_id, first_name, last_name } = user && user
+  const { profile_image, user_id, first_name, last_name } = user
+
   return (
     <div className='participant'>
       <img

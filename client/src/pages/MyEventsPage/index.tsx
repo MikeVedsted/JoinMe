@@ -16,7 +16,7 @@ const MyEventsPage = () => {
     if (pathname.includes('/created'))
       return (
         <EventParticipant
-          user={participant}
+          user={participant && participant}
           handleDelete={() => console.log('ddddd')}
         />
       )

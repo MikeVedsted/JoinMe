@@ -1,0 +1,29 @@
+@import '../../SCSS/config';
+
+.not-found {
+  @include flexCenter;
+  flex-direction: column;
+
+  &__message {
+    text-align: center;
+    font-family: $montserrat;
+    color: $secondary;
+    margin: 10px 0px 40px;
+  }
+
+  &__image {
+    width: 350px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .not-found {
+    &__message {
+      font-size: $sub-head;
+    }
+
+    &__image {
+      width: 200px;
+    }
+  }
+}
