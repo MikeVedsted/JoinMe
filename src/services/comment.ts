@@ -1,6 +1,18 @@
 import { Comment } from '../types'
 import db from '../db'
 
+const createComment = async (newComment: Partial<Comment>) => {
+  const { comment, userk, event } = newComment
+  try {
+    const query = 'INSERT INTO comment (comment, userk, event) VALUES ($1, $2, $3) RETURNING *'
+    const DBResponse = await db.query(query, [comment, userk, event])
+    const newComment: Comment = DBResponse.rows[0]
+    return newComment
+  } catch (error) {
+    return error
+  }
+}
+
 const findCommentsByEventId = async (eventId: string) => {
   try {
     const query = `
@@ -19,5 +31,6 @@ const findCommentsByEventId = async (eventId: string) => {
 }
 
 export default {
+  createComment,
   findCommentsByEventId
 }
