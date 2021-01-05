@@ -1,5 +1,4 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
-import { Dispatch, SetStateAction } from 'react'
 
 export const FETCH_ALL_EVENTS = 'FETCH_ALL_EVENTS'
 export const GET_ERRORS = 'GET_ERRORS'
@@ -133,6 +132,10 @@ export type NavDropdownProps = {
   display: boolean
   setDropdownHidden: (option: boolean) => void
   userId: UserId
+}
+
+export type ProfilePageParamProps = {
+  userId: string
 }
 
 export type AccountFormProps = {
