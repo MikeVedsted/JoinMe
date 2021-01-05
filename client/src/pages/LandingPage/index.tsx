@@ -17,6 +17,7 @@ const LandingPage = () => {
   const { user_id } = cookies.user || ''
 
   useEffect(() => {
+    user_id && setIsModalOpen(false)
     user_id && history.push('/')
     userCount()
   }, [history, user_id])
