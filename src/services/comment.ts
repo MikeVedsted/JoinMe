@@ -51,8 +51,25 @@ const updateComment = async (commentId: string, update: Partial<Comment>) => {
   }
 }
 
+const deleteComment = async (commentId: string) => {
+  try {
+    const DBResponse = await db.query('SELECT * FROM comment WHERE comment_id = $1', [commentId])
+    const commentToDelete = DBResponse.rows[0]
+
+    if (!commentToDelete) {
+      throw { error: 'Comment not found' }
+    } else {
+      await db.query('DELETE FROM comment WHERE comment_id = $1', [commentId])
+      return { message: 'Comment successfully deleted' }
+    }
+  } catch (error) {
+    return error
+  }
+}
+
 export default {
   createComment,
   findCommentsByEventId,
-  updateComment
+  updateComment,
+  deleteComment
 }

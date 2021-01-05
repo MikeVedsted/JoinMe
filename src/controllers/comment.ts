@@ -35,3 +35,12 @@ export const updateComment = async (req: Request, res: Response, next: NextFunct
     next(new NotFoundError('Comment not found', error))
   }
 }
+
+export const deleteComment = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { commentId } = req.params
+    res.json(await CommentService.deleteComment(commentId))
+  } catch (error) {
+    next(new NotFoundError('Comment not found', error))
+  }
+}
