@@ -1,9 +1,8 @@
 @import '../../SCSS/config';
 
-.notfound {
-  display: flex;
+.not-found {
+  @include flexCenter;
   flex-direction: column;
-  align-items: center;
 
   &__message {
     text-align: center;
@@ -18,7 +17,7 @@
 }
 
 @media only screen and (max-width: 600px) {
-  .notfound {
+  .not-found {
     &__message {
       font-size: $sub-head;
     }

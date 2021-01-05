@@ -162,6 +162,6 @@ export type EventSearchProps = {
   setAddress: Dispatch<SetStateAction<{}>>
 }
 
-export type NotfoundProps = {
+export type NotFoundProps = {
   message: string
 }
