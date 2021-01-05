@@ -1,5 +1,4 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
-import { Dispatch, SetStateAction } from 'react'
 
 export const FETCH_ALL_EVENTS = 'FETCH_ALL_EVENTS'
 export const GET_ERRORS = 'GET_ERRORS'
@@ -162,3 +161,9 @@ export type EventSearchProps = {
   setAddress: Dispatch<SetStateAction<{}>>
 }
 
+export type CommentProps = {
+  image: string
+  user: string
+  text: string
+  date: string
+}

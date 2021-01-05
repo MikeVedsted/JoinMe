@@ -1,0 +1,39 @@
+@import '../../SCSS/config';
+
+.comment {
+  width: 100%;
+  background-color: $backgroundDim;
+  margin: 10px 0;
+  display: flex;
+  border-radius: 8px;
+
+  &__image {
+    max-height: 40px;
+    margin: 15px;
+    border-radius: 8px;
+  }
+
+  &__text {
+    color: $textDark;
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+
+    &--user {
+      font: $nunito;
+      font-size: $sub-head;
+      margin: 0;
+    }
+
+    &--date {
+      color: $textDim;
+      font-size: $subtitle;
+    }
+
+    &--comment {
+      font: $montserrat;
+      font-size: $text;
+      margin: 0;
+    }
+  }
+}
