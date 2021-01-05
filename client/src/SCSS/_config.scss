@@ -8,6 +8,7 @@ $default: #401e02;
 $textDark: #2a2a2a;
 $textLight: #f2f2f2;
 $textDim: #666666;
+$lineDim: #606060;
 
 //Fonts
 $montserrat: 'Montserrat', sans-serif;
@@ -25,4 +26,9 @@ $subtitle: 13px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@mixin flexStart {
+  display: flex;
+  justify-content: flex-start;
 }

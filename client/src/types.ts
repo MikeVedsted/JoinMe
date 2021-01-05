@@ -134,6 +134,10 @@ export type NavDropdownProps = {
   userId: string
 }
 
+export type ProfilePageParamProps = {
+  userId: string
+}
+
 export type AccountFormProps = {
   userId: string
 }
