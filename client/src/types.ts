@@ -172,3 +172,8 @@ export type CommentProps = {
 export type NotFoundProps = {
   message: string
 }
+
+export type EventParticipantProps = {
+  user: UserType
+  handleDelete: () => void
+}
