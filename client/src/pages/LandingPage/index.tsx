@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
+import { useCookies } from 'react-cookie'
 import axios from 'axios'
 
 import Modal from '../../components/Modal'
@@ -9,11 +11,15 @@ import './LandingPage.scss'
 
 const LandingPage = () => {
   const [users, setUsers] = useState('')
+  const history = useHistory()
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [cookies] = useCookies(['user'])
+  const { user_id } = cookies.user || ''
 
   useEffect(() => {
+    user_id && history.push('/')
     userCount()
-  }, [])
+  }, [history, user_id])
 
   const userCount = async () => {
     try {
@@ -26,6 +32,10 @@ const LandingPage = () => {
     } catch (error) {
       setUsers('Many')
     }
+  }
+
+  const handleGetStartedButton = () => {
+    user_id ? history.push('/') : setIsModalOpen(true)
   }
 
   return (
@@ -58,7 +68,7 @@ const LandingPage = () => {
             type='button'
             text='Get started!'
             modifier='secondary'
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => handleGetStartedButton()}
           />
         </div>
         <div className='landing-page__circle landing-page__circle--right'>
