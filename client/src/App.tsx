@@ -11,7 +11,8 @@ import {
   faMapMarkerAlt,
   faListUl,
   faUser,
-  faSignOutAlt
+  faSignOutAlt,
+  faFilter
 } from '@fortawesome/free-solid-svg-icons'
 
 import Navbar from './components/Navbar'
@@ -30,7 +31,8 @@ library.add(
   faMapMarkerAlt,
   faListUl,
   faUser,
-  faSignOutAlt
+  faSignOutAlt,
+  faFilter
 )
 
 const App = () => {
