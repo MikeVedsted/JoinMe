@@ -161,3 +161,14 @@ export type EventSearchProps = {
   distance: string
   setAddress: Dispatch<SetStateAction<{}>>
 }
+
+export type CommentProps = {
+  image: string
+  user: string
+  text: string
+  date: string
+}
+
+export type NotFoundProps = {
+  message: string
+}
