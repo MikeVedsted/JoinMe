@@ -169,7 +169,7 @@ export type CommentProps = {
   date: string
 }
 
-export type EventManageDropdownProps = {
+export type EventManageDropDownProps = {
   showParticipants: () => void
   endEvent: () => void
   editEvent: () => void
