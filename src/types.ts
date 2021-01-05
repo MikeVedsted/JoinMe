@@ -61,3 +61,11 @@ export type Address = {
   lat: number
   lng: number
 }
+
+export type Comment = {
+  comment_id: string
+  comment: string
+  userk: string
+  event: string
+  commented_at: Date
+}
