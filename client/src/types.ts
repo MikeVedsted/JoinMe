@@ -1,4 +1,5 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
+import { Dispatch, SetStateAction } from 'react'
 
 export const FETCH_ALL_EVENTS = 'FETCH_ALL_EVENTS'
 export const GET_ERRORS = 'GET_ERRORS'
@@ -33,7 +34,7 @@ export type AppState = {
 export type ButtonComponent = {
   type: 'button' | 'submit' | 'reset'
   text: string
-  modifier?: 'primary' | 'secondary' | 'large-active' | 'large'
+  modifier?: 'primary' | 'secondary' | 'large-active' | 'large' | 'inline'
   onClick?: (() => void) | ((id: any) => void)
   id?: string
 }
@@ -98,6 +99,7 @@ export type EventType = {
   max_participants: number
   description: string
   handleAddRequest: () => void
+  event_id: EventId
 }
 
 export type ModalProps = {
@@ -130,7 +132,7 @@ export type NavDropdownFunctionProps = {
 export type NavDropdownProps = {
   display: boolean
   setDropdownHidden: (option: boolean) => void
-  userId: string
+  userId: UserId
 }
 
 export type ProfilePageParamProps = {
@@ -138,7 +140,7 @@ export type ProfilePageParamProps = {
 }
 
 export type AccountFormProps = {
-  userId: string
+  userId: UserId
 }
 
 export type InputTextAreaProps = {
@@ -167,3 +169,16 @@ export type CommentProps = {
   text: string
   date: string
 }
+
+export type CommentSectionProps = {
+  eventId: EventId
+}
+
+export type EventCommentInputProps = {
+  eventId: EventId
+}
+
+export type UserId = string
+export type EventId = string
+
+export type Comment = any
