@@ -48,3 +48,11 @@ export const deleteUser = async (req: Request, res: Response, next: NextFunction
     next(new NotFoundError('User not found', error))
   }
 }
+
+export const getUserCount = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    return res.json(await UserService.getUserCount())
+  } catch (error) {
+    next(new NotFoundError('No users found', error))
+  }
+}
