@@ -5,7 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { CookiesProvider } from 'react-cookie'
 
 import App from './App'
-import './util/constants/fontawesome'
+import './util/fontawesome'
 import makeStore from './redux/store'
 import './index.scss'
 
