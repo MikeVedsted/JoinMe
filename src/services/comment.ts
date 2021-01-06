@@ -30,7 +30,46 @@ const findCommentsByEventId = async (eventId: string) => {
   }
 }
 
+const updateComment = async (commentId: string, update: Partial<Comment>) => {
+  try {
+    const query = 'SELECT * FROM comment WHERE comment_id = $1'
+    const DBResponse = await db.query(query, [commentId])
+    const existingComment: Comment = DBResponse.rows[0]
+
+    if (!existingComment) {
+      throw { error: 'Comment not found' }
+    }
+
+    const { comment = existingComment.comment } = update
+    const updateQuery = 'UPDATE comment SET comment = $2 WHERE comment_id = $1 RETURNING *'
+    const updatedComments = await db.query(updateQuery, [commentId, comment])
+    const updatedComment: Comment = updatedComments.rows[0]
+
+    return updatedComment
+  } catch (error) {
+    return error
+  }
+}
+
+const deleteComment = async (commentId: string) => {
+  try {
+    const DBResponse = await db.query('SELECT * FROM comment WHERE comment_id = $1', [commentId])
+    const commentToDelete = DBResponse.rows[0]
+
+    if (!commentToDelete) {
+      throw { error: 'Comment not found' }
+    } else {
+      await db.query('DELETE FROM comment WHERE comment_id = $1', [commentId])
+      return { message: 'Comment successfully deleted' }
+    }
+  } catch (error) {
+    return error
+  }
+}
+
 export default {
   createComment,
-  findCommentsByEventId
+  findCommentsByEventId,
+  updateComment,
+  deleteComment
 }

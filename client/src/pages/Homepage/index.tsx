@@ -11,7 +11,6 @@ import './Homepage.scss'
 const Homepage = () => {
   const [events] = useEventDisplay()
   const [address, setAddress] = useState({})
-
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleAddRequest = () => {
@@ -72,6 +71,7 @@ const Homepage = () => {
               max_participants={event.max_participants}
               description={event.description}
               handleAddRequest={handleAddRequest}
+              event_id={event.event_id}
             />
           ))}
         </div>
