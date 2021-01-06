@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
-import axios from 'axios'
 
 import Modal from '../../components/Modal'
 import GoogleUserLogin from '../../components/GoogleUserLogin'
@@ -10,7 +9,6 @@ import { eventCategories } from '../../util/constants/eventCategories'
 import './LandingPage.scss'
 
 const LandingPage = () => {
-  const [users, setUsers] = useState('')
   const history = useHistory()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [cookies] = useCookies(['user'])
@@ -19,21 +17,7 @@ const LandingPage = () => {
   useEffect(() => {
     user_id && setIsModalOpen(false)
     user_id && history.push('/')
-    userCount()
   }, [history, user_id])
-
-  const userCount = async () => {
-    try {
-      const response = await axios({
-        method: 'GET',
-        url: '/api/v1/users'
-      })
-      const data = response.data.length
-      setUsers(data)
-    } catch (error) {
-      setUsers('Many')
-    }
-  }
 
   const handleGetStartedButton = () => {
     user_id ? history.push('/') : setIsModalOpen(true)
@@ -74,7 +58,7 @@ const LandingPage = () => {
         </div>
         <div className='landing-page__circle landing-page__circle--right'>
           <p className='landing-page__text landing-page__text--highlight'>
-            {`${users} people already found event partners`}
+            Many people already found event partners
           </p>
           <p className='landing-page__text'>
             ..and hundreds more are waiting for you to create events and play
