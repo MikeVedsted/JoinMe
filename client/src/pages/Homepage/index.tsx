@@ -11,7 +11,6 @@ import './Homepage.scss'
 const Homepage = () => {
   const [events] = useEventDisplay()
   const [address, setAddress] = useState({})
-
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleAddRequest = () => {

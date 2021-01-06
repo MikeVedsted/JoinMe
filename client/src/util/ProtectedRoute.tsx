@@ -16,7 +16,7 @@ const ProtectedRoute = ({
         cookies.user ? (
           <Component {...props} />
         ) : (
-          <Redirect to={{ pathname: '/' }} />
+          <Redirect to={{ pathname: '/get-started' }} />
         )
       }
     />
