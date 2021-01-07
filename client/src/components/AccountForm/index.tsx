@@ -23,25 +23,9 @@ type UserInfoType = {
 
 const AccountForm = ({ userId }: AccountFormProps) => {
   const [loading, setLoading] = useState(true)
-  const [userInfo, setUserInfo] = useState<UserInfoType>()
-  const [address, setAddress] = useState({})
-  const getUserInfo = async () => {
-    try {
-      setLoading(true)
-      const { data } = await axios.get(`/api/v1/users/${userId}`)
-      console.log(data)
-      setUserInfo(data)
-      setLoading(false)
-    } catch (error) {
-      console.log(error)
-    }
-    console.log(userInfo)
-  }
-
-  console.log('hi')
-  const [fields, handleFieldChange] = useFormFields({
+  const [userInfo, setUserInfo] = useState<UserInfoType>({
     email: '',
-    first_name: userInfo?.first_name,
+    first_name: '',
     last_name: 'Yo',
     date_of_birth: '',
     gender: '',
@@ -49,11 +33,35 @@ const AccountForm = ({ userId }: AccountFormProps) => {
     profile_text: '',
     profile_image: ''
   })
+  const [address, setAddress] = useState({})
+  // const getUserInfo = async () => {
+  //   try {
+  //     setLoading(true)
+  //     const { data } = await axios.get(`/api/v1/users/${userId}`)
+  //     setUserInfo(data)
+  //     setLoading(false)
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
+
   useEffect(() => {
+    async function getUserInfo() {
+      try {
+        const { data } = await axios.get(`/api/v1/users/${userId}`)
+        setUserInfo(data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
     getUserInfo()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-  //console.log(userInfo?.email)
+  }, [userId])
+  console.log(userInfo)
+  const [fields, handleFieldChange] = useFormFields(userInfo)
+  // useEffect(() => {
+  //   getUserInfo()
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [])
 
   const handleSubmit = async (event: any) => {
     event.preventDefault()
@@ -61,7 +69,7 @@ const AccountForm = ({ userId }: AccountFormProps) => {
       const update = { ...fields, address }
       const res = await axios({
         method: 'PUT',
-        url: `api/v1/users/${userId}`,
+        url: `/api/v1/users/${userId}`,
         data: update
       })
       alert(
@@ -72,7 +80,7 @@ const AccountForm = ({ userId }: AccountFormProps) => {
     }
   }
   //console.log(fields)
-  if (loading) return <div>Loading</div>
+  //if (loading) return <div>Loading</div>
   return (
     <form className='form' onSubmit={handleSubmit}>
       <h2 className='form__title'>Edit</h2>
