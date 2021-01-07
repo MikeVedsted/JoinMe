@@ -139,6 +139,7 @@ const getUserCount = async () => {
     return error
   }
 }
+
 export default {
   findUserById,
   findAllUsers,
