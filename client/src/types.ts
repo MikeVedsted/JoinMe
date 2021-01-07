@@ -191,3 +191,9 @@ export type EventParticipantProps = {
   user: UserType
   handleDelete: () => void
 }
+
+export type EventManageDropDownProps = {
+  showParticipants: () => void
+  endEvent: () => void
+  editEvent: () => void
+}
