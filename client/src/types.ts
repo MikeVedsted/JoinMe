@@ -192,6 +192,12 @@ export type EventParticipantProps = {
   handleDelete: () => void
 }
 
+export type EventJoinRequestProps = {
+  user: UserType
+  handleReject: () => void
+  handleApprove: () => void
+}
+
 export type EventManageDropDownProps = {
   showParticipants: () => void
   endEvent: () => void
