@@ -11,14 +11,18 @@ import MyEventsPage from './pages/MyEventsPage'
 const Routes = () => (
   <Switch>
     <ProtectedRoute exact path='/' component={HomePage} />
-    <Route exact path='/user/:userId' component={ProfilePage} />
-    <Route exact path='/get-started' component={LandingPage} />
+    <ProtectedRoute exact path='/user/:userId' component={ProfilePage} />
     <ProtectedRoute
       path='/user/:userId/:contentName'
       component={MyEventsPage}
     />
-    <Route exact path='/user/:userId/account-setup' component={AccountSetup} />
-    <Route path='/user/:userId/:contentName' component={MyEventsPage} />
+    <ProtectedRoute
+      exact
+      path='/user/:userId/account-setup'
+      component={AccountSetup}
+    />
+    <Route exact path='/get-started' component={LandingPage} />
+    <Route path='/' component={LandingPage} />
   </Switch>
 )
 
