@@ -4,6 +4,8 @@ import { useCookies } from 'react-cookie'
 import { useHistory, useParams } from 'react-router-dom'
 
 import Button from '../../components/Button'
+import EventList from '../../components/EventList'
+import useHostedEvents from '../../hooks/useHostedEvents'
 import { ProfilePageParamProps } from '../../types'
 import './ProfilePage.scss'
 
@@ -11,6 +13,7 @@ const ProfilePage = () => {
   const history = useHistory()
   const [cookies] = useCookies(['user'])
   const { userId } = useParams<ProfilePageParamProps>()
+  const [hostedEvents] = useHostedEvents(userId)
   const [userInfo, setUserInfo] = useState({
     profile_image: '',
     first_name: '',
@@ -105,6 +108,10 @@ const ProfilePage = () => {
             )}
           </div>
         )}
+        <EventList
+          events={hostedEvents}
+          title={`Events hosted by ${userInfo.first_name}`}
+        />
       </div>
     </div>
   )
