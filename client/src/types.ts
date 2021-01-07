@@ -34,7 +34,7 @@ export type AppState = {
 export type ButtonComponent = {
   type: 'button' | 'submit' | 'reset'
   text: string
-  modifier?: 'primary' | 'secondary' | 'large-active' | 'large'
+  modifier?: 'primary' | 'secondary' | 'large-active' | 'large' | 'inline'
   onClick?: (() => void) | ((id: any) => void)
   id?: string
 }
@@ -99,6 +99,7 @@ export type EventType = {
   max_participants: number
   description: string
   handleAddRequest: () => void
+  event_id: EventId
 }
 
 export type ModalProps = {
@@ -131,7 +132,7 @@ export type NavDropdownFunctionProps = {
 export type NavDropdownProps = {
   display: boolean
   setDropdownHidden: (option: boolean) => void
-  userId: string
+  userId: UserId
 }
 
 export type ProfilePageParamProps = {
@@ -139,7 +140,7 @@ export type ProfilePageParamProps = {
 }
 
 export type AccountFormProps = {
-  userId: string
+  userId: UserId
 }
 
 export type InputTextAreaProps = {
@@ -167,6 +168,28 @@ export type CommentProps = {
   user: string
   text: string
   date: string
+}
+
+export type CommentSectionProps = {
+  eventId: EventId
+}
+
+export type EventCommentInputProps = {
+  eventId: EventId
+}
+
+export type UserId = string
+export type EventId = string
+
+export type Comment = any
+
+export type NotFoundProps = {
+  message: string
+}
+
+export type EventParticipantProps = {
+  user: UserType
+  handleDelete: () => void
 }
 
 export type EventManageDropDownProps = {
