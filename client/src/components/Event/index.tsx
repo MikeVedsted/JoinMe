@@ -29,7 +29,6 @@ const Event = ({
   const [showManageOptions, setShowManageOptions] = useState(false)
   const [users] = useUserDisplay()
   const [cookies, setCookies] = useCookies(['user'])
-
   const { user_id } = cookies.user || ''
 
   const formattedTime = time.slice(0, 5)
@@ -50,8 +49,6 @@ const Event = ({
   const editEvent = () => {
     setShowManageOptions(false)
   }
-
-  console.log('user_id', user_id, 'creator_id', eventCreator?.user_id)
 
   return (
     <div className='event'>
