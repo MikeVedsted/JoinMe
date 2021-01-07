@@ -20,7 +20,7 @@ const LandingPage = () => {
   }, [history, user_id])
 
   const handleGetStartedButton = () => {
-    user_id ? history.push('/') : setIsModalOpen(true)
+    user_id ? history.push('/') : setIsModalOpen(!isModalOpen)
   }
 
   return (

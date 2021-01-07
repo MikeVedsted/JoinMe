@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import logo from '../../Assets/logoLight.svg'
@@ -8,11 +9,13 @@ const Footer = () => {
   return (
     <div className='footer'>
       <div className='footer__container'>
-        <img
-          className='footer__image footer__image--logo'
-          src={logo}
-          alt='logo'
-        />
+        <Link to='/'>
+          <img
+            className='footer__image footer__image--logo'
+            src={logo}
+            alt='logo'
+          />
+        </Link>
       </div>
       <div className='footer__container'>
         <p className='footer__paragraph'>&#169; copyright JoinMe 2020</p>

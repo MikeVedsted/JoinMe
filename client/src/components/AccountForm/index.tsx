@@ -30,7 +30,7 @@ const AccountForm = ({ userId }: AccountFormProps) => {
       const update = { ...fields, address }
       const res = await axios({
         method: 'PUT',
-        url: `http://localhost:5000/api/v1/users/${userId}`,
+        url: `/api/v1/users/${userId}`,
         data: update
       })
       alert(

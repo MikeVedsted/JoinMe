@@ -52,7 +52,10 @@ const Event = ({
               />
             </div>
             {eventCreator && (
-              <Link className='event__link' to={`/${eventCreator.user_id}`}>
+              <Link
+                className='event__link'
+                to={`/user/${eventCreator.user_id}`}
+              >
                 <p className='event__info-text event__info-text--clickable'>
                   {`${eventCreator.first_name}  ${eventCreator.last_name}`}
                 </p>
