@@ -7,8 +7,9 @@ import cors from 'cors'
 import cookieparser from 'cookie-parser'
 
 import { SESSION_SECRET } from './util/secrets'
-import eventRouter from './routers/event'
 import userRouter from './routers/user'
+import eventRouter from './routers/event'
+import commentRouter from './routers/comment'
 
 const app = express()
 
@@ -38,5 +39,6 @@ app.use(lusca.xssProtection(true))
 
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/events', eventRouter)
+app.use('/api/v1/comments', commentRouter)
 
 export default app

@@ -65,25 +65,16 @@
   }
 
   &__details {
-    padding: 10px;
-
     &--hide {
       display: none;
     }
   }
 
   &__d-text {
-    width: 90%;
+    width: 100%;
     font-family: $nunito;
     font-size: $text;
     color: $textDark;
-  }
-
-  &__comments {
-    padding: 10px;
-    width: 90%;
-    background-color: $textLight;
-    margin-bottom: 10px;
   }
 
   &__actions {

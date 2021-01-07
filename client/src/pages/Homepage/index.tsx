@@ -71,6 +71,7 @@ const Homepage = () => {
               max_participants={event.max_participants}
               description={event.description}
               handleAddRequest={handleAddRequest}
+              event_id={event.event_id}
             />
           ))}
         </div>
