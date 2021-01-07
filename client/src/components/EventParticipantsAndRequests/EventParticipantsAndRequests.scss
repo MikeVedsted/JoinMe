@@ -1,0 +1,29 @@
+@import '../../SCSS/config';
+
+.participants {
+  width: 100%;
+
+  &__buttons {
+    display: flex;
+  }
+
+  &__list {
+    margin: 0px 100px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .participants {
+    &__buttons {
+      flex-direction: column;
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .participants {
+    &__list {
+      margin: 0px;
+    }
+  }
+}

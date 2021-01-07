@@ -1,17 +1,25 @@
 @import '../../SCSS/config';
 
 .participant {
-  width: 30%;
+  width: 100%;
   margin: 10px 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  &__user-info {
+    width: 260px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
 
   &__image {
     width: 30px;
     height: 30px;
     object-fit: cover;
     border-radius: 4px;
+    margin-right: 10px;
   }
 
   &__link {
@@ -19,7 +27,6 @@
   }
 
   &__name {
-    width: 220px;
     text-align: left;
     color: $link;
     font-family: $nunito;

@@ -10,14 +10,16 @@ const EventParticipant = ({ user, handleDelete }: EventParticipantProps) => {
 
   return (
     <div className='participant'>
-      <img
-        className='participant__image'
-        src={profile_image}
-        alt={first_name}
-      />
-      <Link className='participant__link' to={`/${user_id}`}>
-        <p className='participant__name'>{`${first_name} ${last_name}`}</p>
-      </Link>
+      <div className='participant__user-info'>
+        <img
+          className='participant__image'
+          src={profile_image}
+          alt={first_name}
+        />
+        <Link className='participant__link' to={`/${user_id}`}>
+          <p className='participant__name'>{`${first_name} ${last_name}`}</p>
+        </Link>
+      </div>
       <FontAwesomeIcon
         onClick={handleDelete}
         className='participant__delete'

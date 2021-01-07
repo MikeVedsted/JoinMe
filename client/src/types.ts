@@ -34,7 +34,13 @@ export type AppState = {
 export type ButtonComponent = {
   type: 'button' | 'submit' | 'reset'
   text: string
-  modifier?: 'primary' | 'secondary' | 'large-active' | 'large' | 'inline'
+  modifier?:
+    | 'primary'
+    | 'secondary'
+    | 'large-active'
+    | 'large'
+    | 'inline'
+    | 'disabled'
   onClick?: (() => void) | ((id: any) => void)
   id?: string
 }
