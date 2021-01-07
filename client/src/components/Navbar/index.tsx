@@ -26,7 +26,7 @@ const Navbar = () => {
 
   return (
     <nav className={navBg ? 'nav' : 'nav nav--active'}>
-      <Link to='/home'>
+      <Link to='/'>
         <img
           className='nav__image nav__image--logo'
           src={window.innerWidth > 1024 ? logoDark : logoLight}

@@ -182,3 +182,12 @@ export type UserId = string
 export type EventId = string
 
 export type Comment = any
+
+export type NotFoundProps = {
+  message: string
+}
+
+export type EventParticipantProps = {
+  user: UserType
+  handleDelete: () => void
+}
