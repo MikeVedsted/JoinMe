@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
 import Button from '../Button'
@@ -10,19 +10,50 @@ import { useFormFields } from '../../hooks/useFormFields'
 import { genderOptions } from '../../util/constants/genderOptions'
 import { AccountFormProps } from '../../types'
 import './AccountForm.scss'
+type UserInfoType = {
+  email: string
+  first_name: string
+  last_name: string
+  date_of_birth: any
+  gender: string
+  base_address: string
+  profile_text: string
+  profile_image: string
+}
 
 const AccountForm = ({ userId }: AccountFormProps) => {
+  const [loading, setLoading] = useState(true)
+  const [userInfo, setUserInfo] = useState<UserInfoType>()
   const [address, setAddress] = useState({})
+  const getUserInfo = async () => {
+    try {
+      setLoading(true)
+      const { data } = await axios.get(`/api/v1/users/${userId}`)
+      console.log(data)
+      setUserInfo(data)
+      setLoading(false)
+    } catch (error) {
+      console.log(error)
+    }
+    console.log(userInfo)
+  }
+
+  console.log('hi')
   const [fields, handleFieldChange] = useFormFields({
     email: '',
-    first_name: '',
-    last_name: '',
+    first_name: userInfo?.first_name,
+    last_name: 'Yo',
     date_of_birth: '',
     gender: '',
     base_address: '',
     profile_text: '',
     profile_image: ''
   })
+  useEffect(() => {
+    getUserInfo()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+  //console.log(userInfo?.email)
 
   const handleSubmit = async (event: any) => {
     event.preventDefault()
@@ -30,7 +61,7 @@ const AccountForm = ({ userId }: AccountFormProps) => {
       const update = { ...fields, address }
       const res = await axios({
         method: 'PUT',
-        url: `http://localhost:5000/api/v1/users/${userId}`,
+        url: `api/v1/users/${userId}`,
         data: update
       })
       alert(
@@ -40,10 +71,11 @@ const AccountForm = ({ userId }: AccountFormProps) => {
       console.log(error)
     }
   }
-
+  //console.log(fields)
+  if (loading) return <div>Loading</div>
   return (
     <form className='form' onSubmit={handleSubmit}>
-      <h2 className='form__title'>Profile set-up</h2>
+      <h2 className='form__title'>Edit</h2>
       <FormInputField
         type='email'
         id='email'

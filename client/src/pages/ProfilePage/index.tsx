@@ -40,7 +40,7 @@ const ProfilePage = () => {
   }, [userId])
 
   const handleEditClick = () => {
-    history.push(`/users/${userId}/account-setup`)
+    history.push(`/users/${userId}/edit`)
   }
 
   return (

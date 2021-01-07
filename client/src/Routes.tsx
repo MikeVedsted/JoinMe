@@ -7,6 +7,7 @@ import ProfilePage from './pages/ProfilePage'
 import HomePage from './pages/Homepage'
 import AccountSetup from './pages/AccountSetup'
 import MyEventsPage from './pages/MyEventsPage'
+import ProfileEdit from './pages/ProfileEdit'
 
 const Routes = () => (
   <Switch>
@@ -22,6 +23,7 @@ const Routes = () => (
       path='/users/:userId/account-setup'
       component={AccountSetup}
     />
+    <ProtectedRoute exact path='/users/:userId/edit' component={ProfileEdit} />
     <Route path='/user/:userId/:contentName' component={MyEventsPage} />
   </Switch>
 )

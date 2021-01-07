@@ -1,0 +1,28 @@
+@import '../../SCSS/config';
+
+.page {
+  min-height: 100vh;
+  padding-top: 100px;
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    color: $primary;
+    text-align: center;
+  }
+}
+
+.image-upload {
+  display: flex;
+  justify-content: space-between;
+
+  &__field {
+    display: block;
+  }
+
+  &__image {
+    width: 150px;
+    margin-left: 10px;
+    border-radius: 16px;
+  }
+}
