@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { EventListProps } from '../../types'
 import Event from '../../components/Event'
+import { EventListProps } from '../../types'
 import './EventList.scss'
 
 const EventList = ({ events, title }: EventListProps) => {
