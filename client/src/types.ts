@@ -1,5 +1,4 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
-import { Dispatch, SetStateAction } from 'react'
 
 export const FETCH_ALL_EVENTS = 'FETCH_ALL_EVENTS'
 export const GET_ERRORS = 'GET_ERRORS'
@@ -160,7 +159,7 @@ export type EventSearchProps = {
   handleSubmit: () => void
   handleFieldChange: () => void
   distance: string
-  setAddress: Dispatch<SetStateAction<{}>>
+  setAddress: (a: any) => void
 }
 
 export type CommentProps = {
@@ -196,4 +195,13 @@ export type EventManageDropDownProps = {
   showParticipants: () => void
   endEvent: () => void
   editEvent: () => void
+}
+
+export type EventsHostedProps = {
+  events: any[]
+}
+
+export type EventListProps = {
+  events: EventType[]
+  title?: string
 }

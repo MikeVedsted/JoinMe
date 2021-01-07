@@ -15,7 +15,7 @@
   &__content {
     @include flexCenter;
     width: 80vw;
-    margin-left: 3vw;
+    margin-left: 20vw;
     height: fit-content;
   }
 }
@@ -31,6 +31,7 @@
 
     &__content {
       width: 100%;
+      margin-left: 0;
     }
   }
 }

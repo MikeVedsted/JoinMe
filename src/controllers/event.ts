@@ -20,6 +20,14 @@ export const findEventById = async (req: Request, res: Response, next: NextFunct
     next(new NotFoundError('No event found', error))
   }
 }
+export const findEventsByCreator = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { userId } = req.params
+    res.json(await EventService.findEventsByCreator(userId))
+  } catch (error) {
+    next(new NotFoundError('No events found', error))
+  }
+}
 
 export const findEventByCategory = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -49,6 +57,7 @@ export const createEvent = async (req: AuthRequest, res: Response, next: NextFun
     const max_participants = parseInt(maxParticipants)
     // TO DO
     // Add user as created_by, once middleware is applied.
+    console.log(req.user)
 
     const event: Event = {
       title,
