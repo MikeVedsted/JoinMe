@@ -64,7 +64,7 @@ const Homepage = () => {
               created_by={event.created_by}
               image={
                 event.image ||
-                'https://res.cloudinary.com/dahevvjff/image/upload/v1608637375/ughqusxea2vuexzlwmqt.png'
+                'https://www.ikea.com/us/en/images/products/klappa-soft-toy-ball-multicolor__0873092_PE682669_S5.JPG?f=s'
               }
               title={event.title}
               date={event.date}
