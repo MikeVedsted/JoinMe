@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Button from '../Button'
 import EventCommentSection from '../EventCommentSection'
 import EventManageDropDown from '../../components/EventManageDropDown'
-import useUserDisplay from '../../hooks/useUserDisplay'
 import { calculateEventAge } from '../../util/helperFunctions'
 import { EventType, UserType } from '../../types'
 import './Event.scss'
@@ -31,7 +30,6 @@ const Event = ({
 }: EventType) => {
   const [details, setDetails] = useState(false)
   const [showManageOptions, setShowManageOptions] = useState(false)
-  const [users] = useUserDisplay()
   const [cookies] = useCookies(['user'])
   const { user_id } = cookies.user || ''
 

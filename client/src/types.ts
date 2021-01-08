@@ -98,9 +98,9 @@ export type EventType = {
   description: string
   handleAddRequest: () => void
   event_id: EventId
-  creatorName: string
-  first_name: string
-  last_name: string
+  creatorName: string | undefined
+  first_name?: string
+  last_name?: string
   street: string
   number: string
   postal_code: string
