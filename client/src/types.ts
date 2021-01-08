@@ -210,8 +210,3 @@ export type EventListProps = {
 export type EventsHostedProps = {
   events: any[]
 }
-
-export type EventListProps = {
-  events: EventType[]
-  title?: string
-}

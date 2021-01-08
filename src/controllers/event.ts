@@ -20,6 +20,7 @@ export const findEventById = async (req: Request, res: Response, next: NextFunct
     next(new NotFoundError('No event found', error))
   }
 }
+
 export const findEventsByCreator = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { userId } = req.params
