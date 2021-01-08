@@ -13,13 +13,13 @@ const Routes = () => (
     <ProtectedRoute exact path='/' component={HomePage} />
     <ProtectedRoute exact path='/user/:userId' component={ProfilePage} />
     <ProtectedRoute
-      path='/user/:userId/:contentName'
-      component={MyEventsPage}
-    />
-    <ProtectedRoute
       exact
       path='/user/:userId/account-setup'
       component={AccountSetup}
+    />
+    <ProtectedRoute
+      path='/user/:userId/:contentName'
+      component={MyEventsPage}
     />
     <Route exact path='/get-started' component={LandingPage} />
     <Route path='/' component={LandingPage} />
