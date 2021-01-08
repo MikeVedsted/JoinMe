@@ -201,3 +201,8 @@ export type EventManageDropDownProps = {
   editEvent: () => void
   modifier: string
 }
+
+export type EventListProps = {
+  events: EventType[]
+  title?: string
+}
