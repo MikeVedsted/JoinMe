@@ -130,10 +130,21 @@ const deleteUser = async (userId: string) => {
   }
 }
 
+const getUserCount = async () => {
+  try {
+    const DBResponse = await db.query('SELECT * FROM userk')
+    const count: number = DBResponse.rows.length
+    return count
+  } catch (error) {
+    return error
+  }
+}
+
 export default {
   findUserById,
   findAllUsers,
   updateUser,
   googleLogin,
-  deleteUser
+  deleteUser,
+  getUserCount
 }

@@ -6,10 +6,11 @@ import './EventManageDropDown.scss'
 const EventManageDropDown = ({
   showParticipants,
   endEvent,
-  editEvent
+  editEvent,
+  modifier
 }: EventManageDropDownProps) => {
   return (
-    <div className='drop-down'>
+    <div className={`drop-down drop-down--${modifier}`}>
       <p onClick={showParticipants} className='drop-down__item'>
         Participants
       </p>

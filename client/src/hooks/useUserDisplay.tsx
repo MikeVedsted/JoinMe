@@ -12,10 +12,7 @@ const useUserDisplay = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios({
-        method: 'GET',
-        url: '/api/v1/users'
-      })
+      const response = await axios.get('/api/v1/users')
       const data = response.data
       setUsers(data)
     } catch (error) {
