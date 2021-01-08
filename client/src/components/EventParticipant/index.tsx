@@ -15,7 +15,7 @@ const EventParticipant = ({ user, handleDelete }: EventParticipantProps) => {
         src={profile_image}
         alt={first_name}
       />
-      <Link className='participant__link' to={`/${user_id}`}>
+      <Link className='participant__link' to={`/user/${user_id}`}>
         <p className='participant__name'>{`${first_name} ${last_name}`}</p>
       </Link>
       <FontAwesomeIcon

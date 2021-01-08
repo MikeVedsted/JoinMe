@@ -12,10 +12,7 @@ const useEventDisplay = () => {
 
   const fetchEvents = async () => {
     try {
-      const response = await axios({
-        method: 'GET',
-        url: '/api/v1/events'
-      })
+      const response = await axios.get('/api/v1/events')
       const data = response.data
       setEvents(data)
     } catch (error) {
