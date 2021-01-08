@@ -15,7 +15,7 @@ const router = express.Router()
 
 router.get('/', findAllUsers)
 router.get('/count', getUserCount)
-router.get('/interested', getInterestedEvents)
+router.get('/interested', isAuthenticated, getInterestedEvents)
 router.get('/:userId', findUserById)
 router.post('/google-authenticate', googleLogin)
 router.put('/:userId', isAuthenticated, updateUser)
