@@ -208,6 +208,11 @@ export type EventManageDropDownProps = {
   modifier: string
 }
 
+export type EventListProps = {
+  events: EventType[]
+  title?: string
+}
+
 export type EventParticipantsAndRequestsProps = {
   participants: UserType[]
   joinRequests: UserType[]
