@@ -57,7 +57,6 @@ export const createEvent = async (req: AuthRequest, res: Response, next: NextFun
     const max_participants = parseInt(maxParticipants)
     // TO DO
     // Add user as created_by, once middleware is applied.
-    console.log(req.user)
 
     const event: Event = {
       title,
