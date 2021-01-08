@@ -93,12 +93,18 @@ export type EventType = {
   title: string
   date: string
   time: string
-  address: string
   participants: number
   max_participants: number
   description: string
   handleAddRequest: () => void
   event_id: EventId
+  creatorName: string
+  first_name: string
+  last_name: string
+  street: string
+  number: string
+  postal_code: string
+  city: string
 }
 
 export type ModalProps = {
