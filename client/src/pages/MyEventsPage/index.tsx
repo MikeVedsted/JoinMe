@@ -14,7 +14,7 @@ const MyEventsPage = () => {
   const addContent = () => {
     if (pathname.includes('/created')) return <p>My events here</p>
     if (pathname.includes('/interested')) return <p>Requested events here</p>
-    if (pathname.includes('/'))
+    if (pathname.includes('/confirmed'))
       return (
         <EventList
           events={participatingEvents}
