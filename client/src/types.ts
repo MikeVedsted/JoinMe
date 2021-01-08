@@ -194,8 +194,6 @@ export type EventParticipantProps = {
 
 export type EventJoinRequestProps = {
   user: UserType
-  handleReject: () => void
-  handleApprove: () => void
 }
 
 export type EventManageDropDownProps = {
