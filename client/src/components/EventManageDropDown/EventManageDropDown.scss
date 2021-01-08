@@ -6,8 +6,16 @@
   box-shadow: 0px 0px 2px $textDark;
   border-radius: 4px;
   position: absolute;
-  top: 150px;
-  left: 85vw;
+  top: 40px;
+  right: 0vw;
+
+  &--show {
+    display: block;
+  }
+
+  &--hide {
+    display: none;
+  }
 
   &__item {
     text-align: left;
@@ -23,22 +31,5 @@
 
   &__item:hover {
     background-color: $secondary;
-  }
-}
-
-@media only screen and (max-width: 1024px) {
-  .drop-down {
-    left: 83vw;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .drop-down {
-    left: 80vw;
-  }
-}
-@media only screen and (max-width: 600px) {
-  .drop-down {
-    left: 63vw;
   }
 }

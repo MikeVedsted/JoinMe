@@ -200,4 +200,5 @@ export type EventManageDropDownProps = {
   showParticipants: () => void
   endEvent: () => void
   editEvent: () => void
+  modifier: string
 }

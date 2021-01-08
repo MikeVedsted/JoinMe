@@ -13,6 +13,7 @@ import {
   faSignOutAlt,
   faFilter,
   faTrash,
+  faEllipsisV,
   faUserCheck
 } from '@fortawesome/free-solid-svg-icons'
 
@@ -30,5 +31,6 @@ library.add(
   faSignOutAlt,
   faFilter,
   faTrash,
+  faEllipsisV,
   faUserCheck
 )
