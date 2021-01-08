@@ -2,11 +2,15 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { EventParticipantProps } from '../../types'
-import './EventParticipant.scss'
+import { EventJoinRequestProps } from '../../types'
+import './EventJoinRequest.scss'
 
-const EventParticipant = ({ user, handleDelete }: EventParticipantProps) => {
+const EventJoinRequest = ({ user }: EventJoinRequestProps) => {
   const { profile_image, user_id, first_name, last_name } = user
+
+  const handleReject = () => {}
+
+  const handleApprove = () => {}
 
   return (
     <div className='participant'>
@@ -21,7 +25,12 @@ const EventParticipant = ({ user, handleDelete }: EventParticipantProps) => {
         </Link>
       </div>
       <FontAwesomeIcon
-        onClick={handleDelete}
+        onClick={handleApprove}
+        className='participant__approve'
+        icon={'user-check'}
+      />
+      <FontAwesomeIcon
+        onClick={handleReject}
         className='participant__delete'
         icon={'trash'}
       />
@@ -29,4 +38,4 @@ const EventParticipant = ({ user, handleDelete }: EventParticipantProps) => {
   )
 }
 
-export default EventParticipant
+export default EventJoinRequest

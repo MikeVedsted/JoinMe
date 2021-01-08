@@ -19,7 +19,6 @@
     height: 30px;
     object-fit: cover;
     border-radius: 4px;
-    margin-right: 10px;
   }
 
   &__link {
@@ -39,6 +38,11 @@
     color: $primary;
     cursor: pointer;
     margin-left: 10px;
+  }
+
+  &__approve {
+    color: #259242;
+    cursor: pointer;
   }
 }
 

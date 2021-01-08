@@ -5,11 +5,13 @@ import MyEventsSidebar from '../../components/MyEventsSidebar'
 import Modal from '../../components/Modal'
 import EventParticipantsAndRequests from '../../components/EventParticipantsAndRequests'
 import EventForm from '../../components/EventForm'
+import useUserDisplay from '../../hooks/useUserDisplay'
 import './MyEventsPage.scss'
 
 const MyEventsPage = () => {
   const { pathname } = useLocation()
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [users] = useUserDisplay()
 
   const addContent = () => {
     if (pathname.includes('/created'))
@@ -31,7 +33,12 @@ const MyEventsPage = () => {
           {isModalOpen && (
             <Modal
               closeModal={() => setIsModalOpen(false)}
-              content={<EventParticipantsAndRequests />}
+              content={
+                <EventParticipantsAndRequests
+                  participants={users}
+                  joinRequests={users}
+                />
+              }
             />
           )}
         </div>
