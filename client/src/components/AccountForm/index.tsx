@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import axios from 'axios'
 
 import Button from '../Button'
@@ -10,7 +11,6 @@ import { useFormFields } from '../../hooks/useFormFields'
 import { genderOptions } from '../../util/constants/genderOptions'
 import { AccountFormProps, AppState } from '../../types'
 import './AccountForm.scss'
-import { useSelector } from 'react-redux'
 
 const AccountForm = ({ userId }: AccountFormProps) => {
   const user = useSelector((state: AppState) => state.user.user)
