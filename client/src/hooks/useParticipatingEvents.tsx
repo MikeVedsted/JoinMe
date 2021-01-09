@@ -10,8 +10,7 @@ const useParticipatingEvents = () => {
 
   const fetchParticipatingEvents = async () => {
     try {
-      const response = await axios.get(`/api/v1/users/participant`)
-      const data = response.data
+      const { data } = await axios.get(`/api/v1/users/participant`)
       setParticipatingEvents(data)
     } catch (error) {
       console.log(error)
