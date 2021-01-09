@@ -1,0 +1,29 @@
+@import '../../SCSS/config';
+
+.data-box {
+  display: inline-block;
+  color: $textDark;
+  font-family: $nunito;
+  font-size: $text;
+
+  &__icon {
+    color: $secondary;
+    margin-right: 15px;
+    font-size: $text;
+  }
+
+  &__link {
+    text-decoration: none;
+    
+    &:hover {
+      color: $secondary;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .data-box {
+    margin: 0 5% 15px;
+    width: 90%;
+  }
+}

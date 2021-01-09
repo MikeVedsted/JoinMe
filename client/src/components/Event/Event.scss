@@ -1,93 +1,27 @@
 @import '../../SCSS/config';
 
 .event {
-  max-width: 100%;
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   position: relative;
 
-  &__data-box {
-    display: flex;
-  }
-
-  &__image {
-    width: 230px;
-    height: 194px;
-    object-fit: cover;
-    border-radius: 6px;
-    margin-right: 25px;
-  }
-
   &__manage {
     color: $textDark;
     cursor: pointer;
-    margin-right: 10px;
-  }
+    position: absolute;
+    top: 30px;
+    right: 0;
+  }  
 
-  &__info-box {
-    display: flex;
-    flex-direction: column;
-  }
-
-  &__info {
-    display: flex;
-    align-items: center;
-    margin-bottom: 16px;
-  }
-
-  &__icon-wrapper {
-    width: 30px;
-    @include flexCenter;
-  }
-
-  &__info-text {
-    font-size: $text;
-    margin: 0px;
-    font-family: $nunito;
-    color: $textDark;
-
-    &--icon {
-      color: $secondary;
-      margin-right: 15px;
-      font-size: $text;
-    }
-
-    &--total {
-      color: $textDim;
-    }
-
-    &--clickable {
-      cursor: pointer;
-      text-decoration: none;
-    }
-
-    &--clickable:hover {
-      color: rgb(0, 60, 255);
-    }
-  }
-
-  &__link {
-    text-decoration: none;
-  }
-
-  &__details {
-    &--hide {
-      display: none;
-    }
-  }
-
-  &__d-text {
+  &__description {
     width: 100%;
     font-family: $nunito;
     font-size: $text;
     color: $textDark;
   }
 
-  &__actions {
-    margin-left: 240px;
+  &__buttons {
     display: flex;
-    justify-content: flex-end;
   }
 
   &__line {
@@ -101,36 +35,13 @@
   }
 }
 
-.title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  &__wrapper {
-    display: flex;
-  }
-
-  &__text {
-    margin: 5px 0px 10px 0px;
-    &--head {
-      font-family: $montserrat;
-      font-size: $sub-head;
-      color: $textDark;
-    }
-
-    &--time {
-      font-family: $nunito;
-      font-size: $text;
-      color: $textDim;
-      margin-left: 10px;
-    }
-  }
-}
-
 @media only screen and (max-width: 1024px) {
   .event {
-    &__actions {
-      margin-left: 300px;
+    &__buttons {
+      display: inline;
+      & * {
+        margin-top: 5px;
+      }
     }
   }
 }
@@ -138,39 +49,12 @@
 @media only screen and (max-width: 768px) {
   .event {
     width: 100vw;
-
-    &__data-box {
-      flex-direction: column;
-    }
-
-    &__image {
-      border-radius: 0px;
-      width: 100vw;
-      height: 320px;
-      margin-right: 0px;
-    }
-
-    &__info-box {
-      margin-top: 15px;
-      padding-left: 15px;
-    }
-
-    &__info {
-      margin-bottom: 10px;
-    }
-
-    &__actions {
-      width: 90%;
-      flex-direction: column;
-      align-items: center;
-      margin: 15px;
-    }
-  }
-
-  .title {
-    &__text {
-      &--head {
-        margin-left: 10px;
+    
+    &__buttons {
+      padding: 0 2%;
+      display: inline;
+      & * {
+        margin-top: 5px;
       }
     }
   }

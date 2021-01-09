@@ -10,19 +10,11 @@ const EventList = ({ events, title }: EventListProps) => {
       {title && <h2 className='event-list__title'>{title}</h2>}
       {events.map((event: any) => (
         <Event
-          key={event.event_id}
-          created_by={event.created_by}
-          created_at={event.created_at}
-          image={event.image}
-          title={event.title}
-          date={event.date}
-          time={event.time}
-          address={event.address}
+          key={event.created_at}
+          event={event}
+          creatorName={`${event.first_name} ${event.last_name}`}
           participants={event.participants}
-          max_participants={event.max_participants}
-          description={event.description}
           handleAddRequest={event.handleAddRequest}
-          event_id={event.event_id}
         />
       ))}
     </div>

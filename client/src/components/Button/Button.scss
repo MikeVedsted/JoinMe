@@ -7,7 +7,7 @@
   border-radius: 4px;
   background-color: $default;
   padding: 5px 10px;
-  margin: 10px 10px;
+  // margin: 10px 10px;
   font-size: $text;
   color: $textLight;
   cursor: pointer;
@@ -52,6 +52,7 @@
   }
 
   &--inline {
+    background-color: $primary;
     width: auto;
     margin: 1em 0 20px 0;
     padding: 0 10px;

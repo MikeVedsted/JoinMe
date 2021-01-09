@@ -1,0 +1,21 @@
+@import '../../SCSS/config';
+
+.title {
+  font-family: $montserrat;
+  font-size: $sub-head;
+  color: $textDark;
+
+  &__time {
+    font-family: $nunito;
+    font-size: $text;
+    color: $textDim;
+    margin-left: 10px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .title {
+    margin: 0 2% 10px;
+    width: 96%;
+  }
+}
