@@ -6,14 +6,16 @@ import NotFound from '../../components/NotFound'
 import EventList from '../../components/EventList'
 import EventForm from '../../components/EventForm'
 import MyEventsSidebar from '../../components/MyEventsSidebar'
+import useParticipatingEvents from '../../hooks/useParticipatingEvents'
 import useHostedEvents from '../../hooks/useHostedEvents'
 import './MyEventsPage.scss'
 
 const MyEventsPage = () => {
   const { pathname } = useLocation()
+  const [participatingEvents] = useParticipatingEvents()
+  const [hostedEvents] = useHostedEvents(user_id)
   const [cookies] = useCookies(['user'])
   const { user_id } = cookies.user
-  const [hostedEvents] = useHostedEvents(user_id)
 
   const addContent = () => {
     if (pathname.includes('/hosted'))
@@ -21,7 +23,13 @@ const MyEventsPage = () => {
         <EventList events={hostedEvents} title={'Events you are hosting'} />
       )
     if (pathname.includes('/interested')) return <p>Requested events here</p>
-    if (pathname.includes('/confirmed')) return <p>Confirmed events here</p>
+    if (pathname.includes('/confirmed'))
+      return (
+        <EventList
+          events={participatingEvents}
+          title={'Events you are registered for'}
+        />
+      )
     if (pathname.includes('/create-new')) return <EventForm />
     return (
       <NotFound message='Nothing to display here. Select an option from the menu.' />
