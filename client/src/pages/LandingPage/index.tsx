@@ -43,13 +43,13 @@ const LandingPage = () => {
         <Modal
           closeModal={() => setIsModalOpen(false)}
           content={
-            <>
+            <div className='landing-page__modal-content'>
               <h3>Log in!</h3>
               <p className='landing-page__text landing-page__text--login-text'>
                 Hi! Login with Google to proceed!
               </p>
               <GoogleUserLogin />
-            </>
+            </div>
           }
         />
       )}

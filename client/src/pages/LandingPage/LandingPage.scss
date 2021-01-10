@@ -11,6 +11,11 @@
   background-size: cover;
   @include flexCenter;
 
+  &__modal-content {
+    @include flexCenter;
+    flex-direction: column;
+  }
+
   &__circles {
     width: 100vw;
     @include flexCenter;
