@@ -32,7 +32,7 @@ const NavDropdown = ({
         <NavDropdownLink
           text='My events'
           icon={faListUl}
-          destination={`/user/${userId}/created`}
+          destination={`/user/${userId}/hosted`}
         />
         <hr className='nav-dropdown__separator' />
         <NavDropdownLink

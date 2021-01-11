@@ -11,19 +11,7 @@ const EventList = ({ events, title }: EventListProps) => {
       {events.map((event: any) => (
         <Event
           key={event.created_at}
-          event_id={event.event_id}
-          title={event.title}
-          date={event.date}
-          time={event.time}
-          description={event.description}
-          max_participants={event.max_participants}
-          created_by={event.created_by}
-          created_at={event.created_at}
-          image={event.image}
-          street={event.street}
-          number={event.number}
-          postal_code={event.postal_code}
-          city={event.city}
+          event={event}
           creatorName={`${event.first_name} ${event.last_name}`}
           participants={event.participants}
           handleAddRequest={event.handleAddRequest}
