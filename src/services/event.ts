@@ -55,7 +55,20 @@ const createEvent = async (event: Event) => {
 
 const findAllEvents = async () => {
   try {
-    const DBResponse = await db.query('SELECT * FROM event')
+    const query = `
+      SELECT 
+  	    event_id, title, date, time, description, max_participants, created_by, event.created_at, expires_at, image,
+ 	      street, number, postal_code, city, country, lat, lng,
+	      name as category, 
+	      first_name,  last_name
+      FROM
+        event
+      LEFT JOIN address on event.address = address.address_id
+      LEFT JOIN category on event.category = category.category_id
+      LEFT JOIN userk on event.created_by = userk.user_id
+      LEFT JOIN event_participant on event.event_id = event_participant.event
+    `
+    const DBResponse = await db.query(query)
     const events: Event[] = DBResponse.rows
     return events
   } catch (error) {
