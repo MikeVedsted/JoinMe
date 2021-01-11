@@ -13,12 +13,12 @@ import './MyEventsPage.scss'
 
 const MyEventsPage = () => {
   const { pathname } = useLocation()
+  const [cookies] = useCookies(['user'])
+  const { user_id } = cookies.user
   const [interestedEvents] = useInterestedEvents()
   const [participatingEvents] = useParticipatingEvents()
   const [hostedEvents] = useHostedEvents(user_id)
-  const [cookies] = useCookies(['user'])
-  const { user_id } = cookies.user
-  
+
   const addContent = () => {
     if (pathname.includes('/hosted'))
       return (

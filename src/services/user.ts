@@ -140,7 +140,6 @@ const getUserCount = async () => {
   }
 }
 
-
 const getInterestedEvents = async (user_id: string) => {
   try {
     const query = `
@@ -173,7 +172,6 @@ const findParticipatingEvents = async (user_id: string) => {
   }
 }
 
-
 export default {
   findUserById,
   findAllUsers,
@@ -181,6 +179,6 @@ export default {
   googleLogin,
   deleteUser,
   getUserCount,
-  getInterestedEvents
+  getInterestedEvents,
   findParticipatingEvents
 }

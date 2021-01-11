@@ -57,12 +57,7 @@ export const getUserCount = async (req: Request, res: Response, next: NextFuncti
   }
 }
 
-
 export const getInterestedEvents = async (req: AuthRequest, res: Response, next: NextFunction) => {
-  req: AuthRequest,
-  res: Response,
-  next: NextFunction
-) => {
   try {
     if (!req.user) {
       throw Error
