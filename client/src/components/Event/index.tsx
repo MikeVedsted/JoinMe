@@ -44,16 +44,15 @@ const Event = ({ event, creatorName, participants }: EventProps) => {
   const editEvent = () => {
     setShowManageOptions(false)
   }
+
   const handleJoinRequest = async () => {
-    console.log('clicked')
     try {
-      const a = await axios.post(`/api/v1/events/${event_id}/join`)
-      alert(a.data.message)
+      const res = await axios.post(`/api/v1/events/${event_id}/join`)
+      const { message } = res.data
+      alert(message)
     } catch (error) {
-      alert('Sorry, something went wrong. Please try again.')
-      console.log(error)
+      alert(`Sorry, something went wrong. Please try again.\n\n${error}`)
     }
-    // }
   }
 
   return (
