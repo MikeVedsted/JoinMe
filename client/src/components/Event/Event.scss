@@ -39,6 +39,7 @@
   .event {
     &__buttons {
       display: inline;
+     
       & * {
         margin-top: 5px;
       }
@@ -53,6 +54,7 @@
     &__buttons {
       padding: 0 2%;
       display: inline;
+     
       & * {
         margin-top: 5px;
       }
