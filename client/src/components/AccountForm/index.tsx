@@ -30,7 +30,9 @@ const AccountForm = ({ userId }: AccountFormProps) => {
     event.preventDefault()
     try {
       const update = { ...fields, address }
+      console.log('yo')
       const res = await axios.put(`/api/v1/users/${userId}`, update)
+      console.log(res.data)
       alert(
         'Thank you!\nThe changes have been saved and you can now safely leave this page, or make further changes if you spotted a mistake.'
       )
