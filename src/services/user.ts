@@ -143,10 +143,17 @@ const getUserCount = async () => {
 const getInterestedEvents = async (user_id: string) => {
   try {
     const query = `
-      SELECT *
+      SELECT 
+        event_id, title, date, time, description, max_participants, created_by, event.created_at, expires_at, image,
+        street, number, postal_code, city, country, lat, lng,
+        name as category,
+        first_name, last_name  
       FROM event
-      LEFT JOIN event_request on event.event_id = event_request.event
-      WHERE event_request.requester = $1
+      INNER JOIN event_request ON event.event_id = event_request.event
+      INNER JOIN address ON address.address_id = event.address
+      INNER JOIN category ON category.category_id = event.category
+      INNER JOIN userk ON event_request.requester = userk.user_id
+      WHERE event_request.requester = $1;
     `
     const DBResponse = await db.query(query, [user_id])
     const events: Event[] = DBResponse.rows
