@@ -14,6 +14,7 @@
 
   &__window {
     width: 35%;
+    overflow-y: scroll;
     max-height: 70vh;
     border-radius: 8px;
     padding: 40px;
@@ -50,7 +51,8 @@
 @media only screen and (max-width: 600px) {
   .modal {
     &__window {
-      width: 70%;
+      width: 90%;
+      padding: 10px;
     }
   }
 }
