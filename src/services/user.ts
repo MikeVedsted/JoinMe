@@ -130,10 +130,38 @@ const deleteUser = async (userId: string) => {
   }
 }
 
+const getUserCount = async () => {
+  try {
+    const DBResponse = await db.query('SELECT * FROM userk')
+    const count: number = DBResponse.rows.length
+    return count
+  } catch (error) {
+    return error
+  }
+}
+
+const findParticipatingEvents = async (user_id: string) => {
+  try {
+    const query = `
+      SELECT *
+      FROM event
+      LEFT JOIN event_participant on event.event_id = event_participant.event
+      WHERE event_participant.participant = $1
+      `
+    const DBResponse = await db.query(query, [user_id])
+    const events: Event[] = DBResponse.rows
+    return events
+  } catch (error) {
+    return error
+  }
+}
+
 export default {
   findUserById,
   findAllUsers,
   updateUser,
   googleLogin,
-  deleteUser
+  deleteUser,
+  getUserCount,
+  findParticipatingEvents
 }

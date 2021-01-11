@@ -1,29 +1,39 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
+import { useCookies } from 'react-cookie'
 
-import MyEventsSidebar from '../../components/MyEventsSidebar'
-import EventParticipant from '../../components/EventParticipant'
-import useUserDisplay from '../../hooks/useUserDisplay'
+import NotFound from '../../components/NotFound'
+import EventList from '../../components/EventList'
 import EventForm from '../../components/EventForm'
+import MyEventsSidebar from '../../components/MyEventsSidebar'
+import useParticipatingEvents from '../../hooks/useParticipatingEvents'
+import useHostedEvents from '../../hooks/useHostedEvents'
 import './MyEventsPage.scss'
 
 const MyEventsPage = () => {
+  const [cookies] = useCookies(['user'])
+  const { user_id } = cookies.user
   const { pathname } = useLocation()
-  const [users] = useUserDisplay()
-  const participant = users && users[5]
+  const [participatingEvents] = useParticipatingEvents()
+  const [hostedEvents] = useHostedEvents(user_id)
 
   const addContent = () => {
-    if (pathname.includes('/created'))
+    if (pathname.includes('/hosted'))
       return (
-        <EventParticipant
-          user={participant && participant}
-          handleDelete={() => console.log('ddddd')}
-        />
+        <EventList events={hostedEvents} title={'Events you are hosting'} />
       )
     if (pathname.includes('/interested')) return <p>Requested events here</p>
-    if (pathname.includes('/confirmed')) return <p>Confirmed events here</p>
+    if (pathname.includes('/confirmed'))
+      return (
+        <EventList
+          events={participatingEvents}
+          title={'Events you are registered for'}
+        />
+      )
     if (pathname.includes('/create-new')) return <EventForm />
-    return null
+    return (
+      <NotFound message='Nothing to display here. Select an option from the menu.' />
+    )
   }
 
   return (

@@ -11,7 +11,7 @@ const Modal = ({ closeModal, content: Content }: ModalProps) => {
         <button className='modal__close-button' onClick={closeModal}>
           <FontAwesomeIcon icon='times' />
         </button>
-        {Content}
+        <div className='modal__content'>{Content}</div>
       </div>
     </div>
   )

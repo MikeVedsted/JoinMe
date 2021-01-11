@@ -5,6 +5,7 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  position: relative;
 
   &__data-box {
     display: flex;
@@ -16,6 +17,12 @@
     object-fit: cover;
     border-radius: 6px;
     margin-right: 25px;
+  }
+
+  &__manage {
+    color: $textDark;
+    cursor: pointer;
+    margin-right: 10px;
   }
 
   &__info-box {
@@ -65,25 +72,16 @@
   }
 
   &__details {
-    padding: 10px;
-
     &--hide {
       display: none;
     }
   }
 
   &__d-text {
-    width: 90%;
+    width: 100%;
     font-family: $nunito;
     font-size: $text;
     color: $textDark;
-  }
-
-  &__comments {
-    padding: 10px;
-    width: 90%;
-    background-color: $textLight;
-    margin-bottom: 10px;
   }
 
   &__actions {
@@ -105,7 +103,12 @@
 
 .title {
   display: flex;
+  justify-content: space-between;
   align-items: center;
+
+  &__wrapper {
+    display: flex;
+  }
 
   &__text {
     margin: 5px 0px 10px 0px;
