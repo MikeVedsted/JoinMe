@@ -166,11 +166,18 @@ const getInterestedEvents = async (user_id: string) => {
 const findParticipatingEvents = async (user_id: string) => {
   try {
     const query = `
-      SELECT *
+      SELECT 
+        event_id, title, date, time, description, max_participants, created_by, event.created_at, expires_at, image,
+        street, number, postal_code, city, country, lat, lng,
+        name as category,
+        first_name, last_name  
       FROM event
-      LEFT JOIN event_participant on event.event_id = event_participant.event
-      WHERE event_participant.participant = $1
-      `
+      INNER JOIN event_participant ON event.event_id = event_participant.event
+      INNER JOIN address ON address.address_id = event.address
+      INNER JOIN category ON category.category_id = event.category
+      INNER JOIN userk ON event_participant.participant = userk.user_id
+      WHERE event_participant.participant = $1;
+    `
     const DBResponse = await db.query(query, [user_id])
     const events: Event[] = DBResponse.rows
     return events
