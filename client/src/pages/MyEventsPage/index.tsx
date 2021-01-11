@@ -11,11 +11,11 @@ import useHostedEvents from '../../hooks/useHostedEvents'
 import './MyEventsPage.scss'
 
 const MyEventsPage = () => {
+  const [cookies] = useCookies(['user'])
+  const { user_id } = cookies.user
   const { pathname } = useLocation()
   const [participatingEvents] = useParticipatingEvents()
   const [hostedEvents] = useHostedEvents(user_id)
-  const [cookies] = useCookies(['user'])
-  const { user_id } = cookies.user
 
   const addContent = () => {
     if (pathname.includes('/hosted'))
