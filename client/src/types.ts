@@ -241,3 +241,7 @@ export type EventListProps = {
   events: EventType[]
   title?: string
 }
+
+export type EventsHostedProps = {
+  events: any[]
+}

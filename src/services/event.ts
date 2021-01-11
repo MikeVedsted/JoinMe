@@ -74,6 +74,17 @@ const findEventById = async (eventId: string) => {
   }
 }
 
+const findEventsByCreator = async (userId: string) => {
+  try {
+    const DBResponse = await db.query('SELECT * FROM event WHERE created_by = $1', [userId])
+    const events: Event[] = DBResponse.rows
+
+    return events
+  } catch (error) {
+    return error
+  }
+}
+
 const findEventByCategory = async (categoryId: number) => {
   try {
     const DBResponse = await db.query('SELECT * FROM event WHERE category = $1', [categoryId])
@@ -128,6 +139,7 @@ const deleteEvent = async (eventId: string) => {
 export default {
   createEvent,
   findEventById,
+  findEventsByCreator,
   findAllEvents,
   findEventByCategory,
   updateEvent,

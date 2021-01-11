@@ -16,9 +16,9 @@ const MyEventsSidebar = () => {
     <div className='side-bar'>
       <Button
         type='button'
-        text='My events'
-        id='created'
-        modifier={pathname.includes('/created') ? 'large-active' : 'large'}
+        text='Hosted events'
+        id='hosted'
+        modifier={pathname.includes('/hosted') ? 'large-active' : 'large'}
         onClick={(e) => handleClick(e.target.id)}
       />
       <Button
