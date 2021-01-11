@@ -5,7 +5,6 @@ import Modal from '../../components/Modal'
 import Event from '../../components/Event'
 import EventSearch from '../../components/EventSearch'
 import useEventDisplay from '../../hooks/useEventDisplay'
-import { EventType } from '../../types'
 import './Homepage.scss'
 
 const Homepage = () => {

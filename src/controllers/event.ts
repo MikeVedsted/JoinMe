@@ -21,6 +21,15 @@ export const findEventById = async (req: Request, res: Response, next: NextFunct
   }
 }
 
+export const findEventsByCreator = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { userId } = req.params
+    res.json(await EventService.findEventsByCreator(userId))
+  } catch (error) {
+    next(new NotFoundError('No events found', error))
+  }
+}
+
 export const findEventByCategory = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const categoryId = parseInt(req.params.categoryId)
