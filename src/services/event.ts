@@ -150,12 +150,12 @@ const deleteEvent = async (eventId: string) => {
 }
 
 const requestToJoin = async (eventId: string, userId: string) => {
-  const checkStatusQuery = 'SELECT * FROM event_request WHERE requester = $2 AND event = $1'
-  const newRequestQuery = 'INSERT INTO event_request (requester, event) VALUES($1, $2) RETURNING *'
+  const checkStatusQuery = 'SELECT * FROM event_request WHERE event = $1 AND requester = $2'
+  const newRequestQuery = 'INSERT INTO event_request (requester, event) VALUES($2, $1) RETURNING *'
 
   const checkIfRequested = await db.query(checkStatusQuery, [eventId, userId])
 
-  if (checkIfRequested) {
+  if (checkIfRequested.rows.length > 0) {
     return { message: 'Already requested' }
   }
 
