@@ -13,10 +13,13 @@ const googleLogin = async (id_token: string, res: Response) => {
     const user: User = DBResponse.rows[0]
 
     if (!user) {
-      const createUser = await db.query(
-        'INSERT INTO userk (profile_image, first_name, last_name, email) VALUES ($1, $2, $3, $4) RETURNING *',
-        [picture, given_name, family_name, email]
-      )
+      const createUserQuery = `
+      INSERT INTO userk 
+        (profile_image, first_name, last_name, email) 
+      VALUES ($1, $2, $3, $4) 
+      RETURNING *
+      `
+      const createUser = await db.query(createUserQuery, [picture, given_name, family_name, email])
       const newUser: User = createUser.rows[0]
       const token = generateToken(newUser.user_id)
       res.cookie('x-auth-token', token)
@@ -34,13 +37,13 @@ const googleLogin = async (id_token: string, res: Response) => {
 const findUserById = async (userId: string) => {
   try {
     const query = `
-    SELECT u.*, a.*, array_agg(c.name) as interests
-    FROM userk u
-    LEFT JOIN user_interest ui ON u.user_id = ui.userk
-    LEFT JOIN category c ON c.category_id = ui.interest
-    LEFT JOIN address a ON u.base_address = a.address_id
-    WHERE u.user_id = $1
-    GROUP BY u.user_id, a.address_id;
+      SELECT u.*, a.*, array_agg(c.name) as interests
+      FROM userk u
+      LEFT JOIN user_interest ui ON u.user_id = ui.userk
+      LEFT JOIN category c ON c.category_id = ui.interest
+      LEFT JOIN address a ON u.base_address = a.address_id
+      WHERE u.user_id = $1
+      GROUP BY u.user_id, a.address_id;
     `
     const DBResponse = await db.query(query, [userId])
     const user: User = DBResponse.rows[0]
@@ -107,10 +110,22 @@ const updateUser = async (userId: string, update: Partial<User>) => {
       addressId = addressResponse.rows[0].address_id
     }
 
-    const updateUser = await db.query(
-      'UPDATE userk SET first_name = $2, last_name = $3, profile_image = $4, profile_text = $5, base_address = $6, date_of_birth = $7, gender = $8 WHERE user_id = $1 RETURNING *',
-      [userId, first_name, last_name, profile_image, profile_text, addressId, date_of_birth, gender]
-    )
+    const updateUserQuery = `
+      UPDATE userk 
+      SET first_name = $2, last_name = $3, profile_image = $4, profile_text = $5, base_address = $6, date_of_birth = $7, gender = $8 
+      WHERE user_id = $1 
+      RETURNING *
+    `
+    const updateUser = await db.query(updateUserQuery, [
+      userId,
+      first_name,
+      last_name,
+      profile_image,
+      profile_text,
+      addressId,
+      date_of_birth,
+      gender
+    ])
     const updatedUser: User = updateUser.rows[0]
     return updatedUser
   } catch (error) {

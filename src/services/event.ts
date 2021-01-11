@@ -25,30 +25,44 @@ const createEvent = async (event: Event) => {
   ])
 
   if (DBResponse.rowCount === 0) {
-    const newAddress = await db.query(
-      'INSERT INTO address (street, number, postal_code, city, country, lat, lng) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING address_id',
-      [street, number, postal_code, city, country, lat, lng]
-    )
+    const newAddressQuery = `
+      INSERT INTO address 
+        (street, number, postal_code, city, country, lat, lng)
+      VALUES ($1, $2, $3, $4, $5, $6, $7) 
+      RETURNING address_id
+    `
+    const newAddress = await db.query(newAddressQuery, [
+      street,
+      number,
+      postal_code,
+      city,
+      country,
+      lat,
+      lng
+    ])
     addressId = newAddress.rows[0].address_id
   } else {
     addressId = DBResponse.rows[0].address_id
   }
 
-  const createEvent = await db.query(
-    'INSERT INTO event (title, category, date, time, description, max_participants, address, expires_at, created_by, image) VALUES ($1, (SELECT category_id FROM category WHERE name = $2), $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *',
-    [
-      title,
-      category,
-      date,
-      time,
-      description,
-      max_participants,
-      addressId,
-      expires_at,
-      created_by,
-      image
-    ]
-  )
+  const createEventQuery = `
+    INSERT INTO event 
+      (title, category, date, time, description, max_participants, address, expires_at, created_by, image) 
+    VALUES ($1, (SELECT category_id FROM category WHERE name = $2), $3, $4, $5, $6, $7, $8, $9, $10) 
+    RETURNING *'
+  `
+  const createEvent = await db.query(createEventQuery, [
+    title,
+    category,
+    date,
+    time,
+    description,
+    max_participants,
+    addressId,
+    expires_at,
+    created_by,
+    image
+  ])
   const newEvent: Event = createEvent.rows[0]
   return newEvent
 }
@@ -61,8 +75,7 @@ const findAllEvents = async () => {
  	      street, number, postal_code, city, country, lat, lng,
 	      name as category, 
 	      first_name, last_name
-      FROM
-        event
+      FROM event
       LEFT JOIN address on event.address = address.address_id
       LEFT JOIN category on event.category = category.category_id
       LEFT JOIN userk on event.created_by = userk.user_id
@@ -137,11 +150,22 @@ const updateEvent = async (eventId: string, update: Partial<Event>) => {
       image = event.image
     } = update
 
-    const updateQuery = await db.query(
-      'UPDATE event SET title = $2, date = $3, time = $4, description = $5, max_participants=$6, expires_at=$7, image=$8 WHERE event_id = $1 RETURNING *',
-      [eventId, title, date, time, description, max_participants, expires_at, image]
-    )
-    const updatedEvent: Event = updateQuery.rows[0]
+    const updateQuery = `
+      UPDATE event 
+      SET title = $2, date = $3, time = $4, description = $5, max_participants = $6, expires_at = $7, image = $8 
+      WHERE event_id = $1 
+      RETURNING *'`
+    const updateEvent = await db.query(updateQuery, [
+      eventId,
+      title,
+      date,
+      time,
+      description,
+      max_participants,
+      expires_at,
+      image
+    ])
+    const updatedEvent: Event = updateEvent.rows[0]
 
     return updatedEvent
   } catch (error) {
