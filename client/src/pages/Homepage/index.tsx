@@ -1,16 +1,15 @@
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+import Modal from '../../components/Modal'
 import Event from '../../components/Event'
 import EventSearch from '../../components/EventSearch'
-import Modal from '../../components/Modal'
 import useEventDisplay from '../../hooks/useEventDisplay'
 import { EventType } from '../../types'
 import './Homepage.scss'
 
 const Homepage = () => {
   const [events] = useEventDisplay()
-  const [address, setAddress] = useState({})
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleAddRequest = () => {
@@ -36,7 +35,7 @@ const Homepage = () => {
           distance='100'
           handleFieldChange={() => console.log('handled')}
           handleSubmit={handleSearch}
-          setAddress={setAddress}
+          setAddress={() => console.log('address handler')}
         />
       </div>
 
@@ -49,7 +48,7 @@ const Homepage = () => {
               distance='30'
               handleFieldChange={() => console.log('handled')}
               handleSubmit={handleSearch}
-              setAddress={setAddress}
+              setAddress={() => console.log('address handler')}
             />
           }
         />
@@ -60,21 +59,22 @@ const Homepage = () => {
           {events.map((event: EventType) => (
             <Event
               key={event.created_at}
-              created_at={event.created_at}
-              created_by={event.created_by}
-              image={
-                event.image ||
-                'https://www.ikea.com/us/en/images/products/klappa-soft-toy-ball-multicolor__0873092_PE682669_S5.JPG?f=s'
-              }
+              event_id={event.event_id}
               title={event.title}
               date={event.date}
               time={event.time}
-              address={'markkinatie 15 00700 Helsinki'}
-              participants={11}
-              max_participants={event.max_participants}
               description={event.description}
+              max_participants={event.max_participants}
+              created_by={event.created_by}
+              created_at={event.created_at}
+              image={event.image}
+              street={event.street}
+              number={event.number}
+              postal_code={event.postal_code}
+              city={event.city}
+              creatorName={`${event.first_name} ${event.last_name}`}
+              participants={event.participants}
               handleAddRequest={handleAddRequest}
-              event_id={event.event_id}
             />
           ))}
         </div>

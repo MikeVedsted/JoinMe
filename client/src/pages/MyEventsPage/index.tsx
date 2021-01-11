@@ -7,13 +7,15 @@ import EventList from '../../components/EventList'
 import EventForm from '../../components/EventForm'
 import MyEventsSidebar from '../../components/MyEventsSidebar'
 import useParticipatingEvents from '../../hooks/useParticipatingEvents'
+import useInterestedEvents from '../../hooks/useInterestedEvents'
 import useHostedEvents from '../../hooks/useHostedEvents'
 import './MyEventsPage.scss'
 
 const MyEventsPage = () => {
+  const { pathname } = useLocation()
   const [cookies] = useCookies(['user'])
   const { user_id } = cookies.user
-  const { pathname } = useLocation()
+  const [interestedEvents] = useInterestedEvents()
   const [participatingEvents] = useParticipatingEvents()
   const [hostedEvents] = useHostedEvents(user_id)
 
@@ -22,7 +24,13 @@ const MyEventsPage = () => {
       return (
         <EventList events={hostedEvents} title={'Events you are hosting'} />
       )
-    if (pathname.includes('/interested')) return <p>Requested events here</p>
+    if (pathname.includes('/interested'))
+      return (
+        <EventList
+          title={'Events you have requested to join'}
+          events={interestedEvents}
+        />
+      )
     if (pathname.includes('/confirmed'))
       return (
         <EventList

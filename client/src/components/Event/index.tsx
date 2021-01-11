@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Button from '../Button'
 import EventCommentSection from '../EventCommentSection'
 import EventManageDropDown from '../../components/EventManageDropDown'
-import useUserDisplay from '../../hooks/useUserDisplay'
 import { calculateEventAge } from '../../util/helperFunctions'
 import { EventType, UserType } from '../../types'
 import './Event.scss'
@@ -14,29 +13,28 @@ import './Event.scss'
 const Event = ({
   event_id,
   created_by,
+  creatorName,
   created_at,
   image,
   title,
   date,
   time,
-  address,
   participants,
   max_participants,
   description,
+  street,
+  number,
+  postal_code,
+  city,
   handleAddRequest
 }: EventType) => {
   const [details, setDetails] = useState(false)
   const [showManageOptions, setShowManageOptions] = useState(false)
-  const [users] = useUserDisplay()
-  const [cookies, setCookies] = useCookies(['user'])
+  const [cookies] = useCookies(['user'])
   const { user_id } = cookies.user || ''
 
   const formattedTime = time.slice(0, 5)
   const formattedDate = date.slice(0, 10).split('-').reverse().join('-')
-
-  const eventCreator = users.find(
-    (user: UserType) => user.user_id === created_by
-  )
 
   const showParticipants = () => {
     setShowManageOptions(false)
@@ -59,7 +57,7 @@ const Event = ({
             {calculateEventAge(created_at)}
           </p>
         </div>
-        {user_id === eventCreator?.user_id && (
+        {user_id === created_by && (
           <FontAwesomeIcon
             onClick={() => setShowManageOptions(!showManageOptions)}
             className='event__manage'
@@ -83,16 +81,11 @@ const Event = ({
                 icon='user-shield'
               />
             </div>
-            {eventCreator && (
-              <Link
-                className='event__link'
-                to={`/user/${eventCreator.user_id}`}
-              >
-                <p className='event__info-text event__info-text--clickable'>
-                  {`${eventCreator.first_name}  ${eventCreator.last_name}`}
-                </p>
-              </Link>
-            )}
+            <Link className='event__link' to={`/user/${created_by}`}>
+              <p className='event__info-text event__info-text--clickable'>
+                {creatorName}
+              </p>
+            </Link>
           </div>
           <div className='event__info'>
             <div className='event__icon-wrapper'>
@@ -119,7 +112,7 @@ const Event = ({
                 icon='map-marker-alt'
               />
             </div>
-            <p className='event__info-text'>{address}</p>
+            <p className='event__info-text'>{`${street} ${number}, ${postal_code} ${city}`}</p>
           </div>
           <div className='event__info'>
             <div className='event__icon-wrapper'>

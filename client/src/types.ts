@@ -33,7 +33,13 @@ export type AppState = {
 export type ButtonComponent = {
   type: 'button' | 'submit' | 'reset'
   text: string
-  modifier?: 'primary' | 'secondary' | 'large-active' | 'large' | 'inline'
+  modifier?:
+    | 'primary'
+    | 'secondary'
+    | 'large-active'
+    | 'large'
+    | 'inline'
+    | 'disabled'
   onClick?: (() => void) | ((id: any) => void)
   id?: string
 }
@@ -93,12 +99,18 @@ export type EventType = {
   title: string
   date: string
   time: string
-  address: string
   participants: number
   max_participants: number
   description: string
   handleAddRequest: () => void
   event_id: EventId
+  creatorName: string | undefined
+  first_name?: string
+  last_name?: string
+  street: string
+  number: string
+  postal_code: string
+  city: string
 }
 
 export type ModalProps = {
@@ -209,4 +221,9 @@ export type EventListProps = {
 
 export type EventsHostedProps = {
   events: any[]
+}
+
+export type EventParticipantsAndRequestsProps = {
+  participants: UserType[]
+  joinRequests: UserType[]
 }
