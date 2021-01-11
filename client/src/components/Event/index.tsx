@@ -1,40 +1,41 @@
 import React, { useState } from 'react'
 import { useCookies } from 'react-cookie'
-import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Button from '../Button'
+import EventTitle from '../EventTitle'
+import EventImage from '../EventImage'
+import EventDataBox from '../EventDataBox'
 import EventCommentSection from '../EventCommentSection'
 import EventManageDropDown from '../../components/EventManageDropDown'
-import { calculateEventAge } from '../../util/helperFunctions'
-import { EventType, UserType } from '../../types'
+import { EventProps } from '../../types'
 import './Event.scss'
 
 const Event = ({
-  event_id,
-  created_by,
+  event,
   creatorName,
-  created_at,
-  image,
-  title,
-  date,
-  time,
   participants,
-  max_participants,
-  description,
-  street,
-  number,
-  postal_code,
-  city,
   handleAddRequest
-}: EventType) => {
-  const [details, setDetails] = useState(false)
+}: EventProps) => {
+  const [hideDetails, setHideDetails] = useState(true)
   const [showManageOptions, setShowManageOptions] = useState(false)
   const [cookies] = useCookies(['user'])
   const { user_id } = cookies.user || ''
-
-  const formattedTime = time.slice(0, 5)
-  const formattedDate = date.slice(0, 10).split('-').reverse().join('-')
+  const {
+    event_id,
+    created_by,
+    created_at,
+    image,
+    title,
+    date,
+    time,
+    max_participants,
+    description,
+    street,
+    number,
+    postal_code,
+    city
+  } = event
 
   const showParticipants = () => {
     setShowManageOptions(false)
@@ -50,93 +51,42 @@ const Event = ({
 
   return (
     <div className='event'>
-      <title className='title'>
-        <div className='title__wrapper'>
-          <p className='title__text title__text--head'>{title}</p>
-          <p className='title__text title__text--time'>
-            {calculateEventAge(created_at)}
-          </p>
-        </div>
-        {user_id === created_by && (
-          <FontAwesomeIcon
-            onClick={() => setShowManageOptions(!showManageOptions)}
-            className='event__manage'
-            icon='ellipsis-v'
-          />
-        )}
-        <EventManageDropDown
-          modifier={showManageOptions ? 'show' : 'hide'}
-          showParticipants={showParticipants}
-          endEvent={endEvent}
-          editEvent={editEvent}
+      <EventTitle title={title} createdAt={created_at} />
+
+      {user_id === created_by && (
+        <FontAwesomeIcon
+          onClick={() => setShowManageOptions(!showManageOptions)}
+          className='event__manage'
+          icon='ellipsis-v'
         />
-      </title>
-      <div className='event__data-box'>
-        <img className='event__image' src={image} alt={title} />
-        <div className='event__info-box'>
-          <div className='event__info'>
-            <div className='event__icon-wrapper'>
-              <FontAwesomeIcon
-                className='event__info-text event__info-text--icon'
-                icon='user-shield'
-              />
-            </div>
-            <Link className='event__link' to={`/user/${created_by}`}>
-              <p className='event__info-text event__info-text--clickable'>
-                {creatorName}
-              </p>
-            </Link>
-          </div>
-          <div className='event__info'>
-            <div className='event__icon-wrapper'>
-              <FontAwesomeIcon
-                className='event__info-text event__info-text--icon'
-                icon='calendar'
-              />
-            </div>
-            <p className='event__info-text'>{formattedDate}</p>
-          </div>
-          <div className='event__info'>
-            <div className='event__icon-wrapper'>
-              <FontAwesomeIcon
-                className='event__info-text event__info-text--icon'
-                icon='clock'
-              />
-            </div>
-            <p className='event__info-text'>{formattedTime}</p>
-          </div>
-          <div className='event__info'>
-            <div className='event__icon-wrapper'>
-              <FontAwesomeIcon
-                className='event__info-text event__info-text--icon'
-                icon='map-marker-alt'
-              />
-            </div>
-            <p className='event__info-text'>{`${street} ${number}, ${postal_code} ${city}`}</p>
-          </div>
-          <div className='event__info'>
-            <div className='event__icon-wrapper'>
-              <FontAwesomeIcon
-                className='event__info-text event__info-text--icon'
-                icon='user'
-              />
-            </div>
-            <span className='event__info-text'>{`${participants}/`}</span>
-            <span className='event__info-text event__info-text--total'>
-              {max_participants}
-            </span>
-          </div>
-        </div>
+      )}
+
+      <EventManageDropDown
+        modifier={showManageOptions ? 'show' : 'hide'}
+        showParticipants={showParticipants}
+        endEvent={endEvent}
+        editEvent={editEvent}
+      />
+
+      <div>
+        <EventImage src={image} alt={title} />
+        <EventDataBox
+          created_by={created_by}
+          creatorName={creatorName}
+          date={date}
+          time={time}
+          address={`${street} ${number}, ${postal_code} ${city}`}
+          participants={participants}
+          max_participants={max_participants}
+        />
       </div>
-      <div
-        className={
-          details ? 'event__details' : 'event__details event__details--hide '
-        }
-      >
-        <p className='event__d-text'>{description}</p>
+
+      <div hidden={hideDetails}>
+        <p className='event__description'>{description}</p>
         <EventCommentSection eventId={event_id} />
       </div>
-      <div className='event__actions'>
+
+      <div className='event__buttons'>
         <Button
           type='button'
           text='Ask to join'
@@ -145,11 +95,12 @@ const Event = ({
         />
         <Button
           type='button'
-          text={details ? 'View less' : 'View more'}
+          text={hideDetails ? 'View more' : 'View less'}
           modifier='primary'
-          onClick={() => setDetails(!details)}
+          onClick={() => setHideDetails(!hideDetails)}
         />
       </div>
+
       <hr className='event__line' />
     </div>
   )
