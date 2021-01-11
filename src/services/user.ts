@@ -140,6 +140,7 @@ const getUserCount = async () => {
   }
 }
 
+
 const getInterestedEvents = async (user_id: string) => {
   try {
     const query = `
@@ -156,6 +157,23 @@ const getInterestedEvents = async (user_id: string) => {
   }
 }
 
+const findParticipatingEvents = async (user_id: string) => {
+  try {
+    const query = `
+      SELECT *
+      FROM event
+      LEFT JOIN event_participant on event.event_id = event_participant.event
+      WHERE event_participant.participant = $1
+      `
+    const DBResponse = await db.query(query, [user_id])
+    const events: Event[] = DBResponse.rows
+    return events
+  } catch (error) {
+    return error
+  }
+}
+
+
 export default {
   findUserById,
   findAllUsers,
@@ -164,4 +182,5 @@ export default {
   deleteUser,
   getUserCount,
   getInterestedEvents
+  findParticipatingEvents
 }

@@ -12,8 +12,7 @@ const useHostedEvents = (userId: UserId) => {
 
   const fetchHostedEvents = async () => {
     try {
-      const response = await axios.get(`/api/v1/events/creator/${userId}`)
-      const data = response.data
+      const { data } = await axios.get(`/api/v1/events/creator/${userId}`)
       setHostedEvents(data)
     } catch (error) {
       console.log(error)
