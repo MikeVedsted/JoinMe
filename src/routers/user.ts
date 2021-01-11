@@ -7,6 +7,8 @@ import {
   updateUser,
   googleLogin,
   deleteUser,
+  getInterestedEvents,
+  findParticipatingEvents,
   getUserCount
 } from '../controllers/user'
 
@@ -14,6 +16,8 @@ const router = express.Router()
 
 router.get('/', findAllUsers)
 router.get('/count', getUserCount)
+router.get('/interested', isAuthenticated, getInterestedEvents)
+router.get('/participant', isAuthenticated, findParticipatingEvents)
 router.get('/:userId', findUserById)
 router.post('/google-authenticate', googleLogin)
 router.put('/:userId', isAuthenticated, updateUser)

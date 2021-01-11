@@ -213,6 +213,10 @@ export type EventListProps = {
   title?: string
 }
 
+export type EventsHostedProps = {
+  events: any[]
+}
+
 export type EventParticipantsAndRequestsProps = {
   participants: UserType[]
   joinRequests: UserType[]
