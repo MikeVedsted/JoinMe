@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -17,6 +18,7 @@ const Event = ({
   participants,
   handleAddRequest
 }: EventProps) => {
+  const History = useHistory()
   const [hideDetails, setHideDetails] = useState(true)
   const [showManageOptions, setShowManageOptions] = useState(false)
   const [cookies] = useCookies(['user'])
@@ -47,6 +49,7 @@ const Event = ({
 
   const editEvent = () => {
     setShowManageOptions(false)
+    History.push(`/eventEdit/${event_id}`)
   }
 
   return (
