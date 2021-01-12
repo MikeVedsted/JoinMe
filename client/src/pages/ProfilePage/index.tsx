@@ -14,6 +14,7 @@ const ProfilePage = () => {
   const [cookies] = useCookies(['user'])
   const { userId } = useParams<ProfilePageParamProps>()
   const [userInfo, setUserInfo] = useState({
+    user_id: '',
     profile_image: '',
     first_name: '',
     last_name: '',
@@ -28,7 +29,7 @@ const ProfilePage = () => {
     city: '',
     country: ''
   })
-  const [hostedEvents] = useHostedEvents(userId)
+  const [hostedEvents] = useHostedEvents(userInfo.user_id)
 
   useEffect(() => {
     async function getUserInfo() {
