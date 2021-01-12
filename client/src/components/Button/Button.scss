@@ -7,11 +7,16 @@
   border-radius: 4px;
   background-color: $default;
   padding: 5px 10px;
-  margin: 10px 10px;
+  // margin: 10px 10px;
   font-size: $text;
   color: $textLight;
   cursor: pointer;
   transition: 0.3s ease-in-out;
+
+  &--disabled {
+    opacity: 0.7;
+    color: rgb(82, 82, 82);
+  }
 
   &--primary {
     background-color: $primary;
@@ -52,6 +57,7 @@
   }
 
   &--inline {
+    background-color: $primary;
     width: auto;
     margin: 1em 0 20px 0;
     padding: 0 10px;

@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { ButtonComponent } from '../../types'
+import { ButtonProps } from '../../types'
 import './Button.scss'
 
-const Button = ({ type, text, modifier, ...rest }: ButtonComponent) => {
+const Button = ({ type, text, modifier, ...rest }: ButtonProps) => {
   return (
     <button type={type} className={`button button--${modifier}`} {...rest}>
       {text}

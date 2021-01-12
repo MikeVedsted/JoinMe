@@ -65,10 +65,16 @@ export type AppState = {
   user: UserState
 }
 
-export type ButtonComponent = {
+export type ButtonProps = {
   type: 'button' | 'submit' | 'reset'
   text: string
-  modifier?: 'primary' | 'secondary' | 'large-active' | 'large' | 'inline'
+  modifier?:
+    | 'primary'
+    | 'secondary'
+    | 'large-active'
+    | 'large'
+    | 'inline'
+    | 'disabled'
   onClick?: (() => void) | ((id: any) => void)
   id?: string
 }
@@ -128,12 +134,18 @@ export type EventType = {
   title: string
   date: string
   time: string
-  address: string
   participants: number
   max_participants: number
   description: string
   handleAddRequest: () => void
   event_id: EventId
+  creatorName: string | undefined
+  first_name?: string
+  last_name?: string
+  street: string
+  number: string
+  postal_code: string
+  city: string
 }
 
 export type ModalProps = {
@@ -170,7 +182,7 @@ export type NavDropdownProps = {
 }
 
 export type ProfilePageParamProps = {
-  userId: string
+  userId: UserId
 }
 
 export type AccountFormProps = {
@@ -242,6 +254,53 @@ export type EventListProps = {
   title?: string
 }
 
-export type EventsHostedProps = {
-  events: any[]
+export type EventImageProps = {
+  src?: string
+  alt?: string
+}
+
+export type EventTitleProps = {
+  title: string
+  createdAt: string
+}
+
+export type EventDataBoxProps = {
+  created_by: string
+  creatorName: string
+  date: string
+  time: string
+  address: string
+  participants: any
+  max_participants: number
+}
+
+export type EventProps = {
+  event: Event
+  creatorName: string
+  participants: any
+  handleAddRequest: () => void
+}
+
+export type Event = {
+  created_by: string
+  created_at: string
+  image: string
+  title: string
+  date: string
+  time: string
+  max_participants: number
+  description: string
+  event_id: EventId
+  creatorName: string | undefined
+  first_name?: string
+  last_name?: string
+  street: string
+  number: string
+  postal_code: string
+  city: string
+}
+
+export type EventParticipantsAndRequestsProps = {
+  participants: UserType[]
+  joinRequests: UserType[]
 }
