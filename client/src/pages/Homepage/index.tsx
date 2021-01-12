@@ -61,7 +61,6 @@ const Homepage = () => {
               event={event}
               creatorName={`${event.first_name} ${event.last_name}`}
               participants={event.participants}
-              handleAddRequest={handleAddRequest}
             />
           ))}
         </div>

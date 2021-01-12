@@ -243,7 +243,6 @@ export type EventProps = {
   event: Event
   creatorName: string
   participants: any
-  handleAddRequest: () => void
 }
 
 export type Event = {
