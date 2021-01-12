@@ -4,6 +4,7 @@
   padding-top: 95px;
   margin: 0 2.5em;
   justify-content: stretch;
+  align-items: flex-start;
   @include flexStart;
 
   &__sidebar {

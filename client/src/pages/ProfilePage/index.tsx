@@ -13,7 +13,6 @@ const ProfilePage = () => {
   const history = useHistory()
   const [cookies] = useCookies(['user'])
   const { userId } = useParams<ProfilePageParamProps>()
-  const [hostedEvents] = useHostedEvents(userId)
   const [userInfo, setUserInfo] = useState({
     profile_image: '',
     first_name: '',
@@ -29,6 +28,7 @@ const ProfilePage = () => {
     city: '',
     country: ''
   })
+  const [hostedEvents] = useHostedEvents(userId)
 
   useEffect(() => {
     async function getUserInfo() {
@@ -40,7 +40,7 @@ const ProfilePage = () => {
       }
     }
     getUserInfo()
-  }, [userId])
+  }, [])
 
   const handleEditClick = () => {
     history.push('/')
@@ -70,38 +70,32 @@ const ProfilePage = () => {
         <div className='profile__details'>
           <h4 className='profile__details--header'> Full Name: </h4>
           <p className='profile__details--text'>
-            {' '}
-            {`${userInfo.first_name} ${userInfo.last_name}`}{' '}
+            {`${userInfo.first_name} ${userInfo.last_name}`}
           </p>
         </div>
-
         {cookies.user.user_id === userId && (
           <div className='profile__details'>
             <h4 className='profile__details--header'> Email: </h4>
             <p className='profile__details--text'> {userInfo.email} </p>
           </div>
         )}
-
         <div className='profile__details'>
           <h4 className='profile__details--header'> Interests: </h4>
           <p className='profile__details--text'>
-            {' '}
-            {userInfo.interests?.join(', ')}{' '}
+            {userInfo.interests?.join(', ')}
           </p>
         </div>
-
         <div className='profile__details'>
           <h4 className='profile__details--header'> Intro: </h4>
           <p className='profile__details--text'> {userInfo.profile_text} </p>
         </div>
-
         {cookies.user.user_id === userId && (
           <div className='profile__details'>
             <h4 className='profile__details--header'> Address: </h4>
             {userInfo.base_address ? (
               <p className='profile__details--text'>
-                `${userInfo.street} ${userInfo.number}, ${userInfo.postal_code}{' '}
-                ${userInfo.city}, ${userInfo.country}`
+                {userInfo.street} {userInfo.number}, {userInfo.postal_code}{' '}
+                {userInfo.city}, {userInfo.country}
               </p>
             ) : (
               <p className='profile__details--text'> - </p>

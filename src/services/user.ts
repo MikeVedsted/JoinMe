@@ -1,7 +1,7 @@
 import { Response } from 'express'
 import jwt from 'jsonwebtoken'
 
-import generateToken from '../helpers/generateToken'
+import { generateAccessToken, generateRefreshToken } from '../helpers/generateToken'
 import { GoogleToken, User } from '../types'
 import db from '../db'
 
@@ -18,14 +18,30 @@ const googleLogin = async (id_token: string, res: Response) => {
         [picture, given_name, family_name, email]
       )
       const newUser: User = createUser.rows[0]
-      const token = generateToken(newUser.user_id)
-      res.cookie('x-auth-token', token)
+      const accessToken = generateAccessToken(newUser.user_id)
+      const refreshToken = generateRefreshToken(newUser.user_id)
+      res.cookie('x-auth-access-token', accessToken)
+      res.cookie('x-auth-refresh-token', refreshToken)
       return newUser
     } else {
-      const token = generateToken(user.user_id)
-      res.cookie('x-auth-token', token)
+      const accessToken = generateAccessToken(user.user_id)
+      const refreshToken = generateRefreshToken(user.user_id)
+      res.cookie('x-auth-access-token', accessToken)
+      res.cookie('x-auth-refresh-token', refreshToken)
       return user
     }
+  } catch (error) {
+    return error
+  }
+}
+
+const refreshToken = async (userId: string, res: Response) => {
+  try {
+    const accessToken = generateAccessToken(userId)
+    const DBResponse = await db.query('SELECT * FROM userk WHERE user_id = $1', [userId])
+    const user: User = DBResponse.rows[0]
+    res.cookie('x-auth-access-token', accessToken)
+    return user
   } catch (error) {
     return error
   }
@@ -180,5 +196,6 @@ export default {
   deleteUser,
   getUserCount,
   getInterestedEvents,
+  refreshToken,
   findParticipatingEvents
 }

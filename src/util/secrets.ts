@@ -16,6 +16,7 @@ const prod = ENVIRONMENT === 'production'
 
 export const SESSION_SECRET = process.env['SESSION_SECRET'] as string
 export const JWT_SECRET = process.env['JWT_SECRET'] as string
+export const JWT_REFRESH_SECRET = process.env['JWT_REFRESH_SECRET'] as string
 export const GOOGLE_CLIENT_ID = process.env['GOOGLE_CLIENT_ID']
 export const GOOGLE_CLIENT_SECRET = process.env['GOOGLE_CLIENT_SECRET']
 export const PG_USER = process.env['PG_USER']
@@ -28,6 +29,7 @@ export const PG_URI = process.env['PG_URI']
 if (
   !SESSION_SECRET ||
   !JWT_SECRET ||
+  !JWT_REFRESH_SECRET ||
   !GOOGLE_CLIENT_ID ||
   !GOOGLE_CLIENT_SECRET ||
   !PG_USER ||
