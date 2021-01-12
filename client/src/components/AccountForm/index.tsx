@@ -25,12 +25,12 @@ const AccountForm = ({ userId }: AccountFormProps) => {
     profile_text: user[0].profile_text,
     profile_image: user[0].profile_image
   })
-
+  const userAddress = `${user[0].street} ${user[0].number} ${user[0].city} ${user[0].postal_code}`
   const handleSubmit = async (event: any) => {
     event.preventDefault()
     try {
       const update = { ...fields, address }
-      console.log('yo')
+      console.log(update)
       const res = await axios.put(`/api/v1/users/${userId}`, update)
       console.log(res.data)
       alert(
@@ -81,10 +81,10 @@ const AccountForm = ({ userId }: AccountFormProps) => {
       <FormInputField
         type='text'
         id='base_address'
-        label='Default start address'
+        label='Address'
         value={
           fields.base_address
-            ? 'Saved address: ' + fields.base_address
+            ? 'Saved address: ' + userAddress
             : 'Saved address: No address saved'
         }
         readOnly

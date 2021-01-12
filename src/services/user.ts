@@ -64,7 +64,7 @@ const updateUser = async (userId: string, update: Partial<User>) => {
   try {
     const userResponse = await db.query('SELECT * FROM userk WHERE user_id = $1', [userId])
     const user: User = userResponse.rows[0]
-
+    console.log('i am found user', user)
     if (!user) {
       throw new Error()
     }
@@ -112,6 +112,7 @@ const updateUser = async (userId: string, update: Partial<User>) => {
       [userId, first_name, last_name, profile_image, profile_text, addressId, date_of_birth, gender]
     )
     const updatedUser: User = updateUser.rows[0]
+    console.log('am UPDATED USSER', updateUser)
     return updatedUser
   } catch (error) {
     return error

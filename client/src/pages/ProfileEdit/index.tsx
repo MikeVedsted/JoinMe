@@ -21,6 +21,7 @@ const ProfileEdit = () => {
       try {
         setLoading(true)
         const { data } = await axios.get(`/api/v1/users/${user_id}`)
+        console.log(data)
         dispatch(addUser(data))
         setLoading(false)
       } catch (error) {

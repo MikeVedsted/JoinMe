@@ -9,7 +9,7 @@ export function addUser(user: User): UserActions {
   }
 }
 
-// FIX this is not implemented anywehre. Can remove it on refactoring or keep it in case we need it in future
+// FIX this is not implemented anywehere. Can remove it on refactoring or keep it in case we need it in future
 export function removeUser(user: User): UserActions {
   return {
     type: REMOVE_USER,

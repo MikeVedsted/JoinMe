@@ -14,6 +14,11 @@ export type User = {
   date_of_birth: any
   gender: string
   base_address: string
+  street: string
+  number: number
+  city: string
+  postal_code: number
+  country: string
   profile_text: string
   profile_image: string
 }
