@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import { useHistory } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -13,6 +14,7 @@ import { EventProps } from '../../types'
 import './Event.scss'
 
 const Event = ({ event, creatorName, participants }: EventProps) => {
+  const History = useHistory()
   const [hideDetails, setHideDetails] = useState(true)
   const [showManageOptions, setShowManageOptions] = useState(false)
   const [cookies] = useCookies(['user'])
@@ -43,6 +45,7 @@ const Event = ({ event, creatorName, participants }: EventProps) => {
 
   const editEvent = () => {
     setShowManageOptions(false)
+    History.push(`/eventEdit/${event_id}`)
   }
 
   const handleJoinRequest = async () => {
