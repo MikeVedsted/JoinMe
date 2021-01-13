@@ -10,7 +10,7 @@ import { eventCategories } from '../../util/constants/eventCategories'
 import './EventUpdateForm.scss'
 
 const EventUpdateForm = ({ data, user, eventId }: any) => {
-  const [address, setAddress] = useState({})
+  const [address, setAddress] = useState()
   const [error, setError] = useState('')
 
   const convertDate = (date: any) => {
@@ -26,7 +26,7 @@ const EventUpdateForm = ({ data, user, eventId }: any) => {
     date: date,
     time: data ? data.time : '',
     description: data ? data.description : '',
-    maxParticipants: data ? data.max_participants : '',
+    max_participants: data ? data.max_participants : '',
     created_by: user,
     image: data ? data.image : '',
     expires_at: expires_at
@@ -101,9 +101,9 @@ const EventUpdateForm = ({ data, user, eventId }: any) => {
       </label>
       <InputField
         type='number'
-        id='maxParticipants'
+        id='max_participants'
         label='Maximum participants'
-        value={fields.maxParticipants}
+        value={fields.max_participants}
         onChange={handleFields}
         min={1}
         step={1}
