@@ -4,7 +4,7 @@
   font-family: $roboto;
   font-size: $text;
   color: $textLight;
-  background-color: $default;  
+  background-color: $default;
   border: 1px solid $default;
   border-radius: 4px;
   flex-grow: 1;
@@ -12,7 +12,7 @@
   margin: 5px 0;
   cursor: pointer;
   transition: 0.3s ease-in-out;
- 
+
   &--disabled {
     opacity: 0.7;
   }
@@ -68,7 +68,7 @@
 @media only screen and (max-width: 1024px) {
   .button {
     height: 45px;
-    
+
     &--inline {
       height: auto;
     }
