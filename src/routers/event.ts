@@ -8,7 +8,8 @@ import {
   findAllEvents,
   findEventByCategory,
   updateEvent,
-  deleteEvent
+  deleteEvent,
+  requestToJoin
 } from '../controllers/event'
 
 const router = express.Router()
@@ -16,6 +17,7 @@ const router = express.Router()
 router.post('/', isAuthenticated, createEvent)
 router.get('/', findAllEvents)
 router.get('/:eventId', findEventById)
+router.post('/:eventId/join', isAuthenticated, requestToJoin)
 router.get('/creator/:userId', isAuthenticated, findEventsByCreator)
 router.get('/category/:categoryId', findEventByCategory)
 router.put('/:eventId', isAuthenticated, isOwner, updateEvent)

@@ -107,9 +107,9 @@ export type EventType = {
   description: string
   handleAddRequest: () => void
   event_id: EventId
-  creatorName: string | undefined
-  first_name?: string
-  last_name?: string
+  creatorName: string
+  first_name: string
+  last_name: string
   street: string
   number: string
   postal_code: string
@@ -250,7 +250,6 @@ export type EventProps = {
   event: Event
   creatorName: string
   participants: any
-  handleAddRequest: () => void
 }
 
 export type Event = {

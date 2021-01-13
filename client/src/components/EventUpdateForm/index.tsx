@@ -52,7 +52,7 @@ const EventUpdateForm = ({ data, eventId }: any) => {
 
   return (
     <form className='form' onSubmit={handleSubmit}>
-      <h2 className='form__title'>Update an event</h2>
+      <h2 className='form__title'>Update Event</h2>
       <DropdownField
         label='Category'
         id='category'
@@ -103,7 +103,7 @@ const EventUpdateForm = ({ data, eventId }: any) => {
       </label>
       <InputField
         type='number'
-        id='maxParticipants'
+        id='max_participants'
         label='Maximum participants'
         value={fields.max_participants}
         onChange={handleFields}

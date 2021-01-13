@@ -41,6 +41,9 @@ export const findEventByCategory = async (req: Request, res: Response, next: Nex
 
 export const createEvent = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
+    if (!req.user) {
+      throw Error
+    }
     // TO DO
     // Add validation
     const {
@@ -50,14 +53,12 @@ export const createEvent = async (req: AuthRequest, res: Response, next: NextFun
       time,
       description,
       maxParticipants,
-      created_by,
       image,
       expires_at,
       address
     } = req.body
     const max_participants = parseInt(maxParticipants)
-    // TO DO
-    // Add user as created_by, once middleware is applied.
+    const created_by = req.user?.user_id
 
     const event: Event = {
       title,
@@ -93,6 +94,19 @@ export const deleteEvent = async (req: Request, res: Response, next: NextFunctio
   try {
     const { eventId } = req.params
     res.json(await EventService.deleteEvent(eventId))
+  } catch (error) {
+    next(new NotFoundError('Event not found', error))
+  }
+}
+
+export const requestToJoin = async (req: AuthRequest, res: Response, next: NextFunction) => {
+  try {
+    if (!req.user) {
+      throw Error
+    }
+    const { eventId } = req.params
+    const { user_id } = req.user
+    res.json(await EventService.requestToJoin(eventId, user_id))
   } catch (error) {
     next(new NotFoundError('Event not found', error))
   }
