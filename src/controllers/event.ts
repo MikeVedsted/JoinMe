@@ -35,7 +35,7 @@ export const findEventParticipants = async (req: Request, res: Response, next: N
     const { eventId } = req.params
     res.json(await EventService.findEventParticipants(eventId))
   } catch (error) {
-    next(new NotFoundError('No requests found', error))
+    next(new NotFoundError('No participants found', error))
   }
 }
 
