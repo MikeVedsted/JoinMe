@@ -200,6 +200,13 @@ export const deleteEventQ = `
   WHERE event_id = $1
 `
 
+export const participantIdByQ = `
+  SELECT ep_id
+  FROM event_participant
+  WHERE event = $1
+  AND participant = $2
+`
+
 // ---------------
 // ADDRESS QUERIES
 // ---------------

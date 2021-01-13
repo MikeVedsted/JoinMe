@@ -11,7 +11,8 @@ import {
   findEventsByCreator,
   findEventByCategory,
   updateEvent,
-  deleteEvent
+  deleteEvent,
+  removeParticipant
 } from '../controllers/event'
 
 const router = express.Router()
@@ -26,5 +27,6 @@ router.get('/creator/:userId', isAuthenticated, findEventsByCreator)
 router.get('/category/:categoryId', findEventByCategory)
 router.put('/:eventId', isAuthenticated, isOwner, updateEvent)
 router.delete('/:eventId', isAuthenticated, isOwner, deleteEvent)
+router.delete('/:eventId/remove/:participantId', removeParticipant)
 
 export default router

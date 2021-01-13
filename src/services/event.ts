@@ -12,7 +12,8 @@ import {
   updateEventQ,
   deleteEventQ,
   checkRequestStatusQ,
-  createNewRequestQ
+  createNewRequestQ,
+  participantIdByQ
 } from '../db/queries'
 import { Event, User } from '../types'
 
@@ -186,6 +187,21 @@ const requestToJoin = async (eventId: string, userId: string) => {
   return { message: 'Successfully requested', request }
 }
 
+const removeParticipant = async (eventId: string, participantId: string) => {
+  try {
+    const participants = await db.query(participantIdByQ, [eventId, participantId])
+    if (participants.rowCount === 0) {
+      throw new Error('Participant not found')
+    }
+    const participant = participants.rows[0].ep_id
+
+    await db.query('delete from event_participant where ep_id = $1', [participant])
+    return { message: 'Successfully removed participant from event' }
+  } catch (error) {
+    return error
+  }
+}
+
 export default {
   createEvent,
   findEventById,
@@ -196,5 +212,6 @@ export default {
   findEventByCategory,
   updateEvent,
   deleteEvent,
-  requestToJoin
+  requestToJoin,
+  removeParticipant
 }

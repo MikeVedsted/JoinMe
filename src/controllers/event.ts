@@ -128,3 +128,12 @@ export const requestToJoin = async (req: AuthRequest, res: Response, next: NextF
     next(new NotFoundError('Event not found', error))
   }
 }
+
+export const removeParticipant = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { eventId, participantId } = req.params
+    res.json(await EventService.removeParticipant(eventId, participantId))
+  } catch (error) {
+    next(new NotFoundError('Participant not found', error))
+  }
+}
