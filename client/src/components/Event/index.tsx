@@ -49,7 +49,7 @@ const Event = ({
 
   const editEvent = () => {
     setShowManageOptions(false)
-    History.push(`/eventEdit/${event_id}`)
+    History.push(`/event/${event_id}/edit`)
   }
 
   return (

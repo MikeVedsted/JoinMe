@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 
 import Button from '../Button'
@@ -9,7 +10,8 @@ import { useFormFields } from '../../hooks/useFormFields'
 import { eventCategories } from '../../util/constants/eventCategories'
 import './EventUpdateForm.scss'
 
-const EventUpdateForm = ({ data, user, eventId }: any) => {
+const EventUpdateForm = ({ data, eventId }: any) => {
+  const history = useHistory()
   const [address, setAddress] = useState({})
   const [error, setError] = useState('')
 
@@ -17,18 +19,17 @@ const EventUpdateForm = ({ data, user, eventId }: any) => {
     const convertedDate = date.substr(0, 10)
     return convertedDate
   }
-  const date = data ? convertDate(data.date) : ''
-  const expires_at = data ? convertDate(data.expires_at) : ''
+  const date = convertDate(data.date) || ''
+  const expires_at = convertDate(data.expires_at) || ''
 
   const [fields, handleFields] = useFormFields({
-    title: data ? data.title : '',
-    category: data ? data.category : '',
+    title: data.title || '',
+    category: data.category || '',
     date: date,
-    time: data ? data.time : '',
-    description: data ? data.description : '',
-    maxParticipants: data ? data.max_participants : '',
-    created_by: user,
-    image: data ? data.image : '',
+    time: data.time || '',
+    description: data.description || '',
+    max_participants: data.max_participants || '',
+    image: data.image || '',
     expires_at: expires_at
   })
 
@@ -42,6 +43,7 @@ const EventUpdateForm = ({ data, user, eventId }: any) => {
         data: data
       })
       setError('')
+      history.push('/')
       alert(`Success! Event: ${data.event_id} was successfully updated`)
     } catch (error) {
       setError(error.message)
@@ -103,7 +105,7 @@ const EventUpdateForm = ({ data, user, eventId }: any) => {
         type='number'
         id='maxParticipants'
         label='Maximum participants'
-        value={fields.maxParticipants}
+        value={fields.max_participants}
         onChange={handleFields}
         min={1}
         step={1}
