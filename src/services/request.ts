@@ -12,6 +12,16 @@ const acceptRequest = async (requestId: string) => {
   }
 }
 
+const rejectRequest = async (requestId: string) => {
+  try {
+    await db.query(deleteRequestQ, [requestId])
+    return { message: 'Successfully rejected' }
+  } catch (error) {
+    return error
+  }
+}
+
 export default {
-  acceptRequest
+  acceptRequest,
+  rejectRequest
 }

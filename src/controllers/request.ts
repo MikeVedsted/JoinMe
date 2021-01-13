@@ -11,3 +11,12 @@ export const acceptRequest = async (req: Request, res: Response, next: NextFunct
     next(new NotFoundError('Request not found', error))
   }
 }
+
+export const rejectRequest = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { requestId } = req.params
+    res.json(await RequestService.rejectRequest(requestId))
+  } catch (error) {
+    next(new NotFoundError('Request not found', error))
+  }
+}
