@@ -19,6 +19,8 @@ export type User = {
   city: string
   postal_code: number
   country: string
+  lat: number
+  lng: number
   profile_text: string
   profile_image: string
 }

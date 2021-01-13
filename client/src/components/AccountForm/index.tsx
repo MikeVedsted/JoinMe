@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 
@@ -14,25 +14,36 @@ import './AccountForm.scss'
 
 const AccountForm = ({ userId }: AccountFormProps) => {
   const user = useSelector((state: AppState) => state.user.user)
-  const [address, setAddress] = useState({})
+  const [address, setAddress] = useState<any>({})
   const [fields, handleFieldChange] = useFormFields({
     email: user[0].email,
     first_name: user[0].first_name,
     last_name: user[0].last_name,
     date_of_birth: user[0].date_of_birth,
     gender: user[0].gender,
-    base_address: user[0].base_address,
     profile_text: user[0].profile_text,
     profile_image: user[0].profile_image
   })
   const userAddress = `${user[0].street} ${user[0].number} ${user[0].city} ${user[0].postal_code}`
+
+  useMemo(() => {
+    setAddress({
+      street: user[0].street,
+      number: user[0].number,
+      postal_code: user[0].postal_code,
+      city: user[0].city,
+      country: user[0].country,
+      lat: user[0].lat,
+      lng: user[0].lng
+    })
+  }, [user])
+
   const handleSubmit = async (event: any) => {
     event.preventDefault()
     try {
-      const update = { ...fields, address }
-      console.log(update)
+      const update =
+        address.street === null ? { ...fields } : { ...fields, address }
       const res = await axios.put(`/api/v1/users/${userId}`, update)
-      console.log(res.data)
       alert(
         'Thank you!\nThe changes have been saved and you can now safely leave this page, or make further changes if you spotted a mistake.'
       )
@@ -83,7 +94,7 @@ const AccountForm = ({ userId }: AccountFormProps) => {
         id='base_address'
         label='Address'
         value={
-          fields.base_address
+          user[0].street
             ? 'Saved address: ' + userAddress
             : 'Saved address: No address saved'
         }
