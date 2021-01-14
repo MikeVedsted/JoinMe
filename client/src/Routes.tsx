@@ -18,6 +18,8 @@ const Routes = () => (
       path='/event/:eventId/edit'
       component={EventEditPage}
     />
+    
+    {/* account-setup must be before dynamic path ending! Otherwise it will never match */}
     <ProtectedRoute
       exact
       path='/user/:userId/account-setup'
@@ -28,6 +30,8 @@ const Routes = () => (
       component={MyEventsPage}
     />
     <Route exact path='/get-started' component={LandingPage} />
+    
+    {/* path '/' without exact prop must be the last route! It will catch everything that doesn't have a match. */}
     <Route path='/' component={LandingPage} />
   </Switch>
 )
