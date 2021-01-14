@@ -14,7 +14,7 @@ import './AccountForm.scss'
 
 const AccountForm = ({ userId }: AccountFormProps) => {
   const user = useSelector((state: AppState) => state.user.user)
-  const [address, setAddress] = useState<any>({})
+  const [address, setAddress] = useState<any>()
   const [fields, handleFieldChange] = useFormFields({
     email: user[0].email,
     first_name: user[0].first_name,
@@ -27,22 +27,22 @@ const AccountForm = ({ userId }: AccountFormProps) => {
   const userAddress = `${user[0].street} ${user[0].number} ${user[0].city} ${user[0].postal_code}`
 
   useMemo(() => {
-    setAddress({
-      street: user[0].street,
-      number: user[0].number,
-      postal_code: user[0].postal_code,
-      city: user[0].city,
-      country: user[0].country,
-      lat: user[0].lat,
-      lng: user[0].lng
-    })
+    user[0].street &&
+      setAddress({
+        street: user[0].street,
+        number: user[0].number,
+        postal_code: user[0].postal_code,
+        city: user[0].city,
+        country: user[0].country,
+        lat: user[0].lat,
+        lng: user[0].lng
+      })
   }, [user])
 
   const handleSubmit = async (event: any) => {
     event.preventDefault()
     try {
-      const update =
-        address.street === null ? { ...fields } : { ...fields, address }
+      const update = { ...fields, address }
       const res = await axios.put(`/api/v1/users/${userId}`, update)
       alert(
         'Thank you!\nThe changes have been saved and you can now safely leave this page, or make further changes if you spotted a mistake.'
