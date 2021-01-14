@@ -21,17 +21,17 @@ const EventUpdateForm = ({ data, eventId }: EventUpdateFormProps) => {
     return convertedDate
   }
 
-  const date = data ? convertDate(data.date) : ''
-  const expires_at = data ? convertDate(data.expires_at) : ''
+  const date = convertDate(data.date)
+  const expires_at = convertDate(data.expires_at)
 
   const [fields, handleFields] = useFormFields({
-    title: data.title || '',
-    category: data.category || '',
+    title: data.title,
+    category: data.category,
     date: date,
     time: data.time,
-    description: data.description || '',
-    max_participants: data.max_participants || 1,
-    image: data.image || '',
+    description: data.description,
+    max_participants: data.max_participants,
+    image: data.image,
     expires_at: expires_at
   })
 
@@ -54,7 +54,7 @@ const EventUpdateForm = ({ data, eventId }: EventUpdateFormProps) => {
 
   return (
     <form className='form' onSubmit={handleSubmit}>
-      <h2 className='form__title'>Update an event</h2>
+      <h2 className='form__title'>Update Event</h2>
       <DropdownField
         label='Category'
         id='category'
