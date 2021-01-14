@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 
 import Button from '../Button'
@@ -9,14 +10,16 @@ import { useFormFields } from '../../hooks/useFormFields'
 import { eventCategories } from '../../util/constants/eventCategories'
 import './EventUpdateForm.scss'
 
-const EventUpdateForm = ({ data, user, eventId }: any) => {
-  const [address, setAddress] = useState()
+const EventUpdateForm = ({ data, eventId }: any) => {
+  const history = useHistory()
+  const [address, setAddress] = useState({})
   const [error, setError] = useState('')
 
   const convertDate = (date: any) => {
     const convertedDate = date.substr(0, 10)
     return convertedDate
   }
+
   const date = data ? convertDate(data.date) : ''
   const expires_at = data ? convertDate(data.expires_at) : ''
 
@@ -27,7 +30,6 @@ const EventUpdateForm = ({ data, user, eventId }: any) => {
     time: data ? data.time : '',
     description: data ? data.description : '',
     max_participants: data ? data.max_participants : '',
-    created_by: user,
     image: data ? data.image : '',
     expires_at: expires_at
   })
@@ -43,6 +45,7 @@ const EventUpdateForm = ({ data, user, eventId }: any) => {
       })
       setError('')
       alert(`Success! Event: ${data.event_id} was successfully updated`)
+      history.push('/')
     } catch (error) {
       setError(error.message)
     }

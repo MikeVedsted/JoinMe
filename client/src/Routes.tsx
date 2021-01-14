@@ -15,7 +15,7 @@ const Routes = () => (
     <ProtectedRoute exact path='/user/:userId' component={ProfilePage} />
     <ProtectedRoute
       exact
-      path='/eventEdit/:eventId'
+      path='/event/:eventId/edit'
       component={EventEditPage}
     />
     <ProtectedRoute

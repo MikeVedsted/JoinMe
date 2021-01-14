@@ -184,7 +184,6 @@ const updateEvent = async (eventId: string, update: Partial<Event>) => {
       }
     }
 
-    console.log('check x', max_participants)
     const updateQuery = await db.query(
       'UPDATE event SET title = $2, date = $3, time = $4, description = $5, max_participants=$6, expires_at=$7, image=$8, category=(SELECT category_id FROM category WHERE name = $9), address=$10 WHERE event_id = $1 RETURNING *',
       [
