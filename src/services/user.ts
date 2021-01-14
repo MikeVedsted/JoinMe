@@ -218,6 +218,23 @@ const findParticipatingEvents = async (user_id: string) => {
   }
 }
 
+const findPublicUserInfo = async (userId: string) => {
+  try {
+    const query = `
+    SELECT 
+      first_name, last_name, profile_image, profile_text, date_of_birth, gender
+    FROM userk
+    WHERE user_id = $1    
+    `
+    const DBResponse = await db.query(query, [userId])
+    const publicInfo: Partial<User> = DBResponse.rows[0]
+
+    return publicInfo
+  } catch (error) {
+    return error
+  }
+}
+
 export default {
   findUserById,
   findAllUsers,
@@ -226,5 +243,6 @@ export default {
   deleteUser,
   getUserCount,
   getInterestedEvents,
-  findParticipatingEvents
+  findParticipatingEvents,
+  findPublicUserInfo
 }

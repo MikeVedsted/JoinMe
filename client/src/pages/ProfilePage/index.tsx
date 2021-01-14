@@ -12,6 +12,7 @@ import './ProfilePage.scss'
 const ProfilePage = () => {
   const history = useHistory()
   const [cookies] = useCookies(['user'])
+  const currentUser = cookies.user.user_id
   const { userId } = useParams<ProfilePageParamProps>()
   const [hostedEvents] = useHostedEvents(userId)
   const [userInfo, setUserInfo] = useState({
@@ -33,14 +34,18 @@ const ProfilePage = () => {
   useEffect(() => {
     async function getUserInfo() {
       try {
-        const { data } = await axios.get(`/api/v1/users/${userId}`)
+        const url =
+          userId === currentUser
+            ? `/api/v1/users/${userId}`
+            : `/api/v1/users/${userId}/public`
+        const { data } = await axios.get(url)
         setUserInfo(data)
       } catch (error) {
         console.log(error)
       }
     }
     getUserInfo()
-  }, [userId])
+  }, [userId, currentUser])
 
   const handleEditClick = () => {
     history.push(`/users/${userId}/edit`)
