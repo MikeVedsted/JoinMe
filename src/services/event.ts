@@ -91,7 +91,20 @@ const findAllEvents = async () => {
 
 const findEventById = async (eventId: string) => {
   try {
-    const DBResponse = await db.query('SELECT * FROM event WHERE event_id = $1', [eventId])
+    const query = `
+      SELECT 
+  	    event_id, title, date, time, description, max_participants, created_by, event.created_at, expires_at, image,
+ 	      street, number, postal_code, city, country, lat, lng,
+	      name as category, 
+	      first_name,  last_name
+      FROM
+        event
+      LEFT JOIN address on event.address = address.address_id
+      LEFT JOIN category on event.category = category.category_id
+      LEFT JOIN userk on event.created_by = userk.user_id
+      LEFT JOIN event_participant on event.event_id = event_participant.event
+    `
+    const DBResponse = await db.query(`${query} WHERE event_id = $1`, [eventId])
     const event: Event = DBResponse.rows[0]
 
     return event
@@ -136,10 +149,12 @@ const updateEvent = async (eventId: string, update: Partial<Event>) => {
   try {
     const DBResponse = await db.query('SELECT * FROM event WHERE event_id = $1', [eventId])
     const event: Event = DBResponse.rows[0]
+
     if (!event) {
       throw { error: 'Event not found' }
     }
 
+    let { address } = event
     const {
       title = event.title,
       date = event.date,
@@ -147,26 +162,44 @@ const updateEvent = async (eventId: string, update: Partial<Event>) => {
       description = event.description,
       max_participants = event.max_participants,
       expires_at = event.expires_at,
-      image = event.image
+      image = event.image,
+      category = event.category
     } = update
 
-    const updateQuery = `
-      UPDATE event 
-      SET title = $2, date = $3, time = $4, description = $5, max_participants = $6, expires_at = $7, image = $8 
-      WHERE event_id = $1 
-      RETURNING *'`
-    const updateEvent = await db.query(updateQuery, [
-      eventId,
-      title,
-      date,
-      time,
-      description,
-      max_participants,
-      expires_at,
-      image
-    ])
-    const updatedEvent: Event = updateEvent.rows[0]
+    if (update.address) {
+      address = update.address
+      const { street, number, postal_code, city, country, lat, lng } = address
+      const DBAddressResponse = await db.query(
+        'SELECT address_id FROM address WHERE lat = $1 and lng = $2',
+        [lat, lng]
+      )
+      if (DBAddressResponse.rowCount === 0) {
+        const newAddress = await db.query(
+          'INSERT INTO address (street, number, postal_code, city, country, lat, lng) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING address_id',
+          [street, number, postal_code, city, country, lat, lng]
+        )
+        address = newAddress.rows[0].address_id
+      } else {
+        address = DBResponse.rows[0].address
+      }
+    }
 
+    const updateQuery = await db.query(
+      'UPDATE event SET title = $2, date = $3, time = $4, description = $5, max_participants=$6, expires_at=$7, image=$8, category=(SELECT category_id FROM category WHERE name = $9), address=$10 WHERE event_id = $1 RETURNING *',
+      [
+        eventId,
+        title,
+        date,
+        time,
+        description,
+        max_participants,
+        expires_at,
+        image,
+        category,
+        address
+      ]
+    )
+    const updatedEvent: Event = updateQuery.rows[0]
     return updatedEvent
   } catch (error) {
     return error
