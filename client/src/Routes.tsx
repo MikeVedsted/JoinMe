@@ -28,11 +28,12 @@ const Routes = () => (
       path='/user/:userId/account-setup'
       component={AccountSetup}
     />
+    <ProtectedRoute exact path='/user/:userId/edit' component={ProfileEdit} />
     <ProtectedRoute
       path='/user/:userId/:contentName'
       component={MyEventsPage}
     />
-    <ProtectedRoute exact path='/users/:userId/edit' component={ProfileEdit} />
+
     <Route exact path='/get-started' component={LandingPage} />
 
     {/* path '/' without exact prop must be the last route! It will catch everything that doesn't have a match. */}
