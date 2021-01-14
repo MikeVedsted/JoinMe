@@ -2,7 +2,7 @@ import { Response } from 'express'
 import jwt from 'jsonwebtoken'
 
 import generateToken from '../helpers/generateToken'
-import { GoogleToken, User } from '../types'
+import { Address, GoogleToken, User } from '../types'
 import db from '../db'
 
 const googleLogin = async (id_token: string, res: Response) => {
@@ -71,63 +71,79 @@ const updateUser = async (userId: string, update: Partial<User>) => {
     if (!user) {
       throw new Error()
     }
+    let address: Partial<Address> = {}
 
     const {
       first_name = user.first_name,
       last_name = user.last_name,
       profile_image = user.profile_image,
       profile_text = user.profile_text,
-      address = {
-        street: '',
-        number: 0,
-        postal_code: 55545,
-        city: '',
-        country: '',
-        lat: 0,
-        lng: 0
-      },
       date_of_birth = user.date_of_birth,
       gender = user.gender
     } = update
 
-    const { street, postal_code, city, country, lat, lng } = address
-    let { number } = address
-    !number && (number = 0)
-    let addressId: string
-
-    const addressResponse = await db.query(
-      'SELECT address_id FROM address WHERE lat = $1 and lng = $2',
-      [lat, lng]
-    )
-
-    if (addressResponse.rowCount === 0) {
-      const newAddress = await db.query(
-        'INSERT INTO address (street, number, postal_code, city, country, lat, lng) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING address_id',
-        [street, number, postal_code, city, country, lat, lng]
-      )
-      addressId = newAddress.rows[0].address_id
-    } else {
-      addressId = addressResponse.rows[0].address_id
+    if (update.address) {
+      address = update.address
     }
 
-    const updateUserQuery = `
+    if (update.address) {
+      const { street, postal_code, city, country, lat, lng } = address
+      let { number } = address
+      !number && (number = 0)
+      let addressId: string
+
+      const addressResponse = await db.query(
+        'SELECT address_id FROM address WHERE lat = $1 and lng = $2',
+        [lat, lng]
+      )
+
+      if (addressResponse.rowCount === 0 && 'address' in update) {
+        const newAddress = await db.query(
+          'INSERT INTO address (street, number, postal_code, city, country, lat, lng) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING address_id',
+          [street, number, postal_code, city, country, lat, lng]
+        )
+        addressId = newAddress.rows[0].address_id
+      } else {
+        addressId = addressResponse.rows[0].address_id
+      }
+
+      const updateUserQuery = `
+        UPDATE userk 
+        SET first_name = $2, last_name = $3, profile_image = $4, profile_text = $5, base_address = $6, date_of_birth = $7, gender = $8 
+        WHERE user_id = $1 
+        RETURNING *
+      `
+      const updateUser = await db.query(updateUserQuery, [
+        userId,
+        first_name,
+        last_name,
+        profile_image,
+        profile_text,
+        addressId,
+        date_of_birth,
+        gender
+      ])
+      const updatedUser: User = updateUser.rows[0]
+      return updatedUser
+    }
+
+    const updateUserQuerywithoutAddress = `
       UPDATE userk 
-      SET first_name = $2, last_name = $3, profile_image = $4, profile_text = $5, base_address = $6, date_of_birth = $7, gender = $8 
+      SET first_name = $2, last_name = $3, profile_image = $4, profile_text = $5, date_of_birth = $6, gender = $7 
       WHERE user_id = $1 
       RETURNING *
     `
-    const updateUser = await db.query(updateUserQuery, [
+
+    const updateUser = await db.query(updateUserQuerywithoutAddress, [
       userId,
       first_name,
       last_name,
       profile_image,
       profile_text,
-      addressId,
       date_of_birth,
       gender
     ])
     const updatedUser: User = updateUser.rows[0]
-    console.log('am UPDATED USSER', updateUser)
     return updatedUser
   } catch (error) {
     return error
