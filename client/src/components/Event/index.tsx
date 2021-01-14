@@ -47,7 +47,7 @@ const Event = ({ event, creatorName, participants }: EventProps) => {
 
   const handleJoinRequest = async () => {
     try {
-      const res = await axios.post(`/api/v1/events/${event_id}/join`)
+      const res = await axios.post(`/api/v1/events/${event_id}/request`)
       const { message } = res.data
       alert(message)
     } catch (error) {

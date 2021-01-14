@@ -10,7 +10,7 @@ const useParticipatingEvents = () => {
 
   const fetchInterestedEvents = async () => {
     try {
-      const { data } = await axios.get(`/api/v1/users/interested`)
+      const { data } = await axios.get(`/api/v1/events/requested`)
       setInterestedEvents(data)
     } catch (error) {
       console.log(error)

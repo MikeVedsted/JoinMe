@@ -1,32 +1,32 @@
 import express from 'express'
 
-import { isAuthenticated, isOwner } from '../middlewares/authentication'
+import { isAuthenticated } from '../middlewares/authentication'
 import {
   createEvent,
   findAllEvents,
   findEventById,
   requestToJoin,
-  findEventRequests,
   findEventParticipants,
+  findRequestedEvents,
+  findParticipatingEvents,
   findEventsByCreator,
   findEventByCategory,
   updateEvent,
-  deleteEvent,
-  removeParticipant
+  deleteEvent
 } from '../controllers/event'
 
 const router = express.Router()
 
 router.post('/', isAuthenticated, createEvent)
-router.get('/', findAllEvents)
-router.get('/:eventId', findEventById)
-router.post('/:eventId/join', isAuthenticated, requestToJoin)
-router.get('/:eventId/requests', findEventRequests)
-router.get('/:eventId/participants', findEventParticipants)
+router.post('/:eventId/request', isAuthenticated, requestToJoin)
+router.get('/', isAuthenticated, findAllEvents)
+router.get('/requested', isAuthenticated, findRequestedEvents)
+router.get('/participant', isAuthenticated, findParticipatingEvents)
 router.get('/creator/:userId', isAuthenticated, findEventsByCreator)
-router.get('/category/:categoryId', findEventByCategory)
-router.put('/:eventId', isAuthenticated, isOwner, updateEvent)
-router.delete('/:eventId', isAuthenticated, isOwner, deleteEvent)
-router.delete('/:eventId/remove/:participantId', removeParticipant)
+router.get('/category/:categoryId', isAuthenticated, findEventByCategory)
+router.get('/:eventId', isAuthenticated, findEventById)
+router.get('/:eventId/participants', findEventParticipants)
+router.put('/:eventId', isAuthenticated, updateEvent)
+router.delete('/:eventId', isAuthenticated, deleteEvent)
 
 export default router

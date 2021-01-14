@@ -6,16 +6,16 @@ import {
   createAddressQ,
   findEventByIdQ,
   findEventsByCreatorQ,
-  findJoinRequestsByEventQ,
-  findParticipantsByEventQ,
   findEventByCategoryQ,
   updateEventQ,
   deleteEventQ,
   checkRequestStatusQ,
   createNewRequestQ,
-  participantIdByQ
+  findEventRequestsByUserQ,
+  findEventParticipatingQ,
+  findParticipantsByEventQ
 } from '../db/queries'
-import { Event, User } from '../types'
+import { Event } from '../types'
 
 const createEvent = async (event: Event) => {
   const {
@@ -97,26 +97,6 @@ const findEventsByCreator = async (userId: string) => {
   }
 }
 
-const findEventRequests = async (eventId: string) => {
-  try {
-    const DBResponse = await db.query(findJoinRequestsByEventQ, [eventId])
-    const users: Partial<User>[] = DBResponse.rows
-    return users
-  } catch (error) {
-    return error
-  }
-}
-
-const findEventParticipants = async (eventId: string) => {
-  try {
-    const DBResponse = await db.query(findParticipantsByEventQ, [eventId])
-    const users: Partial<User>[] = DBResponse.rows
-    return users
-  } catch (error) {
-    return error
-  }
-}
-
 const findEventByCategory = async (categoryId: number) => {
   try {
     const DBResponse = await db.query(findEventByCategoryQ, [categoryId])
@@ -187,16 +167,31 @@ const requestToJoin = async (eventId: string, userId: string) => {
   return { message: 'Successfully requested', request }
 }
 
-const removeParticipant = async (eventId: string, participantId: string) => {
+const findRequestedEvents = async (userId: string) => {
   try {
-    const participants = await db.query(participantIdByQ, [eventId, participantId])
-    if (participants.rowCount === 0) {
-      throw new Error('Participant not found')
-    }
-    const participant = participants.rows[0].ep_id
+    const DBResponse = await db.query(findEventRequestsByUserQ, [userId])
+    const events: Event[] = DBResponse.rows
+    return events
+  } catch (error) {
+    return error
+  }
+}
 
-    await db.query('delete from event_participant where ep_id = $1', [participant])
-    return { message: 'Successfully removed participant from event' }
+const findParticipatingEvents = async (user_id: string) => {
+  try {
+    const DBResponse = await db.query(findEventParticipatingQ, [user_id])
+    const events: Event[] = DBResponse.rows
+    return events
+  } catch (error) {
+    return error
+  }
+}
+
+const findEventParticipants = async (eventId: string) => {
+  try {
+    const DBResponse = await db.query(findParticipantsByEventQ, [eventId])
+    const events: Event[] = DBResponse.rows
+    return events
   } catch (error) {
     return error
   }
@@ -206,12 +201,12 @@ export default {
   createEvent,
   findEventById,
   findEventsByCreator,
-  findEventRequests,
-  findEventParticipants,
   findAllEvents,
   findEventByCategory,
   updateEvent,
   deleteEvent,
   requestToJoin,
-  removeParticipant
+  findRequestedEvents,
+  findParticipatingEvents,
+  findEventParticipants
 }

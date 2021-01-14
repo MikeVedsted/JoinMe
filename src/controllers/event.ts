@@ -21,24 +21,6 @@ export const findEventById = async (req: Request, res: Response, next: NextFunct
   }
 }
 
-export const findEventRequests = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const { eventId } = req.params
-    res.json(await EventService.findEventRequests(eventId))
-  } catch (error) {
-    next(new NotFoundError('No requests found', error))
-  }
-}
-
-export const findEventParticipants = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const { eventId } = req.params
-    res.json(await EventService.findEventParticipants(eventId))
-  } catch (error) {
-    next(new NotFoundError('No participants found', error))
-  }
-}
-
 export const findEventsByCreator = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { userId } = req.params
@@ -62,8 +44,6 @@ export const createEvent = async (req: AuthRequest, res: Response, next: NextFun
     if (!req.user) {
       throw Error
     }
-    // TO DO
-    // Add validation
     const {
       title,
       category,
@@ -129,11 +109,47 @@ export const requestToJoin = async (req: AuthRequest, res: Response, next: NextF
   }
 }
 
-export const removeParticipant = async (req: Request, res: Response, next: NextFunction) => {
+export const findRequestedEvents = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
-    const { eventId, participantId } = req.params
-    res.json(await EventService.removeParticipant(eventId, participantId))
+    if (!req.user) {
+      throw Error
+    }
+
+    const { user_id } = req.user
+    return res.json(await EventService.findRequestedEvents(user_id))
   } catch (error) {
-    next(new NotFoundError('Participant not found', error))
+    next(new NotFoundError('No results found', error))
+  }
+}
+
+export const findParticipatingEvents = async (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    if (!req.user) {
+      throw Error
+    }
+    const { user_id } = req.user
+    return res.json(await EventService.findParticipatingEvents(user_id))
+  } catch (error) {
+    next(new NotFoundError('No results found', error))
+  }
+}
+
+export const findEventParticipants = async (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    if (!req.user) {
+      throw Error
+    }
+    const { eventId } = req.params
+    res.json(await EventService.findEventParticipants(eventId))
+  } catch (error) {
+    next(new NotFoundError('No participants found', error))
   }
 }

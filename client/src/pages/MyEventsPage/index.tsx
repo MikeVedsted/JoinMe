@@ -7,7 +7,7 @@ import EventList from '../../components/EventList'
 import EventForm from '../../components/EventForm'
 import MyEventsSidebar from '../../components/MyEventsSidebar'
 import useParticipatingEvents from '../../hooks/useParticipatingEvents'
-import useInterestedEvents from '../../hooks/useInterestedEvents'
+import useRequestedEvents from '../../hooks/useRequestedEvents'
 import useHostedEvents from '../../hooks/useHostedEvents'
 import './MyEventsPage.scss'
 
@@ -15,7 +15,7 @@ const MyEventsPage = () => {
   const { pathname } = useLocation()
   const [cookies] = useCookies(['user'])
   const { user_id } = cookies.user
-  const [interestedEvents] = useInterestedEvents()
+  const [interestedEvents] = useRequestedEvents()
   const [participatingEvents] = useParticipatingEvents()
   const [hostedEvents] = useHostedEvents(user_id)
 

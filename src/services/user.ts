@@ -12,9 +12,7 @@ import {
   addressIdByLocQ,
   createAddressQ,
   updateUserQ,
-  deleteUserQ,
-  findEventRequestsByUserQ,
-  findEventParticipatingQ
+  deleteUserQ
 } from '../db/queries'
 import { GoogleToken, User } from '../types'
 
@@ -148,33 +146,11 @@ const getUserCount = async () => {
   }
 }
 
-const getInterestedEvents = async (user_id: string) => {
-  try {
-    const DBResponse = await db.query(findEventRequestsByUserQ, [user_id])
-    const events: Event[] = DBResponse.rows
-    return events
-  } catch (error) {
-    return error
-  }
-}
-
-const findParticipatingEvents = async (user_id: string) => {
-  try {
-    const DBResponse = await db.query(findEventParticipatingQ, [user_id])
-    const events: Event[] = DBResponse.rows
-    return events
-  } catch (error) {
-    return error
-  }
-}
-
 export default {
   findUserById,
   findAllUsers,
   updateUser,
   googleLogin,
   deleteUser,
-  getUserCount,
-  getInterestedEvents,
-  findParticipatingEvents
+  getUserCount
 }

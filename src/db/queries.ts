@@ -44,6 +44,22 @@ export const createNewRequestQ = `
     ($2, $1) 
   RETURNING *
 `
+export const requesterByRequestIdQ = `
+  SELECT requester 
+  FROM event_request 
+  WHERE er_id = $1
+`
+
+export const participantByParticipantIdQ = `
+  SELECT participant 
+  FROM event_participant 
+  WHERE ep_id = $1
+`
+
+export const deleteParticipantQ = `
+  DELETE FROM event_participant
+  WHERE ep_id = $1
+`
 
 // ------------
 // USER QUERIES
@@ -134,6 +150,31 @@ export const findEventParticipatingQ = `
 // -------------
 // EVENT QUERIES
 // -------------
+
+export const findEventOwnerQ = `
+  SELECT created_by
+  FROM event
+  WHERE event_id = $1
+`
+
+export const findEventOwnerByRequestQ = `
+  SELECT created_by
+  FROM event
+  WHERE event_id = (
+    SELECT event 
+    FROM event_request
+    WHERE er_id = $1
+  )
+`
+export const findEventOwnerByParticipantQ = `
+  SELECT created_by
+  FROM event
+  WHERE event_id = (
+    SELECT event 
+    FROM event_participant
+    WHERE ep_id = $1
+  )
+`
 
 export const findAllEventsPopulatedQ = `
   SELECT
