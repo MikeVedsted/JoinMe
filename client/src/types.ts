@@ -89,16 +89,19 @@ export type DropdownProps = {
   onBlur: () => void
   modifier?: string
   required?: boolean
+  selectedValue?: string
 }
 
 export type EventType = {
   key: string
+  category: string
   created_by: string
   created_at: string
   image: string
   title: string
   date: string
   time: string
+  expires_at: string
   participants: number
   max_participants: number
   description: string
@@ -148,6 +151,10 @@ export type NavDropdownProps = {
 
 export type ProfilePageParamProps = {
   userId: UserId
+}
+
+export type EventEditPageParamProps = {
+  eventId: EventId
 }
 
 export type AccountFormProps = {

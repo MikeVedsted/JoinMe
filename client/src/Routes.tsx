@@ -7,11 +7,17 @@ import ProfilePage from './pages/ProfilePage'
 import HomePage from './pages/Homepage'
 import AccountSetup from './pages/AccountSetup'
 import MyEventsPage from './pages/MyEventsPage'
+import EventEditPage from './pages/EventEditPage'
 
 const Routes = () => (
   <Switch>
     <ProtectedRoute exact path='/' component={HomePage} />
     <ProtectedRoute exact path='/user/:userId' component={ProfilePage} />
+    <ProtectedRoute
+      exact
+      path='/event/:eventId/edit'
+      component={EventEditPage}
+    />
     <ProtectedRoute
       exact
       path='/user/:userId/account-setup'
