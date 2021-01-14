@@ -259,6 +259,8 @@ export type Event = {
   title: string
   date: string
   time: string
+  category: string
+  expires_at: string
   max_participants: number
   description: string
   event_id: EventId
@@ -274,4 +276,9 @@ export type Event = {
 export type EventParticipantsAndRequestsProps = {
   participants: UserType[]
   joinRequests: UserType[]
+}
+
+export type EventUpdateFormProps = {
+  data: Event
+  eventId: EventId
 }

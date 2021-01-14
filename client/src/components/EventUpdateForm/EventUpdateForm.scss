@@ -29,6 +29,25 @@
   }
 }
 
+.image-upload {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  &__field {
+    display: block;
+  }
+
+  &__image {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+    object-position: center;
+    margin: auto 0 20px 20px;
+    border-radius: 8px;
+  }
+}
+
 .form-buttons {
   display: flex;
   justify-content: space-between;
@@ -55,9 +74,5 @@
   .form {
     width: 90vw;
     padding: 0 10px 10px;
-
-    &__title {
-      // font-size: 20px;
-    }
   }
 }

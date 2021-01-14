@@ -3,13 +3,13 @@ import { useParams } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 
 import EventUpdateForm from '../../components/EventUpdateForm'
-import useGetSingleEvent from '../../hooks/useGetSingleEvent'
+import useEventDetails from '../../hooks/useEventDetails'
 import { EventEditPageParamProps } from '../../types'
 import './EventEditPage.scss'
 
 const EventEditPage = () => {
   const { eventId } = useParams<EventEditPageParamProps>()
-  const [data] = useGetSingleEvent(eventId)
+  const [data] = useEventDetails(eventId)
   const [cookies] = useCookies(['user'])
   const { user_id } = cookies.user
 
