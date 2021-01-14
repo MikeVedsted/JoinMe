@@ -10,11 +10,13 @@ import EventImage from '../EventImage'
 import EventDataBox from '../EventDataBox'
 import EventCommentSection from '../EventCommentSection'
 import EventManageDropDown from '../../components/EventManageDropDown'
+import ActionConfirm from '../ActionConfirm'
 import { EventProps } from '../../types'
 import './Event.scss'
 
 const Event = ({ event, creatorName, participants }: EventProps) => {
   const history = useHistory()
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const [hideDetails, setHideDetails] = useState(true)
   const [showManageOptions, setShowManageOptions] = useState(false)
   const [cookies] = useCookies(['user'])
@@ -41,6 +43,7 @@ const Event = ({ event, creatorName, participants }: EventProps) => {
 
   const endEvent = () => {
     setShowManageOptions(false)
+    setIsModalOpen(true)
   }
 
   const editEvent = () => {
@@ -60,8 +63,14 @@ const Event = ({ event, creatorName, participants }: EventProps) => {
 
   return (
     <div className='event'>
+      {isModalOpen && (
+        <ActionConfirm
+          setIsModalOpen={setIsModalOpen}
+          handleConfirm={() => console.log('handle')}
+          text={`Are you sure you want to end event- ${title}`}
+        />
+      )}
       <EventTitle title={title} createdAt={created_at} />
-
       {user_id === created_by && (
         <FontAwesomeIcon
           onClick={() => setShowManageOptions(!showManageOptions)}

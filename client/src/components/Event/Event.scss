@@ -5,6 +5,18 @@
   flex-direction: column;
   position: relative;
 
+  &__modal-title {
+    color: $textDark;
+    font-family: $montserrat;
+    font-size: $sub-head;
+    text-align: center;
+  }
+
+  &__modal-buttons {
+    margin-top: 30px;
+    @include flexCenter;
+  }
+
   &__manage {
     color: $textDark;
     cursor: pointer;
