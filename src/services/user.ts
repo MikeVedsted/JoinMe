@@ -71,7 +71,6 @@ const updateUser = async (userId: string, update: Partial<User>) => {
     if (!user) {
       throw new Error()
     }
-    let address: Partial<Address> = {}
 
     const {
       first_name = user.first_name,
@@ -83,10 +82,7 @@ const updateUser = async (userId: string, update: Partial<User>) => {
     } = update
 
     if (update.address) {
-      address = update.address
-    }
-
-    if (update.address) {
+      const address: Address = update.address
       const { street, postal_code, city, country, lat, lng } = address
       let { number } = address
       !number && (number = 0)
@@ -97,7 +93,7 @@ const updateUser = async (userId: string, update: Partial<User>) => {
         [lat, lng]
       )
 
-      if (addressResponse.rowCount === 0 && 'address' in update) {
+      if (addressResponse.rowCount === 0) {
         const newAddress = await db.query(
           'INSERT INTO address (street, number, postal_code, city, country, lat, lng) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING address_id',
           [street, number, postal_code, city, country, lat, lng]
@@ -127,14 +123,14 @@ const updateUser = async (userId: string, update: Partial<User>) => {
       return updatedUser
     }
 
-    const updateUserQuerywithoutAddress = `
+    const updateUserQueryWithoutAddress = `
       UPDATE userk 
       SET first_name = $2, last_name = $3, profile_image = $4, profile_text = $5, date_of_birth = $6, gender = $7 
       WHERE user_id = $1 
       RETURNING *
     `
 
-    const updateUser = await db.query(updateUserQuerywithoutAddress, [
+    const updateUser = await db.query(updateUserQueryWithoutAddress, [
       userId,
       first_name,
       last_name,
