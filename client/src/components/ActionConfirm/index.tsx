@@ -2,31 +2,34 @@ import React from 'react'
 
 import Modal from '../Modal'
 import Button from '../Button'
+import './ActionConfirm.scss'
 
 const ActionConfirm = ({ setIsModalOpen, handleConfirm, text }: any) => {
   return (
-    <Modal
-      closeModal={() => setIsModalOpen(false)}
-      content={
-        <div className='event__modal'>
-          <h1 className='event__modal-title'> {text}</h1>
-          <div className='event__modal-buttons'>
-            <Button
-              type='button'
-              text='Cancel'
-              modifier='secondary'
-              onClick={() => console.log('handle')}
-            />
-            <Button
-              type='button'
-              text='Confrim'
-              modifier='primary'
-              onClick={() => console.log('handle')}
-            />
+    <div className='action'>
+      <Modal
+        closeModal={() => setIsModalOpen(false)}
+        content={
+          <div className='action__wrapper'>
+            <h1 className='action__title'> {text}</h1>
+            <div className='action__buttons'>
+              <Button
+                type='button'
+                text='Cancel'
+                modifier='secondary'
+                onClick={() => setIsModalOpen(false)}
+              />
+              <Button
+                type='button'
+                text='Confrim'
+                modifier='primary'
+                onClick={handleConfirm}
+              />
+            </div>
           </div>
-        </div>
-      }
-    />
+        }
+      />
+    </div>
   )
 }
 
