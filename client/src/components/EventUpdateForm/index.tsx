@@ -8,12 +8,13 @@ import DropdownField from '../FormDropdownField'
 import GoogleAutoComplete from '../GoogleAutoComplete'
 import { useFormFields } from '../../hooks/useFormFields'
 import { eventCategories } from '../../util/constants/eventCategories'
+import { EventUpdateFormProps } from '../../types'
 import './EventUpdateForm.scss'
 
-const EventUpdateForm = ({ data, eventId }: any) => {
+const EventUpdateForm = ({ data, eventId }: EventUpdateFormProps) => {
   const history = useHistory()
-  const [address, setAddress] = useState({})
   const [error, setError] = useState('')
+  const [address, setAddress] = useState()
 
   const convertDate = (date: any) => {
     const convertedDate = date.substr(0, 10)
@@ -24,13 +25,13 @@ const EventUpdateForm = ({ data, eventId }: any) => {
   const expires_at = data ? convertDate(data.expires_at) : ''
 
   const [fields, handleFields] = useFormFields({
-    title: data ? data.title : '',
-    category: data ? data.category : '',
+    title: data.title || '',
+    category: data.category || '',
     date: date,
-    time: data ? data.time : '',
-    description: data ? data.description : '',
-    max_participants: data ? data.max_participants : '',
-    image: data ? data.image : '',
+    time: data.time,
+    description: data.description || '',
+    max_participants: data.max_participants || 1,
+    image: data.image || '',
     expires_at: expires_at
   })
 
@@ -44,7 +45,7 @@ const EventUpdateForm = ({ data, eventId }: any) => {
         data: data
       })
       setError('')
-      alert(`Success! Event: ${data.event_id} was successfully updated`)
+      alert(`Success! Event: ${data.title} was successfully updated`)
       history.push('/')
     } catch (error) {
       setError(error.message)
@@ -120,14 +121,23 @@ const EventUpdateForm = ({ data, eventId }: any) => {
         onChange={handleFields}
         placeholder='Describe your event. Include whatever information might be relevant to know before requesting to join.'
       />
-      <InputField
-        type='url'
-        id='image'
-        label='Image'
-        value={fields.image}
-        onChange={handleFields}
-        placeholder='Enter a link for an image you would like to use'
-      />
+      <div className='image-upload'>
+        <InputField
+          type='url'
+          id='image'
+          label='Image'
+          value={fields.image}
+          onChange={handleFields}
+          placeholder='Enter a link for an image you would like to use'
+        />
+        {fields.image && (
+          <img
+            className='image-upload__image'
+            src={fields.image}
+            alt='What we currently display'
+          />
+        )}
+      </div>
       <div className='form-buttons'>
         <Button type='reset' text='Reset' modifier='secondary' />
         <Button type='submit' text='Update' modifier='primary' />

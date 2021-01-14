@@ -1,16 +1,15 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
-import axios from 'axios'
 
 import EventUpdateForm from '../../components/EventUpdateForm'
-import useGetSingleEvent from '../../hooks/useGetSingleEvent'
-import { EventEditPageParamProps, EventType } from '../../types'
+import useEventDetails from '../../hooks/useEventDetails'
+import { EventEditPageParamProps } from '../../types'
 import './EventEditPage.scss'
 
 const EventEditPage = () => {
   const { eventId } = useParams<EventEditPageParamProps>()
-  const [data] = useGetSingleEvent(eventId)
+  const [data] = useEventDetails(eventId)
   const [cookies] = useCookies(['user'])
   const { user_id } = cookies.user
 
