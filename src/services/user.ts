@@ -88,7 +88,6 @@ const updateUser = async (userId: string, update: Partial<User>) => {
       const { street, postal_code, city, country, lat, lng } = address
       let { number } = address
       !number && (number = 0)
-      //let addressId: string
 
       const addressResponse = await db.query(
         'SELECT address_id FROM address WHERE lat = $1 and lng = $2',
@@ -128,7 +127,7 @@ const updateUser = async (userId: string, update: Partial<User>) => {
     return error
   }
 }
-// 552b56cd-3be5-43ff-ba50-2e84d3b20477
+
 const deleteUser = async (userId: string) => {
   const DBResponse = await db.query('SELECT * FROM userk WHERE user_id = $1', [userId])
   const user: User = DBResponse.rows[0]

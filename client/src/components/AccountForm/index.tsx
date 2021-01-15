@@ -88,6 +88,7 @@ const AccountForm = ({ userId }: AccountFormProps) => {
         label='Gender'
         id='gender'
         options={genderOptions}
+        selectedValue={fields.gender}
         onBlur={handleFieldChange}
       />
       <label className='form__label'>
