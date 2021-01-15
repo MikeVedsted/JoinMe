@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 import { useCookies } from 'react-cookie'
+import { useHistory } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Button from '../Button'
@@ -11,12 +13,8 @@ import EventManageDropDown from '../../components/EventManageDropDown'
 import { EventProps } from '../../types'
 import './Event.scss'
 
-const Event = ({
-  event,
-  creatorName,
-  participants,
-  handleAddRequest
-}: EventProps) => {
+const Event = ({ event, creatorName, participants }: EventProps) => {
+  const history = useHistory()
   const [hideDetails, setHideDetails] = useState(true)
   const [showManageOptions, setShowManageOptions] = useState(false)
   const [cookies] = useCookies(['user'])
@@ -47,6 +45,17 @@ const Event = ({
 
   const editEvent = () => {
     setShowManageOptions(false)
+    history.push(`/event/${event_id}/edit`)
+  }
+
+  const handleJoinRequest = async () => {
+    try {
+      const res = await axios.post(`/api/v1/events/${event_id}/join`)
+      const { message } = res.data
+      alert(message)
+    } catch (error) {
+      alert(`Sorry, something went wrong. Please try again.\n\n${error}`)
+    }
   }
 
   return (
@@ -91,7 +100,7 @@ const Event = ({
           type='button'
           text='Ask to join'
           modifier='primary'
-          onClick={handleAddRequest}
+          onClick={handleJoinRequest}
         />
         <Button
           type='button'

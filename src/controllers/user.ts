@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express'
 
 import UserService from '../services/user'
 import { NotFoundError, BadRequestError } from '../helpers/apiError'
-import { AuthRequest, User } from '../types'
+import { AuthRequest } from '../types'
 
 export const googleLogin = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -94,5 +94,14 @@ export const findParticipatingEvents = async (
     return res.json(await UserService.findParticipatingEvents(user_id))
   } catch (error) {
     next(new NotFoundError('No results found', error))
+  }
+}
+
+export const findPublicUserInfo = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { userId } = req.params
+    return res.json(await UserService.findPublicUserInfo(userId))
+  } catch (error) {
+    next(new NotFoundError('User not found', error))
   }
 }
