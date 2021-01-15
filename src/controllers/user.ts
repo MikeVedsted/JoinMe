@@ -13,18 +13,6 @@ export const googleLogin = async (req: Request, res: Response, next: NextFunctio
   }
 }
 
-export const refreshToken = async (req: AuthRequest, res: Response, next: NextFunction) => {
-  try {
-    if (!req.user) {
-      throw Error
-    }
-    const { user_id } = req.user
-    return res.json(await UserService.refreshToken(user_id, res))
-  } catch (error) {
-    next(new BadRequestError('Unexpected error', error))
-  }
-}
-
 export const getTokenInfo = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
     if (!req.user) {

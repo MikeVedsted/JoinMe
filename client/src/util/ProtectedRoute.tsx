@@ -9,23 +9,24 @@ const ProtectedRoute = ({
   component: Component,
   ...rest
 }: ProtectedRouteProps) => {
-  const [cookies, setCookies] = useCookies(['user'])
+  const [cookies, setCookie, removeCookie] = useCookies(['user'])
   const [isAuthenticated, setAuthentication] = useState(false)
 
   useEffect(() => {
     async function getUserInfo() {
       try {
-        const { data } = await axios.get(`/api/v1/users/verify-token`)
-        if (data.message && new Date(data.message.expiredAt) < new Date()) {
-          const res = await axios.get(`/api/v1/users/refresh-token`)
-          const { user_id, first_name, last_name, profile_image } = res.data
-          setCookies('user', { user_id, first_name, last_name, profile_image })
-          setAuthentication(true)
+        const { data } = await axios.get('/api/v1/users/verify-token')
+        if (data.message === 'jwt expired') {
+          console.log(data)
+          removeCookie('user')
+          console.log(cookies)
         } else {
+          const { user_id, first_name, last_name, profile_image } = data
+          setCookie('user', { user_id, first_name, last_name, profile_image })
           setAuthentication(true)
         }
       } catch (error) {
-        console.log(error)
+        console.log('Error', error)
       }
     }
     getUserInfo()

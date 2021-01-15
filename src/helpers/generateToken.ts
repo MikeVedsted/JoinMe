@@ -20,6 +20,6 @@ export const generateRefreshToken = (id: string) => {
       sub: id
     },
     JWT_REFRESH_SECRET,
-    { expiresIn: '30d' }
+    { expiresIn: 60 * 7 }
   )
 }

@@ -35,18 +35,6 @@ const googleLogin = async (id_token: string, res: Response) => {
   }
 }
 
-const refreshToken = async (userId: string, res: Response) => {
-  try {
-    const accessToken = generateAccessToken(userId)
-    const DBResponse = await db.query('SELECT * FROM userk WHERE user_id = $1', [userId])
-    const user: User = DBResponse.rows[0]
-    res.cookie('x-auth-access-token', accessToken)
-    return user
-  } catch (error) {
-    return error
-  }
-}
-
 const findUserById = async (userId: string) => {
   try {
     const query = `
@@ -196,6 +184,5 @@ export default {
   deleteUser,
   getUserCount,
   getInterestedEvents,
-  refreshToken,
   findParticipatingEvents
 }
