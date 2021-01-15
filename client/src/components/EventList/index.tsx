@@ -13,7 +13,6 @@ const EventList = ({ events, title }: EventListProps) => {
           key={event.created_at}
           event={event}
           creatorName={`${event.first_name} ${event.last_name}`}
-          participants={event.participants}
         />
       ))}
     </div>

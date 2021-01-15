@@ -25,7 +25,7 @@ router.get('/participant', isAuthenticated, findParticipatingEvents)
 router.get('/creator/:userId', isAuthenticated, findEventsByCreator)
 router.get('/category/:categoryId', isAuthenticated, findEventByCategory)
 router.get('/:eventId', isAuthenticated, findEventById)
-router.get('/:eventId/participants', findEventParticipants)
+router.get('/:eventId/participants', isAuthenticated, findEventParticipants)
 router.put('/:eventId', isAuthenticated, updateEvent)
 router.delete('/:eventId', isAuthenticated, deleteEvent)
 

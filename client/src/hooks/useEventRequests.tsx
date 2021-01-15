@@ -12,7 +12,7 @@ const useEventRequests = (eventId: EventId) => {
 
   const fetchRequests = async () => {
     try {
-      const { data } = await axios.get(`/api/v1/events/${eventId}/requests`)
+      const { data } = await axios.get(`/api/v1/requests/${eventId}`)
       setRequests(data)
     } catch (error) {
       console.log(error)

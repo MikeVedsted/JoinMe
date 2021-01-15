@@ -17,14 +17,18 @@ export const deleteRequestQ = `
 `
 
 export const findJoinRequestsByEventQ = `
-  SELECT user_id, profile_image, first_name, last_name
+  SELECT 
+    er_id,
+    user_id, profile_image, first_name, last_name
   FROM event_request 
   INNER JOIN userk ON event_request.requester = userk.user_id
   WHERE event = $1
 `
 
 export const findParticipantsByEventQ = `
-  SELECT user_id, profile_image, first_name, last_name
+  SELECT 
+    ep_id,
+    user_id, profile_image, first_name, last_name
   FROM event_participant 
   INNER JOIN userk ON event_participant.participant = userk.user_id
   WHERE event = $1

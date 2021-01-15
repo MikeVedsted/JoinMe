@@ -1,12 +1,22 @@
 import React from 'react'
+import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { EventParticipantProps } from '../../types'
 import './EventParticipant.scss'
 
-const EventParticipant = ({ user, handleDelete }: EventParticipantProps) => {
-  const { profile_image, user_id, first_name, last_name } = user
+const EventParticipant = ({ participant }: EventParticipantProps) => {
+  const { profile_image, user_id, first_name, last_name, ep_id } = participant
+
+  const handleDelete = async (participantId: string) => {
+    try {
+      await axios.delete(`/api/v1/requests/${participantId}/remove-participant`)
+      alert('Deleted')
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <div className='participant'>
@@ -21,7 +31,7 @@ const EventParticipant = ({ user, handleDelete }: EventParticipantProps) => {
         </Link>
       </div>
       <FontAwesomeIcon
-        onClick={handleDelete}
+        onClick={() => handleDelete(ep_id)}
         className='participant__delete'
         icon={'trash'}
       />

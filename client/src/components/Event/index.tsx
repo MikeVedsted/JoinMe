@@ -8,13 +8,15 @@ import EventTitle from '../EventTitle'
 import EventImage from '../EventImage'
 import EventDataBox from '../EventDataBox'
 import EventCommentSection from '../EventCommentSection'
-import EventManageDropDown from '../../components/EventManageDropDown'
+import EventManageDropDown from '../EventManageDropDown'
+import useEventParticipants from '../../hooks/useEventParticipants'
 import { EventProps } from '../../types'
 import './Event.scss'
 
-const Event = ({ event, creatorName, participants }: EventProps) => {
+const Event = ({ event, creatorName }: EventProps) => {
   const [hideDetails, setHideDetails] = useState(true)
   const [showManageOptions, setShowManageOptions] = useState(false)
+  const [participants] = useEventParticipants(event.event_id)
   const [cookies] = useCookies(['user'])
   const { user_id } = cookies.user || ''
   const {
@@ -82,7 +84,7 @@ const Event = ({ event, creatorName, participants }: EventProps) => {
           date={date}
           time={time}
           address={`${street} ${number}, ${postal_code} ${city}`}
-          participants={participants}
+          participants={participants.length}
           max_participants={max_participants}
         />
       </div>
