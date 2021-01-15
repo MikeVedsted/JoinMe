@@ -3,12 +3,12 @@ import axios from 'axios'
 
 import { EventType } from '../types'
 
-const useEventDisplay = (refresh: boolean) => {
+const useEventDisplay = () => {
   const [events, setEvents] = useState<EventType[]>([])
 
   useEffect(() => {
     fetchEvents()
-  }, [refresh])
+  }, [events])
 
   const fetchEvents = async () => {
     try {
