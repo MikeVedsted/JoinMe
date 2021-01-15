@@ -13,7 +13,7 @@ import { AccountFormProps, AppState } from '../../types'
 import './AccountForm.scss'
 
 const AccountForm = ({ userId }: AccountFormProps) => {
-  const user = useSelector((state: AppState) => state.user.user)
+  const { user } = useSelector((state: AppState) => state.user)
   const [address, setAddress] = useState<any>()
   const [fields, handleFieldChange] = useFormFields({
     email: user[0].email,
@@ -24,7 +24,7 @@ const AccountForm = ({ userId }: AccountFormProps) => {
     profile_text: user[0].profile_text,
     profile_image: user[0].profile_image
   })
-  const userAddress = `${user[0].street} ${user[0].number} ${user[0].city} ${user[0].postal_code}`
+  const userAddress = `${user[0].street} ${user[0].number}, ${user[0].postal_code} ${user[0].city}`
 
   useMemo(() => {
     user[0].street &&

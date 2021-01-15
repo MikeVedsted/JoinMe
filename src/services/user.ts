@@ -67,9 +67,9 @@ const updateUser = async (userId: string, update: Partial<User>) => {
   try {
     const userResponse = await db.query('SELECT * FROM userk WHERE user_id = $1', [userId])
     const user: User = userResponse.rows[0]
-
+    console.log(user)
     if (!user) {
-      throw new Error()
+      throw new Error('User not found')
     }
 
     const {
@@ -80,13 +80,15 @@ const updateUser = async (userId: string, update: Partial<User>) => {
       date_of_birth = user.date_of_birth,
       gender = user.gender
     } = update
+    const { base_address } = user
+    let addressId: any = base_address
 
     if (update.address) {
       const address: Address = update.address
       const { street, postal_code, city, country, lat, lng } = address
       let { number } = address
       !number && (number = 0)
-      let addressId: string
+      //let addressId: string
 
       const addressResponse = await db.query(
         'SELECT address_id FROM address WHERE lat = $1 and lng = $2',
@@ -102,40 +104,21 @@ const updateUser = async (userId: string, update: Partial<User>) => {
       } else {
         addressId = addressResponse.rows[0].address_id
       }
+    }
 
-      const updateUserQuery = `
+    const updateUserQuery = `
         UPDATE userk 
         SET first_name = $2, last_name = $3, profile_image = $4, profile_text = $5, base_address = $6, date_of_birth = $7, gender = $8 
         WHERE user_id = $1 
         RETURNING *
       `
-      const updateUser = await db.query(updateUserQuery, [
-        userId,
-        first_name,
-        last_name,
-        profile_image,
-        profile_text,
-        addressId,
-        date_of_birth,
-        gender
-      ])
-      const updatedUser: User = updateUser.rows[0]
-      return updatedUser
-    }
-
-    const updateUserQueryWithoutAddress = `
-      UPDATE userk 
-      SET first_name = $2, last_name = $3, profile_image = $4, profile_text = $5, date_of_birth = $6, gender = $7 
-      WHERE user_id = $1 
-      RETURNING *
-    `
-
-    const updateUser = await db.query(updateUserQueryWithoutAddress, [
+    const updateUser = await db.query(updateUserQuery, [
       userId,
       first_name,
       last_name,
       profile_image,
       profile_text,
+      addressId,
       date_of_birth,
       gender
     ])
@@ -145,7 +128,7 @@ const updateUser = async (userId: string, update: Partial<User>) => {
     return error
   }
 }
-
+// 552b56cd-3be5-43ff-ba50-2e84d3b20477
 const deleteUser = async (userId: string) => {
   const DBResponse = await db.query('SELECT * FROM userk WHERE user_id = $1', [userId])
   const user: User = DBResponse.rows[0]

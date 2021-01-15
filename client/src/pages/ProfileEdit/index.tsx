@@ -30,8 +30,7 @@ const ProfileEdit = () => {
     getUserInfo()
   }, [dispatch, user_id])
 
-  // FIX? Add loading component/icon anything if needed
-  // if (loading) return <div>LOADING</div>
+  // FIX? Add loading component
   return (
     !loading && (
       <div className='page'>
