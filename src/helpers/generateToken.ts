@@ -9,7 +9,7 @@ export const generateAccessToken = (id: string) => {
       sub: id
     },
     JWT_SECRET,
-    { expiresIn: 60 * 5 }
+    { expiresIn: 60 * 60 }
   )
 }
 
@@ -20,6 +20,6 @@ export const generateRefreshToken = (id: string) => {
       sub: id
     },
     JWT_REFRESH_SECRET,
-    { expiresIn: 60 * 7 }
+    { expiresIn: '30d' }
   )
 }

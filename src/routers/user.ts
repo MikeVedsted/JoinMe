@@ -12,7 +12,6 @@ import {
   getTokenInfo,
   getUserCount,
   findPublicUserInfo
-
 } from '../controllers/user'
 
 const router = express.Router()

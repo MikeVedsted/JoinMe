@@ -48,7 +48,6 @@ const ProfilePage = () => {
     getUserInfo()
   }, [])
 
-
   const handleEditClick = () => {
     history.push('/')
   }
