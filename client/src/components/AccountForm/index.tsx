@@ -44,9 +44,10 @@ const AccountForm = ({ userId }: AccountFormProps) => {
     try {
       const update = { ...fields, address }
       const res = await axios.put(`/api/v1/users/${userId}`, update)
-      alert(
-        'Thank you!\nThe changes have been saved and you can now safely leave this page, or make further changes if you spotted a mistake.'
-      )
+      res.status === 200 &&
+        alert(
+          'Thank you!\nThe changes have been saved and you can now safely leave this page, or make further changes if you spotted a mistake.'
+        )
     } catch (error) {
       console.log(error)
     }
