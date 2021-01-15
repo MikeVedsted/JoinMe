@@ -20,5 +20,19 @@
 }
 
 .image-upload {
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 20px;
+  align-items: center !important;
+
+  &__field {
+    display: block;
+  }
+
+  &__image {
+    width: 150px;
+    margin-left: 10px;
+    margin-bottom: 0 !important;
+    border-radius: 16px;
+  }
 }

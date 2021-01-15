@@ -10,18 +10,3 @@
     text-align: center;
   }
 }
-
-.image-upload {
-  display: flex;
-  justify-content: space-between;
-
-  &__field {
-    display: block;
-  }
-
-  &__image {
-    width: 150px;
-    margin-left: 10px;
-    border-radius: 16px;
-  }
-}

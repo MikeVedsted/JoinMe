@@ -89,18 +89,13 @@ const AccountForm = ({ userId }: AccountFormProps) => {
         options={genderOptions}
         onBlur={handleFieldChange}
       />
-      <FormInputField
-        type='text'
-        id='base_address'
-        label='Address'
-        value={
-          user[0].street
-            ? 'Saved address: ' + userAddress
-            : 'Saved address: No address saved'
-        }
-        readOnly
-      />
-      <GoogleAutoComplete handleAddress={setAddress} />
+      <label className='form__label'>
+        Address
+        <p className='form__label form__label--address'>
+          Current address: {user[0].street ? userAddress : '-'}
+        </p>
+        <GoogleAutoComplete handleAddress={setAddress} />
+      </label>
       <FormInputTextArea
         id='profile_text'
         label='Profile text'
