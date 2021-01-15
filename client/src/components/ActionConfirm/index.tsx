@@ -2,9 +2,14 @@ import React from 'react'
 
 import Modal from '../Modal'
 import Button from '../Button'
+import { ActionConfirmProps } from '../../types'
 import './ActionConfirm.scss'
 
-const ActionConfirm = ({ setIsModalOpen, handleConfirm, text }: any) => {
+const ActionConfirm = ({
+  setIsModalOpen,
+  handleConfirm,
+  text
+}: ActionConfirmProps) => {
   return (
     <div className='action'>
       <Modal
