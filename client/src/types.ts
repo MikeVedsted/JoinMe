@@ -282,9 +282,3 @@ export type EventUpdateFormProps = {
   data: Event
   eventId: EventId
 }
-
-export type ActionConfirmProps = {
-  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
-  handleConfirm: () => void
-  text: string
-}

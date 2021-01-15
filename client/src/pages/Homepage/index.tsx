@@ -8,7 +8,8 @@ import useEventDisplay from '../../hooks/useEventDisplay'
 import './Homepage.scss'
 
 const Homepage = () => {
-  const [events] = useEventDisplay()
+  const [refresh, setRefresh] = useState(false)
+  const [events] = useEventDisplay(refresh)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleAddRequest = () => {

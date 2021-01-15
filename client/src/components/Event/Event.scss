@@ -5,6 +5,24 @@
   flex-direction: column;
   position: relative;
 
+  &__modal {
+    @include flexCenter;
+    flex-direction: column;
+  }
+
+  &__modal-title {
+    color: $secondary;
+    font-family: $montserrat;
+    font-size: $sub-head;
+    text-align: center;
+  }
+
+  &__modal-buttons {
+    margin-top: 30px;
+    width: 70%;
+    @include flexCenter;
+  }
+
   &__manage {
     color: $textDark;
     cursor: pointer;
@@ -58,6 +76,20 @@
       & * {
         margin-top: 5px;
       }
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .event {
+    &__modal-title {
+      margin-top: 40px;
+      font-size: $text;
+    }
+
+    &__modal-buttons {
+      width: 90%;
+      flex-direction: column;
     }
   }
 }
