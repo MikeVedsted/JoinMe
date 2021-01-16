@@ -18,7 +18,7 @@ const NavDropdown = ({
   userId
 }: NavDropdownProps) => {
   const history = useHistory()
-  const [cookies, setCookie, removeCookie] = useCookies(['user'])
+  const [, , removeCookie] = useCookies(['user'])
 
   const logout = () => {
     removeCookie('user')
@@ -33,12 +33,14 @@ const NavDropdown = ({
           text='My events'
           icon={faListUl}
           destination={`/user/${userId}/hosted`}
+          setDropdownHidden={setDropdownHidden}
         />
         <hr className='nav-dropdown__separator' />
         <NavDropdownLink
           text='My profile'
           icon={faUser}
           destination={`/user/${userId}`}
+          setDropdownHidden={setDropdownHidden}
         />
         <hr className='nav-dropdown__separator' />
         <NavDropdownFunction
