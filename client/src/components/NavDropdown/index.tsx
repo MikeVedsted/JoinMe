@@ -44,8 +44,7 @@ const NavDropdown = ({
     return () => {
       document.removeEventListener('click', handleClickOutside)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [display])
+  })
 
   return (
     <div ref={node} hidden={display} className='nav-dropdown'>

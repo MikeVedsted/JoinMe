@@ -10,15 +10,11 @@ const NavDropdownLink = ({
   destination,
   setDropdownHidden
 }: NavDropdownLinkProps) => {
-  const handleDropdownHidden = () => {
-    setDropdownHidden(true)
-  }
-
   return (
     <Link
       to={destination}
       className='nav-dropdown__link'
-      onClick={handleDropdownHidden}
+      onClick={() => setDropdownHidden(true)}
     >
       <li className='nav-dropdown__item'>
         <FontAwesomeIcon icon={icon} className='nav-dropdown__item--icon' />
