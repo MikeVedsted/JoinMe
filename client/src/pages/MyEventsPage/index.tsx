@@ -31,6 +31,7 @@ const MyEventsPage = () => {
     if (pathname.includes('/interested'))
       return (
         <EventList
+          type='interested'
           title={'Events you have requested to join'}
           events={interestedEvents}
         />
