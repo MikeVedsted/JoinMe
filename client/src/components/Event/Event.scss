@@ -5,16 +5,25 @@
   flex-direction: column;
   position: relative;
 
-  &__modal {
-    @include flexCenter;
-    flex-direction: column;
-  }
-
   &__modal-title {
     color: $secondary;
     font-family: $montserrat;
     font-size: $sub-head;
     text-align: center;
+  }
+
+  &__modal-buttons {
+    @include twoButtonsInline;
+    margin-top: 30px;
+  }
+
+  &__modal-warning {
+    color: $textDark;
+    font-size: 12px;
+    font-style: italic;
+    font-family: $nunito;
+    font-weight: 100;
+    text-align: justify;
   }
 
   &__modal-buttons {
@@ -88,8 +97,10 @@
     }
 
     &__modal-buttons {
-      width: 90%;
       flex-direction: column;
+      & * {
+        width: 100%;
+      }
     }
   }
 }

@@ -76,10 +76,13 @@ const Event = ({ event, creatorName, participants }: EventProps) => {
         <Modal
           closeModal={() => setIsModalOpen(false)}
           content={
-            <div className='event__modal'>
+            <div>
               <h1 className='event__modal-title'>
-                {' '}
-                {`Are you sure you want to delete the event : '${title}'?`}
+                {`Are you sure you want to delete the event: ${title}?`}
+                <p className='event__modal-warning'>
+                  The event, including comments and participant information,
+                  will be permanently deleted and it cannot be undone.
+                </p>
               </h1>
               <div className='event__modal-buttons'>
                 <Button
@@ -90,7 +93,7 @@ const Event = ({ event, creatorName, participants }: EventProps) => {
                 />
                 <Button
                   type='button'
-                  text='Confrim'
+                  text='Confirm'
                   modifier='primary'
                   onClick={handleEndEvent}
                 />
