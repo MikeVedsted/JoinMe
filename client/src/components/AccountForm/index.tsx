@@ -14,7 +14,6 @@ import './AccountForm.scss'
 
 const AccountForm = ({ userId }: AccountFormProps) => {
   const { user } = useSelector((state: AppState) => state.user)
-  console.log(user)
   const [address, setAddress] = useState<any>()
   const [fields, handleFieldChange] = useFormFields({
     email: user[0].email,
@@ -26,7 +25,7 @@ const AccountForm = ({ userId }: AccountFormProps) => {
     profile_image: user[0].profile_image
   })
   const userAddress = `${user[0].street} ${user[0].number}, ${user[0].postal_code} ${user[0].city}`
-  console.log(fields.date_of_birth.slice(0, 10))
+
   useMemo(() => {
     user[0].street &&
       setAddress({
@@ -81,7 +80,11 @@ const AccountForm = ({ userId }: AccountFormProps) => {
       <FormInputField
         type='date'
         id='date_of_birth'
-        value={fields.date_of_birth.slice(0, 10)}
+        value={
+          fields.date_of_birth
+            ? fields.date_of_birth.slice(0, 10)
+            : fields.date_of_birth
+        }
         label='Birthday'
         onChange={handleFieldChange}
       />
