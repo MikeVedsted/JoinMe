@@ -1,0 +1,41 @@
+@import '../../SCSS/config';
+
+.hosted-event {
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    font-family: $montserrat;
+    font-size: $heading;
+    color: $textDark;
+    margin: 0;
+  }
+
+  &__content {
+    display: flex;
+    
+  }
+
+  &__buttons {
+    $height: 194px;    
+
+    & * {
+      margin: 0 0  calc(#{$height}/5/3) 0;
+      width: 100%;
+      height: calc(194px/5)
+    }
+  }
+}
+
+
+@media only screen and (max-width: 1024px) {
+  .hosted-event {
+    &__content {
+      display: block;
+    }
+
+    &__buttons {      
+      margin: 0 2% 20px;
+    }
+  }
+}
