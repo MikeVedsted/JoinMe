@@ -9,12 +9,14 @@ import EventTitle from '../EventTitle'
 import EventImage from '../EventImage'
 import EventDataBox from '../EventDataBox'
 import EventCommentSection from '../EventCommentSection'
+import Modal from '../Modal'
 import EventManageDropDown from '../../components/EventManageDropDown'
 import { EventProps } from '../../types'
 import './Event.scss'
 
 const Event = ({ event, creatorName, participants }: EventProps) => {
   const history = useHistory()
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const [hideDetails, setHideDetails] = useState(true)
   const [showManageOptions, setShowManageOptions] = useState(false)
   const [cookies] = useCookies(['user'])
@@ -41,6 +43,7 @@ const Event = ({ event, creatorName, participants }: EventProps) => {
 
   const endEvent = () => {
     setShowManageOptions(false)
+    setIsModalOpen(true)
   }
 
   const editEvent = () => {
@@ -57,11 +60,49 @@ const Event = ({ event, creatorName, participants }: EventProps) => {
       alert(`Sorry, something went wrong. Please try again.\n\n${error}`)
     }
   }
+  const handleEndEvent = async () => {
+    try {
+      await axios.delete(`/api/v1/events/${event_id}`)
+      setIsModalOpen(false)
+      alert('Event Successfully Deleted!')
+    } catch (error) {
+      alert(`Sorry, something went wrong. Please try again.\n\n${error}`)
+    }
+  }
 
   return (
     <div className='event'>
+      {isModalOpen && (
+        <Modal
+          closeModal={() => setIsModalOpen(false)}
+          content={
+            <div>
+              <h1 className='event__modal-title'>
+                {`Are you sure you want to delete the event: ${title}?`}
+                <p className='event__modal-warning'>
+                  The event, including comments and participant information,
+                  will be permanently deleted and it cannot be undone.
+                </p>
+              </h1>
+              <div className='event__modal-buttons'>
+                <Button
+                  type='button'
+                  text='Cancel'
+                  modifier='secondary'
+                  onClick={() => setIsModalOpen(false)}
+                />
+                <Button
+                  type='button'
+                  text='Confirm'
+                  modifier='primary'
+                  onClick={handleEndEvent}
+                />
+              </div>
+            </div>
+          }
+        />
+      )}
       <EventTitle title={title} createdAt={created_at} />
-
       {user_id === created_by && (
         <FontAwesomeIcon
           onClick={() => setShowManageOptions(!showManageOptions)}

@@ -50,7 +50,7 @@ const createEvent = async (event: Event) => {
     INSERT INTO event 
       (title, category, date, time, description, max_participants, address, expires_at, created_by, image) 
     VALUES ($1, (SELECT category_id FROM category WHERE name = $2), $3, $4, $5, $6, $7, $8, $9, $10) 
-    RETURNING *'
+    RETURNING *
   `
     const createEvent = await db.query(createEventQuery, [
       title,
