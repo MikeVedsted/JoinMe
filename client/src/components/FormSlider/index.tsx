@@ -15,8 +15,15 @@ const FormSlider = ({
   const [relativeValue, setRelativeValue] = useState(initialValue)
   const [thumbPosition, setThumbPosition] = useState('')
 
+  const handleSliderChange = (e: any) => {
+    setRelativeValue(e.target.value)
+    onChange(e)
+  }
+
   useEffect(() => {
-    setRelativeValue(((Number(value) - minRange) * 100) / (maxRange - minRange))
+    setRelativeValue(
+      ((Number(relativeValue) - minRange) * 100) / (maxRange - minRange)
+    )
     const newPosition = `calc(${relativeValue}% + (${
       8 - relativeValue * 0.15
     }px))`
@@ -26,7 +33,7 @@ const FormSlider = ({
   return (
     <div className='slider'>
       <output style={{ left: `${thumbPosition}` }} className='slider__value'>
-        {value}
+        {relativeValue}
       </output>
       <input
         type='range'
@@ -43,9 +50,9 @@ const FormSlider = ({
             #f28705 100%
           )`
         }}
-        value={value}
+        value={relativeValue}
         className='slider__range'
-        onChange={onChange}
+        onChange={handleSliderChange}
       />
       <div className='slider__subset-labels'>
         <p className='slider__subset-labels--text'>{minRange} km</p>

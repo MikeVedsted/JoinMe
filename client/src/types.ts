@@ -86,7 +86,7 @@ export type DropdownProps = {
   label: string
   id: string
   options: string[]
-  onBlur: () => void
+  onBlur: (searchValue: any) => void
   modifier?: string
   required?: boolean
   selectedValue?: string
@@ -128,7 +128,7 @@ export type FormSliderProps = {
   maxRange?: number
   steps?: number
   initialValue?: number
-  onChange: () => void
+  onChange: (a: any) => void
 }
 
 export type NavDropdownLinkProps = {
@@ -176,7 +176,7 @@ export type InputTextAreaProps = {
 
 export type EventSearchProps = {
   handleSubmit: () => void
-  handleFieldChange: () => void
+  handleFieldChange: (e: any) => void
   distance: string
   setAddress: (a: any) => void
 }
