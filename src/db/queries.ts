@@ -84,7 +84,10 @@ export const createUserQ = `
 `
 
 export const findUserByIdQ = `
-  SELECT u.*, a.*, array_agg(c.name) as interests
+  SELECT 
+    u.*, 
+    a.*, 
+    array_agg(c.name) as interests
   FROM userk u
   LEFT JOIN user_interest ui ON u.user_id = ui.userk
   LEFT JOIN category c ON c.category_id = ui.interest
@@ -119,8 +122,8 @@ export const updateUserQ = `
 `
 
 export const deleteUserQ = `
-    DELETE FROM userk 
-    WHERE user_id = $1
+  DELETE FROM userk 
+  WHERE user_id = $1
 `
 
 export const findEventRequestsByUserQ = `
@@ -149,6 +152,11 @@ export const findEventParticipatingQ = `
   INNER JOIN category ON category.category_id = event.category
   INNER JOIN userk ON event_participant.participant = userk.user_id
   WHERE event_participant.participant = $1
+`
+export const findPublicUserQ = `
+  SELECT first_name, last_name, profile_image, profile_text, date_of_birth, gender
+  FROM userk
+  WHERE user_id = $1   
 `
 
 // -------------
@@ -202,8 +210,16 @@ export const createEventQ = `
 `
 
 export const findEventByIdQ = `
-  SELECT *
+  SELECT 
+    event_id, title, date, time, description, max_participants, created_by, event.created_at, expires_at, image,
+    street, number, postal_code, city, country, lat, lng,
+    name as category, 
+    first_name, last_name
   FROM event
+  LEFT JOIN address ON event.address = address.address_id
+  LEFT JOIN category ON event.category = category.category_id
+  LEFT JOIN userk ON event.created_by = userk.user_id
+  LEFT JOIN event_participant ON event.event_id = event_participant.event
   WHERE event_id = $1
 `
 
@@ -236,6 +252,8 @@ export const updateEventQ = `
     max_participants = $6,
     expires_at = $7,
     image = $8
+    category = (SELECT category_id FROM category WHERE name = $9),
+    address=$10
   WHERE event_id = $1
   RETURNING *
 `

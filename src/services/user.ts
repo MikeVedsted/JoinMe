@@ -1,8 +1,6 @@
 import { Response } from 'express'
 import jwt from 'jsonwebtoken'
 
-import generateToken from '../helpers/generateToken'
-import db from '../db'
 import {
   findUserByEmailQ,
   createUserQ,
@@ -12,28 +10,37 @@ import {
   addressIdByLocQ,
   createAddressQ,
   updateUserQ,
-  deleteUserQ
+  deleteUserQ,
+  findEventRequestsByUserQ,
+  findEventParticipatingQ,
+  findPublicUserQ
 } from '../db/queries'
+import db from '../db'
+import { generateAccessToken, generateRefreshToken } from '../helpers/generateToken'
 import { GoogleToken, User } from '../types'
 
 const googleLogin = async (id_token: string, res: Response) => {
   const decodedToken = jwt.decode(id_token)
   const { given_name, family_name, picture, email } = decodedToken as GoogleToken
   try {
-    const findUser = await db.query(findUserByEmailQ, [email])
-    const user: User = findUser.rows[0]
+    const DBResponse = await db.query(findUserByEmailQ, [email])
+    const user: User = DBResponse.rows[0]
 
     if (!user) {
       const createUser = await db.query(createUserQ, [picture, given_name, family_name, email])
       const newUser: User = createUser.rows[0]
-      const token = generateToken(newUser.user_id)
-      res.cookie('x-auth-token', token)
+      const accessToken = generateAccessToken(newUser.user_id)
+      const refreshToken = generateRefreshToken(newUser.user_id)
+      res.cookie('x-auth-access-token', accessToken)
+      res.cookie('x-auth-refresh-token', refreshToken)
       return newUser
+    } else {
+      const accessToken = generateAccessToken(user.user_id)
+      const refreshToken = generateRefreshToken(user.user_id)
+      res.cookie('x-auth-access-token', accessToken)
+      res.cookie('x-auth-refresh-token', refreshToken)
+      return user
     }
-
-    const token = generateToken(user.user_id)
-    res.cookie('x-auth-token', token)
-    return user
   } catch (error) {
     return error
   }
@@ -146,11 +153,45 @@ const getUserCount = async () => {
   }
 }
 
+const getInterestedEvents = async (user_id: string) => {
+  try {
+    const DBResponse = await db.query(findEventRequestsByUserQ, [user_id])
+    const events: Event[] = DBResponse.rows
+    return events
+  } catch (error) {
+    return error
+  }
+}
+
+const findParticipatingEvents = async (user_id: string) => {
+  try {
+    const DBResponse = await db.query(findEventParticipatingQ, [user_id])
+    const events: Event[] = DBResponse.rows
+    return events
+  } catch (error) {
+    return error
+  }
+}
+
+const findPublicUserInfo = async (userId: string) => {
+  try {
+    const DBResponse = await db.query(findPublicUserQ, [userId])
+    const publicInfo: Partial<User> = DBResponse.rows[0]
+
+    return publicInfo
+  } catch (error) {
+    return error
+  }
+}
+
 export default {
   findUserById,
   findAllUsers,
   updateUser,
   googleLogin,
   deleteUser,
-  getUserCount
+  getUserCount,
+  getInterestedEvents,
+  findParticipatingEvents,
+  findPublicUserInfo
 }

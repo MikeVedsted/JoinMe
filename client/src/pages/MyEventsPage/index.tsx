@@ -15,7 +15,7 @@ const MyEventsPage = () => {
   const { pathname } = useLocation()
   const [cookies] = useCookies(['user'])
   const { user_id } = cookies.user
-  const [interestedEvents] = useRequestedEvents()
+  const [requestedEvents] = useRequestedEvents()
   const [participatingEvents] = useParticipatingEvents()
   const [hostedEvents] = useHostedEvents(user_id)
 
@@ -28,7 +28,7 @@ const MyEventsPage = () => {
       return (
         <EventList
           title={'Events you have requested to join'}
-          events={interestedEvents}
+          events={requestedEvents}
         />
       )
     if (pathname.includes('/confirmed'))

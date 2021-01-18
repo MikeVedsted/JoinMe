@@ -8,7 +8,7 @@ const useEventDisplay = () => {
 
   useEffect(() => {
     fetchEvents()
-  }, [])
+  }, [events])
 
   const fetchEvents = async () => {
     try {

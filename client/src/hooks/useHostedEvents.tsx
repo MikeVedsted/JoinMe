@@ -7,8 +7,8 @@ const useHostedEvents = (userId: UserId) => {
   const [hostedEvents, setHostedEvents] = useState([])
 
   useEffect(() => {
-    fetchHostedEvents()
-  }, [])
+    userId && fetchHostedEvents()
+  }, [userId])
 
   const fetchHostedEvents = async () => {
     try {

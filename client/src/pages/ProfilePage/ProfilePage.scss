@@ -1,9 +1,10 @@
 @import '../../SCSS/config';
 
 .profile {
-  padding-top: 95px;
+  padding-top: 100px;
   margin: 0 2.5em;
   justify-content: stretch;
+  align-items: flex-start;
   @include flexStart;
 
   &__sidebar {
@@ -11,6 +12,13 @@
     flex-direction: column;
     flex-basis: 30%;
     flex-shrink: 10%;
+    height: fit-content;
+    position: sticky;
+    top: 122px;
+
+    & * {
+      width: 100%;
+    }
 
     &--image {
       width: auto;
@@ -64,6 +72,10 @@
 @media only screen and (max-width: 1024px) {
   .profile {
     flex-direction: column;
+
+    &__sidebar {
+      position: static;
+    }
 
     &__main {
       margin-left: 0vh;

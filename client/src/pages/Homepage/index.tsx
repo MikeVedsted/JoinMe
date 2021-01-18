@@ -52,11 +52,7 @@ const Homepage = () => {
       {events ? (
         <div className='homepage__events'>
           {events.map((event: any) => (
-            <Event
-              key={event.created_at}
-              event={event}
-              creatorName={`${event.first_name} ${event.last_name}`}
-            />
+            <Event key={event.created_at} event={event} />
           ))}
         </div>
       ) : (

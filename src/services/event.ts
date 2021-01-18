@@ -1,4 +1,3 @@
-import db from '../db'
 import {
   addressIdByLocQ,
   findAllEventsPopulatedQ,
@@ -15,56 +14,62 @@ import {
   findEventParticipatingQ,
   findParticipantsByEventQ
 } from '../db/queries'
-import { Event } from '../types'
+import db from '../db'
+import { Event, User } from '../types'
 
 const createEvent = async (event: Event) => {
-  const {
-    title,
-    category,
-    date,
-    time,
-    description,
-    max_participants,
-    address,
-    expires_at,
-    created_by,
-    image
-  } = event
-  const { street, postal_code, city, country, lat, lng } = address
-  let { number } = address
-  !number && (number = 0)
-  let addressId: string
-  const DBResponse = await db.query(addressIdByLocQ, [lat, lng])
+  try {
+    const {
+      title,
+      category,
+      date,
+      time,
+      description,
+      max_participants,
+      address,
+      expires_at,
+      created_by,
+      image
+    } = event
+    const { street, postal_code, city, country, lat, lng } = address
+    let { number } = address
+    !number && (number = 0)
+    let addressId: string
 
-  if (DBResponse.rowCount === 0) {
-    const newAddress = await db.query(createAddressQ, [
-      street,
-      number,
-      postal_code,
-      city,
-      country,
-      lat,
-      lng
+    const DBResponse = await db.query(addressIdByLocQ, [lat, lng])
+
+    if (DBResponse.rowCount === 0) {
+      const newAddress = await db.query(createAddressQ, [
+        street,
+        number,
+        postal_code,
+        city,
+        country,
+        lat,
+        lng
+      ])
+      addressId = newAddress.rows[0].address_id
+    } else {
+      addressId = DBResponse.rows[0].address_id
+    }
+
+    const createEvent = await db.query(createEventQ, [
+      title,
+      category,
+      date,
+      time,
+      description,
+      max_participants,
+      addressId,
+      expires_at,
+      created_by,
+      image
     ])
-    addressId = newAddress.rows[0].address_id
-  } else {
-    addressId = DBResponse.rows[0].address_id
+    const newEvent: Event = createEvent.rows[0]
+    return newEvent
+  } catch (error) {
+    return error
   }
-
-  const createEvent = await db.query(createEventQ, [
-    title,
-    category,
-    date,
-    time,
-    description,
-    max_participants,
-    addressId,
-    expires_at,
-    created_by,
-    image
-  ])
-  const newEvent: Event = createEvent.rows[0]
-  return newEvent
 }
 
 const findAllEvents = async () => {
@@ -116,6 +121,7 @@ const updateEvent = async (eventId: string, update: Partial<Event>) => {
       throw { error: 'Event not found' }
     }
 
+    let { address } = event
     const {
       title = event.title,
       date = event.date,
@@ -123,8 +129,29 @@ const updateEvent = async (eventId: string, update: Partial<Event>) => {
       description = event.description,
       max_participants = event.max_participants,
       expires_at = event.expires_at,
-      image = event.image
+      image = event.image,
+      category = event.category
     } = update
+
+    if (update.address) {
+      address = update.address
+      const { street, number, postal_code, city, country, lat, lng } = address
+      const DBAddressResponse = await db.query(addressIdByLocQ, [lat, lng])
+      if (DBAddressResponse.rowCount === 0) {
+        const newAddress = await db.query(createAddressQ, [
+          street,
+          number,
+          postal_code,
+          city,
+          country,
+          lat,
+          lng
+        ])
+        address = newAddress.rows[0].address_id
+      } else {
+        address = DBResponse.rows[0].address
+      }
+    }
 
     const updateQuery = await db.query(updateEventQ, [
       eventId,
@@ -134,7 +161,9 @@ const updateEvent = async (eventId: string, update: Partial<Event>) => {
       description,
       max_participants,
       expires_at,
-      image
+      image,
+      category,
+      address
     ])
     const updatedEvent: Event = updateQuery.rows[0]
     return updatedEvent

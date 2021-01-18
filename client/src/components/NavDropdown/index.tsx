@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useCookies } from 'react-cookie'
 import { useHistory } from 'react-router-dom'
 import {
@@ -17,8 +17,9 @@ const NavDropdown = ({
   setDropdownHidden,
   userId
 }: NavDropdownProps) => {
+  const node = useRef() as React.MutableRefObject<HTMLInputElement>
   const history = useHistory()
-  const [cookies, setCookie, removeCookie] = useCookies(['user'])
+  const [, , removeCookie] = useCookies(['user'])
 
   const logout = () => {
     removeCookie('user')
@@ -26,19 +27,40 @@ const NavDropdown = ({
     history.push('/')
   }
 
+  const handleClickOutside = (e: any) => {
+    if (node.current.contains(e.target)) {
+      return
+    }
+    setDropdownHidden(true)
+  }
+
+  useEffect(() => {
+    if (display === false) {
+      document.addEventListener('click', handleClickOutside)
+    } else {
+      document.removeEventListener('click', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside)
+    }
+  })
+
   return (
-    <div hidden={display} className='nav-dropdown'>
+    <div ref={node} hidden={display} className='nav-dropdown'>
       <ul className='nav-dropdown__list'>
         <NavDropdownLink
           text='My events'
           icon={faListUl}
           destination={`/user/${userId}/hosted`}
+          setDropdownHidden={setDropdownHidden}
         />
         <hr className='nav-dropdown__separator' />
         <NavDropdownLink
           text='My profile'
           icon={faUser}
           destination={`/user/${userId}`}
+          setDropdownHidden={setDropdownHidden}
         />
         <hr className='nav-dropdown__separator' />
         <NavDropdownFunction

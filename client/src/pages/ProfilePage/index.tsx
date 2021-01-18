@@ -12,9 +12,10 @@ import './ProfilePage.scss'
 const ProfilePage = () => {
   const history = useHistory()
   const [cookies] = useCookies(['user'])
+  const currentUser = cookies.user.user_id
   const { userId } = useParams<ProfilePageParamProps>()
-  const [hostedEvents] = useHostedEvents(userId)
   const [userInfo, setUserInfo] = useState({
+    user_id: '',
     profile_image: '',
     first_name: '',
     last_name: '',
@@ -29,18 +30,23 @@ const ProfilePage = () => {
     city: '',
     country: ''
   })
+  const [hostedEvents] = useHostedEvents(userInfo.user_id)
 
   useEffect(() => {
     async function getUserInfo() {
       try {
-        const { data } = await axios.get(`/api/v1/users/${userId}`)
+        const url =
+          userId === currentUser
+            ? `/api/v1/users/${userId}`
+            : `/api/v1/users/${userId}/public`
+        const { data } = await axios.get(url)
         setUserInfo(data)
       } catch (error) {
         console.log(error)
       }
     }
     getUserInfo()
-  }, [userId])
+  }, [])
 
   const handleEditClick = () => {
     history.push('/')
@@ -70,38 +76,32 @@ const ProfilePage = () => {
         <div className='profile__details'>
           <h4 className='profile__details--header'> Full Name: </h4>
           <p className='profile__details--text'>
-            {' '}
-            {`${userInfo.first_name} ${userInfo.last_name}`}{' '}
+            {`${userInfo.first_name} ${userInfo.last_name}`}
           </p>
         </div>
-
-        {cookies.user.user_id === userId && (
+        {currentUser === userId && (
           <div className='profile__details'>
             <h4 className='profile__details--header'> Email: </h4>
             <p className='profile__details--text'> {userInfo.email} </p>
           </div>
         )}
-
         <div className='profile__details'>
           <h4 className='profile__details--header'> Interests: </h4>
           <p className='profile__details--text'>
-            {' '}
-            {userInfo.interests?.join(', ')}{' '}
+            {userInfo.interests?.join(', ')}
           </p>
         </div>
-
         <div className='profile__details'>
           <h4 className='profile__details--header'> Intro: </h4>
           <p className='profile__details--text'> {userInfo.profile_text} </p>
         </div>
-
-        {cookies.user.user_id === userId && (
+        {currentUser === userId && (
           <div className='profile__details'>
             <h4 className='profile__details--header'> Address: </h4>
             {userInfo.base_address ? (
               <p className='profile__details--text'>
-                `${userInfo.street} ${userInfo.number}, ${userInfo.postal_code}{' '}
-                ${userInfo.city}, ${userInfo.country}`
+                {userInfo.street} {userInfo.number}, {userInfo.postal_code}{' '}
+                {userInfo.city}, {userInfo.country}
               </p>
             ) : (
               <p className='profile__details--text'> - </p>
