@@ -8,6 +8,7 @@ const DropdownField = ({
   id,
   options,
   onBlur,
+  selectedValue,
   ...rest
 }: DropdownProps) => {
   return (
@@ -15,7 +16,7 @@ const DropdownField = ({
       {label}
       <select onBlur={onBlur} id={id} className='form__field'>
         <option disabled selected hidden className='form__field--option'>
-          Select an option
+          {selectedValue ? selectedValue : 'Select an option'}
         </option>
         {options.map((optionValue) => (
           <option key={optionValue} className='form__field--option'>

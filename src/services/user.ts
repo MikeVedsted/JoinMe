@@ -1,8 +1,6 @@
 import { Response } from 'express'
 import jwt from 'jsonwebtoken'
 
-import generateToken from '../helpers/generateToken'
-import db from '../db'
 import {
   findUserByEmailQ,
   createUserQ,
@@ -16,26 +14,38 @@ import {
   findEventRequestsByUserQ,
   findEventParticipatingQ
 } from '../db/queries'
+import db from '../db'
+import { generateAccessToken, generateRefreshToken } from '../helpers/generateToken'
 import { GoogleToken, User } from '../types'
 
 const googleLogin = async (id_token: string, res: Response) => {
   const decodedToken = jwt.decode(id_token)
   const { given_name, family_name, picture, email } = decodedToken as GoogleToken
   try {
-    const findUser = await db.query(findUserByEmailQ, [email])
-    const user: User = findUser.rows[0]
+    const DBResponse = await db.query('SELECT * FROM userk WHERE email = $1', [email])
+    const user: User = DBResponse.rows[0]
 
     if (!user) {
-      const createUser = await db.query(createUserQ, [picture, given_name, family_name, email])
+      const createUserQuery = `
+      INSERT INTO userk 
+        (profile_image, first_name, last_name, email) 
+      VALUES ($1, $2, $3, $4) 
+      RETURNING *
+      `
+      const createUser = await db.query(createUserQuery, [picture, given_name, family_name, email])
       const newUser: User = createUser.rows[0]
-      const token = generateToken(newUser.user_id)
-      res.cookie('x-auth-token', token)
+      const accessToken = generateAccessToken(newUser.user_id)
+      const refreshToken = generateRefreshToken(newUser.user_id)
+      res.cookie('x-auth-access-token', accessToken)
+      res.cookie('x-auth-refresh-token', refreshToken)
       return newUser
+    } else {
+      const accessToken = generateAccessToken(user.user_id)
+      const refreshToken = generateRefreshToken(user.user_id)
+      res.cookie('x-auth-access-token', accessToken)
+      res.cookie('x-auth-refresh-token', refreshToken)
+      return user
     }
-
-    const token = generateToken(user.user_id)
-    res.cookie('x-auth-token', token)
-    return user
   } catch (error) {
     return error
   }
@@ -168,6 +178,23 @@ const findParticipatingEvents = async (user_id: string) => {
   }
 }
 
+const findPublicUserInfo = async (userId: string) => {
+  try {
+    const query = `
+    SELECT 
+      first_name, last_name, profile_image, profile_text, date_of_birth, gender
+    FROM userk
+    WHERE user_id = $1    
+    `
+    const DBResponse = await db.query(query, [userId])
+    const publicInfo: Partial<User> = DBResponse.rows[0]
+
+    return publicInfo
+  } catch (error) {
+    return error
+  }
+}
+
 export default {
   findUserById,
   findAllUsers,
@@ -176,5 +203,6 @@ export default {
   deleteUser,
   getUserCount,
   getInterestedEvents,
-  findParticipatingEvents
+  findParticipatingEvents,
+  findPublicUserInfo
 }

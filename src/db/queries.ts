@@ -157,8 +157,17 @@ export const createEventQ = `
 `
 
 export const findEventByIdQ = `
-  SELECT *
-  FROM event
+  SELECT 
+  event_id, title, date, time, description, max_participants, created_by, event.created_at, expires_at, image,
+   street, number, postal_code, city, country, lat, lng,
+  name as category, 
+  first_name,  last_name
+  FROM
+  event
+  LEFT JOIN address on event.address = address.address_id
+  LEFT JOIN category on event.category = category.category_id
+  LEFT JOIN userk on event.created_by = userk.user_id
+  LEFT JOIN event_participant on event.event_id = event_participant.event
   WHERE event_id = $1
 `
 
@@ -191,6 +200,8 @@ export const updateEventQ = `
     max_participants = $6,
     expires_at = $7,
     image = $8
+    category = (SELECT category_id FROM category WHERE name = $9),
+    address=$10
   WHERE event_id = $1
   RETURNING *
 `
