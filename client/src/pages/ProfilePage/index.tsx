@@ -79,7 +79,7 @@ const ProfilePage = () => {
             {`${userInfo.first_name} ${userInfo.last_name}`}
           </p>
         </div>
-        {cookies.user.user_id === userId && (
+        {currentUser === userId && (
           <div className='profile__details'>
             <h4 className='profile__details--header'> Email: </h4>
             <p className='profile__details--text'> {userInfo.email} </p>
@@ -95,7 +95,7 @@ const ProfilePage = () => {
           <h4 className='profile__details--header'> Intro: </h4>
           <p className='profile__details--text'> {userInfo.profile_text} </p>
         </div>
-        {cookies.user.user_id === userId && (
+        {currentUser === userId && (
           <div className='profile__details'>
             <h4 className='profile__details--header'> Address: </h4>
             {userInfo.base_address ? (

@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken'
 
 import { JWT_SECRET, JWT_REFRESH_SECRET } from '../util/secrets'
+
 //Generate access Token
 export const generateAccessToken = (id: string) => {
   return jwt.sign(
@@ -9,10 +10,11 @@ export const generateAccessToken = (id: string) => {
       sub: id
     },
     JWT_SECRET,
-    { expiresIn: 60 * 60 }
+    { expiresIn: 60 * 15 }
   )
 }
 
+//Generate refresh token
 export const generateRefreshToken = (id: string) => {
   return jwt.sign(
     {
