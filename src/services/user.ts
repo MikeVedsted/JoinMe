@@ -12,7 +12,8 @@ import {
   updateUserQ,
   deleteUserQ,
   findEventRequestsByUserQ,
-  findEventParticipatingQ
+  findEventParticipatingQ,
+  findPublicUserQ
 } from '../db/queries'
 import db from '../db'
 import { generateAccessToken, generateRefreshToken } from '../helpers/generateToken'
@@ -22,17 +23,11 @@ const googleLogin = async (id_token: string, res: Response) => {
   const decodedToken = jwt.decode(id_token)
   const { given_name, family_name, picture, email } = decodedToken as GoogleToken
   try {
-    const DBResponse = await db.query('SELECT * FROM userk WHERE email = $1', [email])
+    const DBResponse = await db.query(findUserByEmailQ, [email])
     const user: User = DBResponse.rows[0]
 
     if (!user) {
-      const createUserQuery = `
-      INSERT INTO userk 
-        (profile_image, first_name, last_name, email) 
-      VALUES ($1, $2, $3, $4) 
-      RETURNING *
-      `
-      const createUser = await db.query(createUserQuery, [picture, given_name, family_name, email])
+      const createUser = await db.query(createUserQ, [picture, given_name, family_name, email])
       const newUser: User = createUser.rows[0]
       const accessToken = generateAccessToken(newUser.user_id)
       const refreshToken = generateRefreshToken(newUser.user_id)
@@ -180,13 +175,7 @@ const findParticipatingEvents = async (user_id: string) => {
 
 const findPublicUserInfo = async (userId: string) => {
   try {
-    const query = `
-    SELECT 
-      first_name, last_name, profile_image, profile_text, date_of_birth, gender
-    FROM userk
-    WHERE user_id = $1    
-    `
-    const DBResponse = await db.query(query, [userId])
+    const DBResponse = await db.query(findPublicUserQ, [userId])
     const publicInfo: Partial<User> = DBResponse.rows[0]
 
     return publicInfo

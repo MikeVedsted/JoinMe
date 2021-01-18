@@ -155,15 +155,17 @@ const updateEvent = async (eventId: string, update: Partial<Event>) => {
     if (update.address) {
       address = update.address
       const { street, number, postal_code, city, country, lat, lng } = address
-      const DBAddressResponse = await db.query(
-        'SELECT address_id FROM address WHERE lat = $1 and lng = $2',
-        [lat, lng]
-      )
+      const DBAddressResponse = await db.query(addressIdByLocQ, [lat, lng])
       if (DBAddressResponse.rowCount === 0) {
-        const newAddress = await db.query(
-          'INSERT INTO address (street, number, postal_code, city, country, lat, lng) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING address_id',
-          [street, number, postal_code, city, country, lat, lng]
-        )
+        const newAddress = await db.query(createAddressQ, [
+          street,
+          number,
+          postal_code,
+          city,
+          country,
+          lat,
+          lng
+        ])
         address = newAddress.rows[0].address_id
       } else {
         address = DBResponse.rows[0].address
