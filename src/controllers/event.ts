@@ -21,6 +21,24 @@ export const findEventById = async (req: Request, res: Response, next: NextFunct
   }
 }
 
+export const findEventRequests = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { eventId } = req.params
+    res.json(await EventService.findEventRequests(eventId))
+  } catch (error) {
+    next(new NotFoundError('No requests found', error))
+  }
+}
+
+export const findEventParticipants = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { eventId } = req.params
+    res.json(await EventService.findEventParticipants(eventId))
+  } catch (error) {
+    next(new NotFoundError('No requests found', error))
+  }
+}
+
 export const findEventsByCreator = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { userId } = req.params
