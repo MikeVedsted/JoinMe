@@ -9,9 +9,9 @@ import Button from '../Button'
 import EventTitle from '../EventTitle'
 import EventImage from '../EventImage'
 import EventDataBox from '../EventDataBox'
+import ModalMessageCancel from '../ModalMessageCancel'
 import EventCommentSection from '../EventCommentSection'
 import EventManageDropDown from '../EventManageDropDown'
-import useEventParticipants from '../../hooks/useEventParticipants'
 import { EventProps } from '../../types'
 import './Event.scss'
 
@@ -20,24 +20,9 @@ const Event = ({ event }: EventProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [hideDetails, setHideDetails] = useState(true)
   const [showManageOptions, setShowManageOptions] = useState(false)
-  const [participants] = useEventParticipants(event.event_id)
   const [cookies] = useCookies(['user'])
   const { user_id } = cookies.user || ''
-  const {
-    event_id,
-    created_by,
-    created_at,
-    image,
-    title,
-    date,
-    time,
-    max_participants,
-    description,
-    street,
-    number,
-    postal_code,
-    city
-  } = event
+  const { event_id, created_by, created_at, image, title, description } = event
 
   const showParticipants = () => {
     setShowManageOptions(false)
@@ -79,33 +64,18 @@ const Event = ({ event }: EventProps) => {
         <Modal
           closeModal={() => setIsModalOpen(false)}
           content={
-            <div>
-              <h1 className='event__modal-title'>
-                {`Are you sure you want to delete the event: ${title}?`}
-                <p className='event__modal-warning'>
-                  The event, including comments and participant information,
-                  will be permanently deleted and it cannot be undone.
-                </p>
-              </h1>
-              <div className='event__modal-buttons'>
-                <Button
-                  type='button'
-                  text='Cancel'
-                  modifier='secondary'
-                  onClick={() => setIsModalOpen(false)}
-                />
-                <Button
-                  type='button'
-                  text='Confirm'
-                  modifier='primary'
-                  onClick={handleEndEvent}
-                />
-              </div>
-            </div>
+            <ModalMessageCancel
+              title={`Are you sure you want to cancel the event: ${title}?`}
+              additionalText='The event, including comments and participant information, will be permanently deleted and it cannot be undone.'
+              confirmFunction={handleEndEvent}
+              cancelFunction={() => setIsModalOpen(false)}
+            />
           }
         />
       )}
+
       <EventTitle title={title} createdAt={created_at} />
+
       {user_id === created_by && (
         <FontAwesomeIcon
           onClick={() => setShowManageOptions(!showManageOptions)}
@@ -123,15 +93,7 @@ const Event = ({ event }: EventProps) => {
 
       <div>
         <EventImage src={image} alt={title} />
-        <EventDataBox
-          created_by={created_by}
-          creatorName={`${event.first_name} ${event.last_name}`}
-          date={date}
-          time={time}
-          address={`${street} ${number}, ${postal_code} ${city}`}
-          participants={participants.length}
-          max_participants={max_participants}
-        />
+        <EventDataBox event={event} />
       </div>
 
       <div hidden={hideDetails}>
