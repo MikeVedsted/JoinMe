@@ -55,8 +55,8 @@ const Event = ({ event }: EventProps) => {
 
   const handleJoinRequest = async () => {
     try {
-      const res = await axios.post(`/api/v1/events/${event_id}/request`)
-      const { message } = res.data
+      const { data } = await axios.post(`/api/v1/events/${event_id}/request`)
+      const { message } = data
       alert(message)
     } catch (error) {
       alert(`Sorry, something went wrong. Please try again.\n\n${error}`)

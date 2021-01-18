@@ -39,11 +39,7 @@ const EventUpdateForm = ({ data, eventId }: EventUpdateFormProps) => {
     event.preventDefault()
     try {
       const data = { ...fields, address }
-      await axios({
-        method: 'PUT',
-        url: `/api/v1/events/${eventId}`,
-        data: data
-      })
+      await axios.put(`/api/v1/events/${eventId}`, data)
       setError('')
       alert(`Success! Event: ${data.title} was successfully updated`)
       history.push('/')

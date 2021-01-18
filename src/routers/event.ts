@@ -10,7 +10,6 @@ import {
   findRequestedEvents,
   findParticipatingEvents,
   findEventsByCreator,
-  findEventByCategory,
   updateEvent,
   deleteEvent
 } from '../controllers/event'
@@ -23,7 +22,6 @@ router.get('/', isAuthenticated, findAllEvents)
 router.get('/requested', isAuthenticated, findRequestedEvents)
 router.get('/participant', isAuthenticated, findParticipatingEvents)
 router.get('/creator/:userId', isAuthenticated, findEventsByCreator)
-router.get('/category/:categoryId', isAuthenticated, findEventByCategory)
 router.get('/:eventId', isAuthenticated, findEventById)
 router.get('/:eventId/participants', isAuthenticated, findEventParticipants)
 router.put('/:eventId', isAuthenticated, updateEvent)

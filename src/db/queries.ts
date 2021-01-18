@@ -103,7 +103,7 @@ export const findAllUsersQ = `
 
 export const rawUserkByIdQ = `
   SELECT * 
-  FROM userk 
+  FROM userk
   WHERE user_id = $1
 `
 
@@ -234,12 +234,6 @@ export const findEventsByCreatorQ = `
   INNER JOIN category ON category.category_id = event.category
   INNER JOIN userk ON userk.user_id = event.created_by
   WHERE created_by = $1;
-`
-
-export const findEventByCategoryQ = `
-  SELECT *
-  FROM event
-  WHERE category = $1
 `
 
 export const updateEventQ = `

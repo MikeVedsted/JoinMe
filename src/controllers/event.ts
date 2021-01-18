@@ -30,15 +30,6 @@ export const findEventsByCreator = async (req: Request, res: Response, next: Nex
   }
 }
 
-export const findEventByCategory = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const categoryId = parseInt(req.params.categoryId)
-    res.json(await EventService.findEventByCategory(categoryId))
-  } catch (error) {
-    next(new NotFoundError('No events found', error))
-  }
-}
-
 export const createEvent = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
     if (!req.user) {

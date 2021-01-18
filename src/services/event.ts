@@ -5,7 +5,6 @@ import {
   createAddressQ,
   findEventByIdQ,
   findEventsByCreatorQ,
-  findEventByCategoryQ,
   updateEventQ,
   deleteEventQ,
   checkRequestStatusQ,
@@ -15,7 +14,7 @@ import {
   findParticipantsByEventQ
 } from '../db/queries'
 import db from '../db'
-import { Event, User } from '../types'
+import { Event } from '../types'
 
 const createEvent = async (event: Event) => {
   try {
@@ -95,16 +94,6 @@ const findEventById = async (eventId: string) => {
 const findEventsByCreator = async (userId: string) => {
   try {
     const DBResponse = await db.query(findEventsByCreatorQ, [userId])
-    const events: Event[] = DBResponse.rows
-    return events
-  } catch (error) {
-    return error
-  }
-}
-
-const findEventByCategory = async (categoryId: number) => {
-  try {
-    const DBResponse = await db.query(findEventByCategoryQ, [categoryId])
     const events: Event[] = DBResponse.rows
     return events
   } catch (error) {
@@ -231,7 +220,6 @@ export default {
   findEventById,
   findEventsByCreator,
   findAllEvents,
-  findEventByCategory,
   updateEvent,
   deleteEvent,
   requestToJoin,
