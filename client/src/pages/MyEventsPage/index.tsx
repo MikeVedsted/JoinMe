@@ -22,7 +22,11 @@ const MyEventsPage = () => {
   const addContent = () => {
     if (pathname.includes('/hosted'))
       return (
-        <EventList events={hostedEvents} title={'Events you are hosting'} />
+        <EventList
+          type={'hosted'}
+          events={hostedEvents}
+          title={'Events you are hosting'}
+        />
       )
     if (pathname.includes('/interested'))
       return (
