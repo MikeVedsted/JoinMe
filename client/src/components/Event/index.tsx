@@ -4,13 +4,14 @@ import { useCookies } from 'react-cookie'
 import { useHistory } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+import Modal from '../Modal'
 import Button from '../Button'
 import EventTitle from '../EventTitle'
 import EventImage from '../EventImage'
 import EventDataBox from '../EventDataBox'
 import EventCommentSection from '../EventCommentSection'
-import Modal from '../Modal'
-import EventManageDropDown from '../../components/EventManageDropDown'
+import EventManageDropDown from '../EventManageDropDown'
+import useEventParticipants from '../../hooks/useEventParticipants'
 import { EventProps } from '../../types'
 import './Event.scss'
 
@@ -19,6 +20,7 @@ const Event = ({ event }: EventProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [hideDetails, setHideDetails] = useState(true)
   const [showManageOptions, setShowManageOptions] = useState(false)
+  const [participants] = useEventParticipants(event.event_id)
   const [cookies] = useCookies(['user'])
   const { user_id } = cookies.user || ''
   const {
@@ -53,13 +55,14 @@ const Event = ({ event }: EventProps) => {
 
   const handleJoinRequest = async () => {
     try {
-      const res = await axios.post(`/api/v1/events/${event_id}/join`)
-      const { message } = res.data
+      const { data } = await axios.post(`/api/v1/events/${event_id}/request`)
+      const { message } = data
       alert(message)
     } catch (error) {
       alert(`Sorry, something went wrong. Please try again.\n\n${error}`)
     }
   }
+
   const handleEndEvent = async () => {
     try {
       await axios.delete(`/api/v1/events/${event_id}`)
@@ -126,7 +129,7 @@ const Event = ({ event }: EventProps) => {
           date={date}
           time={time}
           address={`${street} ${number}, ${postal_code} ${city}`}
-          participants={2} // UPDATE WITH #246
+          participants={participants.length}
           max_participants={max_participants}
         />
       </div>

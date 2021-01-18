@@ -1,6 +1,6 @@
 import express from 'express'
 
-import { isAuthenticated } from '../middlewares/authentication'
+import { isAuthenticated, isOwner } from '../middlewares/authentication'
 import {
   createComment,
   findCommentsByEventId,
@@ -10,9 +10,9 @@ import {
 
 const router = express.Router()
 
-router.post('/:eventId', createComment)
-router.get('/:eventId', findCommentsByEventId)
-router.put('/:commentId', updateComment)
-router.delete('/:commentId', deleteComment)
+router.post('/:eventId', isAuthenticated, createComment)
+router.get('/:eventId', isAuthenticated, findCommentsByEventId)
+router.put('/:commentId', isAuthenticated, isOwner, updateComment)
+router.delete('/:commentId', isAuthenticated, isOwner, deleteComment)
 
 export default router

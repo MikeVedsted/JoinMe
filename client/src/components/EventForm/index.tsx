@@ -31,15 +31,11 @@ const EventForm = () => {
   const handleSubmit = async (event: any) => {
     event.preventDefault()
     try {
-      const data = { ...fields, address }
-      const res = await axios({
-        method: 'POST',
-        url: '/api/v1/events',
-        data: data
-      })
+      const submission = { ...fields, address }
+      const { data } = await axios.post('/api/v1/events', submission)
       setError('')
       alert(
-        `Success! Event: ${res.data.title} was created with ID ${res.data.event_id}`
+        `Success! Event: ${data.title} was created with ID ${data.event_id}`
       )
     } catch (error) {
       setError(error.message)

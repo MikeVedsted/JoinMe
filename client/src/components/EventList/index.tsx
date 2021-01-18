@@ -10,12 +10,12 @@ import './EventList.scss'
 const EventList = ({ events, title, type }: EventListProps) => {
   const content = (event: EventType) => {
     if (type === 'hosted')
-      return <EventHosted key={event.created_at} event={event} />
+      return <EventHosted key={event.event_id} event={event} />
     if (type === 'interested')
-      return <EventInterested key={event.created_at} event={event} />
+      return <EventInterested key={event.event_id} event={event} />
     if (type === 'confirmed')
-      return <EventConfirmed key={event.created_at} event={event} />
-    return <Event key={event.created_at} event={event} />
+      return <EventConfirmed key={event.event_id} event={event} />
+    return <Event key={event.event_id} event={event} />
   }
 
   return (

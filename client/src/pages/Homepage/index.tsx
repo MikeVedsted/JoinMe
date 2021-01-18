@@ -11,10 +11,6 @@ const Homepage = () => {
   const [events] = useEventDisplay()
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const handleAddRequest = () => {
-    console.log('requested!!')
-  }
-
   const toggleSearchModal = () => {
     setIsModalOpen(!isModalOpen)
   }

@@ -6,7 +6,7 @@ import { GoogleLogin } from 'react-google-login'
 
 const GoogleUserLogin = () => {
   const GOOGLE_CLIENT = process.env.REACT_APP_GOOGLE_API_KEY as string
-  const [cookies, setCookies] = useCookies(['user'])
+  const [, setCookies] = useCookies(['user'])
   const history = useHistory()
 
   const checkIfNew = (date: string, userId: string) => {
@@ -38,6 +38,7 @@ const GoogleUserLogin = () => {
     alert(
       'Oh no 😢\nSomething went wrong with your login.\n\nTry again, or let us know at contact.joinme2020@gmail.com that there is an issue.'
     )
+    console.log(response)
   }
 
   return (

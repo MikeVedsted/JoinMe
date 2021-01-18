@@ -1,11 +1,17 @@
-import { Comment } from '../types'
 import db from '../db'
+import {
+  createCommentQ,
+  findEventCommentsQ,
+  findCommentByIdQ,
+  updateCommentQ,
+  deleteCommentQ
+} from '../db/queries'
+import { Comment } from '../types'
 
 const createComment = async (newComment: Partial<Comment>) => {
   const { comment, userk, event } = newComment
   try {
-    const query = 'INSERT INTO comment (comment, userk, event) VALUES ($1, $2, $3) RETURNING *'
-    const DBResponse = await db.query(query, [comment, userk, event])
+    const DBResponse = await db.query(createCommentQ, [comment, userk, event])
     const newComment: Comment = DBResponse.rows[0]
     return newComment
   } catch (error) {
@@ -15,15 +21,8 @@ const createComment = async (newComment: Partial<Comment>) => {
 
 const findCommentsByEventId = async (eventId: string) => {
   try {
-    const query = `
-      SELECT * FROM comment
-      LEFT JOIN userk ON comment.userk = userk.user_id
-      WHERE event = $1
-      ORDER BY commented_at
-    `
-    const DBResponse = await db.query(query, [eventId])
+    const DBResponse = await db.query(findEventCommentsQ, [eventId])
     const comments: Comment[] = DBResponse.rows
-
     return comments
   } catch (error) {
     return error
@@ -32,8 +31,7 @@ const findCommentsByEventId = async (eventId: string) => {
 
 const updateComment = async (commentId: string, update: Partial<Comment>) => {
   try {
-    const query = 'SELECT * FROM comment WHERE comment_id = $1'
-    const DBResponse = await db.query(query, [commentId])
+    const DBResponse = await db.query(findCommentByIdQ, [commentId])
     const existingComment: Comment = DBResponse.rows[0]
 
     if (!existingComment) {
@@ -41,10 +39,8 @@ const updateComment = async (commentId: string, update: Partial<Comment>) => {
     }
 
     const { comment = existingComment.comment } = update
-    const updateQuery = 'UPDATE comment SET comment = $2 WHERE comment_id = $1 RETURNING *'
-    const updatedComments = await db.query(updateQuery, [commentId, comment])
+    const updatedComments = await db.query(updateCommentQ, [commentId, comment])
     const updatedComment: Comment = updatedComments.rows[0]
-
     return updatedComment
   } catch (error) {
     return error
@@ -53,15 +49,15 @@ const updateComment = async (commentId: string, update: Partial<Comment>) => {
 
 const deleteComment = async (commentId: string) => {
   try {
-    const DBResponse = await db.query('SELECT * FROM comment WHERE comment_id = $1', [commentId])
+    const DBResponse = await db.query(findCommentByIdQ, [commentId])
     const commentToDelete = DBResponse.rows[0]
 
     if (!commentToDelete) {
       throw { error: 'Comment not found' }
-    } else {
-      await db.query('DELETE FROM comment WHERE comment_id = $1', [commentId])
-      return { message: 'Comment successfully deleted' }
     }
+
+    await db.query(deleteCommentQ, [commentId])
+    return { message: 'Comment successfully deleted' }
   } catch (error) {
     return error
   }
