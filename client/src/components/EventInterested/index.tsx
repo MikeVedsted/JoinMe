@@ -6,10 +6,10 @@ import EventTitle from '../EventTitle'
 import EventImage from '../EventImage'
 import EventDataBox from '../EventDataBox'
 import EventCommentSection from '../EventCommentSection'
-import { EventInterestedProps } from '../../types'
+import { EventProps } from '../../types'
 import './EventInterested.scss'
 
-const EventInterested = ({ event }: EventInterestedProps) => {
+const EventInterested = ({ event }: EventProps) => {
   const [hideComments, setHideComment] = useState(true)
   const {
     event_id,

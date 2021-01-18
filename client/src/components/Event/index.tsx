@@ -14,7 +14,7 @@ import EventManageDropDown from '../../components/EventManageDropDown'
 import { EventProps } from '../../types'
 import './Event.scss'
 
-const Event = ({ event, creatorName, participants }: EventProps) => {
+const Event = ({ event }: EventProps) => {
   const history = useHistory()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [hideDetails, setHideDetails] = useState(true)
@@ -122,11 +122,11 @@ const Event = ({ event, creatorName, participants }: EventProps) => {
         <EventImage src={image} alt={title} />
         <EventDataBox
           created_by={created_by}
-          creatorName={creatorName}
+          creatorName={`${event.first_name} ${event.last_name}`}
           date={date}
           time={time}
           address={`${street} ${number}, ${postal_code} ${city}`}
-          participants={participants}
+          participants={2} // UPDATE WITH #246
           max_participants={max_participants}
         />
       </div>

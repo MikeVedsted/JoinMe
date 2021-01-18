@@ -52,13 +52,7 @@
   }
 
   &__line {
-    border: 0;
-    clear: both;
-    display: block;
-    width: 100%;
-    background-color: $textDim;
-    height: 1.5px;
-    margin-top: 30px;
+    @include separator;
   }
 }
 

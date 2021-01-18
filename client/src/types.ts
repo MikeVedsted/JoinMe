@@ -225,7 +225,7 @@ export type EventManageDropDownProps = {
 export type EventListProps = {
   events: EventType[]
   title?: string
-  type?: 'hosted' | 'interested'
+  type?: 'hosted' | 'interested' | 'confirmed'
 }
 
 export type EventImageProps = {
@@ -250,8 +250,6 @@ export type EventDataBoxProps = {
 
 export type EventProps = {
   event: Event
-  creatorName: string
-  participants: any
 }
 
 export type Event = {
@@ -283,12 +281,4 @@ export type EventParticipantsAndRequestsProps = {
 export type EventUpdateFormProps = {
   data: Event
   eventId: EventId
-}
-
-export type EventHostedProps = {
-  event: Event
-}
-
-export type EventInterestedProps = {
-  event: Event
 }
