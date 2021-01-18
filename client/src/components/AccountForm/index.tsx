@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 
@@ -14,7 +14,16 @@ import './AccountForm.scss'
 
 const AccountForm = ({ userId }: AccountFormProps) => {
   const { user } = useSelector((state: AppState) => state.user)
-  const [address, setAddress] = useState<any>()
+  const initAddress = user.street && {
+    street: user.street,
+    number: user.number,
+    postal_code: user.postal_code,
+    city: user.city,
+    country: user.country,
+    lat: user.lat,
+    lng: user.lng
+  }
+  const [address, setAddress] = useState<any>(initAddress)
   const [fields, handleFieldChange] = useFormFields({
     email: user.email,
     first_name: user.first_name,
@@ -25,19 +34,6 @@ const AccountForm = ({ userId }: AccountFormProps) => {
     profile_image: user.profile_image
   })
   const userAddress = `${user.street} ${user.number}, ${user.postal_code} ${user.city}`
-
-  useMemo(() => {
-    user.street &&
-      setAddress({
-        street: user.street,
-        number: user.number,
-        postal_code: user.postal_code,
-        city: user.city,
-        country: user.country,
-        lat: user.lat,
-        lng: user.lng
-      })
-  }, [user])
 
   const handleSubmit = async (event: any) => {
     event.preventDefault()
