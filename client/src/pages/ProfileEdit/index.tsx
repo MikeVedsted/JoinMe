@@ -20,8 +20,8 @@ const ProfileEdit = () => {
 
   return (
     !loading && (
-      <div className='page'>
-        <h2 className='page__title'>
+      <div className='editPage'>
+        <h2 className='editPage__title'>
           Hi {first_name}! Let&apos;s make some changes.
         </h2>
         {user && userId === user_id && <AccountForm userId={user_id} />}

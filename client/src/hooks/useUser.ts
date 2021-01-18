@@ -14,25 +14,19 @@ const useUser = (userId: string) => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    userId === user_id ? fetchUser() : fetchPublicUser()
+    fetchUser()
   }, [])
 
   const fetchUser = async () => {
     try {
+      const url =
+        userId === user_id
+          ? `/api/v1/users/${userId}`
+          : `/api/v1/users/${userId}/public`
       setLoading(true)
-      const { data } = await axios.get(`/api/v1/users/${userId}`)
+      const { data } = await axios.get(url)
       setUser(data)
       dispatch(addUser(data))
-      setLoading(false)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-  const fetchPublicUser = async () => {
-    try {
-      setLoading(true)
-      const { data } = await axios.get(`/api/v1/users/${userId}/public`)
-      setUser(data)
       setLoading(false)
     } catch (error) {
       console.log(error)

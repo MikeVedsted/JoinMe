@@ -16,26 +16,26 @@ const AccountForm = ({ userId }: AccountFormProps) => {
   const { user } = useSelector((state: AppState) => state.user)
   const [address, setAddress] = useState<any>()
   const [fields, handleFieldChange] = useFormFields({
-    email: user[0].email,
-    first_name: user[0].first_name,
-    last_name: user[0].last_name,
-    date_of_birth: user[0].date_of_birth,
-    gender: user[0].gender,
-    profile_text: user[0].profile_text,
-    profile_image: user[0].profile_image
+    email: user.email,
+    first_name: user.first_name,
+    last_name: user.last_name,
+    date_of_birth: user.date_of_birth,
+    gender: user.gender,
+    profile_text: user.profile_text,
+    profile_image: user.profile_image
   })
-  const userAddress = `${user[0].street} ${user[0].number}, ${user[0].postal_code} ${user[0].city}`
+  const userAddress = `${user.street} ${user.number}, ${user.postal_code} ${user.city}`
 
   useMemo(() => {
-    user[0].street &&
+    user.street &&
       setAddress({
-        street: user[0].street,
-        number: user[0].number,
-        postal_code: user[0].postal_code,
-        city: user[0].city,
-        country: user[0].country,
-        lat: user[0].lat,
-        lng: user[0].lng
+        street: user.street,
+        number: user.number,
+        postal_code: user.postal_code,
+        city: user.city,
+        country: user.country,
+        lat: user.lat,
+        lng: user.lng
       })
   }, [user])
 
@@ -98,7 +98,7 @@ const AccountForm = ({ userId }: AccountFormProps) => {
       <label className='form__label'>
         Address
         <p className='form__label form__label--address'>
-          Current address: {user[0].street ? userAddress : '-'}
+          Current address: {user.street ? userAddress : '-'}
         </p>
         <GoogleAutoComplete handleAddress={setAddress} />
       </label>

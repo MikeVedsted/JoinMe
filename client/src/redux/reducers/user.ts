@@ -2,28 +2,51 @@ import { UserState, UserActions, ADD_USER, REMOVE_USER } from '../../types'
 
 export default function user(
   state: UserState = {
-    user: []
+    user: {
+      email: '',
+      first_name: '',
+      last_name: '',
+      date_of_birth: '',
+      gender: '',
+      base_address: '',
+      street: '',
+      number: '',
+      city: '',
+      postal_code: 0,
+      country: '',
+      lat: 0,
+      lng: 0,
+      profile_text: '',
+      profile_image: ''
+    }
   },
   action: UserActions
 ): UserState {
   switch (action.type) {
     case ADD_USER: {
       const { user } = action.payload
-      if (state.user.find((p) => p.email === user.email)) {
-        return state
-      }
-      // Always return new state (e.g, new object) if changed
-      return { ...state, user: [...state.user, user] }
+      return { ...state, user: user }
     }
-    // FIX This is not implemented anywhere. Delete me on refactoring or keep me for future
     case REMOVE_USER: {
-      const { user } = action.payload
-      const index = state.user.findIndex((p) => p.email === user.email)
-      if (index >= 0) {
-        state.user.splice(index, 1)
-        return { ...state, user: [...state.user] }
+      return {
+        user: {
+          email: '',
+          first_name: '',
+          last_name: '',
+          date_of_birth: '',
+          gender: '',
+          base_address: '',
+          street: '',
+          number: '',
+          city: '',
+          postal_code: 0,
+          country: '',
+          lat: 0,
+          lng: 0,
+          profile_text: '',
+          profile_image: ''
+        }
       }
-      return state
     }
 
     default:

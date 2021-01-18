@@ -9,12 +9,8 @@ export function addUser(user: User): UserActions {
   }
 }
 
-// FIX this is not implemented anywehere. Can remove it on refactoring or keep it in case we need it in future
-export function removeUser(user: User): UserActions {
+export function removeUser() {
   return {
-    type: REMOVE_USER,
-    payload: {
-      user
-    }
+    type: REMOVE_USER
   }
 }

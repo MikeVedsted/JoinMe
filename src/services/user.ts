@@ -67,7 +67,7 @@ const updateUser = async (userId: string, update: Partial<User>) => {
   try {
     const userResponse = await db.query('SELECT * FROM userk WHERE user_id = $1', [userId])
     const user: User = userResponse.rows[0]
-    console.log(user)
+
     if (!user) {
       throw new Error('User not found')
     }
@@ -81,13 +81,11 @@ const updateUser = async (userId: string, update: Partial<User>) => {
       gender = user.gender
     } = update
     const { base_address } = user
-    let addressId: any = base_address
+    let addressId: string | Address | undefined = base_address
 
     if (update.address) {
       const address: Address = update.address
-      const { street, postal_code, city, country, lat, lng } = address
-      let { number } = address
-      !number && (number = 0)
+      const { street, number, postal_code, city, country, lat, lng } = address
 
       const addressResponse = await db.query(
         'SELECT address_id FROM address WHERE lat = $1 and lng = $2',

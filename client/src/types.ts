@@ -15,7 +15,7 @@ export type User = {
   gender: string
   base_address: string
   street: string
-  number: number
+  number: string
   city: string
   postal_code: number
   country: string
@@ -26,7 +26,7 @@ export type User = {
 }
 
 export type UserState = {
-  user: User[]
+  user: User
 }
 
 export type AddUserAction = {
