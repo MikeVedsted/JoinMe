@@ -9,6 +9,7 @@ import {
   deleteUser,
   getInterestedEvents,
   findParticipatingEvents,
+  getTokenInfo,
   getUserCount,
   findPublicUserInfo
 } from '../controllers/user'
@@ -17,6 +18,7 @@ const router = express.Router()
 
 router.get('/', findAllUsers)
 router.get('/count', getUserCount)
+router.get('/verify-token', isAuthenticated, getTokenInfo)
 router.get('/interested', isAuthenticated, getInterestedEvents)
 router.get('/participant', isAuthenticated, findParticipatingEvents)
 router.get('/:userId', isAuthenticated, isOwner, findUserById)
