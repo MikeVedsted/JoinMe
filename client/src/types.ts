@@ -177,6 +177,7 @@ export type NavDropdownLinkProps = {
   text: string
   icon: IconProp
   destination: string
+  setDropdownHidden: (option: boolean) => void
 }
 
 export type NavDropdownFunctionProps = {

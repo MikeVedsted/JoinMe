@@ -12,7 +12,7 @@ import './Navbar.scss'
 const Navbar = () => {
   const [navBg, setNavBg] = useState(true)
   const [dropdownHidden, setDropdownHidden] = useState(true)
-  const [cookies, setCookies] = useCookies(['user'])
+  const [cookies] = useCookies(['user'])
   const { profile_image } =
     cookies.user ||
     'https://res.cloudinary.com/dahevvjff/image/upload/v1608637375/ughqusxea2vuexzlwmqt.png'

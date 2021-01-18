@@ -4,9 +4,18 @@ import { Link } from 'react-router-dom'
 
 import { NavDropdownLinkProps } from '../../types'
 
-const NavDropdownLink = ({ text, icon, destination }: NavDropdownLinkProps) => {
+const NavDropdownLink = ({
+  text,
+  icon,
+  destination,
+  setDropdownHidden
+}: NavDropdownLinkProps) => {
   return (
-    <Link to={destination} className='nav-dropdown__link'>
+    <Link
+      to={destination}
+      className='nav-dropdown__link'
+      onClick={() => setDropdownHidden(true)}
+    >
       <li className='nav-dropdown__item'>
         <FontAwesomeIcon icon={icon} className='nav-dropdown__item--icon' />
         {text}
