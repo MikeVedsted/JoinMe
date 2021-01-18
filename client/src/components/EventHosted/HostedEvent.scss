@@ -11,6 +11,10 @@
     margin: 0;
   }
 
+  &__line {
+    @include separator;
+  }
+
   &__content {
     display: flex;
   }

@@ -39,6 +39,7 @@ const MyEventsPage = () => {
     if (pathname.includes('/confirmed'))
       return (
         <EventList
+          type='confirmed'
           events={participatingEvents}
           title={'Events you are registered for'}
         />

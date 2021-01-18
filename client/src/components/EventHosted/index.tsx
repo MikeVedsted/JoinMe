@@ -6,10 +6,10 @@ import Button from '../Button'
 import EventTitle from '../EventTitle'
 import EventImage from '../EventImage'
 import EventCommentSection from '../EventCommentSection'
-import { EventHostedProps } from '../../types'
+import { EventProps } from '../../types'
 import './HostedEvent.scss'
 
-const EventHosted = ({ event }: EventHostedProps) => {
+const EventHosted = ({ event }: EventProps) => {
   const history = useHistory()
   const [hideComments, setHideComments] = useState(true)
   const [showModal, setShowModal] = useState(false)
@@ -75,7 +75,7 @@ const EventHosted = ({ event }: EventHostedProps) => {
       <div hidden={hideComments}>
         <EventCommentSection eventId={event_id} />
       </div>
-      <hr className='event__line' />
+      <hr className='hosted-event__line' />
     </div>
   )
 }
