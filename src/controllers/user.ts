@@ -69,34 +69,6 @@ export const getUserCount = async (req: Request, res: Response, next: NextFuncti
   }
 }
 
-export const getInterestedEvents = async (req: AuthRequest, res: Response, next: NextFunction) => {
-  try {
-    if (!req.user) {
-      throw Error
-    }
-    const { user_id } = req.user
-    return res.json(await UserService.getInterestedEvents(user_id))
-  } catch (error) {
-    next(new NotFoundError('No results found', error))
-  }
-}
-
-export const findParticipatingEvents = async (
-  req: AuthRequest,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    if (!req.user) {
-      throw Error
-    }
-    const { user_id } = req.user
-    return res.json(await UserService.findParticipatingEvents(user_id))
-  } catch (error) {
-    next(new NotFoundError('No results found', error))
-  }
-}
-
 export const findPublicUserInfo = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { userId } = req.params

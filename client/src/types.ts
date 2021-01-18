@@ -135,6 +135,7 @@ export type NavDropdownLinkProps = {
   text: string
   icon: IconProp
   destination: string
+  setDropdownHidden: (option: boolean) => void
 }
 
 export type NavDropdownFunctionProps = {
@@ -205,13 +206,28 @@ export type NotFoundProps = {
   message: string
 }
 
+export type Participant = {
+  ep_id: string
+  first_name: string
+  last_name: string
+  profile_image: string
+  user_id: string
+}
+
+export type Requester = {
+  er_id: string
+  first_name: string
+  last_name: string
+  profile_image: string
+  user_id: string
+}
+
 export type EventParticipantProps = {
-  user: UserType
-  handleDelete: () => void
+  participant: Participant
 }
 
 export type EventJoinRequestProps = {
-  user: UserType
+  requester: Requester
 }
 
 export type EventManageDropDownProps = {
@@ -248,8 +264,6 @@ export type EventDataBoxProps = {
 
 export type EventProps = {
   event: Event
-  creatorName: string
-  participants: any
 }
 
 export type Event = {
@@ -274,8 +288,8 @@ export type Event = {
 }
 
 export type EventParticipantsAndRequestsProps = {
-  participants: UserType[]
-  joinRequests: UserType[]
+  participants: Participant[]
+  joinRequests: Requester[]
 }
 
 export type EventUpdateFormProps = {
