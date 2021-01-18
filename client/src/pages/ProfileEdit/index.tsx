@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams, useHistory, useLocation } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 
 import AccountForm from '../../components/AccountForm'
@@ -8,11 +8,19 @@ import { ProfilePageParamProps } from '../../types'
 import './ProfileEdit.scss'
 
 const ProfileEdit = () => {
+  const { pathname } = useLocation()
   const { userId } = useParams<ProfilePageParamProps>()
   let history = useHistory()
   const [cookies] = useCookies(['user'])
   const { first_name, user_id } = cookies.user
   const [user, loading] = useUser(userId)
+  const heading = pathname.includes('/account-setup')
+    ? `Hi ${first_name}! Welcome to JoinMe!`
+    : `Hi ${first_name}! Let's make some changes.`
+  const paragraph = pathname.includes('/account-setup')
+    ? `For a better experience finding events, Let's get your profile
+          set up!`
+    : ''
 
   useEffect(() => {
     userId !== user_id && history.push(`/user/${userId}`)
@@ -21,9 +29,8 @@ const ProfileEdit = () => {
   return (
     !loading && (
       <div className='editPage'>
-        <h2 className='editPage__title'>
-          Hi {first_name}! Let&apos;s make some changes.
-        </h2>
+        <h2 className='editPage__title'>{heading}</h2>
+        <p className='editPage__text'>{paragraph}</p>
         {user && userId === user_id && <AccountForm userId={user_id} />}
       </div>
     )

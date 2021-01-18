@@ -5,7 +5,6 @@ import ProtectedRoute from './util/ProtectedRoute'
 import LandingPage from './pages/LandingPage'
 import ProfilePage from './pages/ProfilePage'
 import HomePage from './pages/Homepage'
-import AccountSetup from './pages/AccountSetup'
 import MyEventsPage from './pages/MyEventsPage'
 import ProfileEdit from './pages/ProfileEdit'
 import EventEditPage from './pages/EventEditPage'
@@ -26,7 +25,7 @@ const Routes = () => (
     <ProtectedRoute
       exact
       path='/user/:userId/account-setup'
-      component={AccountSetup}
+      component={ProfileEdit}
     />
     <ProtectedRoute exact path='/user/:userId/edit' component={ProfileEdit} />
     <ProtectedRoute
