@@ -5,16 +5,16 @@ import {
   createAddressQ,
   findEventByIdQ,
   findEventsByCreatorQ,
-  findJoinRequestsByEventQ,
-  findParticipantsByEventQ,
-  findEventByCategoryQ,
   updateEventQ,
   deleteEventQ,
   checkRequestStatusQ,
-  createNewRequestQ
+  createNewRequestQ,
+  findEventRequestsByUserQ,
+  findEventParticipatingQ,
+  findParticipantsByEventQ
 } from '../db/queries'
 import db from '../db'
-import { Event, User } from '../types'
+import { Event } from '../types'
 
 const createEvent = async (event: Event) => {
   try {
@@ -94,36 +94,6 @@ const findEventById = async (eventId: string) => {
 const findEventsByCreator = async (userId: string) => {
   try {
     const DBResponse = await db.query(findEventsByCreatorQ, [userId])
-    const events: Event[] = DBResponse.rows
-    return events
-  } catch (error) {
-    return error
-  }
-}
-
-const findEventRequests = async (eventId: string) => {
-  try {
-    const DBResponse = await db.query(findJoinRequestsByEventQ, [eventId])
-    const users: Partial<User>[] = DBResponse.rows
-    return users
-  } catch (error) {
-    return error
-  }
-}
-
-const findEventParticipants = async (eventId: string) => {
-  try {
-    const DBResponse = await db.query(findParticipantsByEventQ, [eventId])
-    const users: Partial<User>[] = DBResponse.rows
-    return users
-  } catch (error) {
-    return error
-  }
-}
-
-const findEventByCategory = async (categoryId: number) => {
-  try {
-    const DBResponse = await db.query(findEventByCategoryQ, [categoryId])
     const events: Event[] = DBResponse.rows
     return events
   } catch (error) {
@@ -215,15 +185,45 @@ const requestToJoin = async (eventId: string, userId: string) => {
   return { message: 'Successfully requested', request }
 }
 
+const findRequestedEvents = async (userId: string) => {
+  try {
+    const DBResponse = await db.query(findEventRequestsByUserQ, [userId])
+    const events: Event[] = DBResponse.rows
+    return events
+  } catch (error) {
+    return error
+  }
+}
+
+const findParticipatingEvents = async (user_id: string) => {
+  try {
+    const DBResponse = await db.query(findEventParticipatingQ, [user_id])
+    const events: Event[] = DBResponse.rows
+    return events
+  } catch (error) {
+    return error
+  }
+}
+
+const findEventParticipants = async (eventId: string) => {
+  try {
+    const DBResponse = await db.query(findParticipantsByEventQ, [eventId])
+    const events: Event[] = DBResponse.rows
+    return events
+  } catch (error) {
+    return error
+  }
+}
+
 export default {
   createEvent,
   findEventById,
   findEventsByCreator,
-  findEventRequests,
-  findEventParticipants,
   findAllEvents,
-  findEventByCategory,
   updateEvent,
   deleteEvent,
-  requestToJoin
+  requestToJoin,
+  findRequestedEvents,
+  findParticipatingEvents,
+  findEventParticipants
 }

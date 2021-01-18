@@ -17,11 +17,7 @@ const EventCommentInput = ({ eventId }: EventCommentInputProps) => {
     event.preventDefault()
     try {
       const data = { comment: fields.comment, userId: user_id }
-      const res = await axios({
-        method: 'POST',
-        url: `/api/v1/comments/${eventId}`,
-        data: data
-      })
+      await axios.post(`/api/v1/comments/${eventId}`, data)
     } catch (error) {
       console.log(error)
     }

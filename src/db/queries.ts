@@ -18,6 +18,7 @@ export const deleteRequestQ = `
 
 export const findJoinRequestsByEventQ = `
   SELECT 
+    er_id,
     user_id, profile_image, first_name, last_name
   FROM event_request 
   INNER JOIN userk ON event_request.requester = userk.user_id
@@ -26,6 +27,7 @@ export const findJoinRequestsByEventQ = `
 
 export const findParticipantsByEventQ = `
   SELECT 
+    ep_id,
     user_id, profile_image, first_name, last_name
   FROM event_participant 
   INNER JOIN userk ON event_participant.participant = userk.user_id
@@ -45,6 +47,22 @@ export const createNewRequestQ = `
   VALUES 
     ($2, $1) 
   RETURNING *
+`
+export const requesterByRequestIdQ = `
+  SELECT requester 
+  FROM event_request 
+  WHERE er_id = $1
+`
+
+export const participantByParticipantIdQ = `
+  SELECT participant 
+  FROM event_participant 
+  WHERE ep_id = $1
+`
+
+export const deleteParticipantQ = `
+  DELETE FROM event_participant
+  WHERE ep_id = $1
 `
 
 // ------------
@@ -85,7 +103,7 @@ export const findAllUsersQ = `
 
 export const rawUserkByIdQ = `
   SELECT * 
-  FROM userk 
+  FROM userk
   WHERE user_id = $1
 `
 
@@ -145,6 +163,31 @@ export const findPublicUserQ = `
 // EVENT QUERIES
 // -------------
 
+export const findEventOwnerQ = `
+  SELECT created_by
+  FROM event
+  WHERE event_id = $1
+`
+
+export const findEventOwnerByRequestQ = `
+  SELECT created_by
+  FROM event
+  WHERE event_id = (
+    SELECT event 
+    FROM event_request
+    WHERE er_id = $1
+  )
+`
+export const findEventOwnerByParticipantQ = `
+  SELECT created_by
+  FROM event
+  WHERE event_id = (
+    SELECT event 
+    FROM event_participant
+    WHERE ep_id = $1
+  )
+`
+
 export const findAllEventsPopulatedQ = `
   SELECT
     event_id, title, date, time, description, max_participants, created_by, event.created_at, expires_at, image,
@@ -193,12 +236,6 @@ export const findEventsByCreatorQ = `
   WHERE created_by = $1;
 `
 
-export const findEventByCategoryQ = `
-  SELECT *
-  FROM event
-  WHERE category = $1
-`
-
 export const updateEventQ = `
   UPDATE event
   SET
@@ -218,6 +255,13 @@ export const updateEventQ = `
 export const deleteEventQ = `
   DELETE FROM event
   WHERE event_id = $1
+`
+
+export const participantIdByQ = `
+  SELECT ep_id
+  FROM event_participant
+  WHERE event = $1
+  AND participant = $2
 `
 
 // ---------------

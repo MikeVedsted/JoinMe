@@ -12,8 +12,7 @@ const useEventComments = (eventId: EventId) => {
 
   const fetchComments = async () => {
     try {
-      const response = await axios.get(`/api/v1/comments/${eventId}`)
-      const data = response.data
+      const { data } = await axios.get(`/api/v1/comments/${eventId}`)
       setComments(data)
     } catch (error) {
       console.log(error)
