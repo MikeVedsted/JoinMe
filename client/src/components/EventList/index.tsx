@@ -2,6 +2,7 @@ import React from 'react'
 
 import Event from '../../components/Event'
 import EventHosted from '../../components/EventHosted'
+import EventInterested from '../../components/EventInterested'
 import { EventListProps, EventType } from '../../types'
 import './EventList.scss'
 
@@ -9,6 +10,8 @@ const EventList = ({ events, title, type }: EventListProps) => {
   const content = (event: EventType) => {
     if (type === 'hosted')
       return <EventHosted key={event.created_at} event={event} />
+    if (type === 'interested')
+      return <EventInterested key={event.created_at} event={event} />
     return (
       <Event
         key={event.created_at}
