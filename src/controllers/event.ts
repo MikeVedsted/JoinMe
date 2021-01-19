@@ -2,11 +2,12 @@ import { Request, Response, NextFunction } from 'express'
 
 import { NotFoundError, BadRequestError } from '../helpers/apiError'
 import EventService from '../services/event'
-import { AuthRequest, Event } from '../types'
+import { AuthRequest, Event, EventSearchQuery } from '../types'
 
 export const findAllEvents = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    res.json(await EventService.findAllEvents())
+    const { category, lat, lng, distance } = req.query as EventSearchQuery
+    res.json(await EventService.findAllEvents(category, lat, lng, distance))
   } catch (error) {
     next(new NotFoundError('No events found', error))
   }

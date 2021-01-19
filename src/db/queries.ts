@@ -128,10 +128,11 @@ export const deleteUserQ = `
 
 export const findEventRequestsByUserQ = `
   SELECT 
+    er_id,
     event_id, title, date, time, description, max_participants, created_by, event.created_at, expires_at, image,
     street, number, postal_code, city, country, lat, lng,
     name as category,
-    first_name, last_name  
+    first_name, last_name
   FROM event
   INNER JOIN event_request ON event.event_id = event_request.event
   INNER JOIN address ON address.address_id = event.address
@@ -145,7 +146,8 @@ export const findEventParticipatingQ = `
     event_id, title, date, time, description, max_participants, created_by, event.created_at, expires_at, image,
     street, number, postal_code, city, country, lat, lng,
     name as category,
-    first_name, last_name  
+    first_name, last_name,
+    ep_id
   FROM event
   INNER JOIN event_participant ON event.event_id = event_participant.event
   INNER JOIN address ON address.address_id = event.address

@@ -14,8 +14,14 @@ const DropdownField = ({
   return (
     <label className='form__label' {...rest}>
       {label}
-      <select onBlur={onBlur} id={id} className='form__field'>
-        <option disabled selected hidden className='form__field--option'>
+      <select
+        onChange={onBlur}
+        id={id}
+        className='form__field'
+        value={selectedValue}
+        defaultValue='Select an option'
+      >
+        <option disabled hidden className='form__field--option'>
           {selectedValue ? selectedValue : 'Select an option'}
         </option>
         {options.map((optionValue) => (

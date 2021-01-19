@@ -128,7 +128,7 @@ export type DropdownProps = {
   label: string
   id: string
   options: string[]
-  onBlur: () => void
+  onBlur: (searchValue: any) => void
   modifier?: string
   required?: boolean
   selectedValue?: string
@@ -156,6 +156,7 @@ export type EventType = {
   number: string
   postal_code: string
   city: string
+  er_id?: string
 }
 
 export type ModalProps = {
@@ -170,7 +171,7 @@ export type FormSliderProps = {
   maxRange?: number
   steps?: number
   initialValue?: number
-  onChange: () => void
+  onChange: (a: any) => void
 }
 
 export type NavDropdownLinkProps = {
@@ -219,7 +220,7 @@ export type InputTextAreaProps = {
 
 export type EventSearchProps = {
   handleSubmit: () => void
-  handleFieldChange: () => void
+  handleFieldChange: (e: any) => void
   distance: string
   setAddress: (a: any) => void
 }
@@ -282,6 +283,7 @@ export type EventManageDropDownProps = {
 export type EventListProps = {
   events: EventType[]
   title?: string
+  type?: 'hosted' | 'interested' | 'confirmed'
 }
 
 export type EventImageProps = {
@@ -295,13 +297,7 @@ export type EventTitleProps = {
 }
 
 export type EventDataBoxProps = {
-  created_by: string
-  creatorName: string
-  date: string
-  time: string
-  address: string
-  participants: any
-  max_participants: number
+  event: Event
 }
 
 export type EventProps = {
@@ -327,6 +323,8 @@ export type Event = {
   number: string
   postal_code: string
   city: string
+  er_id?: string
+  ep_id?: string
 }
 
 export type EventParticipantsAndRequestsProps = {
@@ -337,4 +335,11 @@ export type EventParticipantsAndRequestsProps = {
 export type EventUpdateFormProps = {
   data: Event
   eventId: EventId
+}
+
+export type ModalMessageCancelProps = {
+  title: string
+  additionalText: string
+  cancelFunction: () => void
+  confirmFunction: () => void
 }

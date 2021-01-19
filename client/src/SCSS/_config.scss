@@ -44,3 +44,25 @@ $subtitle: 13px;
     width: 49%;
   }
 }
+
+@mixin threeButtonsInline {
+  width: 96%;
+  padding: 0 2%;
+  display: flex;
+  justify-content: space-between;
+
+  & * {
+    flex-grow: 0;
+    width: 30%;
+  }
+}
+
+@mixin separator {
+  border: 0;
+  clear: both;
+  display: block;
+  width: 100%;
+  background-color: $textDim;
+  height: 1.5px;
+  margin-top: 30px;
+}

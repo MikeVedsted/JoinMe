@@ -5,33 +5,6 @@
   flex-direction: column;
   position: relative;
 
-  &__modal-title {
-    color: $secondary;
-    font-family: $montserrat;
-    font-size: $sub-head;
-    text-align: center;
-  }
-
-  &__modal-buttons {
-    @include twoButtonsInline;
-    margin-top: 30px;
-  }
-
-  &__modal-warning {
-    color: $textDark;
-    font-size: 12px;
-    font-style: italic;
-    font-family: $nunito;
-    font-weight: 100;
-    text-align: justify;
-  }
-
-  &__modal-buttons {
-    margin-top: 30px;
-    width: 70%;
-    @include flexCenter;
-  }
-
   &__manage {
     color: $textDark;
     cursor: pointer;
@@ -48,17 +21,11 @@
   }
 
   &__buttons {
-    display: flex;
+    @include twoButtonsInline;
   }
 
   &__line {
-    border: 0;
-    clear: both;
-    display: block;
-    width: 100%;
-    background-color: $textDim;
-    height: 1.5px;
-    margin-top: 30px;
+    @include separator;
   }
 }
 
@@ -84,22 +51,6 @@
 
       & * {
         margin-top: 5px;
-      }
-    }
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  .event {
-    &__modal-title {
-      margin-top: 40px;
-      font-size: $text;
-    }
-
-    &__modal-buttons {
-      flex-direction: column;
-      & * {
-        width: 100%;
       }
     }
   }

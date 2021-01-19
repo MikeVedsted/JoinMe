@@ -8,15 +8,17 @@ import useEventDisplay from '../../hooks/useEventDisplay'
 import './Homepage.scss'
 
 const Homepage = () => {
-  const [events] = useEventDisplay()
   const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const {
+    events,
+    handleFieldChange,
+    handleAddressChange,
+    handleSearch
+  } = useEventDisplay()
 
   const toggleSearchModal = () => {
     setIsModalOpen(!isModalOpen)
-  }
-
-  const handleSearch = () => {
-    setIsModalOpen(false)
   }
 
   return (
@@ -28,9 +30,9 @@ const Homepage = () => {
       <div className='homepage__search-box'>
         <EventSearch
           distance='100'
-          handleFieldChange={() => console.log('handled')}
+          handleFieldChange={handleFieldChange}
           handleSubmit={handleSearch}
-          setAddress={() => console.log('address handler')}
+          setAddress={handleAddressChange}
         />
       </div>
 
@@ -41,9 +43,9 @@ const Homepage = () => {
           content={
             <EventSearch
               distance='30'
-              handleFieldChange={() => console.log('handled')}
+              handleFieldChange={handleFieldChange}
               handleSubmit={handleSearch}
-              setAddress={() => console.log('address handler')}
+              setAddress={handleAddressChange}
             />
           }
         />
