@@ -49,7 +49,7 @@ $imageHeight: 50px;
 @media only screen and (max-width: 600px) {
   .nav {
     height: 80px;
-    
+
     &__logo {
       margin-left: $smallSpacing;
     }
@@ -59,7 +59,7 @@ $imageHeight: 50px;
       margin: auto 10px;
     }
 
-    &__profile-image { 
+    &__profile-image {
       margin: auto 10px;
     }
   }
