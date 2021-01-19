@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Button from '../../components/Button'
 import EventParticipant from '../../components/EventParticipant'
 import EventJoinRequest from '../EventJoinRequest'
+import NotFound from '../NotFound'
 import {
   EventParticipantsAndRequestsProps,
   Participant,
@@ -43,9 +44,7 @@ const EventParticipantsAndRequests = ({
               />
             ))
           ) : (
-            <h2 className='participants__not-found'>
-              Sorry! No participants yet.
-            </h2>
+            <NotFound message='No participants for this event' />
           )}
         </div>
       ) : (
@@ -58,9 +57,7 @@ const EventParticipantsAndRequests = ({
               />
             ))
           ) : (
-            <h2 className='participants__not-found'>
-              Sorry! No join requests yet.
-            </h2>
+            <NotFound message='No requests for this event' />
           )}
         </div>
       )}
