@@ -71,9 +71,60 @@ const createEvent = async (event: Event) => {
   }
 }
 
-const findAllEvents = async () => {
+const findAllEvents = async (
+  category: string | undefined,
+  lat: string | undefined,
+  lng: string | undefined,
+  distance: string | undefined
+) => {
   try {
-    const DBResponse = await db.query(findAllEventsPopulatedQ)
+    let categoryCondition = ''
+    let locationQuery = ''
+    let distanceJoinQuery = ''
+    if (category) {
+      categoryCondition = `WHERE category = (SELECT category_id FROM category WHERE name = '${category}')`
+    }
+
+    if (lat && lng && distance) {
+      const latQuery = parseFloat(lat)
+      const lngQuery = parseFloat(lng)
+      const distanceQuery = parseInt(distance)
+      locationQuery = `
+      WITH tmp as
+      (SELECT * FROM
+      (SELECT
+          *, (
+            3959 * acos (
+            cos ( radians(${latQuery}) )
+            * cos( radians( lat ) )
+            * cos( radians( lng ) - radians(${lngQuery}) )
+            + sin ( radians(${latQuery}) )
+            * sin( radians( lat ) )
+          )
+      ) AS distance
+      FROM address) al
+      WHERE distance < ${distanceQuery} * 0.621371
+      ORDER BY distance)
+      `
+      distanceJoinQuery = `INNER JOIN tmp ON tmp.address_id = event.address`
+    }
+
+    const query = `
+      ${locationQuery}
+      SELECT 
+  	    event_id, title, date, time, description, max_participants, created_by, event.created_at, expires_at, image,
+        address.street, address.number, address.postal_code, address.city, address.country, address.lat, address.lng,
+	      name as category, 
+	      first_name, last_name
+      FROM event
+      ${distanceJoinQuery}
+      LEFT JOIN address on event.address = address.address_id
+      LEFT JOIN category on event.category = category.category_id
+      LEFT JOIN userk on event.created_by = userk.user_id
+      LEFT JOIN event_participant on event.event_id = event_participant.event
+      ${categoryCondition}
+    `
+    const DBResponse = await db.query(query)
     const events: Event[] = DBResponse.rows
     return events
   } catch (error) {
