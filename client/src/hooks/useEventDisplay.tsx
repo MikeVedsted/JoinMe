@@ -13,6 +13,7 @@ const useEventDisplay = () => {
     },
     distance: ''
   })
+
   const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchConditions({
       ...searchConditions,

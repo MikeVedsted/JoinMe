@@ -88,7 +88,7 @@ const findAllEvents = async (
     if (lat && lng && distance) {
       const latQuery = parseFloat(lat)
       const lngQuery = parseFloat(lng)
-      const distanceQuery = parseFloat(distance)
+      const distanceQuery = parseInt(distance)
       locationQuery = `
       WITH tmp as
       (SELECT * FROM
