@@ -11,10 +11,6 @@ const Homepage = () => {
   const [events] = useEventDisplay()
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const handleAddRequest = () => {
-    console.log('requested!!')
-  }
-
   const toggleSearchModal = () => {
     setIsModalOpen(!isModalOpen)
   }
@@ -56,12 +52,7 @@ const Homepage = () => {
       {events ? (
         <div className='homepage__events'>
           {events.map((event: any) => (
-            <Event
-              key={event.created_at}
-              event={event}
-              creatorName={`${event.first_name} ${event.last_name}`}
-              participants={event.participants}
-            />
+            <Event key={event.created_at} event={event} />
           ))}
         </div>
       ) : (

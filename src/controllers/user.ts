@@ -13,6 +13,18 @@ export const googleLogin = async (req: Request, res: Response, next: NextFunctio
   }
 }
 
+export const getTokenInfo = async (req: AuthRequest, res: Response, next: NextFunction) => {
+  try {
+    if (!req.user) {
+      throw Error
+    }
+    const { user_id } = req.user
+    return res.json(await UserService.findUserById(user_id))
+  } catch (error) {
+    next(new BadRequestError('Unexpected error', error))
+  }
+}
+
 export const findAllUsers = async (req: Request, res: Response, next: NextFunction) => {
   try {
     return res.json(await UserService.findAllUsers())
@@ -54,34 +66,6 @@ export const getUserCount = async (req: Request, res: Response, next: NextFuncti
     return res.json(await UserService.getUserCount())
   } catch (error) {
     next(new NotFoundError('No users found', error))
-  }
-}
-
-export const getInterestedEvents = async (req: AuthRequest, res: Response, next: NextFunction) => {
-  try {
-    if (!req.user) {
-      throw Error
-    }
-    const { user_id } = req.user
-    return res.json(await UserService.getInterestedEvents(user_id))
-  } catch (error) {
-    next(new NotFoundError('No results found', error))
-  }
-}
-
-export const findParticipatingEvents = async (
-  req: AuthRequest,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    if (!req.user) {
-      throw Error
-    }
-    const { user_id } = req.user
-    return res.json(await UserService.findParticipatingEvents(user_id))
-  } catch (error) {
-    next(new NotFoundError('No results found', error))
   }
 }
 

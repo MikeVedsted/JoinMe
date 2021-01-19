@@ -28,9 +28,9 @@ const ProfileEdit = () => {
 
   return (
     !loading && (
-      <div className='editPage'>
-        <h2 className='editPage__title'>{heading}</h2>
-        <p className='editPage__text'>{paragraph}</p>
+      <div className='edit-page'>
+        <h2 className='edit-page__title'>{heading}</h2>
+        <p className='edit-page__text'>{paragraph}</p>
         {user && userId === user_id && <AccountForm userId={user_id} />}
       </div>
     )

@@ -26,7 +26,6 @@ const NavDropdown = ({
 
   const logout = () => {
     removeCookie('user')
-    setDropdownHidden(true)
     dispatch(removeUser())
     history.push('/')
   }
