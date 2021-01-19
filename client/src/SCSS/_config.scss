@@ -6,7 +6,7 @@ $secondary: #f28705;
 $backgroundDim: #fff2e2;
 $default: #401e02;
 $textDark: #2a2a2a;
-$textLight: #f2f2f2;
+$textLight: rgb(242, 242, 242);
 $textDim: #666666;
 $lineDim: #606060;
 $link: #001fc1;
@@ -22,6 +22,10 @@ $sub-head: 22px;
 $text: 18px;
 $subtitle: 13px;
 
+// Standard sizes
+$largeSpacing: 40px;
+$smallSpacing: 20px;
+
 // Mixins
 @mixin flexCenter {
   display: flex;
@@ -34,10 +38,15 @@ $subtitle: 13px;
   justify-content: flex-start;
 }
 
-@mixin twoButtonsInline {
-  width: 100%;
+@mixin flexSpaceBetween {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+@mixin twoButtonsInline {
+  @include flexSpaceBetween;
+  width: 100%;
 
   & * {
     flex-grow: 0;
@@ -65,4 +74,12 @@ $subtitle: 13px;
   background-color: $textDim;
   height: 1.5px;
   margin-top: 30px;
+}
+
+@mixin borderRadiusSmall {
+  border-radius: 6px;
+}
+
+@mixin shadow {
+  box-shadow: 0px 0px 2px rgb(41, 41, 41);
 }
