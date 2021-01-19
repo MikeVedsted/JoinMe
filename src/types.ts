@@ -69,3 +69,10 @@ export type Comment = {
   event: string
   commented_at: Date
 }
+
+export type EventSearchQuery = {
+  category: string | undefined
+  lat: string | undefined
+  lng: string | undefined
+  distance: string | undefined
+}
