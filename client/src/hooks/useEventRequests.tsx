@@ -8,7 +8,7 @@ const useEventRequests = (eventId: EventId) => {
 
   useEffect(() => {
     fetchRequests()
-  }, [])
+  }, [requests])
 
   const fetchRequests = async () => {
     try {

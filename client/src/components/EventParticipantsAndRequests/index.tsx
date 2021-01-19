@@ -35,21 +35,33 @@ const EventParticipantsAndRequests = ({
       <hr className='participants__hr' />
       {listView === 'participants' ? (
         <div className='participants__list'>
-          {participants.map((participant: Participant) => (
-            <EventParticipant
-              key={participant.user_id}
-              participant={participant}
-            />
-          ))}
+          {participants.length > 0 ? (
+            participants.map((participant: Participant) => (
+              <EventParticipant
+                key={participant.user_id}
+                participant={participant}
+              />
+            ))
+          ) : (
+            <h2 className='participants__not-found'>
+              Sorry! No participants yet.
+            </h2>
+          )}
         </div>
       ) : (
         <div className='participants__list participants__list--new-requests'>
-          {joinRequests.map((participant: Requester) => (
-            <EventJoinRequest
-              key={participant.user_id}
-              requester={participant}
-            />
-          ))}
+          {joinRequests.length > 0 ? (
+            joinRequests.map((participant: Requester) => (
+              <EventJoinRequest
+                key={participant.user_id}
+                requester={participant}
+              />
+            ))
+          ) : (
+            <h2 className='participants__not-found'>
+              Sorry! No join requests yet.
+            </h2>
+          )}
         </div>
       )}
     </div>
