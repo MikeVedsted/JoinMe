@@ -23,16 +23,16 @@ const MyEventsPage = () => {
     if (pathname.includes('/hosted'))
       return (
         <EventList
-          type={'hosted'}
+          type='hosted'
+          title='Events you are hosting'
           events={hostedEvents}
-          title={'Events you are hosting'}
         />
       )
     if (pathname.includes('/interested'))
       return (
         <EventList
           type='interested'
-          title={'Events you have requested to join'}
+          title='Events you have requested to join'
           events={requestedEvents}
         />
       )
@@ -40,8 +40,8 @@ const MyEventsPage = () => {
       return (
         <EventList
           type='confirmed'
+          title='Events you are registered for'
           events={participatingEvents}
-          title={'Events you are registered for'}
         />
       )
     if (pathname.includes('/create-new')) return <EventForm />
