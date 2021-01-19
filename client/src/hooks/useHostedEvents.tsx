@@ -8,7 +8,7 @@ const useHostedEvents = (userId: UserId) => {
 
   useEffect(() => {
     userId && fetchHostedEvents()
-  }, [])
+  }, [userId])
 
   const fetchHostedEvents = async () => {
     try {
