@@ -22,17 +22,24 @@ $sub-head: 22px;
 $text: 18px;
 $subtitle: 13px;
 
+// SIZE CONSTANTS
+$largeSpacing: 40px;
+$smallSpacing: 20px;
+$profileImageSize: 50px;
+
 // FONT MIXINS
+@mixin header {
+  font-family: $montserrat;
+  font-size: $heading;
+  color: $textDark;
+  font-weight: 600;
+}
+
 @mixin subheader {
   font-family: $montserrat;
   font-size: $sub-head;
   color: $textDark;
 }
-
-// SIZE CONSTANTS
-$largeSpacing: 40px;
-$smallSpacing: 20px;
-$profileImageSize: 50px;
 
 // LAYOUT MIXINS
 @mixin flexCenter {
@@ -50,6 +57,12 @@ $profileImageSize: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+@mixin flexColumnCenter {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 @mixin twoButtonsInline {
