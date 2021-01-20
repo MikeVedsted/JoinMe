@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import axios from 'axios'
 
 import Button from '../Button'
@@ -8,30 +9,41 @@ import FormDropdownField from '../FormDropdownField'
 import GoogleAutoComplete from '../GoogleAutoComplete'
 import { useFormFields } from '../../hooks/useFormFields'
 import { genderOptions } from '../../util/constants/genderOptions'
-import { AccountFormProps } from '../../types'
+import { AccountFormProps, AppState } from '../../types'
 import './AccountForm.scss'
 
 const AccountForm = ({ userId }: AccountFormProps) => {
-  const [address, setAddress] = useState({})
+  const { user } = useSelector((state: AppState) => state.user)
+  const initAddress = user.street && {
+    street: user.street,
+    number: user.number,
+    postal_code: user.postal_code,
+    city: user.city,
+    country: user.country,
+    lat: user.lat,
+    lng: user.lng
+  }
+  const [address, setAddress] = useState<any>(initAddress)
   const [fields, handleFieldChange] = useFormFields({
-    email: '',
-    first_name: '',
-    last_name: '',
-    date_of_birth: '',
-    gender: '',
-    base_address: '',
-    profile_text: '',
-    profile_image: ''
+    email: user.email,
+    first_name: user.first_name,
+    last_name: user.last_name,
+    date_of_birth: user.date_of_birth,
+    gender: user.gender,
+    profile_text: user.profile_text,
+    profile_image: user.profile_image
   })
+  const userAddress = `${user.street} ${user.number}, ${user.postal_code} ${user.city}`
 
   const handleSubmit = async (event: any) => {
     event.preventDefault()
     try {
       const update = { ...fields, address }
-      await axios.put(`/api/v1/users/${userId}`, update)
-      alert(
-        'Thank you!\nThe changes have been saved and you can now safely leave this page, or make further changes if you spotted a mistake.'
-      )
+      const res = await axios.put(`/api/v1/users/${userId}`, update)
+      res.status === 200 &&
+        alert(
+          'Thank you!\nThe changes have been saved and you can now safely leave this page, or make further changes if you spotted a mistake.'
+        )
     } catch (error) {
       console.log(error)
     }
@@ -39,7 +51,7 @@ const AccountForm = ({ userId }: AccountFormProps) => {
 
   return (
     <form className='form' onSubmit={handleSubmit}>
-      <h2 className='form__title'>Profile set-up</h2>
+      <h2 className='form__title'>Edit</h2>
       <FormInputField
         type='email'
         id='email'
@@ -64,7 +76,11 @@ const AccountForm = ({ userId }: AccountFormProps) => {
       <FormInputField
         type='date'
         id='date_of_birth'
-        value={fields.date_of_birth}
+        value={
+          fields.date_of_birth
+            ? fields.date_of_birth.slice(0, 10)
+            : fields.date_of_birth
+        }
         label='Birthday'
         onChange={handleFieldChange}
       />
@@ -72,16 +88,16 @@ const AccountForm = ({ userId }: AccountFormProps) => {
         label='Gender'
         id='gender'
         options={genderOptions}
+        selectedValue={fields.gender}
         onBlur={handleFieldChange}
       />
-      <FormInputField
-        type='text'
-        id='base_address'
-        label='Default start address'
-        value={'Saved address: ' + fields.base_address}
-        readOnly
-      />
-      <GoogleAutoComplete handleAddress={setAddress} />
+      <label className='form__label'>
+        Address
+        <p className='form__label form__label--address'>
+          Current address: {user.street ? userAddress : '-'}
+        </p>
+        <GoogleAutoComplete handleAddress={setAddress} />
+      </label>
       <FormInputTextArea
         id='profile_text'
         label='Profile text'

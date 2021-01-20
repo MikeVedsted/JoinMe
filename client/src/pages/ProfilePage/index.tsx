@@ -49,7 +49,7 @@ const ProfilePage = () => {
   }, [])
 
   const handleEditClick = () => {
-    history.push('/')
+    history.push(`/user/${userId}/edit`)
   }
 
   return (

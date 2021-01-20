@@ -4,6 +4,47 @@ export const FETCH_ALL_EVENTS = 'FETCH_ALL_EVENTS'
 export const GET_ERRORS = 'GET_ERRORS'
 export const CLEAR_ERRORS = 'CLEAR_ERRORS'
 
+export const ADD_USER = 'ADD_USER'
+export const REMOVE_USER = 'REMOVE_USER'
+
+export type User = {
+  email: string
+  first_name: string
+  last_name: string
+  date_of_birth: any
+  gender: string
+  base_address: string
+  street: string
+  number: string
+  city: string
+  postal_code: number
+  country: string
+  lat: number
+  lng: number
+  profile_text: string
+  profile_image: string
+}
+
+export type UserState = {
+  user: User
+}
+
+export type AddUserAction = {
+  type: typeof ADD_USER
+  payload: {
+    user: User
+  }
+}
+
+export type RemoveUserAction = {
+  type: typeof REMOVE_USER
+  payload: {
+    user: User
+  }
+}
+
+export type UserActions = AddUserAction | RemoveUserAction
+
 export type ProtectedRouteProps = {
   component?: any
   exact?: boolean
@@ -28,6 +69,7 @@ export type AppState = {
     user: UserType
     isAuthenticated: boolean
   }
+  user: UserState
 }
 
 export type ButtonProps = {

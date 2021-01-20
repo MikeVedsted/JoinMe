@@ -17,7 +17,7 @@ import {
 } from '../db/queries'
 import db from '../db'
 import { generateAccessToken, generateRefreshToken } from '../helpers/generateToken'
-import { GoogleToken, User } from '../types'
+import { Address, GoogleToken, User } from '../types'
 
 const googleLogin = async (id_token: string, res: Response) => {
   const decodedToken = jwt.decode(id_token)
@@ -72,7 +72,7 @@ const updateUser = async (userId: string, update: Partial<User>) => {
     const user: User = userResponse.rows[0]
 
     if (!user) {
-      throw new Error()
+      throw new Error('User not found')
     }
 
     const {
@@ -80,39 +80,33 @@ const updateUser = async (userId: string, update: Partial<User>) => {
       last_name = user.last_name,
       profile_image = user.profile_image,
       profile_text = user.profile_text,
-      address = {
-        street: '',
-        number: 0,
-        postal_code: 12345,
-        city: '',
-        country: '',
-        lat: 0,
-        lng: 0
-      },
       date_of_birth = user.date_of_birth,
       gender = user.gender
     } = update
+    const { base_address } = user
+    let addressId: string | Address | undefined = base_address
 
-    const { street, postal_code, city, country, lat, lng } = address
-    let { number } = address
-    !number && (number = 0)
-    let addressId: string
-    const addressResponse = await db.query(addressIdByLocQ, [lat, lng])
+    if (update.address) {
+      const address: Address = update.address
+      const { street, number, postal_code, city, country, lat, lng } = address
 
-    if (addressResponse.rowCount === 0) {
-      const newAddress = await db.query(createAddressQ, [
-        street,
-        number,
-        postal_code,
-        city,
-        country,
-        lat,
-        lng
-      ])
-      addressId = newAddress.rows[0].address_id
+      const addressResponse = await db.query(addressIdByLocQ, [lat, lng])
+
+      if (addressResponse.rowCount === 0) {
+        const newAddress = await db.query(createAddressQ, [
+          street,
+          number,
+          postal_code,
+          city,
+          country,
+          lat,
+          lng
+        ])
+        addressId = newAddress.rows[0].address_id
+      } else {
+        addressId = addressResponse.rows[0].address_id
+      }
     }
-
-    addressId = addressResponse.rows[0].address_id
 
     const updateUser = await db.query(updateUserQ, [
       userId,
