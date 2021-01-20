@@ -1,5 +1,4 @@
-import React from 'react'
-import { useCookies } from 'react-cookie'
+import React, { useState } from 'react'
 import axios from 'axios'
 
 import Button from '../Button'
@@ -8,32 +7,58 @@ import { useFormFields } from '../../hooks/useFormFields'
 import { EventCommentInputProps } from '../../types'
 import './EventCommentInput.scss'
 
-const EventCommentInput = ({ eventId }: EventCommentInputProps) => {
-  const [cookies] = useCookies(['user'])
-  const [fields, handleFields] = useFormFields({ comment: '' })
-  const { user_id } = cookies.user
+// TODO:
+// Add dispatch for sending comment once ready
+// Add dispatch for setting message once ready
+// Add success message once ready
+// Prevent button from going off screen
+// IMPROVEMENTS
+// Auto-expand textarea to content
 
-  const handleSubmit = async (event: any) => {
+const EventCommentInput = ({ eventId }: EventCommentInputProps) => {
+  const [fields, handleFields] = useFormFields({ comment: '' })
+  const [submitted, setSubmitted] = useState(false)
+
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
     try {
-      const data = { comment: fields.comment, userId: user_id }
-      await axios.post(`/api/v1/comments/${eventId}`, data)
+      await axios.post(`/api/v1/comments/${eventId}`, fields)
+      setSubmitted(true)
     } catch (error) {
       console.log(error)
     }
   }
 
+  const dismiss = (event: MouseEvent) => {
+    event.preventDefault()
+    setSubmitted(false)
+  }
+
   return (
-    <form onSubmit={handleSubmit} className='comment-input'>
-      <FormInputTextArea
-        id='comment'
-        label='Add a comment'
-        rows={1}
-        onChange={handleFields}
-        placeholder='Write a comment or ask a question to the creator'
-      />
-      <Button type='submit' text='Send' modifier='inline' />
-    </form>
+    <>
+      {submitted ? (
+        <>
+          <p>Success!</p>
+          <Button
+            type='button'
+            text='Dismiss'
+            modifier='inline'
+            onClick={dismiss}
+          />
+        </>
+      ) : (
+        <form onSubmit={handleSubmit} className='comment-input'>
+          <FormInputTextArea
+            id='comment'
+            label='Add a comment'
+            rows={1}
+            onChange={handleFields}
+            placeholder='Write a comment or ask a question to the creator'
+          />
+          <Button type='submit' text='Send' modifier='inline' />
+        </form>
+      )}
+    </>
   )
 }
 
