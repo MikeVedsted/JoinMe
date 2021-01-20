@@ -7,7 +7,7 @@ import './EventTitle.scss'
 const EventTitle = ({ title, createdAt }: EventTitleProps) => {
   return (
     <h3 className='event-title'>
-      {`${title} `}
+      {title + ' '}
       <span className='event-title__time'>
         {calculateEventAge(createdAt)} ago
       </span>
