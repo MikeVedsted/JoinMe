@@ -41,6 +41,20 @@ $profileImageSize: 50px;
   color: $textDark;
 }
 
+@mixin text {
+  font-family: $montserrat;
+  font-size: $text;
+  color: $textDark;
+}
+
+@mixin link {
+  text-decoration: none;
+
+  &:hover {
+    color: $secondary;
+  }
+}
+
 // LAYOUT MIXINS
 @mixin flexCenter {
   display: flex;
