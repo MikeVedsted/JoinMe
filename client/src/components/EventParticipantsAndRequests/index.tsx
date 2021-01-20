@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Button from '../../components/Button'
 import EventParticipant from '../../components/EventParticipant'
 import EventJoinRequest from '../EventJoinRequest'
+import NotFound from '../NotFound'
 import {
   EventParticipantsAndRequestsProps,
   Participant,
@@ -35,21 +36,29 @@ const EventParticipantsAndRequests = ({
       <hr className='participants__hr' />
       {listView === 'participants' ? (
         <div className='participants__list'>
-          {participants.map((participant: Participant) => (
-            <EventParticipant
-              key={participant.user_id}
-              participant={participant}
-            />
-          ))}
+          {participants.length > 0 ? (
+            participants.map((participant: Participant) => (
+              <EventParticipant
+                key={participant.user_id}
+                participant={participant}
+              />
+            ))
+          ) : (
+            <NotFound message='No participants for this event' />
+          )}
         </div>
       ) : (
         <div className='participants__list participants__list--new-requests'>
-          {joinRequests.map((participant: Requester) => (
-            <EventJoinRequest
-              key={participant.user_id}
-              requester={participant}
-            />
-          ))}
+          {joinRequests.length > 0 ? (
+            joinRequests.map((participant: Requester) => (
+              <EventJoinRequest
+                key={participant.user_id}
+                requester={participant}
+              />
+            ))
+          ) : (
+            <NotFound message='No requests for this event' />
+          )}
         </div>
       )}
     </div>

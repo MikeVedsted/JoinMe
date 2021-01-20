@@ -11,6 +11,7 @@ const GoogleUserLogin = () => {
 
   const checkIfNew = (date: string, userId: string) => {
     const diff = new Date().getTime() - new Date(date).getTime()
+
     if (diff < 60000) history.push(`/user/${userId}/account-setup`)
   }
 

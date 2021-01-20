@@ -13,11 +13,6 @@ const makeStore = (initialState = initState) => {
     }
   }
 
-  const localStorageState = localStorage.getItem('all-hats')
-  if (localStorageState) {
-    initialState = JSON.parse(localStorageState)
-  }
-
   const store = createStore(
     createRootReducer(),
     initialState,
