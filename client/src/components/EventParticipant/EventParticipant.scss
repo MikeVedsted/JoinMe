@@ -36,8 +36,14 @@
   }
 
   &__delete {
+    font-size: 20px;
     color: $primary;
     cursor: pointer;
     margin-left: 10px;
+    transition: 0.3s ease-in-out;
+  }
+
+  &__delete:hover {
+    transform: scale(1.3);
   }
 }
