@@ -10,45 +10,45 @@ import logoLight from '../../Assets/logoSecondary.svg'
 import './Navbar.scss'
 
 const Navbar = () => {
-  const [navBg, setNavBg] = useState(true)
+  const [navHasBackground, setNavHasBackground] = useState(false)
   const [dropdownHidden, setDropdownHidden] = useState(true)
   const [cookies] = useCookies(['user'])
-  const { profile_image } =
-    cookies.user ||
-    'https://res.cloudinary.com/dahevvjff/image/upload/v1608637375/ughqusxea2vuexzlwmqt.png'
+  const { profile_image } = cookies.user
   const { user_id } = cookies.user || ''
 
   const changeNavStyle = () => {
-    window.scrollY >= 50 ? setNavBg(false) : setNavBg(true)
+    window.scrollY >= 50
+      ? setNavHasBackground(true)
+      : setNavHasBackground(false)
   }
 
   window.addEventListener('scroll', changeNavStyle)
 
   return (
-    <nav className={navBg ? 'nav' : 'nav nav--active'}>
+    <nav className={navHasBackground ? 'nav nav__overlay' : 'nav'}>
       <Link to='/'>
         <img
-          className='nav__image nav__image--logo'
+          className='nav__logo'
           src={window.innerWidth > 1024 ? logoDark : logoLight}
           alt='logo'
         />
       </Link>
-      {user_id ? (
-        <div className='nav__icons'>
-          <FontAwesomeIcon className='nav__icon' icon='bell' />
-          <FontAwesomeIcon className='nav__icon' icon='comment' />
-          <img
-            onClick={() => setDropdownHidden(!dropdownHidden)}
-            className='nav__image nav__image--profile'
-            src={profile_image}
-            alt='profile'
-          />
-        </div>
-      ) : (
-        <div className='nav__login'>
+      <div className='nav__options'>
+        {user_id ? (
+          <>
+            <FontAwesomeIcon className='nav__icon' icon='bell' />
+            <FontAwesomeIcon className='nav__icon' icon='comment' />
+            <img
+              onClick={() => setDropdownHidden(!dropdownHidden)}
+              className='nav__profile-image'
+              src={profile_image}
+              alt='profile'
+            />
+          </>
+        ) : (
           <GoogleLogin />
-        </div>
-      )}
+        )}
+      </div>
       <NavDropdown
         display={dropdownHidden}
         setDropdownHidden={setDropdownHidden}
