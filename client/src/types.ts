@@ -227,7 +227,8 @@ export type EventSearchProps = {
 
 export type CommentProps = {
   image: string
-  user: string
+  name: string
+  id: string
   text: string
   date: string
 }

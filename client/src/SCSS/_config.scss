@@ -29,6 +29,20 @@ $subtitle: 13px;
   color: $textDark;
 }
 
+@mixin text {
+  font-family: $montserrat;
+  font-size: $text;
+  color: $textDark;
+}
+
+@mixin link {
+  text-decoration: none;
+
+  &:hover {
+    color: $secondary;
+  }
+}
+
 // SIZE CONSTANTS
 $largeSpacing: 40px;
 $smallSpacing: 20px;
