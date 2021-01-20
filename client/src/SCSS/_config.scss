@@ -25,6 +25,7 @@ $subtitle: 13px;
 // SIZE CONSTANTS
 $largeSpacing: 40px;
 $smallSpacing: 20px;
+$profileImageSize: 50px;
 
 // FONT MIXINS
 @mixin header {
@@ -39,6 +40,7 @@ $smallSpacing: 20px;
   font-size: $sub-head;
   color: $textDark;
 }
+
 
 // LAYOUT MIXINS
 @mixin flexCenter {

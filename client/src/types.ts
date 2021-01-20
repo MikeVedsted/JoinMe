@@ -321,3 +321,8 @@ export type EventType = {
   last_name?: string
   ep_id?: string
 }
+
+export type ProfileImageProps = {
+  image: string
+  alt: string
+}
