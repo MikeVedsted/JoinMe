@@ -343,3 +343,8 @@ export type ModalMessageCancelProps = {
   cancelFunction: () => void
   confirmFunction: () => void
 }
+
+export type ProfileImageProps = {
+  image: string
+  alt: string
+}
