@@ -11,6 +11,10 @@ import useRequestedEvents from '../../hooks/useRequestedEvents'
 import useHostedEvents from '../../hooks/useHostedEvents'
 import './MyEventsPage.scss'
 
+// TO DO
+// Get user_id from state instead of cookies
+// Can we prevent the whole page form rendering again, when making a selection, while still checking auth?
+
 const MyEventsPage = () => {
   const { pathname } = useLocation()
   const [cookies] = useCookies(['user'])
@@ -52,10 +56,10 @@ const MyEventsPage = () => {
 
   return (
     <div className='my-events'>
-      <div className='my-events__controls'>
+      <div className='my-events__left-column'>
         <MyEventsSidebar />
       </div>
-      <div className='my-events__content'>{addContent()}</div>
+      <div className='my-events__right-column'>{addContent()}</div>
     </div>
   )
 }

@@ -2,4 +2,6 @@
 
 .side-bar {
   @include flexColumn;
+  position: sticky;
+  top: calc(#{$navHeight + $largeSpacing});
 }
