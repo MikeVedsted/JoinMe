@@ -348,4 +348,5 @@ export type ModalMessageCancelProps = {
 export type ProfileImageProps = {
   image: string
   alt: string
+  onClick?: () => void
 }
