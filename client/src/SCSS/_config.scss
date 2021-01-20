@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Nunito&display=swap');
 
-// Colors
+// COLORS
 $primary: #e03600;
 $secondary: #f28705;
 $backgroundDim: #fff2e2;
@@ -23,6 +23,13 @@ $text: 18px;
 $subtitle: 13px;
 
 // FONT MIXINS
+@mixin header {
+  font-family: $montserrat;
+  font-size: $heading;
+  color: $textDark;
+  font-weight: 600;
+}
+
 @mixin subheader {
   font-family: $montserrat;
   font-size: $sub-head;

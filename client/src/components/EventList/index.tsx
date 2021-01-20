@@ -1,9 +1,11 @@
 import React from 'react'
 
-import Event from '../../components/Event'
-import EventHosted from '../../components/EventHosted'
-import EventInterested from '../../components/EventInterested'
-import EventConfirmed from '../../components/EventConfirmed'
+import Event from '../Event'
+import NotFound from '../NotFound'
+import EventHosted from '../EventHosted'
+import EventConfirmed from '../EventConfirmed'
+import EventInterested from '../EventInterested'
+
 import { EventListProps, EventType } from '../../types'
 import './EventList.scss'
 
@@ -21,7 +23,11 @@ const EventList = ({ events, title, type }: EventListProps) => {
   return (
     <div className='event-list'>
       {title && <h2 className='event-list__title'>{title}</h2>}
-      {events.map((event: EventType) => content(event))}
+      {events.length > 0 ? (
+        events.map((event: EventType) => content(event))
+      ) : (
+        <NotFound message='No events here yet.' />
+      )}
     </div>
   )
 }
