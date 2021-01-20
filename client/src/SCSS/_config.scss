@@ -22,7 +22,14 @@ $sub-head: 22px;
 $text: 18px;
 $subtitle: 13px;
 
-// Mixins
+// FONT MIXINS
+@mixin subheader {
+  font-family: $montserrat;
+  font-size: $sub-head;
+  color: $textDark;
+}
+
+// LAYOUT MIXINS
 @mixin flexCenter {
   display: flex;
   justify-content: center;
@@ -57,6 +64,7 @@ $subtitle: 13px;
   }
 }
 
+// STYLE MIXINS
 @mixin separator {
   border: 0;
   clear: both;
