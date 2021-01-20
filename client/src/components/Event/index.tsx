@@ -12,25 +12,32 @@ import EventDataBox from '../EventDataBox'
 import ModalMessageCancel from '../ModalMessageCancel'
 import EventCommentSection from '../EventCommentSection'
 import EventManageDropDown from '../EventManageDropDown'
+import EventParticipantAndRequests from '../EventParticipantsAndRequests'
+import useEventParticipants from '../../hooks/useEventParticipants'
+import useEventRequests from '../../hooks/useEventRequests'
 import { EventProps } from '../../types'
 import './Event.scss'
 
 const Event = ({ event }: EventProps) => {
   const history = useHistory()
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false)
+  const [isParticipantsModalOpen, setIsParticipantsModalOpen] = useState(false)
   const [hideDetails, setHideDetails] = useState(true)
   const [showManageOptions, setShowManageOptions] = useState(false)
   const [cookies] = useCookies(['user'])
   const { user_id } = cookies.user || ''
   const { event_id, created_by, created_at, image, title, description } = event
+  const [participants] = useEventParticipants(event_id)
+  const [requests] = useEventRequests(event_id)
 
   const showParticipants = () => {
     setShowManageOptions(false)
+    setIsParticipantsModalOpen(true)
   }
 
   const endEvent = () => {
     setShowManageOptions(false)
-    setIsModalOpen(true)
+    setIsConfirmModalOpen(true)
   }
 
   const editEvent = () => {
@@ -51,7 +58,7 @@ const Event = ({ event }: EventProps) => {
   const handleEndEvent = async () => {
     try {
       await axios.delete(`/api/v1/events/${event_id}`)
-      setIsModalOpen(false)
+      setIsConfirmModalOpen(false)
       alert('Event Successfully Deleted!')
     } catch (error) {
       alert(`Sorry, something went wrong. Please try again.\n\n${error}`)
@@ -60,15 +67,27 @@ const Event = ({ event }: EventProps) => {
 
   return (
     <div className='event'>
-      {isModalOpen && (
+      {isConfirmModalOpen && (
         <Modal
-          closeModal={() => setIsModalOpen(false)}
+          closeModal={() => setIsConfirmModalOpen(false)}
           content={
             <ModalMessageCancel
               title={`Are you sure you want to cancel the event: ${title}?`}
               additionalText='The event, including comments and participant information, will be permanently deleted and it cannot be undone.'
               confirmFunction={handleEndEvent}
-              cancelFunction={() => setIsModalOpen(false)}
+              cancelFunction={() => setIsConfirmModalOpen(false)}
+            />
+          }
+        />
+      )}
+
+      {isParticipantsModalOpen && (
+        <Modal
+          closeModal={() => setIsParticipantsModalOpen(false)}
+          content={
+            <EventParticipantAndRequests
+              participants={participants}
+              joinRequests={requests}
             />
           }
         />
