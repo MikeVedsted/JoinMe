@@ -61,7 +61,7 @@ $smallSpacing: 20px;
 @mixin flexColumnCenter {
   display: flex;
   align-items: center;
-  flex-direction: column;  
+  flex-direction: column;
 }
 
 @mixin twoButtonsInline {
@@ -104,4 +104,3 @@ $smallSpacing: 20px;
 @mixin shadow {
   box-shadow: 0px 0px 2px rgb(41, 41, 41);
 }
-
