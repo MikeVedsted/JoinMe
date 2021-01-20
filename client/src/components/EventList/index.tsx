@@ -20,6 +20,9 @@ const EventList = ({ events, title, type }: EventListProps) => {
     return <Event key={event.event_id} event={event} />
   }
 
+  // IMPROVEMENTS
+  // Add loading component once store and component is created
+
   return (
     <div className='event-list'>
       {title && <h2 className='event-list__title'>{title}</h2>}
