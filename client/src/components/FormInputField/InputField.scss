@@ -13,11 +13,12 @@
 
   &__field {
     width: 100%;
+    background-color: transparent;
     display: block;
-    border: none;
+    outline: none;
     border-bottom: 2px solid $primary;
-    margin: 0 0 20px 0;
-    padding: 5px 0;
+    margin-bottom: 25px;
+    padding-top: 10px;
 
     &:read-only {
       border: none;
