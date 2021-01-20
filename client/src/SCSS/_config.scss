@@ -47,6 +47,12 @@ $profileImageSize: 50px;
   color: $textDark;
 }
 
+@mixin subtitle {
+  font-family: $montserrat;
+  font-size: $subtitle;
+  color: $textDark;
+}
+
 @mixin link {
   text-decoration: none;
 
@@ -113,5 +119,3 @@ $profileImageSize: 50px;
 @mixin shadow {
   box-shadow: 0px 0px 2px rgb(41, 41, 41);
 }
-
-
