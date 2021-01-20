@@ -73,10 +73,14 @@ $profileImageSize: 50px;
   align-items: center;
 }
 
-@mixin flexColumnCenter {
+@mixin flexColumn {
   display: flex;
-  align-items: center;
   flex-direction: column;
+}
+
+@mixin flexColumnCenter {
+  @include flexColumn;
+  align-items: center;
 }
 
 @mixin twoButtonsInline {
