@@ -13,7 +13,7 @@ const Navbar = () => {
   const [navHasBackground, setNavHasBackground] = useState(false)
   const [dropdownHidden, setDropdownHidden] = useState(true)
   const [cookies] = useCookies(['user'])
-  const { profile_image } = cookies.user
+  const profileImage = cookies.user?.profile_image
   const { user_id } = cookies.user || ''
 
   const changeNavStyle = () => {
@@ -41,7 +41,7 @@ const Navbar = () => {
             <img
               onClick={() => setDropdownHidden(!dropdownHidden)}
               className='nav__profile-image'
-              src={profile_image}
+              src={profileImage}
               alt='profile'
             />
           </>
