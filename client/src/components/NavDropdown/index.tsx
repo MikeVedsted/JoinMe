@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { useCookies } from 'react-cookie'
+import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import {
   faListUl,
@@ -9,6 +10,7 @@ import {
 
 import NavDropdownFunction from '../NavDropdownFunction'
 import NavDropdownLink from '../NavDropdownLink'
+import { removeUser } from '../../redux/actions'
 import { NavDropdownProps } from '../../types'
 import './NavDropdown.scss'
 
@@ -17,13 +19,14 @@ const NavDropdown = ({
   setDropdownHidden,
   userId
 }: NavDropdownProps) => {
+  const dispatch = useDispatch()
   const node = useRef() as React.MutableRefObject<HTMLInputElement>
   const history = useHistory()
   const [, , removeCookie] = useCookies(['user'])
 
   const logout = () => {
     removeCookie('user')
-    setDropdownHidden(true)
+    dispatch(removeUser())
     history.push('/')
   }
 
