@@ -79,6 +79,12 @@ $profileImageSize: 50px;
   align-items: center;
 }
 
+@mixin flexColumnCenter {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
 @mixin twoButtonsInline {
   @include flexSpaceBetween;
   width: 100%;
