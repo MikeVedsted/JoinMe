@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { NotFoundProps } from '../../types'
 import notfound from '../../Assets/sorry.jpg'
+import { NotFoundProps } from '../../types'
 import './NotFound.scss'
 
 const NotFound = ({ message }: NotFoundProps) => {
