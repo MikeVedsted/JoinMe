@@ -28,15 +28,16 @@ $smallSpacing: 20px;
 $profileImageSize: 50px;
 $navHeight: 100px;
 $footerHeight: 65px;
-$pagePadding: calc(#{$navHeight + $largeSpacing}) $largeSpacing calc(#{$footerHeight + $largeSpacing}); 
-
+$pagePadding: calc(#{$navHeight + $largeSpacing}) $largeSpacing
+  calc(#{$footerHeight + $largeSpacing});
 
 // SIZE CONSTANTS - MOBILE SCREENS
 $largeSpacingMobile: 20px;
 $smallSpacingMobile: 10px;
 $navHeightMobile: 100px;
 $footerHeightMobile: 60px;
-$pagePaddingMobile: calc(#{$navHeightMobile + $largeSpacingMobile}) $largeSpacingMobile calc(#{$footerHeightMobile + $largeSpacingMobile}); 
+$pagePaddingMobile: calc(#{$navHeightMobile + $largeSpacingMobile})
+  $largeSpacingMobile calc(#{$footerHeightMobile + $largeSpacingMobile});
 
 // FONT MIXINS
 @mixin header {
