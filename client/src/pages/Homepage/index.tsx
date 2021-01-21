@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Modal from '../../components/Modal'
-import EventList from '../../components/EventList'
 import NotFound from '../../components/NotFound'
+import EventList from '../../components/EventList'
 import EventSearch from '../../components/EventSearch'
 import useEventDisplay from '../../hooks/useEventDisplay'
 import './Homepage.scss'
@@ -28,6 +28,14 @@ const Homepage = () => {
 
   return (
     <div className='homepage'>
+      <div
+        hidden={!largeScreen()}
+        className='homepage__filter-icon'
+        onClick={() => setIsModalOpen(!isModalOpen)}
+      >
+        <FontAwesomeIcon icon={'filter'} />
+      </div>
+
       {/* Search box modal for small screens */}
       {isModalOpen && (
         <Modal
@@ -43,29 +51,19 @@ const Homepage = () => {
         />
       )}
 
-      <div className='homepage__left-column'>
-        <div
-          hidden={!largeScreen()}
-          className='homepage__filter-icon'
-          onClick={() => setIsModalOpen(!isModalOpen)}
-        >
-          <FontAwesomeIcon icon={'filter'} />
-        </div>
-
-        <div hidden={largeScreen()} className='homepage__search-box'>
-          <EventSearch
-            distance='100'
-            handleFieldChange={handleFieldChange}
-            handleSubmit={handleSearch}
-            setAddress={handleAddressChange}
-          />
-        </div>
+      <div className='homepage__left-column' hidden={largeScreen()}>
+        <EventSearch
+          distance='100'
+          handleFieldChange={handleFieldChange}
+          handleSubmit={handleSearch}
+          setAddress={handleAddressChange}
+        />
       </div>
       <div className='homepage__right-column'>
         {allEvents && allEvents.length > 0 ? (
           <EventList events={allEvents} />
         ) : (
-          <NotFound message='Sorry, not events found.' />
+          <NotFound message='Sorry, no events found.' />
         )}
       </div>
     </div>
