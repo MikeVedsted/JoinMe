@@ -15,9 +15,9 @@
   &__field {
     width: 100%;
     display: block;
-    border: none;
+    outline: none;
     border-bottom: 2px solid $primary;
-    margin: 0 0 20px 0;
-    padding: 5px 0;
+    margin: 20px;
+    padding-top: 10px;
   }
 }

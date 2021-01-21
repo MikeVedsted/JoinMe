@@ -7,11 +7,7 @@ const Textarea = ({ id, label, modifier, ...rest }: InputTextAreaProps) => {
   return (
     <label className='form__label'>
       {label}
-      {rest.required ? (
-        <span className='form__label--required'>{'*'}</span>
-      ) : (
-        ''
-      )}
+      {rest.required && <span className='form__label--required'>{'*'}</span>}
       <textarea
         id={id}
         className={`form__field form__field${modifier}`}
