@@ -42,7 +42,7 @@ $profileImageSize: 50px;
 }
 
 @mixin text {
-  font-family: $montserrat;
+  font-family: $nunito;
   font-size: $text;
   color: $textDark;
 }
@@ -102,6 +102,13 @@ $profileImageSize: 50px;
   & * {
     flex-grow: 0;
     width: 30%;
+  }
+}
+
+@mixin columnFullWidthItems {
+  flex-direction: column;
+  & * {
+    width: 100%;
   }
 }
 
