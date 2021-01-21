@@ -12,10 +12,8 @@ const ModalMessageCancel = ({
 }: ModalMessageCancelProps) => {
   return (
     <>
-      <h2 className='modal__title'>
-        {title}
-        <p className='modal__warning'>{additionalText}</p>
-      </h2>
+      <h2 className='modal__title'>{title}</h2>
+      <p className='modal__text'>{additionalText}</p>
       <div className='modal__buttons'>
         <Button
           type='button'
