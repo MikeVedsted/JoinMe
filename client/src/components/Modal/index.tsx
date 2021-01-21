@@ -4,6 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ModalProps } from '../../types'
 import './Modal.scss'
 
+// TO DO
+// On click should dispatch close modal action
+
 const Modal = ({ closeModal, content: Content }: ModalProps) => {
   return (
     <div className='modal'>
