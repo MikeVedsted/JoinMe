@@ -29,6 +29,10 @@ export type UserState = {
   user: User
 }
 
+export type LoadingState = {
+  loading: boolean
+}
+
 export type AddUserAction = {
   type: typeof ADD_USER
   payload: {
@@ -70,6 +74,7 @@ export type AppState = {
     isAuthenticated: boolean
   }
   user: UserState
+  loading: LoadingState
 }
 
 export type ButtonProps = {
