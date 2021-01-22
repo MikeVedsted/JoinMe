@@ -14,7 +14,6 @@ export const createComment = async (req: AuthRequest, res: Response, next: NextF
       userk: req.user.user_id,
       event: req.params.eventId
     }
-    console.log(comment)
     res.json(await CommentService.createComment(comment))
   } catch (error) {
     next(new BadRequestError('Failed to create comment', error))
