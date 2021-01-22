@@ -1,11 +1,34 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 
-export const FETCH_ALL_EVENTS = 'FETCH_ALL_EVENTS'
+export const FETCH_EVENTS_REQUESTED = 'FETCH_EVENTS_REQUESTED'
+export const FETCH_EVENTS_SUCCEED = 'FETCH_EVENTS_SUCCEED'
+export const FETCH_EVENTS_FAILED = 'FETCH_EVENTS_FAILED'
+
 export const GET_ERRORS = 'GET_ERRORS'
 export const CLEAR_ERRORS = 'CLEAR_ERRORS'
 
 export const ADD_USER = 'ADD_USER'
 export const REMOVE_USER = 'REMOVE_USER'
+
+export type AppState = {
+  event: EventState
+  user: UserState
+  auth: any
+}
+
+export type EventState = {
+  allEvents: EventType[]
+  status: string
+  message: string
+  loading: boolean
+}
+
+export type UserState = {
+  user: User
+  status: string
+  message: string
+  loading: boolean
+}
 
 export type User = {
   email: string
@@ -25,10 +48,6 @@ export type User = {
   profile_image: string
 }
 
-export type UserState = {
-  user: User
-}
-
 export type AddUserAction = {
   type: typeof ADD_USER
   payload: {
@@ -44,13 +63,7 @@ export type RemoveUserAction = {
 }
 
 export type UserActions = AddUserAction | RemoveUserAction
-
-export type ProtectedRouteProps = {
-  component?: any
-  exact?: boolean
-  path: string
-  children?: any
-}
+export type EventActions = FetchEventActions
 
 export type UserType = {
   email: string
@@ -64,12 +77,73 @@ export type UserType = {
   user_id: string
 }
 
-export type AppState = {
-  auth: {
-    user: UserType
-    isAuthenticated: boolean
+export type EventType = {
+  key: string
+  category: string
+  created_by: string
+  created_at: string
+  image: string
+  title: string
+  date: string
+  time: string
+  expires_at: string
+  participants: number
+  max_participants: number
+  description: string
+  handleAddRequest: () => void
+  event_id: EventId
+  first_name?: string
+  last_name?: string
+  street: string
+  number: string
+  postal_code: string
+  city: string
+  er_id?: string
+  ep_id?: string
+  is_owner?: boolean
+  is_requested?: boolean
+  is_confirmed?: boolean
+}
+
+// ============ //
+//  ACTIONS     //
+// ============ //
+
+export type FetchEventActions =
+  | FetchEventRequested
+  | FetchEventSucceed
+  | FetchEventFailed
+
+export type FetchEventRequested = {
+  type: typeof FETCH_EVENTS_REQUESTED
+}
+
+export type FetchEventSucceed = {
+  type: typeof FETCH_EVENTS_SUCCEED
+  payload: {
+    events: EventType[]
+    status: string | ''
+    message: string
   }
-  user: UserState
+}
+
+export type FetchEventFailed = {
+  type: typeof FETCH_EVENTS_FAILED
+  payload: {
+    status: string | ''
+    message: string
+  }
+}
+
+// ============ //
+//  PROPS       //
+// ============ //
+
+export type ProtectedRouteProps = {
+  component?: any
+  exact?: boolean
+  path: string
+  children?: any
 }
 
 export type ButtonProps = {
@@ -132,31 +206,6 @@ export type DropdownProps = {
   modifier?: string
   required?: boolean
   selectedValue?: string
-}
-
-export type EventType = {
-  key: string
-  category: string
-  created_by: string
-  created_at: string
-  image: string
-  title: string
-  date: string
-  time: string
-  expires_at: string
-  participants: number
-  max_participants: number
-  description: string
-  handleAddRequest: () => void
-  event_id: EventId
-  creatorName: string
-  first_name: string
-  last_name: string
-  street: string
-  number: string
-  postal_code: string
-  city: string
-  er_id?: string
 }
 
 export type ModalProps = {
@@ -298,34 +347,11 @@ export type EventTitleProps = {
 }
 
 export type EventDataBoxProps = {
-  event: Event
+  event: EventType
 }
 
 export type EventProps = {
-  event: Event
-}
-
-export type Event = {
-  created_by: string
-  created_at: string
-  image: string
-  title: string
-  date: string
-  time: string
-  category: string
-  expires_at: string
-  max_participants: number
-  description: string
-  event_id: EventId
-  creatorName: string | undefined
-  first_name?: string
-  last_name?: string
-  street: string
-  number: string
-  postal_code: string
-  city: string
-  er_id?: string
-  ep_id?: string
+  event: EventType
 }
 
 export type EventParticipantsAndRequestsProps = {
@@ -334,7 +360,7 @@ export type EventParticipantsAndRequestsProps = {
 }
 
 export type EventUpdateFormProps = {
-  data: Event
+  data: EventType
   eventId: EventId
 }
 
@@ -348,4 +374,18 @@ export type ModalMessageCancelProps = {
 export type ProfileImageProps = {
   image: string
   alt: string
+  onClick?: () => void
+}
+
+export type SearchParamsProps = {
+  category: string
+  location: {
+    lat: string
+    lng: string
+  }
+  distance: string
+}
+
+export type CommentSubmission = {
+  comment: string
 }

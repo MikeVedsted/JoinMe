@@ -11,7 +11,7 @@ const Homepage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const {
-    events,
+    allEvents,
     handleFieldChange,
     handleAddressChange,
     handleSearch
@@ -51,9 +51,9 @@ const Homepage = () => {
         />
       )}
 
-      {events ? (
+      {allEvents ? (
         <div className='homepage__events'>
-          {events.map((event: any) => (
+          {allEvents.map((event: any) => (
             <Event key={event.created_at} event={event} />
           ))}
         </div>
