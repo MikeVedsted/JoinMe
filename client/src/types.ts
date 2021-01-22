@@ -92,14 +92,14 @@ export type EventType = {
   description: string
   handleAddRequest: () => void
   event_id: EventId
-  creatorName: string
-  first_name: string
-  last_name: string
+  first_name?: string
+  last_name?: string
   street: string
   number: string
   postal_code: string
   city: string
   er_id?: string
+  ep_id?: string
   is_owner?: boolean
   is_requested?: boolean
   is_confirmed?: boolean
@@ -347,34 +347,11 @@ export type EventTitleProps = {
 }
 
 export type EventDataBoxProps = {
-  event: Event
+  event: EventType
 }
 
 export type EventProps = {
-  event: Event
-}
-
-export type Event = {
-  created_by: string
-  created_at: string
-  image: string
-  title: string
-  date: string
-  time: string
-  category: string
-  expires_at: string
-  max_participants: number
-  description: string
-  event_id: EventId
-  creatorName: string | undefined
-  first_name?: string
-  last_name?: string
-  street: string
-  number: string
-  postal_code: string
-  city: string
-  er_id?: string
-  ep_id?: string
+  event: EventType
 }
 
 export type EventParticipantsAndRequestsProps = {
@@ -383,7 +360,7 @@ export type EventParticipantsAndRequestsProps = {
 }
 
 export type EventUpdateFormProps = {
-  data: Event
+  data: EventType
   eventId: EventId
 }
 

@@ -37,8 +37,7 @@ $smallSpacingMobile: 10px;
 $navHeightMobile: 100px;
 $footerHeightMobile: 60px;
 $pagePaddingMobile: calc(#{$navHeightMobile + $largeSpacingMobile})
-$largeSpacingMobile calc(#{$footerHeightMobile + $largeSpacingMobile});
-
+  $largeSpacingMobile calc(#{$footerHeightMobile + $largeSpacingMobile});
 
 // FONT MIXINS
 @mixin header {
@@ -142,4 +141,12 @@ $largeSpacingMobile calc(#{$footerHeightMobile + $largeSpacingMobile});
 
 @mixin shadow {
   box-shadow: 0px 0px 2px rgb(41, 41, 41);
+}
+
+@mixin animatedIcon {
+  font-size: 40px;
+  color: $primary;
+  position: absolute;
+  top: 100px;
+  left: 100px;
 }
