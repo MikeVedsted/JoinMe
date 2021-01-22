@@ -1,13 +1,18 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
-import Event from '../../components/Event'
-import EventHosted from '../../components/EventHosted'
-import EventInterested from '../../components/EventInterested'
-import EventConfirmed from '../../components/EventConfirmed'
-import { EventListProps, EventType } from '../../types'
+import Event from '../Event'
+import Loading from '../Loading'
+import NotFound from '../NotFound'
+import EventHosted from '../EventHosted'
+import EventConfirmed from '../EventConfirmed'
+import EventInterested from '../EventInterested'
+import { EventListProps, EventType, AppState } from '../../types'
 import './EventList.scss'
 
 const EventList = ({ events, title, type }: EventListProps) => {
+  const { loading } = useSelector((state: AppState) => state.event)
+
   const content = (event: EventType) => {
     if (type === 'hosted')
       return <EventHosted key={event.event_id} event={event} />
@@ -20,8 +25,13 @@ const EventList = ({ events, title, type }: EventListProps) => {
 
   return (
     <div className='event-list'>
+      {loading && <Loading />}
       {title && <h2 className='event-list__title'>{title}</h2>}
-      {events.map((event: EventType) => content(event))}
+      {events.length > 0 ? (
+        events.map((event: EventType) => content(event))
+      ) : (
+        <NotFound message='No events found.' />
+      )}
     </div>
   )
 }
