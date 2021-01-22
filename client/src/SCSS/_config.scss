@@ -22,10 +22,23 @@ $sub-head: 22px;
 $text: 18px;
 $subtitle: 13px;
 
-// SIZE CONSTANTS
+// SIZE CONSTANTS - LARGE SCREENS
 $largeSpacing: 40px;
 $smallSpacing: 20px;
 $profileImageSize: 50px;
+$navHeight: 100px;
+$footerHeight: 65px;
+$pagePadding: calc(#{$navHeight + $largeSpacing}) $largeSpacing
+  calc(#{$footerHeight + $largeSpacing});
+
+// SIZE CONSTANTS - MOBILE SCREENS
+$largeSpacingMobile: 20px;
+$smallSpacingMobile: 10px;
+$navHeightMobile: 100px;
+$footerHeightMobile: 60px;
+$pagePaddingMobile: calc(#{$navHeightMobile + $largeSpacingMobile})
+$largeSpacingMobile calc(#{$footerHeightMobile + $largeSpacingMobile});
+
 
 // FONT MIXINS
 @mixin header {
@@ -42,7 +55,7 @@ $profileImageSize: 50px;
 }
 
 @mixin text {
-  font-family: $montserrat;
+  font-family: $nunito;
   font-size: $text;
   color: $textDark;
 }
@@ -102,6 +115,13 @@ $profileImageSize: 50px;
   & * {
     flex-grow: 0;
     width: 30%;
+  }
+}
+
+@mixin columnFullWidthItems {
+  flex-direction: column;
+  & * {
+    width: 100%;
   }
 }
 
