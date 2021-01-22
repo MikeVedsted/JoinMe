@@ -24,7 +24,9 @@ const EventCommentSection = ({ eventId }: CommentSectionProps) => {
           />
         ))
       ) : (
-        <p className='comment-section__placeholder'>No comments yet</p>
+        <p className='comment-section__placeholder'>
+          No comments yet. Have a question? Add it below!
+        </p>
       )}
       <EventCommentInput eventId={eventId} />
     </div>
