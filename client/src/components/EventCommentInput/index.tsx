@@ -1,53 +1,45 @@
 import React, { useState } from 'react'
-import axios from 'axios'
+import { useDispatch } from 'react-redux'
 
 import Button from '../Button'
 import FormInputTextArea from '../FormInputTextArea'
 import { useFormFields } from '../../hooks/useFormFields'
+import { addCommentToEvent } from '../../redux/actions/event'
 import { EventCommentInputProps } from '../../types'
 import './EventCommentInput.scss'
 
-// TODO:
-// Add dispatch for sending comment once ready
-// Add dispatch for setting message once ready
-// Add success message once ready
-// Prevent button from going off screen
-// IMPROVEMENTS
-// Auto-expand textarea to content
-
 const EventCommentInput = ({ eventId }: EventCommentInputProps) => {
+  const dispatch = useDispatch()
   const [fields, handleFields] = useFormFields({ comment: '' })
   const [submitted, setSubmitted] = useState(false)
+  const [message, setMessage] = useState('')
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
     try {
-      await axios.post(`/api/v1/comments/${eventId}`, fields)
+      dispatch(addCommentToEvent(eventId, fields))
       setSubmitted(true)
+      setMessage('Success!')
     } catch (error) {
-      console.log(error)
+      setSubmitted(true)
+      setMessage('Something went wrong, please try again.')
     }
   }
 
-  const dismiss = (event: MouseEvent) => {
-    event.preventDefault()
-    setSubmitted(false)
-  }
-
   return (
-    <>
+    <form onSubmit={handleSubmit} className='comment-input'>
       {submitted ? (
         <>
-          <p>Success!</p>
+          <p className='comment-input__message'>{message}</p>
           <Button
             type='button'
             text='Dismiss'
             modifier='inline'
-            onClick={dismiss}
+            onClick={() => setSubmitted(false)}
           />
         </>
       ) : (
-        <form onSubmit={handleSubmit} className='comment-input'>
+        <>
           <FormInputTextArea
             id='comment'
             label='Add a comment'
@@ -55,10 +47,10 @@ const EventCommentInput = ({ eventId }: EventCommentInputProps) => {
             onChange={handleFields}
             placeholder='Write a comment or ask a question to the creator'
           />
-          <Button type='submit' text='Send' modifier='inline' />
-        </form>
+          <Button type='submit' text='Send' modifier='secondary' />
+        </>
       )}
-    </>
+    </form>
   )
 }
 

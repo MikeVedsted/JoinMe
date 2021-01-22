@@ -1,7 +1,11 @@
 @import '../../SCSS/config';
 
 .comment-input {
-  max-width: 100%;
+  @include flexCenter;
   margin: $smallSpacing 0;
-  display: flex;
+  align-items: flex-end;
+
+  &__message {
+    width: 100%;
+  }
 }
