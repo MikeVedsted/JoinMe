@@ -26,6 +26,7 @@ $subtitle: 13px;
 $largeSpacing: 40px;
 $smallSpacing: 20px;
 $profileImageSize: 50px;
+$eventImageSize: 200px;
 $navHeight: 100px;
 $footerHeight: 65px;
 $pagePadding: calc(#{$navHeight + $largeSpacing}) $largeSpacing
@@ -36,6 +37,7 @@ $largeSpacingMobile: 20px;
 $smallSpacingMobile: 10px;
 $navHeightMobile: 100px;
 $footerHeightMobile: 60px;
+$eventImageSizeMobile: 150px;
 $pagePaddingMobile: calc(#{$navHeightMobile + $largeSpacingMobile})
   $largeSpacingMobile calc(#{$footerHeightMobile + $largeSpacingMobile});
 
@@ -132,7 +134,6 @@ $pagePaddingMobile: calc(#{$navHeightMobile + $largeSpacingMobile})
   width: 100%;
   background-color: $textDim;
   height: 1.5px;
-  margin-top: 30px;
 }
 
 @mixin borderRadiusSmall {

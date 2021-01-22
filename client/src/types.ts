@@ -179,8 +179,8 @@ export type Address = {
   number: string
   street: string
   city: string
-  postalCode: string
-  country: string
+  postal_code: string
+  country?: string
 }
 
 export type InputFieldProps = {
@@ -337,8 +337,8 @@ export type EventListProps = {
 }
 
 export type EventImageProps = {
-  src?: string
-  alt?: string
+  src: string
+  alt: string
 }
 
 export type EventTitleProps = {
@@ -348,6 +348,7 @@ export type EventTitleProps = {
 
 export type EventDataBoxProps = {
   event: Event
+  participantCount: number
 }
 
 export type EventProps = {
