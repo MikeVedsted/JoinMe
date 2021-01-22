@@ -59,6 +59,12 @@ $pagePaddingMobile: calc(#{$navHeightMobile + $largeSpacingMobile})
   color: $textDark;
 }
 
+@mixin subtitle {
+  font-family: $montserrat;
+  font-size: $subtitle;
+  color: $textDark;
+}
+
 @mixin link {
   text-decoration: none;
 
