@@ -1,23 +1,20 @@
 @import '../../SCSS/config';
 
 .event {
-  display: flex;
-  flex-direction: column;
+  @include flexColumn;
   position: relative;
+  max-width: 800px;
 
   &__manage {
     color: $textDark;
-    cursor: pointer;
     position: absolute;
-    top: 30px;
+    top: 0;
     right: 0;
+    cursor: pointer;
   }
 
   &__description {
-    width: 100%;
-    font-family: $nunito;
-    font-size: $text;
-    color: $textDark;
+    @include text;
   }
 
   &__buttons {
@@ -26,31 +23,17 @@
 
   &__line {
     @include separator;
-  }
-}
-
-@media only screen and (max-width: 1024px) {
-  .event {
-    &__buttons {
-      display: inline;
-
-      & * {
-        margin-top: 5px;
-      }
-    }
+    margin: $smallSpacing 0;
   }
 }
 
 @media only screen and (max-width: 768px) {
   .event {
-    width: 100vw;
-
     &__buttons {
-      padding: 0 2%;
-      display: inline;
+      @include flexColumn;
 
       & * {
-        margin-top: 5px;
+        width: 100%;
       }
     }
   }
