@@ -7,7 +7,6 @@ import NotFound from '../NotFound'
 import EventHosted from '../EventHosted'
 import EventConfirmed from '../EventConfirmed'
 import EventInterested from '../EventInterested'
-
 import { EventListProps, EventType, AppState } from '../../types'
 import './EventList.scss'
 
