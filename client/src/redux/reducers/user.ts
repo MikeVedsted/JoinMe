@@ -18,7 +18,10 @@ export default function user(
       lng: 0,
       profile_text: '',
       profile_image: ''
-    }
+    },
+    loading: false,
+    status: '',
+    message: ''
   },
   action: UserActions
 ): UserState {
@@ -29,6 +32,7 @@ export default function user(
     }
     case REMOVE_USER: {
       return {
+        ...state,
         user: {
           email: '',
           first_name: '',

@@ -5,4 +5,5 @@
   @include shadow;
   height: $profileImageSize;
   width: $profileImageSize;
+  object-fit: cover;
 }

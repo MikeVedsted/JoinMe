@@ -7,7 +7,9 @@ import { AuthRequest, Event, EventSearchQuery } from '../types'
 export const findAllEvents = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { category, lat, lng, distance } = req.query as EventSearchQuery
-    res.json(await EventService.findAllEvents(category, lat, lng, distance))
+    res.json({
+      events: await EventService.findAllEvents(category, lat, lng, distance)
+    })
   } catch (error) {
     next(new NotFoundError('No events found', error))
   }
