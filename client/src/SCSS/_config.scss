@@ -37,7 +37,7 @@ $smallSpacingMobile: 10px;
 $navHeightMobile: 100px;
 $footerHeightMobile: 60px;
 $pagePaddingMobile: calc(#{$navHeightMobile + $largeSpacingMobile})
-$largeSpacingMobile calc(#{$footerHeightMobile + $largeSpacingMobile});
+  $largeSpacingMobile calc(#{$footerHeightMobile + $largeSpacingMobile});
 
 // FONT MIXINS
 @mixin header {
