@@ -1,23 +1,21 @@
 @import '../../SCSS/config';
 
-.form {
-  &__label {
-    width: 100%;
-    font-family: $montserrat;
-    color: $textDark;
-    font-weight: 600;
+.textarea {
+  width: 100%;
+  @include flexColumn;
 
+  &__label {
+    @include inputLabel;
     &--required {
       color: $primary;
     }
   }
 
   &__field {
-    width: 100%;
-    display: block;
+    resize: vertical;
     outline: none;
+    border: none;
     border-bottom: 2px solid $primary;
-    margin: 20px;
-    padding-top: 10px;
+    @include text;
   }
 }

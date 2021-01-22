@@ -21,6 +21,7 @@ $heading: 30px;
 $sub-head: 22px;
 $text: 18px;
 $subtitle: 13px;
+$lineHeight: 140%;
 
 // SIZE CONSTANTS - LARGE SCREENS
 $largeSpacing: 40px;
@@ -37,8 +38,7 @@ $smallSpacingMobile: 10px;
 $navHeightMobile: 100px;
 $footerHeightMobile: 60px;
 $pagePaddingMobile: calc(#{$navHeightMobile + $largeSpacingMobile})
-$largeSpacingMobile calc(#{$footerHeightMobile + $largeSpacingMobile});
-
+  $largeSpacingMobile calc(#{$footerHeightMobile + $largeSpacingMobile});
 
 // FONT MIXINS
 @mixin header {
@@ -58,6 +58,7 @@ $largeSpacingMobile calc(#{$footerHeightMobile + $largeSpacingMobile});
   font-family: $nunito;
   font-size: $text;
   color: $textDark;
+  line-height: $lineHeight;
 }
 
 @mixin link {
@@ -142,4 +143,12 @@ $largeSpacingMobile calc(#{$footerHeightMobile + $largeSpacingMobile});
 
 @mixin shadow {
   box-shadow: 0px 0px 2px rgb(41, 41, 41);
+}
+
+@mixin inputLabel {
+  width: 100%;
+  font-family: $montserrat;
+  color: $textDark;
+  font-weight: 600;
+  margin-bottom: 10px;
 }
