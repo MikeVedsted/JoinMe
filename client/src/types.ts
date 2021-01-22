@@ -14,6 +14,7 @@ export type AppState = {
   event: EventState
   user: UserState
   auth: any
+  ui: UiState
 }
 
 export type EventState = {
@@ -30,7 +31,13 @@ export type UserState = {
   loading: boolean
 }
 
+export type UiState = {
+  isModalOpen: boolean
+  isDropDownOpen: boolean
+}
+
 export type User = {
+  user_id: string
   email: string
   first_name: string
   last_name: string

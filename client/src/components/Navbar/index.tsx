@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -8,19 +9,19 @@ import ProfileImage from '../ProfileImage'
 import GoogleLogin from '../GoogleUserLogin'
 import logoDark from '../../Assets/logoDark.svg'
 import logoLight from '../../Assets/logoSecondary.svg'
+import { AppState } from '../../types'
 import './Navbar.scss'
 
 // TO DO
 // Check auth in state and remove cookie check
 // Handle dropdown from ui state
-// Get user_id and image from state
 
 const Navbar = () => {
+  const { profile_image, user_id } = useSelector(
+    (state: AppState) => state.user.user
+  )
+  const { isDropDownOpen } = useSelector((state: AppState) => state.ui)
   const [navHasBackground, setNavHasBackground] = useState(false)
-  const [dropdownHidden, setDropdownHidden] = useState(true)
-  const [cookies] = useCookies(['user'])
-  const profileImage = cookies.user?.profile_image
-  const { user_id } = cookies.user || ''
 
   const changeNavStyle = () => {
     window.scrollY >= 50
@@ -45,7 +46,7 @@ const Navbar = () => {
           <FontAwesomeIcon className='nav__icon' icon='bell' />
           <FontAwesomeIcon className='nav__icon' icon='comment' />
           <ProfileImage
-            image={profileImage}
+            image={profile_image}
             alt='You. Click here for menu.'
             onClick={() => setDropdownHidden(!dropdownHidden)}
           />
@@ -57,7 +58,7 @@ const Navbar = () => {
       )}
 
       <NavDropdown
-        display={dropdownHidden}
+        display={isDropDownOpen}
         setDropdownHidden={setDropdownHidden}
         userId={user_id}
       />
