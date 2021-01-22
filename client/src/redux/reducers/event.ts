@@ -1,4 +1,3 @@
-import Event from '../../components/Event'
 import {
   EventState,
   EventActions,

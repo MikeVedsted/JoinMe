@@ -385,3 +385,7 @@ export type SearchParamsProps = {
   }
   distance: string
 }
+
+export type CommentSubmission = {
+  comment: string
+}
