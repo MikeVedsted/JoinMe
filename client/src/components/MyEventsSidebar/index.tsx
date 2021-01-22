@@ -18,28 +18,28 @@ const MyEventsSidebar = () => {
         type='button'
         text='Hosted events'
         id='hosted'
-        modifier={pathname.includes('/hosted') ? 'large-active' : 'large'}
+        modifier={pathname.includes('/hosted') ? 'primary' : 'secondary'}
         onClick={(e) => handleClick(e.target.id)}
       />
       <Button
         type='button'
         text='Interested events'
         id='interested'
-        modifier={pathname.includes('/interested') ? 'large-active' : 'large'}
+        modifier={pathname.includes('/interested') ? 'primary' : 'secondary'}
         onClick={(e) => handleClick(e.target.id)}
       />
       <Button
         type='button'
         text='Confirmed events'
         id='confirmed'
-        modifier={pathname.includes('/confirmed') ? 'large-active' : 'large'}
+        modifier={pathname.includes('/confirmed') ? 'primary' : 'secondary'}
         onClick={(e) => handleClick(e.target.id)}
       />
       <Button
         type='button'
         text='Create event'
         id='create-new'
-        modifier={pathname.includes('/create-new') ? 'large-active' : 'large'}
+        modifier={pathname.includes('/create-new') ? 'primary' : 'secondary'}
         onClick={(e) => handleClick(e.target.id)}
       />
     </div>
