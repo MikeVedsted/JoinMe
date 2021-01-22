@@ -1,5 +1,5 @@
+@import '../../SCSS/config';
+
 .side-bar {
-  display: flex;
-  flex-direction: column;
-  max-width: 100%;
+  @include flexColumn;
 }
