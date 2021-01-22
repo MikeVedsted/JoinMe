@@ -22,7 +22,31 @@ $sub-head: 22px;
 $text: 18px;
 $subtitle: 13px;
 
+// SIZE CONSTANTS - LARGE SCREENS
+$largeSpacing: 40px;
+$smallSpacing: 20px;
+$profileImageSize: 50px;
+$navHeight: 100px;
+$footerHeight: 65px;
+$pagePadding: calc(#{$navHeight + $largeSpacing}) $largeSpacing
+  calc(#{$footerHeight + $largeSpacing});
+
+// SIZE CONSTANTS - MOBILE SCREENS
+$largeSpacingMobile: 20px;
+$smallSpacingMobile: 10px;
+$navHeightMobile: 100px;
+$footerHeightMobile: 60px;
+$pagePaddingMobile: calc(#{$navHeightMobile + $largeSpacingMobile})
+  $largeSpacingMobile calc(#{$footerHeightMobile + $largeSpacingMobile});
+
 // FONT MIXINS
+@mixin header {
+  font-family: $montserrat;
+  font-size: $heading;
+  color: $textDark;
+  font-weight: 600;
+}
+
 @mixin subheader {
   font-family: $montserrat;
   font-size: $sub-head;
@@ -30,7 +54,7 @@ $subtitle: 13px;
 }
 
 @mixin text {
-  font-family: $montserrat;
+  font-family: $nunito;
   font-size: $text;
   color: $textDark;
 }
@@ -42,11 +66,6 @@ $subtitle: 13px;
     color: $secondary;
   }
 }
-
-// SIZE CONSTANTS
-$largeSpacing: 40px;
-$smallSpacing: 20px;
-$profileImageSize: 50px;
 
 // LAYOUT MIXINS
 @mixin flexCenter {
@@ -63,6 +82,16 @@ $profileImageSize: 50px;
 @mixin flexSpaceBetween {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+@mixin flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flexColumnCenter {
+  @include flexColumn;
   align-items: center;
 }
 
@@ -88,6 +117,13 @@ $profileImageSize: 50px;
   }
 }
 
+@mixin columnFullWidthItems {
+  flex-direction: column;
+  & * {
+    width: 100%;
+  }
+}
+
 // STYLE MIXINS
 @mixin separator {
   border: 0;
@@ -105,4 +141,12 @@ $profileImageSize: 50px;
 
 @mixin shadow {
   box-shadow: 0px 0px 2px rgb(41, 41, 41);
+}
+
+@mixin animatedIcon {
+  font-size: 40px;
+  color: $primary;
+  position: absolute;
+  top: 100px;
+  left: 100px;
 }

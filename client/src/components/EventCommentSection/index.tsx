@@ -17,9 +17,9 @@ const EventCommentSection = ({ eventId }: CommentSectionProps) => {
             key={comment.date}
             image={comment.profile_image}
             name={comment.first_name}
-            id={comment.user_id}
             text={comment.comment}
             date={comment.commented_at}
+            id={comment.user_id}
           />
         ))}
       <EventCommentInput eventId={eventId} />
