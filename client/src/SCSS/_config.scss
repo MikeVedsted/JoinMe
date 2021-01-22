@@ -61,6 +61,12 @@ $pagePaddingMobile: calc(#{$navHeightMobile + $largeSpacingMobile})
   color: $textDark;
 }
 
+@mixin dimmedText {
+  font-family: $nunito;
+  font-size: $text;
+  color: $textDim;
+}
+
 @mixin link {
   text-decoration: none;
 
