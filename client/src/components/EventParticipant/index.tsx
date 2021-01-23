@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { EventParticipantProps } from '../../types'
+import { EventParticipantProps } from '../../Types'
 import './EventParticipant.scss'
 
 const EventParticipant = ({ participant }: EventParticipantProps) => {

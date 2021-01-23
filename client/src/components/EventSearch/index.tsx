@@ -5,7 +5,7 @@ import FormSlider from '../FormSlider'
 import FormDropdownField from '../FormDropdownField'
 import GoogleAutoComplete from '../GoogleAutoComplete'
 import { eventCategories } from '../../util/constants/eventCategories'
-import { EventSearchProps } from '../../types'
+import { EventSearchProps } from '../../Types'
 
 import './EventSearch.scss'
 

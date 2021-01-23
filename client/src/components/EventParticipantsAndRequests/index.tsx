@@ -8,7 +8,7 @@ import {
   EventParticipantsAndRequestsProps,
   Participant,
   Requester
-} from '../../types'
+} from '../../Types'
 import './EventParticipantsAndRequests.scss'
 
 const EventParticipantsAndRequests = ({

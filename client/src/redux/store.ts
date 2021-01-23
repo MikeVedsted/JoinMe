@@ -2,7 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 
 import createRootReducer from './reducers'
-import { AppState } from '../types'
+import { AppState } from '../Types'
 
 const initState: AppState = {
   event: {

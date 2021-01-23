@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { InputTextAreaProps } from '../../types'
+import { InputTextAreaProps } from '../../Types'
 import './Textarea.scss'
 
 const Textarea = ({ id, label, modifier, ...rest }: InputTextAreaProps) => {
