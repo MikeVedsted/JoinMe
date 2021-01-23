@@ -4,11 +4,11 @@ import {
   FETCH_EVENTS_REQUESTED,
   FETCH_EVENTS_SUCCEED,
   FETCH_EVENTS_FAILED,
-  SearchParamsProps,
+  SearchParams,
   CommentSubmission
-} from '../../types'
+} from '../../Types'
 
-export const fetchAllEvents = (searchParams: SearchParamsProps) => async (
+export const fetchAllEvents = (searchParams: SearchParams) => async (
   dispatch: Dispatch
 ) => {
   try {

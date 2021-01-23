@@ -15,7 +15,7 @@ import EventManageDropDown from '../EventManageDropDown'
 import EventParticipantAndRequests from '../EventParticipantsAndRequests'
 import useEventParticipants from '../../hooks/useEventParticipants'
 import useEventRequests from '../../hooks/useEventRequests'
-import { EventProps } from '../../types'
+import { EventProps } from '../../Types'
 import './Event.scss'
 
 const Event = ({ event }: EventProps) => {

@@ -4,13 +4,13 @@ import { useCookies } from 'react-cookie'
 import axios from 'axios'
 
 import { addUser } from '../redux/actions'
-import { User } from '../types'
+import { UserInState } from '../Types'
 
 const useUser = (userId: string) => {
   const dispatch = useDispatch()
   const [cookies] = useCookies(['user'])
   const { user_id } = cookies.user
-  const [user, setUser] = useState<User>()
+  const [user, setUser] = useState<UserInState>()
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

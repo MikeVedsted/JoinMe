@@ -7,13 +7,13 @@ import NotFound from '../NotFound'
 import EventHosted from '../EventHosted'
 import EventConfirmed from '../EventConfirmed'
 import EventInterested from '../EventInterested'
-import { EventListProps, EventType, AppState } from '../../types'
+import { EventListProps, EventObject, AppState } from '../../Types'
 import './EventList.scss'
 
 const EventList = ({ events, title, type }: EventListProps) => {
   const { loading } = useSelector((state: AppState) => state.event)
 
-  const content = (event: EventType) => {
+  const content = (event: EventObject) => {
     if (type === 'hosted')
       return <EventHosted key={event.event_id} event={event} />
     if (type === 'interested')
@@ -28,7 +28,7 @@ const EventList = ({ events, title, type }: EventListProps) => {
       {loading && <Loading />}
       {title && <h2 className='event-list__title'>{title}</h2>}
       {events.length > 0 ? (
-        events.map((event: EventType) => content(event))
+        events.map((event: EventObject) => content(event))
       ) : (
         <NotFound message='No events found.' />
       )}

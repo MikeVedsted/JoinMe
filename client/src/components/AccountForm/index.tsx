@@ -9,7 +9,7 @@ import FormDropdownField from '../FormDropdownField'
 import GoogleAutoComplete from '../GoogleAutoComplete'
 import { useFormFields } from '../../hooks/useFormFields'
 import { genderOptions } from '../../util/constants/genderOptions'
-import { AccountFormProps, AppState } from '../../types'
+import { AccountFormProps, AppState } from '../../Types'
 import './AccountForm.scss'
 
 const AccountForm = ({ userId }: AccountFormProps) => {

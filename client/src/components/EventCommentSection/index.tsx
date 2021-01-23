@@ -3,7 +3,7 @@ import React from 'react'
 import EventComment from '../EventComment'
 import EventCommentInput from '../EventCommentInput'
 import useEventComments from '../../hooks/useEventComments'
-import { CommentSectionProps } from '../../types'
+import { CommentSectionProps } from '../../Types'
 import './EventCommentSection.scss'
 
 const EventCommentSection = ({ eventId }: CommentSectionProps) => {
