@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import axios from 'axios'
+import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
 import Modal from '../Modal'
@@ -11,12 +11,14 @@ import EventCommentSection from '../EventCommentSection'
 import EventParticipantsAndRequests from '../EventParticipantsAndRequests'
 import useEventParticipants from '../../hooks/useEventParticipants'
 import useEventRequests from '../../hooks/useEventRequests'
+import { endEvent } from '../../redux/actions'
 import { EventProps } from '../../Types'
 import './HostedEvent.scss'
 
 const EventHosted = ({ event }: EventProps) => {
-  const { event_id, created_at, image, title } = event
   const history = useHistory()
+  const dispatch = useDispatch()
+  const { event_id, created_at, image, title } = event
   const [participants] = useEventParticipants(event_id)
   const [requests] = useEventRequests(event_id)
   const [hideComments, setHideComments] = useState(true)
@@ -25,11 +27,9 @@ const EventHosted = ({ event }: EventProps) => {
 
   const handleEndEvent = async () => {
     try {
-      await axios.delete(`/api/v1/events/${event_id}`)
-      setShowModal(false)
-      alert('Event Successfully Deleted!')
-    } catch (error) {
-      alert(`Sorry, something went wrong. Please try again.\n\n${error}`)
+      dispatch(endEvent(event_id))
+    } catch {
+      alert(`Sorry, something went wrong. Please try again.`)
     }
   }
 
@@ -51,7 +51,7 @@ const EventHosted = ({ event }: EventProps) => {
         />
       )
     return (
-      <p>Error - Please try again and let us know what you did to get here</p>
+      <p>Error - Please try again and let us know what you did to get here.</p>
     )
   }
 

@@ -8,8 +8,12 @@ export const FETCH_EVENTS_FAILED = 'FETCH_EVENTS_FAILED'
 export const FETCH_EVENTS_SUCCEED = 'FETCH_EVENTS_SUCCEED'
 export const FETCH_EVENTS_REQUESTED = 'FETCH_EVENTS_REQUESTED'
 
+export const END_EVENT_REQUESTED = 'END_EVENT_REQUESTED'
+export const END_EVENT_SUCCESS = 'END_EVENT_SUCCESS'
+export const END_EVENT_FAIL = 'END_EVENT_FAIL'
+
 export type UserActions = AddUserAction | RemoveUserAction
-export type EventActions = FetchEventActions
+export type EventActions = FetchEventActions | EndEventActions
 
 export type AppState = {
   event: EventState
@@ -67,6 +71,31 @@ export type FetchEventFailed = {
   type: typeof FETCH_EVENTS_FAILED
   payload: {
     status: string | ''
+    message: string
+  }
+}
+
+export type EndEventActions = EndEventRequested | EndEventSuccess | EndEventFail
+
+export type EndEventRequested = {
+  type: typeof END_EVENT_REQUESTED
+  payload: {
+    status: string
+    message: string
+  }
+}
+export type EndEventSuccess = {
+  type: typeof END_EVENT_SUCCESS
+  payload: {
+    status: string
+    message: string
+  }
+}
+
+export type EndEventFail = {
+  type: typeof END_EVENT_FAIL
+  payload: {
+    status: string
     message: string
   }
 }
