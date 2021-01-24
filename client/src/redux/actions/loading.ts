@@ -1,9 +1,9 @@
-import { LoadingActions, SET_LOADING, SET_LOADED } from '../../Types'
+import { SET_LOADING, SET_LOADED } from '../../Types'
 
-export const setLoading = (): LoadingActions => {
+export const setLoading = () => {
   return { type: SET_LOADING }
 }
 
-export const setLoaded = (): LoadingActions => {
+export const setLoaded = () => {
   return { type: SET_LOADED }
 }

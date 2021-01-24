@@ -1,4 +1,4 @@
-import { ErrorState, ErrorActions } from '../../Types'
+import { ErrorState, ErrorActions, SET_ERRORS, CLEAR_ERRORS } from '../../Types'
 
 const initState = {
   status: NaN,
@@ -10,6 +10,11 @@ export default function error(
   action: ErrorActions
 ): ErrorState {
   switch (action.type) {
+    case SET_ERRORS:
+      const { status, message } = action.payload
+      return { ...state, status: status, message: message }
+    case CLEAR_ERRORS:
+      return { ...state, status: NaN, message: '' }
     default:
       return state
   }
