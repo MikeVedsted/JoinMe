@@ -37,8 +37,7 @@ const Navbar = () => {
         />
       </Link>
 
-      {/* {isAuthenticated ? ( */}
-      {true ? (
+      {isAuthenticated ? (
         <div className='nav__options'>
           <FontAwesomeIcon className='nav__icon' icon='bell' />
           <FontAwesomeIcon className='nav__icon' icon='comment' />
