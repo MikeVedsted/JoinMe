@@ -1,7 +1,7 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { ModalProps } from '../../types'
+import { ModalProps } from '../../Types'
 import './Modal.scss'
 
 const Modal = ({ closeModal, content: Content }: ModalProps) => {

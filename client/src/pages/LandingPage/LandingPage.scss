@@ -1,121 +1,75 @@
 @import '../../SCSS/config';
 
 .landing-page {
-  width: 100vw;
+  @include flexColumnCenter;
+  justify-content: center;
   max-width: 100%;
-  min-height: 100vh;
-  padding-top: 100px;
+  height: 100vh;
+  background-color: $default;
   background-image: url(../../Assets/football.jpg);
-  background-color: $textDark;
-  background-attachment: fixed;
   background-size: cover;
-  @include flexCenter;
-
-  &__modal-content {
-    @include flexCenter;
-    flex-direction: column;
-  }
+  background-position-x: 20%;
 
   &__circles {
-    width: 100vw;
-    @include flexCenter;
+    display: flex;
   }
 
   &__circle {
-    @include flexCenter;
-    flex-direction: column;
+    @include flexColumnCenter;
+    justify-content: center;
+    background-color: $primary;
+    opacity: 0.8;
+    text-align: center;
     width: 30vw;
     height: 30vw;
-    padding: 8px;
-    position: absolute;
-    top: 18vh;
     border-radius: 50%;
+    margin: auto -1vw;
+  }
 
-    &--left {
-      left: 21vw;
-      background-color: #e03400bb;
-    }
-
-    &--right {
-      left: 48vw;
-      background-color: #e03400bb;
-    }
+  &__title {
+    @include subheader;
+    color: $textLight;
+    margin-bottom: 0;
+    width: 80%;
   }
 
   &__text {
+    @include text;
+    color: $textLight;
     width: 80%;
-    text-align: center;
-    font-size: 1.2rem;
-    font-family: $nunito;
-    line-height: 150%;
-    margin-top: 0px;
-    color: $textDark;
-
-    &--login-text {
-      width: 95%;
-      color: $textDark;
-      font-size: $text;
-    }
-
-    &--highlight {
-      font-size: 1.8rem;
-      font-family: $montserrat;
-      color: $textLight;
-      margin-top: 35px;
-    }
   }
 
   &__button {
-    z-index: 2;
-    position: fixed;
-    top: 80vh;
-    min-width: 10vw;
-    @include flexCenter;
+    width: 25%;
+    height: 60px;
+    display: flex;
+    margin-top: $largeSpacing;
   }
 }
 
-@media only screen and (max-width: 1120px) {
-  .landing-page {
-    &__text {
-      font-size: 1rem;
+.modal-content {
+  @include flexColumnCenter;
 
-      &--highlight {
-        font-size: 1.5rem;
-      }
-    }
+  &__title {
+    @include header;
+    color: $primary;
+  }
+
+  &__text {
+    @include text;
+    margin-top: 0;
+    text-align: center;
   }
 }
 
 @media only screen and (max-width: 1024px) {
   .landing-page {
     background-image: url(../../Assets/bicycle.jpg);
+    background-position: center;
 
     &__circle {
       width: 45vw;
       height: 45vw;
-      top: 20vh;
-
-      &--left {
-        left: 7vw;
-      }
-
-      &--right {
-        left: 47vw;
-      }
-    }
-
-    &__text {
-      width: 75%;
-
-      &--highlight {
-        margin-top: 10px;
-        font-size: 1.8rem;
-      }
-    }
-
-    &__button {
-      width: 30vw;
-      top: 85vh;
     }
   }
 }
@@ -124,31 +78,8 @@
   .landing-page {
     background-image: url(../../Assets/bicycle.jpg);
 
-    &__circle {
-      width: 45vw;
-      height: 45vw;
-      top: 30vh;
-
-      &--left {
-        left: 7vw;
-      }
-
-      &--right {
-        left: 47vw;
-      }
-    }
-
-    &__text {
-      font-size: 1rem;
-
-      &--highlight {
-        font-size: 1.2em;
-      }
-    }
-
     &__button {
-      width: 30vw;
-      top: 80vh;
+      width: 50%;
     }
   }
 }
@@ -156,53 +87,29 @@
 @media only screen and (max-width: 600px) {
   .landing-page {
     background-image: url(../../Assets/winter.jpg);
-    padding-top: 50px;
+    background-size: auto 100%;
+    height: auto;
 
     &__circles {
-      flex-direction: column;
-      align-items: center;
+      display: inline;
+      margin-top: 40vh;
     }
 
     &__circle {
-      &--left {
-        position: static;
-        background-color: rgba(255, 255, 255, 0);
-        border-bottom: 2px solid $primary;
-        width: 260px;
-        height: 260px;
-      }
-
-      &--right {
-        position: static;
-        background-color: rgba(255, 255, 255, 0);
-        border-bottom: 2px solid $primary;
-        width: 260px;
-        height: 260px;
-      }
-    }
-
-    &__text {
-      color: $textLight;
-      font-size: $text;
-      width: 200px;
-
-      &--highlight {
-        font-size: $sub-head;
-        color: $secondary;
-      }
-
-      &--login-text {
-        color: $textDark;
-        margin-bottom: 30px;
-      }
+      width: 80vw;
+      height: 80vw;
+      margin: $smallSpacingMobile;
+      background: rgb(224, 54, 0);
+      background: radial-gradient(
+        circle,
+        rgba(224, 54, 0, 0) 0%,
+        rgba(224, 54, 0, 0.8) 100%
+      );
     }
 
     &__button {
-      width: 95%;
-      position: static;
-      display: flex;
-      justify-content: center;
-      margin-top: 20px;
+      width: 90vw;
+      margin: $largeSpacing auto;
     }
   }
 }

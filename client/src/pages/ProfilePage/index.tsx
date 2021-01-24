@@ -6,14 +6,14 @@ import { useHistory, useParams } from 'react-router-dom'
 import Button from '../../components/Button'
 import EventList from '../../components/EventList'
 import useHostedEvents from '../../hooks/useHostedEvents'
-import { ProfilePageParamProps } from '../../types'
+import { ProfilePageParams } from '../../Types'
 import './ProfilePage.scss'
 
 const ProfilePage = () => {
   const history = useHistory()
   const [cookies] = useCookies(['user'])
   const currentUser = cookies.user.user_id
-  const { userId } = useParams<ProfilePageParamProps>()
+  const { userId } = useParams<ProfilePageParams>()
   const [userInfo, setUserInfo] = useState({
     user_id: '',
     profile_image: '',

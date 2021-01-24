@@ -2,7 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 
 import createRootReducer from './reducers'
-import { AppState } from '../types'
+import { AppState } from '../Types'
 
 const initState: AppState = {
   event: {
@@ -34,10 +34,12 @@ const initState: AppState = {
     message: '',
     loading: false
   },
-  auth: '',
+  auth: {
+    isAuthenticated: false
+  },
   ui: {
-    isModalOpen: false,
-    isDropDownOpen: false
+    hideNavDropdown: true,
+    hideModal: true
   }
 }
 

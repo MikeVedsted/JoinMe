@@ -4,12 +4,12 @@ import { useCookies } from 'react-cookie'
 
 import AccountForm from '../../components/AccountForm'
 import useUser from '../../hooks/useUser'
-import { ProfilePageParamProps } from '../../types'
+import { ProfilePageParams } from '../../Types'
 import './ProfileEdit.scss'
 
 const ProfileEdit = () => {
   const { pathname } = useLocation()
-  const { userId } = useParams<ProfilePageParamProps>()
+  const { userId } = useParams<ProfilePageParams>()
   let history = useHistory()
   const [cookies] = useCookies(['user'])
   const { first_name, user_id } = cookies.user

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { fetchAllEvents } from '../redux/actions/event'
-import { AppState } from '../types'
+import { AppState } from '../Types'
 
 const useEventDisplay = () => {
   const dispatch = useDispatch()

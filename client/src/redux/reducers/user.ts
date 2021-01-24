@@ -1,4 +1,4 @@
-import { UserState, UserActions, ADD_USER, REMOVE_USER } from '../../types'
+import { UserState, UserActions, ADD_USER, REMOVE_USER } from '../../Types'
 
 export default function user(
   state: UserState = {

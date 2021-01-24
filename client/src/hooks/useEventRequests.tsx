@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-import { EventId } from '../types'
+import { EventId } from '../Types'
 
 const useEventRequests = (eventId: EventId) => {
   const [requests, setRequests] = useState([])

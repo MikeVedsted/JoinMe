@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import ProfileImage from '../ProfileImage'
 import { calculateEventAge } from '../../util/helperFunctions'
-import { CommentProps } from '../../types'
+import { CommentProps } from '../../Types'
 import './EventComment.scss'
 
 const EventComment = ({ image, name, id, text, date }: CommentProps) => {

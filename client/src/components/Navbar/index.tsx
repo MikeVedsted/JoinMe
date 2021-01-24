@@ -1,26 +1,22 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { useCookies } from 'react-cookie'
+import { useSelector, useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import NavDropdown from '../NavDropdown'
+import GoogleLogin from '../GoogleLogin'
 import ProfileImage from '../ProfileImage'
-import GoogleLogin from '../GoogleUserLogin'
 import logoDark from '../../Assets/logoDark.svg'
 import logoLight from '../../Assets/logoSecondary.svg'
-import { AppState } from '../../types'
+import { toggleNavDropdown } from '../../redux/actions'
+import { AppState } from '../../Types'
 import './Navbar.scss'
 
-// TO DO
-// Check auth in state and remove cookie check
-// Handle dropdown from ui state
-
 const Navbar = () => {
-  const { profile_image, user_id } = useSelector(
-    (state: AppState) => state.user.user
-  )
-  const { isDropDownOpen } = useSelector((state: AppState) => state.ui)
+  const dispatch = useDispatch()
+  const { profile_image } = useSelector((state: AppState) => state.user.user)
+  const { hideNavDropdown } = useSelector((state: AppState) => state.ui)
+  const { isAuthenticated } = useSelector((state: AppState) => state.auth)
   const [navHasBackground, setNavHasBackground] = useState(false)
 
   const changeNavStyle = () => {
@@ -41,14 +37,15 @@ const Navbar = () => {
         />
       </Link>
 
-      {user_id ? (
+      {/* {isAuthenticated ? ( */}
+      {true ? (
         <div className='nav__options'>
           <FontAwesomeIcon className='nav__icon' icon='bell' />
           <FontAwesomeIcon className='nav__icon' icon='comment' />
           <ProfileImage
             image={profile_image}
             alt='You. Click here for menu.'
-            onClick={() => setDropdownHidden(!dropdownHidden)}
+            onClick={() => dispatch(toggleNavDropdown(hideNavDropdown))}
           />
         </div>
       ) : (
@@ -56,12 +53,7 @@ const Navbar = () => {
           <GoogleLogin />
         </div>
       )}
-
-      <NavDropdown
-        display={isDropDownOpen}
-        setDropdownHidden={setDropdownHidden}
-        userId={user_id}
-      />
+      <NavDropdown />
     </nav>
   )
 }

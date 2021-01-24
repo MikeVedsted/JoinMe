@@ -1,15 +1,17 @@
 import { combineReducers } from 'redux'
 
-import user from './user'
 import event from './event'
-// import auth from './auth'
+import user from './user'
+import auth from './auth'
+import ui from './ui'
 // import error from './error'
 
 const createRootReducer = () =>
   combineReducers({
+    event,
     user,
-    event
-    // auth,
+    auth,
+    ui
     // error,
   })
 
