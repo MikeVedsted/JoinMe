@@ -1,8 +1,8 @@
 import { UserInState, EventObject } from './index'
 
-// === //
+// ==== //
 // @APP //
-// === //
+// ==== //
 
 export type AppState = {
   loading: LoadingState
@@ -13,9 +13,9 @@ export type AppState = {
   ui: UIState
 }
 
-// ===== //
+// ====== //
 // @EVENT //
-// ===== //
+// ====== //
 
 export const FETCH_EVENTS_FAILED = 'FETCH_EVENTS_FAILED'
 export const FETCH_EVENTS_SUCCEED = 'FETCH_EVENTS_SUCCEED'
@@ -56,9 +56,9 @@ export type FetchEventFailed = {
   }
 }
 
-// ==== //
+// ===== //
 // @USER //
-// ==== //
+// ===== //
 
 export const ADD_USER = 'ADD_USER'
 export const REMOVE_USER = 'REMOVE_USER'
@@ -82,6 +82,7 @@ export type UserState = {
   lng: number
   profile_text: string
   profile_image: string
+  created_at: string
 }
 
 export type AddUserAction = {
@@ -98,28 +99,48 @@ export type RemoveUserAction = {
   }
 }
 
-// ==== //
+// ===== //
 // @AUTH //
-// ==== //
+// ===== //
 
-export type AuthActions = any
+export const SET_AUTHORIZED = 'SET_AUTHORIZED'
+export const SET_UNAUTHORIZED = 'SET_UNAUTHORIZED'
+
+export type AuthActions = setAuthorizedAction | setUnauthorizedAction
 
 export type AuthState = {
   isAuthenticated: boolean
+}
+
+export type setAuthorizedAction = {
+  type: typeof SET_AUTHORIZED
+}
+export type setUnauthorizedAction = {
+  type: typeof SET_UNAUTHORIZED
 }
 
 // === //
 // @UI //
 // === //
 
+export const CLOSE_MODAL = 'CLOSE_MODAL'
 export const TOGGLE_MODAL = 'TOGGLE_MODAL'
+export const CLOSE_NAV_DROPDOWN = 'CLOSE_NAV_DROPDOWN'
 export const TOGGLE_NAV_DROPDOWN = 'TOGGLE_NAV_DROPDOWN'
 
-export type UIActions = ToggleNavDropdown | ToggleModal
+export type UIActions =
+  | ToggleNavDropdown
+  | CloseNavDropdown
+  | ToggleModal
+  | CloseModal
 
 export type UIState = {
   hideNavDropdown: boolean
   hideModal: boolean
+}
+
+export type CloseNavDropdown = {
+  type: typeof CLOSE_NAV_DROPDOWN
 }
 
 export type ToggleNavDropdown = {
@@ -129,6 +150,10 @@ export type ToggleNavDropdown = {
   }
 }
 
+export type CloseModal = {
+  type: typeof CLOSE_MODAL
+}
+
 export type ToggleModal = {
   type: typeof TOGGLE_MODAL
   payload: {
@@ -136,9 +161,9 @@ export type ToggleModal = {
   }
 }
 
-// ===== //
+// ====== //
 // @ERROR //
-// ===== //
+// ====== //
 
 export const SET_ERRORS = 'SET_ERRORS'
 export const CLEAR_ERRORS = 'CLEAR_ERRORS'
@@ -150,9 +175,9 @@ export type ErrorState = {
   message: string
 }
 
-// ======= //
+// ======== //
 // @LOADING //
-// ======= //
+// ======== //
 
 export const SET_LOADING = 'SET_LOADING'
 export const SET_LOADED = 'SET_LOADED'

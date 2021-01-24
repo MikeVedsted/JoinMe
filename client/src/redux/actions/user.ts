@@ -1,6 +1,6 @@
 import { ADD_USER, REMOVE_USER, UserActions, UserInState } from '../../Types'
 
-export function addUser(user: UserInState): UserActions {
+export function setUser(user: UserInState): UserActions {
   return {
     type: ADD_USER,
     payload: {

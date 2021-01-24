@@ -2,7 +2,9 @@ import {
   UIState,
   UIActions,
   TOGGLE_NAV_DROPDOWN,
-  TOGGLE_MODAL
+  TOGGLE_MODAL,
+  CLOSE_NAV_DROPDOWN,
+  CLOSE_MODAL
 } from '../../Types'
 
 const initState: UIState = {
@@ -21,6 +23,10 @@ export default function ui(
     case TOGGLE_MODAL:
       const { hideModal } = action.payload
       return { ...state, hideModal: hideModal }
+    case CLOSE_NAV_DROPDOWN:
+      return { ...state, hideNavDropdown: true }
+    case CLOSE_MODAL:
+      return { ...state, hideModal: true }
     default:
       return state
   }
