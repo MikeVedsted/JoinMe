@@ -15,7 +15,7 @@ import './NavDropdown.scss'
 const NavDropdown = () => {
   const dispatch = useDispatch()
   const node = useRef() as React.MutableRefObject<HTMLDivElement>
-  const { user_id } = useSelector((state: AppState) => state.user.user)
+  const { user_id } = useSelector((state: AppState) => state.user)
   const { hideNavDropdown } = useSelector((state: AppState) => state.ui)
 
   const handleClickOutside = (e: any) => {

@@ -11,7 +11,7 @@ import { EventListProps, EventObject, AppState } from '../../Types'
 import './EventList.scss'
 
 const EventList = ({ events, title, type }: EventListProps) => {
-  const { loading } = useSelector((state: AppState) => state.event)
+  const { loading } = useSelector((state: AppState) => state.loading)
 
   const content = (event: EventObject) => {
     if (type === 'hosted')

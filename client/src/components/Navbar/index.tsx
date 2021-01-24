@@ -14,7 +14,7 @@ import './Navbar.scss'
 
 const Navbar = () => {
   const dispatch = useDispatch()
-  const { profile_image } = useSelector((state: AppState) => state.user.user)
+  const { profile_image } = useSelector((state: AppState) => state.user)
   const { hideNavDropdown } = useSelector((state: AppState) => state.ui)
   const { isAuthenticated } = useSelector((state: AppState) => state.auth)
   const [navHasBackground, setNavHasBackground] = useState(false)

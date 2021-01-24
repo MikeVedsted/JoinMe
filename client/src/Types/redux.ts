@@ -3,10 +3,10 @@ import { UserInState, EventObject } from './index'
 // === //
 // APP //
 // === //
-export const GET_ERRORS = 'GET_ERRORS'
-export const CLEAR_ERRORS = 'CLEAR_ERRORS'
 
 export type AppState = {
+  loading: LoadingState
+  error: ErrorState
   event: EventState
   user: UserState
   auth: AuthState
@@ -25,9 +25,9 @@ export type EventActions = FetchEventActions
 
 export type EventState = {
   allEvents: EventObject[]
-  status: string
-  message: string
-  loading: boolean
+  hostedEvents: EventObject[]
+  interestedEvents: EventObject[]
+  confirmedEvents: EventObject[]
 }
 
 export type FetchEventActions =
@@ -66,10 +66,22 @@ export const REMOVE_USER = 'REMOVE_USER'
 export type UserActions = AddUserAction | RemoveUserAction
 
 export type UserState = {
-  user: UserInState
-  status: string
-  message: string
-  loading: boolean
+  user_id: string
+  email: string
+  first_name: string
+  last_name: string
+  date_of_birth: string
+  gender: string
+  base_address: string
+  street: string
+  number: string
+  city: string
+  postal_code: number
+  country: string
+  lat: number
+  lng: number
+  profile_text: string
+  profile_image: string
 }
 
 export type AddUserAction = {
@@ -122,4 +134,29 @@ export type ToggleModal = {
   payload: {
     hideModal: boolean
   }
+}
+
+// ===== //
+// ERROR //
+// ===== //
+
+export const GET_ERRORS = 'GET_ERRORS'
+export const SET_ERRORS = 'SET_ERRORS'
+export const CLEAR_ERRORS = 'CLEAR_ERRORS'
+
+export type ErrorActions = any
+
+export type ErrorState = {
+  status: number
+  message: string
+}
+
+// ======= //
+// LOADING //
+// ======= //
+
+export type LoadingActions = any
+
+export type LoadingState = {
+  loading: boolean
 }

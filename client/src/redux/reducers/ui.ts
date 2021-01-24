@@ -5,11 +5,13 @@ import {
   TOGGLE_MODAL
 } from '../../Types'
 
+const initState: UIState = {
+  hideNavDropdown: true,
+  hideModal: true
+}
+
 export default function ui(
-  state: UIState = {
-    hideNavDropdown: true,
-    hideModal: true
-  },
+  state: UIState = initState,
   action: UIActions
 ): UIState {
   switch (action.type) {

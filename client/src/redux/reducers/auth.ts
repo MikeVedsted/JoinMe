@@ -1,9 +1,11 @@
 import { AuthState, AuthActions } from '../../Types'
 
+const initState = {
+  isAuthenticated: false
+}
+
 export default function auth(
-  state: AuthState = {
-    isAuthenticated: false
-  },
+  state: AuthState = initState,
   action: AuthActions
 ): AuthState {
   switch (action.type) {

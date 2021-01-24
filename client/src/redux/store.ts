@@ -2,46 +2,8 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 
 import createRootReducer from './reducers'
-import { AppState } from '../Types'
 
-const initState: AppState = {
-  event: {
-    allEvents: [],
-    status: '',
-    message: '',
-    loading: false
-  },
-  user: {
-    user: {
-      user_id: '',
-      email: '',
-      first_name: '',
-      last_name: '',
-      date_of_birth: '',
-      gender: '',
-      base_address: '',
-      street: '',
-      number: '',
-      city: '',
-      postal_code: parseInt(''),
-      country: '',
-      lat: parseInt(''),
-      lng: parseInt(''),
-      profile_text: '',
-      profile_image: ''
-    },
-    status: '',
-    message: '',
-    loading: false
-  },
-  auth: {
-    isAuthenticated: false
-  },
-  ui: {
-    hideNavDropdown: true,
-    hideModal: true
-  }
-}
+const initState = {}
 
 const makeStore = (initialState = initState) => {
   let composeEnhancers = compose
