@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { EventJoinRequestProps } from '../../types'
+import { EventJoinRequestProps } from '../../Types'
 import './EventJoinRequest.scss'
 
 const EventJoinRequest = ({ requester }: EventJoinRequestProps) => {

@@ -2,7 +2,7 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
 
-import { NavDropdownLinkProps } from '../../types'
+import { NavDropdownLinkProps } from '../../Types'
 
 const NavDropdownLink = ({
   text,

@@ -4,7 +4,7 @@ import {
   FETCH_EVENTS_REQUESTED,
   FETCH_EVENTS_SUCCEED,
   FETCH_EVENTS_FAILED
-} from '../../types'
+} from '../../Types'
 
 export default function event(
   state: EventState = {

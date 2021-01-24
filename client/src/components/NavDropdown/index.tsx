@@ -11,7 +11,7 @@ import {
 import NavDropdownFunction from '../NavDropdownFunction'
 import NavDropdownLink from '../NavDropdownLink'
 import { removeUser } from '../../redux/actions'
-import { NavDropdownProps } from '../../types'
+import { NavDropdownProps } from '../../Types'
 import './NavDropdown.scss'
 
 const NavDropdown = ({

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import { FormSliderProps } from '../../types'
+import { FormSliderProps } from '../../Types'
 import './FormSlider.scss'
 
 const FormSlider = ({

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { InputFieldProps } from '../../types'
+import { InputFieldProps } from '../../Types'
 import './InputField.scss'
 
 const InputField = ({

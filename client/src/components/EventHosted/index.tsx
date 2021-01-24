@@ -11,7 +11,7 @@ import EventCommentSection from '../EventCommentSection'
 import EventParticipantsAndRequests from '../EventParticipantsAndRequests'
 import useEventParticipants from '../../hooks/useEventParticipants'
 import useEventRequests from '../../hooks/useEventRequests'
-import { EventProps } from '../../types'
+import { EventProps } from '../../Types'
 import './HostedEvent.scss'
 
 const EventHosted = ({ event }: EventProps) => {

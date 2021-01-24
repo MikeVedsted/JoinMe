@@ -5,7 +5,7 @@ import Button from '../Button'
 import FormInputTextArea from '../FormInputTextArea'
 import { useFormFields } from '../../hooks/useFormFields'
 import { addCommentToEvent } from '../../redux/actions/event'
-import { EventCommentInputProps } from '../../types'
+import { EventCommentInputProps } from '../../Types'
 import './EventCommentInput.scss'
 
 const EventCommentInput = ({ eventId }: EventCommentInputProps) => {

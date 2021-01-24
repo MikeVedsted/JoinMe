@@ -2,7 +2,7 @@ import React from 'react'
 import Autocomplete from 'react-google-autocomplete'
 import axios from 'axios'
 
-import { AddressSelection, AutoCompleteProps } from '../../types'
+import { AddressSelection, AutoCompleteProps } from '../../Types'
 
 const AddressAutoComplete = ({ handleAddress }: AutoCompleteProps) => {
   const MAPS_KEY = process.env.REACT_APP_GOOGLE_MAPS_KEY
