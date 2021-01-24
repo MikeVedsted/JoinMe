@@ -6,7 +6,7 @@ import EventTitle from '../EventTitle'
 import EventImage from '../EventImage'
 import EventDataBox from '../EventDataBox'
 import EventCommentSection from '../EventCommentSection'
-import { EventProps } from '../../types'
+import { EventProps } from '../../Types'
 import './EventConfirmed.scss'
 
 const EventConfirmed = ({ event }: EventProps) => {

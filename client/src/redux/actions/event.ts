@@ -4,10 +4,11 @@ import {
   FETCH_EVENTS_REQUESTED,
   FETCH_EVENTS_SUCCEED,
   FETCH_EVENTS_FAILED,
-  SearchParamsProps
-} from '../../types'
+  SearchParams,
+  CommentSubmission
+} from '../../Types'
 
-export const fetchAllEvents = (searchParams: SearchParamsProps) => async (
+export const fetchAllEvents = (searchParams: SearchParams) => async (
   dispatch: Dispatch
 ) => {
   try {
@@ -38,4 +39,12 @@ const fetchEventsFailed = (error: any) => {
     type: FETCH_EVENTS_FAILED,
     payload: error
   }
+}
+
+export const addCommentToEvent = async (
+  eventId: string,
+  comment: CommentSubmission
+) => {
+  const { data } = await axios.post(`/api/v1/comments/${eventId}`, comment)
+  return data
 }

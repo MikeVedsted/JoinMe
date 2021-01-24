@@ -2,15 +2,18 @@ import { Request, Response, NextFunction } from 'express'
 
 import { NotFoundError, BadRequestError } from '../helpers/apiError'
 import CommentService from '../services/comment'
+import { AuthRequest } from '../types'
 
-export const createComment = async (req: Request, res: Response, next: NextFunction) => {
+export const createComment = async (req: AuthRequest, res: Response, next: NextFunction) => {
+  if (!req.user) {
+    throw Error('Not authorized to do this')
+  }
   try {
     const comment = {
       comment: req.body.comment,
-      userk: req.body.userId,
+      userk: req.user.user_id,
       event: req.params.eventId
     }
-
     res.json(await CommentService.createComment(comment))
   } catch (error) {
     next(new BadRequestError('Failed to create comment', error))

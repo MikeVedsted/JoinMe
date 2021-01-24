@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { calculateEventAge } from '../../util/helperFunctions'
-import { EventTitleProps } from '../../types'
+import { EventTitleProps } from '../../Types'
 import './EventTitle.scss'
 
 const EventTitle = ({ title, createdAt }: EventTitleProps) => {
