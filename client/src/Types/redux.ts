@@ -155,8 +155,19 @@ export type ErrorState = {
 // LOADING //
 // ======= //
 
-export type LoadingActions = any
+export const SET_LOADING = 'SET_LOADING'
+export const SET_LOADED = 'SET_LOADED'
+
+export type LoadingActions = SetLoading | SetLoaded
 
 export type LoadingState = {
   loading: boolean
+}
+
+export type SetLoading = {
+  type: typeof SET_LOADING
+}
+
+export type SetLoaded = {
+  type: typeof SET_LOADED
 }
