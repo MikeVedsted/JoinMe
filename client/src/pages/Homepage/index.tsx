@@ -2,10 +2,15 @@ import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Modal from '../../components/Modal'
-import Event from '../../components/Event'
+import NotFound from '../../components/NotFound'
+import EventList from '../../components/EventList'
 import EventSearch from '../../components/EventSearch'
 import useEventDisplay from '../../hooks/useEventDisplay'
 import './Homepage.scss'
+
+// TO DO
+// Move modal handling to state
+// Add loading for event list once ready
 
 const Homepage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -17,23 +22,18 @@ const Homepage = () => {
     handleSearch
   } = useEventDisplay()
 
-  const toggleSearchModal = () => {
-    setIsModalOpen(!isModalOpen)
+  const largeScreen = () => {
+    return window.innerWidth < 769
   }
 
   return (
     <div className='homepage'>
-      <div className='homepage__filter-icon' onClick={toggleSearchModal}>
+      <div
+        hidden={!largeScreen()}
+        className='homepage__filter-icon'
+        onClick={() => setIsModalOpen(!isModalOpen)}
+      >
         <FontAwesomeIcon icon={'filter'} />
-      </div>
-
-      <div className='homepage__search-box'>
-        <EventSearch
-          distance='100'
-          handleFieldChange={handleFieldChange}
-          handleSubmit={handleSearch}
-          setAddress={handleAddressChange}
-        />
       </div>
 
       {/* Search box modal for small screens */}
@@ -51,15 +51,21 @@ const Homepage = () => {
         />
       )}
 
-      {allEvents ? (
-        <div className='homepage__events'>
-          {allEvents.map((event: any) => (
-            <Event key={event.created_at} event={event} />
-          ))}
-        </div>
-      ) : (
-        <h1>Sorry! no events found!!</h1>
-      )}
+      <div className='homepage__left-column' hidden={largeScreen()}>
+        <EventSearch
+          distance='100'
+          handleFieldChange={handleFieldChange}
+          handleSubmit={handleSearch}
+          setAddress={handleAddressChange}
+        />
+      </div>
+      <div className='homepage__right-column'>
+        {allEvents && allEvents.length > 0 ? (
+          <EventList events={allEvents} />
+        ) : (
+          <NotFound message='Sorry, no events found.' />
+        )}
+      </div>
     </div>
   )
 }
