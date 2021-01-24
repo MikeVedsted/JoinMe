@@ -1,7 +1,7 @@
 import { UserInState, EventObject } from './index'
 
 // === //
-// APP //
+// @APP //
 // === //
 
 export type AppState = {
@@ -14,7 +14,7 @@ export type AppState = {
 }
 
 // ===== //
-// EVENT //
+// @EVENT //
 // ===== //
 
 export const FETCH_EVENTS_FAILED = 'FETCH_EVENTS_FAILED'
@@ -57,7 +57,7 @@ export type FetchEventFailed = {
 }
 
 // ==== //
-// USER //
+// @USER //
 // ==== //
 
 export const ADD_USER = 'ADD_USER'
@@ -99,7 +99,7 @@ export type RemoveUserAction = {
 }
 
 // ==== //
-// AUTH //
+// @AUTH //
 // ==== //
 
 export type AuthActions = any
@@ -109,7 +109,7 @@ export type AuthState = {
 }
 
 // === //
-// UI //
+// @UI //
 // === //
 
 export const TOGGLE_MODAL = 'TOGGLE_MODAL'
@@ -137,10 +137,9 @@ export type ToggleModal = {
 }
 
 // ===== //
-// ERROR //
+// @ERROR //
 // ===== //
 
-export const GET_ERRORS = 'GET_ERRORS'
 export const SET_ERRORS = 'SET_ERRORS'
 export const CLEAR_ERRORS = 'CLEAR_ERRORS'
 
@@ -152,7 +151,7 @@ export type ErrorState = {
 }
 
 // ======= //
-// LOADING //
+// @LOADING //
 // ======= //
 
 export const SET_LOADING = 'SET_LOADING'
