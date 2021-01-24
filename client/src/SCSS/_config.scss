@@ -21,6 +21,7 @@ $heading: 30px;
 $sub-head: 22px;
 $text: 18px;
 $subtitle: 13px;
+$lineHeight: 140%;
 
 // SIZE CONSTANTS - LARGE SCREENS
 $largeSpacing: 40px;
@@ -58,6 +59,7 @@ $pagePaddingMobile: calc(#{$navHeightMobile + $largeSpacingMobile})
   font-family: $nunito;
   font-size: $text;
   color: $textDark;
+  line-height: $lineHeight;
 }
 
 @mixin subtitle {
@@ -156,4 +158,12 @@ $pagePaddingMobile: calc(#{$navHeightMobile + $largeSpacingMobile})
   position: absolute;
   top: 100px;
   left: 100px;
+}
+
+@mixin inputLabel {
+  width: 100%;
+  font-family: $montserrat;
+  color: $textDark;
+  font-weight: 600;
+  margin-bottom: 10px;
 }
