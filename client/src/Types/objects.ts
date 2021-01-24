@@ -1,6 +1,7 @@
 import { EventId } from './index'
 
 export type UserInState = {
+  user_id: string
   email: string
   first_name: string
   last_name: string

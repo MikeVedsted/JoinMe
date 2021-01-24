@@ -4,8 +4,8 @@ import { useCookies } from 'react-cookie'
 import axios from 'axios'
 
 import Modal from '../../components/Modal'
-import GoogleUserLogin from '../../components/GoogleUserLogin'
 import Button from '../../components/Button'
+import GoogleLogin from '../../components/GoogleLogin'
 import { eventCategories } from '../../util/constants/eventCategories'
 import './LandingPage.scss'
 
@@ -48,7 +48,7 @@ const LandingPage = () => {
           You can log in with a Google account below and if you do not yet have
           an account with us, we will create one for you.
         </p>
-        <GoogleUserLogin />
+        <GoogleLogin />
       </div>
     )
   }

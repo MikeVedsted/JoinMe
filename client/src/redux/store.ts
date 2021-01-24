@@ -13,6 +13,7 @@ const initState: AppState = {
   },
   user: {
     user: {
+      user_id: '',
       email: '',
       first_name: '',
       last_name: '',
@@ -33,7 +34,13 @@ const initState: AppState = {
     message: '',
     loading: false
   },
-  auth: ''
+  auth: {
+    isAuthenticated: false
+  },
+  ui: {
+    hideNavDropdown: true,
+    hideModal: true
+  }
 }
 
 const makeStore = (initialState = initState) => {

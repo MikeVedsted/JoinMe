@@ -3,6 +3,7 @@ import { UserState, UserActions, ADD_USER, REMOVE_USER } from '../../Types'
 export default function user(
   state: UserState = {
     user: {
+      user_id: '',
       email: '',
       first_name: '',
       last_name: '',
@@ -34,6 +35,7 @@ export default function user(
       return {
         ...state,
         user: {
+          user_id: '',
           email: '',
           first_name: '',
           last_name: '',

@@ -70,19 +70,12 @@ export type NavDropdownLinkProps = {
   text: string
   icon: IconProp
   destination: string
-  setDropdownHidden: (option: boolean) => void
 }
 
 export type NavDropdownFunctionProps = {
   text: string
   icon: IconProp
   handler: () => void
-}
-
-export type NavDropdownProps = {
-  display: boolean
-  setDropdownHidden: (option: boolean) => void
-  userId: UserId
 }
 
 export type ProfileImageProps = {
