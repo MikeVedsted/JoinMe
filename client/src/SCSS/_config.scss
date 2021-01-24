@@ -66,7 +66,7 @@ $pagePaddingMobile: calc(#{$navHeightMobile + $largeSpacingMobile})
   font-size: $subtitle;
   color: $textDark;
 }
-  
+
 @mixin dimmedText {
   font-family: $nunito;
   font-size: $text;
