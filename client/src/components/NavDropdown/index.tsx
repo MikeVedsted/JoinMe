@@ -14,30 +14,25 @@ import './NavDropdown.scss'
 
 const NavDropdown = () => {
   const dispatch = useDispatch()
-  const node = useRef() as React.MutableRefObject<HTMLInputElement>
+  const node = useRef() as React.MutableRefObject<HTMLDivElement>
   const { user_id } = useSelector((state: AppState) => state.user.user)
   const { hideNavDropdown } = useSelector((state: AppState) => state.ui)
 
   const handleClickOutside = (e: any) => {
-    if (node.current.contains(e.target)) {
-      return
-    }
-    dispatch(toggleNavDropdown(hideNavDropdown))
+    !node.current.contains(e.target) &&
+      dispatch(toggleNavDropdown(hideNavDropdown))
   }
 
   useEffect(() => {
-    if (hideNavDropdown === false) {
-      document.addEventListener('click', handleClickOutside)
-    } else {
-      document.removeEventListener('click', handleClickOutside)
-    }
+    hideNavDropdown
+      ? document.removeEventListener('click', handleClickOutside)
+      : document.addEventListener('click', handleClickOutside)
     return () => {
       document.removeEventListener('click', handleClickOutside)
     }
   })
 
   return (
-    // <div ref={node} hidden={hideNavDropdown} className='nav-dropdown'>
     <div ref={node} hidden={hideNavDropdown} className='nav-dropdown'>
       <ul className='nav-dropdown__list'>
         <NavDropdownLink
