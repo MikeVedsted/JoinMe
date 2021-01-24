@@ -1,3 +1,5 @@
+import { Address } from '../Types'
+
 export const calculateEventAge = (eventDate: string) => {
   const diff = new Date().getTime() - new Date(eventDate).getTime()
   const hours = parseInt((diff / 3600000).toFixed(0))
@@ -15,9 +17,19 @@ export const calculateEventAge = (eventDate: string) => {
   }
 }
 
-export const convertDate = (date: string) => {
-  const birthYear = new Date(date).getFullYear()
-  const birthMonth = new Date(date).getMonth() + 1
-  const birthDay = new Date(date).getDate()
-  return birthYear + '-' + birthMonth + '-' + birthDay
+export const formatTime = (time: string) => {
+  return time.slice(0, 5)
+}
+
+export const formatDate = (date: string) => {
+  return date.slice(0, 10).split('-').reverse().join('-')
+}
+
+export const formatAddress = (addressObject: Address) => {
+  const { street, number, postal_code, city } = addressObject
+  let num = number.replace(/\s+/g, '')
+  num = num.length > 0 ? ` ${num}, ` : ', '
+  let pos = postal_code.replace(/\s+/g, '')
+  pos = pos.length > 0 ? `${pos} ` : ''
+  return street + num + pos + city
 }

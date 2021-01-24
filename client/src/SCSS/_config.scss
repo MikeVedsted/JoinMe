@@ -66,6 +66,12 @@ $pagePaddingMobile: calc(#{$navHeightMobile + $largeSpacingMobile})
   font-size: $subtitle;
   color: $textDark;
 }
+  
+@mixin dimmedText {
+  font-family: $nunito;
+  font-size: $text;
+  color: $textDim;
+}
 
 @mixin link {
   text-decoration: none;
@@ -140,7 +146,6 @@ $pagePaddingMobile: calc(#{$navHeightMobile + $largeSpacingMobile})
   width: 100%;
   background-color: $textDim;
   height: 1.5px;
-  margin-top: 30px;
 }
 
 @mixin borderRadiusSmall {

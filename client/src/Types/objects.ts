@@ -72,8 +72,8 @@ export type Address = {
   number: string
   street: string
   city: string
-  postalCode: string
-  country: string
+  postal_code: string
+  country?: string
 }
 
 export type Comment = {

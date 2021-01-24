@@ -141,6 +141,7 @@ export type EventTitleProps = {
 
 export type EventDataBoxProps = {
   event: EventObject
+  participantCount: number
 }
 
 export type EventProps = {

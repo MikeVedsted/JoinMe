@@ -6,12 +6,14 @@ import EventTitle from '../EventTitle'
 import EventImage from '../EventImage'
 import EventDataBox from '../EventDataBox'
 import EventCommentSection from '../EventCommentSection'
+import useEventParticipants from '../../hooks/useEventParticipants'
 import { EventProps } from '../../Types'
 import './EventInterested.scss'
 
 const EventInterested = ({ event }: EventProps) => {
   const { event_id, created_at, image, title, description, er_id } = event
   const [hideComments, setHideComment] = useState(true)
+  const [participants] = useEventParticipants(event_id)
 
   const handleCancelRequest = async () => {
     try {
@@ -29,7 +31,7 @@ const EventInterested = ({ event }: EventProps) => {
 
       <div>
         <EventImage src={image} alt={title} />
-        <EventDataBox event={event} />
+        <EventDataBox event={event} participantCount={participants.length} />
       </div>
 
       <p className='interested-event__description'>{description}</p>

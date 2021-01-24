@@ -6,6 +6,7 @@ import EventTitle from '../EventTitle'
 import EventImage from '../EventImage'
 import EventDataBox from '../EventDataBox'
 import EventCommentSection from '../EventCommentSection'
+import useEventParticipants from '../../hooks/useEventParticipants'
 import { EventProps } from '../../Types'
 import './EventConfirmed.scss'
 
@@ -13,6 +14,7 @@ const EventConfirmed = ({ event }: EventProps) => {
   const { event_id, created_at, image, title, description, ep_id } = event
   const [hideComments, setHideComment] = useState(true)
   const [hideDetails, setHideDetails] = useState(true)
+  const [participants] = useEventParticipants(event_id)
 
   const handleToggle = (id: string) => {
     if (id === 'details') {
@@ -76,7 +78,7 @@ const EventConfirmed = ({ event }: EventProps) => {
         hidden={hideDetails}
         className={!hideDetails ? 'confirmed-event__details' : ''}
       >
-        <EventDataBox event={event} />
+        <EventDataBox event={event} participantCount={participants.length} />
 
         <p className='confirmed-event__description'>{description}</p>
       </div>
