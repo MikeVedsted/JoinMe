@@ -15,8 +15,7 @@
     display: block;
     outline: none;
     border-bottom: 2px solid $primary;
-    margin-bottom: 25px;
-    padding-top: 10px;
+    padding-top: $mobileSmallSpacing;
 
     &:read-only {
       border: none;
