@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { useCookies } from 'react-cookie'
 import axios from 'axios'
 
-import { addUser } from '../redux/actions'
+import { setUser } from '../redux/actions'
 import { UserInState } from '../Types'
 
 const useUser = (userId: string) => {
@@ -27,7 +27,7 @@ const useUser = (userId: string) => {
       setLoading(true)
       const { data } = await axios.get(url)
       setUser(data)
-      dispatch(addUser(data))
+      dispatch(setUser(data))
       setLoading(false)
     } catch (error) {
       console.log(error)

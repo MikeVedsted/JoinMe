@@ -1,22 +1,34 @@
-import { Dispatch } from 'redux'
-import { UIActions, TOGGLE_NAV_DROPDOWN, TOGGLE_MODAL } from '../../Types'
+import {
+  TOGGLE_NAV_DROPDOWN,
+  TOGGLE_MODAL,
+  CLOSE_MODAL,
+  CLOSE_NAV_DROPDOWN
+} from '../../Types'
 
-export const toggleNavDropdown = (navDropdownState: boolean) => (
-  dispatch: Dispatch
-) => {
-  dispatch({
+export const toggleNavDropdown = (navDropdownState: boolean) => {
+  return {
     type: TOGGLE_NAV_DROPDOWN,
-    payload: {
-      hideNavDropdown: !navDropdownState
-    }
-  })
+    payload: { hideNavDropdown: !navDropdownState }
+  }
 }
 
-export const ToggleModal = (modalState: boolean): UIActions => {
+export const toggleModal = (modalState: boolean) => {
   return {
     type: TOGGLE_MODAL,
     payload: {
       hideModal: !modalState
     }
+  }
+}
+
+export const CloseNavDropdown = () => {
+  return {
+    type: CLOSE_NAV_DROPDOWN
+  }
+}
+
+export const closeModal = () => {
+  return {
+    type: CLOSE_MODAL
   }
 }
