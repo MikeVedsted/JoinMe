@@ -7,8 +7,8 @@ import { toggleNavDropdown } from '../../redux/actions'
 import { NavDropdownLinkProps, AppState } from '../../Types'
 
 const NavDropdownLink = ({ text, icon, destination }: NavDropdownLinkProps) => {
-  const dispatch = useDispatch()
   const { hideNavDropdown } = useSelector((state: AppState) => state.ui)
+  const dispatch = useDispatch()
 
   return (
     <Link
