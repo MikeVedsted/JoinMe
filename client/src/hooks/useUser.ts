@@ -4,13 +4,11 @@ import { useCookies } from 'react-cookie'
 import axios from 'axios'
 
 import { setUser } from '../redux/actions'
-import { UserInState } from '../Types'
 
 const useUser = (userId: string) => {
   const dispatch = useDispatch()
   const [cookies] = useCookies(['user'])
   const { user_id } = cookies.user
-  const [user, setUser] = useState<UserInState>()
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -26,7 +24,6 @@ const useUser = (userId: string) => {
           : `/api/v1/users/${userId}/public`
       setLoading(true)
       const { data } = await axios.get(url)
-      setUser(data)
       dispatch(setUser(data))
       setLoading(false)
     } catch (error) {
@@ -34,7 +31,7 @@ const useUser = (userId: string) => {
     }
   }
 
-  return [user, loading]
+  return [loading]
 }
 
 export default useUser
