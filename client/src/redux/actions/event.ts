@@ -66,3 +66,20 @@ export const endEvent = (event_id: string) => async (dispatch: Dispatch) => {
     dispatch(setLoaded())
   }
 }
+
+export const cancelJoinRequest = (requestId: string | undefined) => async (
+  dispatch: Dispatch
+) => {
+  try {
+    dispatch(setLoading())
+    await axios.delete(`/api/v1/requests/${requestId}/cancel`)
+    dispatch(clearErrors())
+    dispatch(closeModal())
+    dispatch(setLoaded())
+  } catch (error) {
+    const { status, message } = error
+    dispatch(setErrors(status, message))
+    dispatch(closeModal())
+    dispatch(setLoaded())
+  }
+}

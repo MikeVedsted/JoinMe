@@ -86,7 +86,7 @@ export type ProfileImageProps = {
 
 export type ModalMessageCancelProps = {
   title: string
-  additionalText: string
+  additionalText?: string
   cancelFunction: () => void
   confirmFunction: () => void
 }
