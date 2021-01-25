@@ -156,6 +156,7 @@ $buttonHeightMobile: 45px;
   width: 100%;
   background-color: $textDim;
   height: 1.5px;
+  margin: $smallSpacing 0;
 }
 
 @mixin borderRadiusSmall {
