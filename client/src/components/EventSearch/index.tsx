@@ -19,7 +19,7 @@ const EventSearch = ({ distance }: EventSearchProps) => {
 
   return (
     <div className='search-box'>
-      <h2 className='search-box__title'>Search events</h2>
+      <h3 className='search-box__title'>Search events</h3>
       <FormDropdownField
         label='Category'
         id='category'

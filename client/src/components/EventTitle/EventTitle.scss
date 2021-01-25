@@ -2,7 +2,7 @@
 
 .event-title {
   @include subheader;
-  margin: 0 0 $smallSpacing;
+  margin-top: $smallSpacingMobile;
 
   &__time {
     @include dimmedText;

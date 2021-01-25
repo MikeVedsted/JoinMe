@@ -8,6 +8,7 @@ import GoogleLogin from '../GoogleLogin'
 import ProfileImage from '../ProfileImage'
 import logoDark from '../../Assets/logoDark.svg'
 import logoLight from '../../Assets/logoSecondary.svg'
+import { screenGreaterThan } from '../../util/helperFunctions'
 import { toggleNavDropdown } from '../../redux/actions'
 import { AppState } from '../../Types'
 import './Navbar.scss'
@@ -32,7 +33,7 @@ const Navbar = () => {
       <Link to='/'>
         <img
           className='nav__logo'
-          src={window.innerWidth > 1024 ? logoDark : logoLight}
+          src={screenGreaterThan(1024) ? logoDark : logoLight}
           alt='logo'
         />
       </Link>

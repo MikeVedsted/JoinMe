@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, Dispatch, SetStateAction } from 'react'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { UserId, EventObject, EventId, Participant, Requester } from './index'
 
@@ -177,4 +177,9 @@ export type InputTextAreaProps = {
 
 export type EventSearchProps = {
   distance: string
+}
+
+export type MobileSearchToggleProps = {
+  toggle: Dispatch<SetStateAction<boolean>>
+  state: boolean
 }
