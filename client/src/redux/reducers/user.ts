@@ -16,7 +16,8 @@ const initState: UserState = {
   lat: parseInt(''),
   lng: parseInt(''),
   profile_text: '',
-  profile_image: ''
+  profile_image: '',
+  created_at: ''
 }
 
 export default function user(

@@ -1,38 +1,20 @@
-import React from 'react'
-import axios from 'axios'
+import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import { useCookies } from 'react-cookie'
 import { GoogleLogin } from 'react-google-login'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { authenticateUser } from '../../redux/actions'
+import { AppState } from '../../Types'
 
 const GoogleUserLogin = () => {
   const GOOGLE_CLIENT = process.env.REACT_APP_GOOGLE_API_KEY as string
-  const [, setCookies] = useCookies(['user'])
+  const { created_at, user_id } = useSelector((state: AppState) => state.user)
   const history = useHistory()
-
-  const checkIfNew = (date: string, userId: string) => {
-    const diff = new Date().getTime() - new Date(date).getTime()
-
-    if (diff < 60000) history.push(`/user/${userId}/account-setup`)
-  }
+  const dispatch = useDispatch()
 
   const responseSuccessGoogle = async (response: any) => {
-    const userToken = await response.tokenObj.id_token
-    try {
-      const res = await axios.post('/api/v1/users/google-authenticate', {
-        id_token: userToken
-      })
-      const {
-        user_id,
-        first_name,
-        last_name,
-        profile_image,
-        created_at
-      } = res.data
-      setCookies('user', { user_id, first_name, last_name, profile_image })
-      checkIfNew(created_at, user_id)
-    } catch (error) {
-      console.log(error)
-    }
+    const { id_token } = response.tokenObj
+    dispatch(authenticateUser(id_token))
   }
 
   const responseFailGoogle = (response: any) => {
@@ -41,6 +23,11 @@ const GoogleUserLogin = () => {
     )
     console.log(response)
   }
+
+  useEffect(() => {
+    const diff = new Date().getTime() - new Date(created_at).getTime()
+    if (diff < 6000) history.push(`/user/${user_id}/account-setup`)
+  }, [created_at])
 
   return (
     <GoogleLogin
