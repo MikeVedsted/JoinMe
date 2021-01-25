@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-import { EventType, EventId } from '../types'
+import { EventObject, EventId } from '../Types'
 
 const useEventDetails = (eventId: EventId) => {
-  const [details, setDetails] = useState<EventType>()
+  const [details, setDetails] = useState<EventObject>()
 
   useEffect(() => {
     async function getEventInfo() {

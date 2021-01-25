@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { EventImageProps } from '../../types'
+import { EventImageProps } from '../../Types'
 import './EventImage.scss'
 
 const EventImage = ({ src, alt, ...rest }: EventImageProps) => {

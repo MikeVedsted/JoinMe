@@ -1,7 +1,5 @@
 @import '../../SCSS/config';
 
-$imageHeight: 50px;
-
 .nav {
   @include flexSpaceBetween;
   width: 100%;
@@ -17,28 +15,20 @@ $imageHeight: 50px;
   }
 
   &__logo {
-    height: $imageHeight + 10px;
+    height: $profileImageSize + 10px;
     margin-left: $largeSpacing;
   }
 
   &__options {
     @include flexCenter;
+    padding: 0 $largeSpacing;
   }
 
   &__icon {
     color: $secondary;
     font-size: $heading;
-    margin: auto $smallSpacing;
+    margin: auto $smallSpacing auto 0;
     cursor: pointer;
-  }
-
-  &__profile-image {
-    @include borderRadiusSmall;
-    @include shadow;
-    width: $imageHeight;
-    height: $imageHeight;
-    margin: auto $largeSpacing auto $smallSpacing;
-    object-fit: cover;
   }
 
   &__login {
@@ -56,11 +46,11 @@ $imageHeight: 50px;
 
     &__icon {
       font-size: $sub-head;
-      margin: auto 10px;
+      margin: auto $smallSpacingMobile;
     }
 
     &__profile-image {
-      margin: auto 10px;
+      margin: auto $smallSpacingMobile;
     }
   }
 }

@@ -4,11 +4,11 @@ import { useCookies } from 'react-cookie'
 
 import EventUpdateForm from '../../components/EventUpdateForm'
 import useEventDetails from '../../hooks/useEventDetails'
-import { EventEditPageParamProps } from '../../types'
+import { EventEditPageParams } from '../../Types'
 import './EventEditPage.scss'
 
 const EventEditPage = () => {
-  const { eventId } = useParams<EventEditPageParamProps>()
+  const { eventId } = useParams<EventEditPageParams>()
   const [data] = useEventDetails(eventId)
   const [cookies] = useCookies(['user'])
   const { user_id } = cookies.user

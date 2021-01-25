@@ -1,20 +1,23 @@
 import React, { useState } from 'react'
-import { useCookies } from 'react-cookie'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import NavDropdown from '../NavDropdown'
-import GoogleLogin from '../GoogleUserLogin'
+import GoogleLogin from '../GoogleLogin'
+import ProfileImage from '../ProfileImage'
 import logoDark from '../../Assets/logoDark.svg'
 import logoLight from '../../Assets/logoSecondary.svg'
+import { toggleNavDropdown } from '../../redux/actions'
+import { AppState } from '../../Types'
 import './Navbar.scss'
 
 const Navbar = () => {
+  const dispatch = useDispatch()
+  const { profile_image } = useSelector((state: AppState) => state.user)
+  const { hideNavDropdown } = useSelector((state: AppState) => state.ui)
+  const { isAuthenticated } = useSelector((state: AppState) => state.auth)
   const [navHasBackground, setNavHasBackground] = useState(false)
-  const [dropdownHidden, setDropdownHidden] = useState(true)
-  const [cookies] = useCookies(['user'])
-  const profileImage = cookies.user?.profile_image
-  const { user_id } = cookies.user || ''
 
   const changeNavStyle = () => {
     window.scrollY >= 50
@@ -33,27 +36,23 @@ const Navbar = () => {
           alt='logo'
         />
       </Link>
-      <div className='nav__options'>
-        {user_id ? (
-          <>
-            <FontAwesomeIcon className='nav__icon' icon='bell' />
-            <FontAwesomeIcon className='nav__icon' icon='comment' />
-            <img
-              onClick={() => setDropdownHidden(!dropdownHidden)}
-              className='nav__profile-image'
-              src={profileImage}
-              alt='profile'
-            />
-          </>
-        ) : (
+
+      {isAuthenticated ? (
+        <div className='nav__options'>
+          <FontAwesomeIcon className='nav__icon' icon='bell' />
+          <FontAwesomeIcon className='nav__icon' icon='comment' />
+          <ProfileImage
+            image={profile_image}
+            alt='You. Click here for menu.'
+            onClick={() => dispatch(toggleNavDropdown(hideNavDropdown))}
+          />
+        </div>
+      ) : (
+        <div className='nav__login'>
           <GoogleLogin />
-        )}
-      </div>
-      <NavDropdown
-        display={dropdownHidden}
-        setDropdownHidden={setDropdownHidden}
-        userId={user_id}
-      />
+        </div>
+      )}
+      <NavDropdown />
     </nav>
   )
 }

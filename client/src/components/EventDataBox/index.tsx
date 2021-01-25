@@ -7,10 +7,11 @@ import {
   formatDate,
   formatAddress
 } from '../../util/helperFunctions'
-import { EventDataBoxProps } from '../../types'
+import useEventParticipants from '../../hooks/useEventParticipants'
+import { EventDataBoxProps } from '../../Types'
 import './EventDataBox.scss'
 
-const EventDataBox = ({ event, participantCount }: EventDataBoxProps) => {
+const EventDataBox = ({ event }: EventDataBoxProps) => {
   const {
     time,
     date,
@@ -21,9 +22,11 @@ const EventDataBox = ({ event, participantCount }: EventDataBoxProps) => {
     number,
     postal_code,
     city,
-    max_participants
+    max_participants,
+    event_id
   } = event
   const address = { street, number, postal_code, city }
+  const [participants] = useEventParticipants(event_id)
 
   return (
     <div className='data-box'>
@@ -45,7 +48,7 @@ const EventDataBox = ({ event, participantCount }: EventDataBoxProps) => {
       </p>
       <p className='data-box__line'>
         <FontAwesomeIcon icon='user' className='data-box__icon' />
-        {participantCount}/{max_participants} confirmed
+        {participants.length}/{max_participants} confirmed
       </p>
     </div>
   )

@@ -1,4 +1,4 @@
-import { Address } from '../types'
+import { Address } from '../Types'
 
 export const calculateEventAge = (eventDate: string) => {
   const diff = new Date().getTime() - new Date(eventDate).getTime()

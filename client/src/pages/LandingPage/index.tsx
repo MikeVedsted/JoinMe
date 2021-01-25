@@ -4,10 +4,15 @@ import { useCookies } from 'react-cookie'
 import axios from 'axios'
 
 import Modal from '../../components/Modal'
-import GoogleUserLogin from '../../components/GoogleUserLogin'
 import Button from '../../components/Button'
+import GoogleLogin from '../../components/GoogleLogin'
 import { eventCategories } from '../../util/constants/eventCategories'
 import './LandingPage.scss'
+
+// TO DO
+// Move userCount to dispatch
+// Move auth check to state instead of cookie
+// use clickOutside logic for modal
 
 const LandingPage = () => {
   const history = useHistory()
@@ -24,17 +29,28 @@ const LandingPage = () => {
 
   const getUserCount = async () => {
     try {
-      const response = await axios.get('/api/v1/users/count')
-      const count = response.data
+      const { data } = await axios.get('/api/v1/users/count')
+      const count = data
       setUsers(count)
-    } catch (error) {
-      console.log(error)
+    } catch {
       setUsers('Many')
     }
   }
 
-  const handleGetStartedButton = () => {
-    user_id ? history.push('/') : setIsModalOpen(!isModalOpen)
+  const modalContent = () => {
+    return (
+      <div className='modal-content'>
+        <h2 className='modal-content__title'>Get started</h2>
+        <p className='modal-content__text'>
+          We are excited you want to join us!
+        </p>
+        <p className='modal-content__text'>
+          You can log in with a Google account below and if you do not yet have
+          an account with us, we will create one for you.
+        </p>
+        <GoogleLogin />
+      </div>
+    )
   }
 
   return (
@@ -42,43 +58,35 @@ const LandingPage = () => {
       {isModalOpen && (
         <Modal
           closeModal={() => setIsModalOpen(false)}
-          content={
-            <div className='landing-page__modal-content'>
-              <h3>Log in!</h3>
-              <p className='landing-page__text landing-page__text--login-text'>
-                Hi! Login with Google to proceed!
-              </p>
-              <GoogleUserLogin />
-            </div>
-          }
+          content={modalContent()}
         />
       )}
       <div className='landing-page__circles'>
-        <div className='landing-page__circle landing-page__circle--left'>
-          <p className='landing-page__text landing-page__text--highlight'>
-            Table Tennis Basketball, Horse Riding
+        <div className='landing-page__circle'>
+          <p className='landing-page__title'>
+            {`${eventCategories.length} categories of events are waiting!`}
           </p>
           <p className='landing-page__text'>
-            {`..and ${eventCategories.length} other events are available in Helsinki which you can join!`}
+            ..invite others to your event or join theirs, all over Finland!
           </p>
         </div>
-        <div className='landing-page__button'>
-          <Button
-            type='button'
-            text='Get started!'
-            modifier='secondary'
-            onClick={() => handleGetStartedButton()}
-          />
-        </div>
-        <div className='landing-page__circle landing-page__circle--right'>
-          <p className='landing-page__text landing-page__text--highlight'>
-            {users} people already found event partners
+
+        <div className='landing-page__circle'>
+          <p className='landing-page__title'>
+            {users} people have already joined
           </p>
           <p className='landing-page__text'>
-            ..and hundreds more are waiting for you to create events and play
-            together!
+            ..join them in the search for great social sporting activities!
           </p>
         </div>
+      </div>
+      <div className='landing-page__button'>
+        <Button
+          type='button'
+          text='Get started!'
+          modifier='secondary'
+          onClick={() => setIsModalOpen(!isModalOpen)}
+        />
       </div>
     </div>
   )

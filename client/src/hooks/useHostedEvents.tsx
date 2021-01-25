@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-import { UserId } from '../types'
+import { UserId } from '../Types'
 
 const useHostedEvents = (userId: UserId) => {
   const [hostedEvents, setHostedEvents] = useState([])
