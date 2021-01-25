@@ -1,20 +1,24 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+import { closeModal } from '../../redux/actions'
 import { ModalProps } from '../../Types'
 import './Modal.scss'
 
-// TO DO
-// On click should dispatch close modal action
+const Modal = ({ content }: ModalProps) => {
+  const dispatch = useDispatch()
 
-const Modal = ({ closeModal, content: Content }: ModalProps) => {
   return (
     <div className='modal'>
       <div className='modal__window'>
-        <button className='modal__close-button' onClick={closeModal}>
+        <button
+          className='modal__close-button'
+          onClick={() => dispatch(closeModal())}
+        >
           <FontAwesomeIcon icon='times' />
         </button>
-        <div className='modal__content'>{Content}</div>
+        <div className='modal__content'>{content}</div>
       </div>
     </div>
   )
