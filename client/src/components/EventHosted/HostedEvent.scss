@@ -2,19 +2,17 @@
 
 .hosted-event {
   @include flexColumn;
+  max-width: 800px;
 
   &__content {
     display: flex;
   }
 
   &__buttons {
-    @include flexColumn;
-    height: $eventImageSize;
-
     & * {
-      width: 100%;
-      height: calc($eventImageSize / 5);
       margin: 0 0 calc(#{$eventImageSize}/ 5 / 3) 0;
+      width: 100%;
+      height: calc(#{$eventImageSize}/ 5);
     }
   }
 
@@ -23,14 +21,18 @@
   }
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 768px) {
   .hosted-event {
     &__content {
       display: block;
     }
 
     &__buttons {
-      margin-top: $smallSpacing;
+      margin: $smallSpacingMobile 0;
+      & * {
+        margin: 0 0 $smallSpacingMobile;
+        height: $buttonStandardHeightMobile;
+      }
     }
   }
 }

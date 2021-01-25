@@ -4,20 +4,28 @@ import { InputTextAreaProps } from '../../Types'
 import './Textarea.scss'
 
 const Textarea = ({ id, label, modifier, ...rest }: InputTextAreaProps) => {
+  const handleAutoSize = (e: any) => {
+    e.target.style.height = 'inherit'
+    e.target.style.height = `${e.target.scrollHeight}px`
+  }
+
   return (
-    <label className='form__label'>
-      {label}
-      {rest.required ? (
-        <span className='form__label--required'>{'*'}</span>
-      ) : (
-        ''
-      )}
+    <div className='textarea'>
+      <p className='textarea__label'>
+        {rest.required && (
+          <span className=' textarea__label textarea__label--required'>
+            {'*'}
+          </span>
+        )}
+        {label}
+      </p>
       <textarea
         id={id}
-        className={`form__field form__field${modifier}`}
+        onKeyDown={handleAutoSize}
+        className='textarea__field'
         {...rest}
       />
-    </label>
+    </div>
   )
 }
 

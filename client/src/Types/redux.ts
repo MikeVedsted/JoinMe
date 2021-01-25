@@ -1,52 +1,33 @@
 import { UserInState, EventObject } from './index'
 
-export const ADD_USER = 'ADD_USER'
-export const GET_ERRORS = 'GET_ERRORS'
-export const REMOVE_USER = 'REMOVE_USER'
-export const CLEAR_ERRORS = 'CLEAR_ERRORS'
+// ==== //
+// @APP //
+// ==== //
+
+export type AppState = {
+  loading: LoadingState
+  error: ErrorState
+  event: EventState
+  user: UserState
+  auth: AuthState
+  ui: UIState
+}
+
+// ====== //
+// @EVENT //
+// ====== //
+
 export const FETCH_EVENTS_FAILED = 'FETCH_EVENTS_FAILED'
 export const FETCH_EVENTS_SUCCEED = 'FETCH_EVENTS_SUCCEED'
 export const FETCH_EVENTS_REQUESTED = 'FETCH_EVENTS_REQUESTED'
 
-export const END_EVENT_REQUESTED = 'END_EVENT_REQUESTED'
-export const END_EVENT_SUCCESS = 'END_EVENT_SUCCESS'
-export const END_EVENT_FAIL = 'END_EVENT_FAIL'
-
-export type UserActions = AddUserAction | RemoveUserAction
-export type EventActions = FetchEventActions | EndEventActions
-
-export type AppState = {
-  event: EventState
-  user: UserState
-  auth: any
-}
+export type EventActions = FetchEventActions
 
 export type EventState = {
   allEvents: EventObject[]
-  status: string
-  message: string
-  loading: boolean
-}
-
-export type UserState = {
-  user: UserInState
-  status: string
-  message: string
-  loading: boolean
-}
-
-export type AddUserAction = {
-  type: typeof ADD_USER
-  payload: {
-    user: UserInState
-  }
-}
-
-export type RemoveUserAction = {
-  type: typeof REMOVE_USER
-  payload: {
-    user: UserInState
-  }
+  hostedEvents: EventObject[]
+  interestedEvents: EventObject[]
+  confirmedEvents: EventObject[]
 }
 
 export type FetchEventActions =
@@ -75,27 +56,142 @@ export type FetchEventFailed = {
   }
 }
 
-export type EndEventActions = EndEventRequested | EndEventSuccess | EndEventFail
+// ===== //
+// @USER //
+// ===== //
 
-export type EndEventRequested = {
-  type: typeof END_EVENT_REQUESTED
+export const ADD_USER = 'ADD_USER'
+export const REMOVE_USER = 'REMOVE_USER'
+
+export type UserActions = AddUserAction | RemoveUserAction
+
+export type UserState = {
+  user_id: string
+  email: string
+  first_name: string
+  last_name: string
+  date_of_birth: string
+  gender: string
+  base_address: string
+  street: string
+  number: string
+  city: string
+  postal_code: number
+  country: string
+  lat: number
+  lng: number
+  profile_text: string
+  profile_image: string
+  created_at: string
+}
+
+export type AddUserAction = {
+  type: typeof ADD_USER
   payload: {
-    status: string
-    message: string
+    user: UserInState
   }
 }
-export type EndEventSuccess = {
-  type: typeof END_EVENT_SUCCESS
+
+export type RemoveUserAction = {
+  type: typeof REMOVE_USER
   payload: {
-    status: string
-    message: string
+    user: UserInState
   }
 }
 
-export type EndEventFail = {
-  type: typeof END_EVENT_FAIL
+// ===== //
+// @AUTH //
+// ===== //
+
+export const SET_AUTHORIZED = 'SET_AUTHORIZED'
+export const SET_UNAUTHORIZED = 'SET_UNAUTHORIZED'
+
+export type AuthActions = setAuthorizedAction | setUnauthorizedAction
+
+export type AuthState = {
+  isAuthenticated: boolean
+}
+
+export type setAuthorizedAction = {
+  type: typeof SET_AUTHORIZED
+}
+export type setUnauthorizedAction = {
+  type: typeof SET_UNAUTHORIZED
+}
+
+// === //
+// @UI //
+// === //
+
+export const CLOSE_MODAL = 'CLOSE_MODAL'
+export const TOGGLE_MODAL = 'TOGGLE_MODAL'
+export const CLOSE_NAV_DROPDOWN = 'CLOSE_NAV_DROPDOWN'
+export const TOGGLE_NAV_DROPDOWN = 'TOGGLE_NAV_DROPDOWN'
+
+export type UIActions =
+  | ToggleNavDropdown
+  | CloseNavDropdown
+  | ToggleModal
+  | CloseModal
+
+export type UIState = {
+  hideNavDropdown: boolean
+  hideModal: boolean
+}
+
+export type CloseNavDropdown = {
+  type: typeof CLOSE_NAV_DROPDOWN
+}
+
+export type ToggleNavDropdown = {
+  type: typeof TOGGLE_NAV_DROPDOWN
   payload: {
-    status: string
-    message: string
+    hideNavDropdown: boolean
   }
+}
+
+export type CloseModal = {
+  type: typeof CLOSE_MODAL
+}
+
+export type ToggleModal = {
+  type: typeof TOGGLE_MODAL
+  payload: {
+    hideModal: boolean
+  }
+}
+
+// ====== //
+// @ERROR //
+// ====== //
+
+export const SET_ERRORS = 'SET_ERRORS'
+export const CLEAR_ERRORS = 'CLEAR_ERRORS'
+
+export type ErrorActions = any
+
+export type ErrorState = {
+  status: number
+  message: string
+}
+
+// ======== //
+// @LOADING //
+// ======== //
+
+export const SET_LOADING = 'SET_LOADING'
+export const SET_LOADED = 'SET_LOADED'
+
+export type LoadingActions = SetLoading | SetLoaded
+
+export type LoadingState = {
+  loading: boolean
+}
+
+export type SetLoading = {
+  type: typeof SET_LOADING
+}
+
+export type SetLoaded = {
+  type: typeof SET_LOADED
 }

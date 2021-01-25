@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 
 import Modal from '../Modal'
 import Button from '../Button'
@@ -11,61 +11,48 @@ import EventCommentSection from '../EventCommentSection'
 import EventParticipantsAndRequests from '../EventParticipantsAndRequests'
 import useEventParticipants from '../../hooks/useEventParticipants'
 import useEventRequests from '../../hooks/useEventRequests'
-import { endEvent } from '../../redux/actions'
-import { EventProps } from '../../Types'
+import { closeModal, endEvent, toggleModal } from '../../redux/actions'
+import { AppState, EventProps } from '../../Types'
 import './HostedEvent.scss'
 
 const EventHosted = ({ event }: EventProps) => {
-  const history = useHistory()
-  const dispatch = useDispatch()
+  const { hideModal } = useSelector((state: AppState) => state.ui)
   const { event_id, created_at, image, title } = event
   const [participants] = useEventParticipants(event_id)
   const [requests] = useEventRequests(event_id)
   const [hideComments, setHideComments] = useState(true)
-  const [showModal, setShowModal] = useState(false)
   const [modalContent, setModalContent] = useState('')
-
-  const handleEndEvent = async () => {
-    try {
-      dispatch(endEvent(event_id))
-    } catch {
-      alert(`Sorry, something went wrong. Please try again.`)
-    }
-  }
-
-  const populateModal = () => {
-    if (modalContent === 'participants')
-      return (
-        <EventParticipantsAndRequests
-          joinRequests={requests}
-          participants={participants}
-        />
-      )
-    if (modalContent === 'cancel')
-      return (
-        <ModalMessageCancel
-          title={`Are you sure you want to cancel the event: ${title}?`}
-          additionalText='The event, including comments and participant information, will be permanently deleted and it cannot be undone.'
-          confirmFunction={handleEndEvent}
-          cancelFunction={() => setShowModal(false)}
-        />
-      )
-    return (
-      <p>Error - Please try again and let us know what you did to get here.</p>
-    )
-  }
+  const dispatch = useDispatch()
+  const history = useHistory()
 
   const handleModal = (id: string) => {
     setModalContent(id)
-    setShowModal(true)
+    dispatch(toggleModal(hideModal))
   }
 
   return (
     <div className='hosted-event'>
-      {showModal && (
+      {!hideModal && modalContent === 'cancel' && (
         <Modal
-          closeModal={() => setShowModal(false)}
-          content={populateModal()}
+          content={
+            <ModalMessageCancel
+              title={`Are you sure you want to cancel the event: ${title}?`}
+              additionalText='The event, including comments and participant information, will be permanently deleted and it cannot be undone.'
+              confirmFunction={() => dispatch(endEvent(event_id))}
+              cancelFunction={() => dispatch(closeModal())}
+            />
+          }
+        />
+      )}
+
+      {!hideModal && modalContent === 'participants' && (
+        <Modal
+          content={
+            <EventParticipantsAndRequests
+              joinRequests={requests}
+              participants={participants}
+            />
+          }
         />
       )}
 

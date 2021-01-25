@@ -1,20 +1,23 @@
 import React, { useState } from 'react'
-import axios from 'axios'
+import { useSelector, useDispatch } from 'react-redux'
 
+import Modal from '../Modal'
 import Button from '../Button'
 import EventTitle from '../EventTitle'
 import EventImage from '../EventImage'
 import EventDataBox from '../EventDataBox'
+import ModalMessageCancel from '../ModalMessageCancel'
 import EventCommentSection from '../EventCommentSection'
-import useEventParticipants from '../../hooks/useEventParticipants'
-import { EventProps } from '../../Types'
+import { toggleModal, leaveEvent, closeModal } from '../../redux/actions'
+import { EventProps, AppState } from '../../Types'
 import './EventConfirmed.scss'
 
 const EventConfirmed = ({ event }: EventProps) => {
   const { event_id, created_at, image, title, description, ep_id } = event
+  const { hideModal } = useSelector((state: AppState) => state.ui)
   const [hideComments, setHideComment] = useState(true)
   const [hideDetails, setHideDetails] = useState(true)
-  const [participants] = useEventParticipants(event_id)
+  const dispatch = useDispatch()
 
   const handleToggle = (id: string) => {
     if (id === 'details') {
@@ -27,18 +30,21 @@ const EventConfirmed = ({ event }: EventProps) => {
     }
   }
 
-  const handleLeaveEvent = async () => {
-    try {
-      await axios.delete(`/api/v1/requests/${ep_id}/leave`)
-      alert('Successfully deleted')
-    } catch (error) {
-      alert('Something went wrong. Please try again or refresh the page.')
-      console.log(error)
-    }
-  }
-
   return (
     <div className='confirmed-event'>
+      {!hideModal && (
+        <Modal
+          content={
+            <ModalMessageCancel
+              title='Are you sure you want to leave the event?'
+              additionalText='You can request to join again later but will not necessarily be accepted'
+              confirmFunction={() => dispatch(leaveEvent(ep_id))}
+              cancelFunction={() => dispatch(closeModal())}
+            />
+          }
+        />
+      )}
+
       <EventTitle title={title} createdAt={created_at} />
 
       <div className='confirmed-event__content'>
@@ -49,12 +55,12 @@ const EventConfirmed = ({ event }: EventProps) => {
             type='button'
             text='Leave event'
             modifier='primary'
-            onClick={handleLeaveEvent}
+            onClick={() => dispatch(toggleModal(hideModal))}
           />
 
           <Button
             type='button'
-            text='View details'
+            text={hideDetails ? 'View details' : 'Hide details'}
             modifier='primary'
             id='details'
             onClick={(e) => handleToggle(e.target.id)}
@@ -78,7 +84,7 @@ const EventConfirmed = ({ event }: EventProps) => {
         hidden={hideDetails}
         className={!hideDetails ? 'confirmed-event__details' : ''}
       >
-        <EventDataBox event={event} participantCount={participants.length} />
+        <EventDataBox event={event} />
 
         <p className='confirmed-event__description'>{description}</p>
       </div>

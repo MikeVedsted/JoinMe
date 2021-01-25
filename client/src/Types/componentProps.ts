@@ -1,3 +1,4 @@
+import { ChangeEvent } from 'react'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { UserId, EventObject, EventId, Participant, Requester } from './index'
 
@@ -52,8 +53,7 @@ export type DropdownProps = {
 }
 
 export type ModalProps = {
-  closeModal: () => void
-  content?: any
+  content: any
 }
 
 export type FormSliderProps = {
@@ -63,26 +63,19 @@ export type FormSliderProps = {
   maxRange?: number
   steps?: number
   initialValue?: number
-  onChange: (a: number) => void
+  onChange: (a: ChangeEvent<HTMLInputElement>) => void
 }
 
 export type NavDropdownLinkProps = {
   text: string
   icon: IconProp
   destination: string
-  setDropdownHidden: (option: boolean) => void
 }
 
 export type NavDropdownFunctionProps = {
   text: string
   icon: IconProp
   handler: () => void
-}
-
-export type NavDropdownProps = {
-  display: boolean
-  setDropdownHidden: (option: boolean) => void
-  userId: UserId
 }
 
 export type ProfileImageProps = {
@@ -93,7 +86,7 @@ export type ProfileImageProps = {
 
 export type ModalMessageCancelProps = {
   title: string
-  additionalText: string
+  additionalText?: string
   cancelFunction: () => void
   confirmFunction: () => void
 }
@@ -141,7 +134,6 @@ export type EventTitleProps = {
 
 export type EventDataBoxProps = {
   event: EventObject
-  participantCount: number
 }
 
 export type EventProps = {
@@ -186,8 +178,5 @@ export type InputTextAreaProps = {
 }
 
 export type EventSearchProps = {
-  handleSubmit: () => void
-  handleFieldChange: (e: any) => void
   distance: string
-  setAddress: (a: any) => void
 }

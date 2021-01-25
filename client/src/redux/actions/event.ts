@@ -5,11 +5,11 @@ import {
   FETCH_EVENTS_SUCCEED,
   FETCH_EVENTS_FAILED,
   SearchParams,
-  CommentSubmission,
-  END_EVENT_REQUESTED,
-  END_EVENT_SUCCESS,
-  END_EVENT_FAIL
+  CommentSubmission
 } from '../../Types'
+import { clearErrors, setErrors } from './error'
+import { setLoaded, setLoading } from './loading'
+import { closeModal } from './ui'
 
 export const fetchAllEvents = (searchParams: SearchParams) => async (
   dispatch: Dispatch
@@ -52,25 +52,51 @@ export const addCommentToEvent = async (
   return data
 }
 
-export const endEvent = (eventId: String) => async (dispatch: Dispatch) => {
+export const endEvent = (event_id: string) => async (dispatch: Dispatch) => {
   try {
-    dispatch({ type: END_EVENT_REQUESTED })
-    await axios.delete(`/api/v1/events/${eventId}`)
-    return dispatch(endEventSuccess())
+    dispatch(setLoading())
+    await axios.delete(`/api/v1/events/${event_id}`)
+    dispatch(clearErrors())
+    dispatch(closeModal())
+    dispatch(setLoaded())
   } catch (error) {
-    return dispatch(endEventFail(error))
+    const { status, message } = error
+    dispatch(setErrors(status, message))
+    dispatch(closeModal())
+    dispatch(setLoaded())
   }
 }
 
-const endEventSuccess = () => {
-  return {
-    type: END_EVENT_SUCCESS
+export const cancelJoinRequest = (requestId: string | undefined) => async (
+  dispatch: Dispatch
+) => {
+  try {
+    dispatch(setLoading())
+    await axios.delete(`/api/v1/requests/${requestId}/cancel`)
+    dispatch(clearErrors())
+    dispatch(closeModal())
+    dispatch(setLoaded())
+  } catch (error) {
+    const { status, message } = error
+    dispatch(setErrors(status, message))
+    dispatch(closeModal())
+    dispatch(setLoaded())
   }
 }
 
-const endEventFail = (error: any) => {
-  return {
-    type: END_EVENT_FAIL,
-    payload: error
+export const leaveEvent = (participantId: string | undefined) => async (
+  dispatch: Dispatch
+) => {
+  try {
+    dispatch(setLoading())
+    await axios.delete(`/api/v1/requests/${participantId}/leave`)
+    dispatch(clearErrors())
+    dispatch(closeModal())
+    dispatch(setLoaded())
+  } catch (error) {
+    const { status, message } = error
+    dispatch(setErrors(status, message))
+    dispatch(closeModal())
+    dispatch(setLoaded())
   }
 }

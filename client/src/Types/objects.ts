@@ -1,6 +1,7 @@
 import { EventId } from './index'
 
 export type UserInState = {
+  user_id: string
   email: string
   first_name: string
   last_name: string
@@ -16,6 +17,7 @@ export type UserInState = {
   lng: number
   profile_text: string
   profile_image: string
+  created_at: string
 }
 
 export type UserObject = {

@@ -1,64 +1,30 @@
-import React, { useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React from 'react'
+import { useSelector } from 'react-redux'
 
 import Modal from '../../components/Modal'
 import NotFound from '../../components/NotFound'
 import EventList from '../../components/EventList'
 import EventSearch from '../../components/EventSearch'
-import useEventDisplay from '../../hooks/useEventDisplay'
+import MobileSearchToggle from '../../components/MobileSearchToggle'
+import { screenGreaterThan } from '../../util/helperFunctions'
+import { AppState } from '../../Types'
 import './Homepage.scss'
 
-// TO DO
-// Move modal handling to state
-// Add loading for event list once ready
-
 const Homepage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
-  const {
-    allEvents,
-    handleFieldChange,
-    handleAddressChange,
-    handleSearch
-  } = useEventDisplay()
-
-  const largeScreen = () => {
-    return window.innerWidth < 769
-  }
+  const { allEvents } = useSelector((state: AppState) => state.event)
+  const { hideModal } = useSelector((state: AppState) => state.ui)
 
   return (
     <div className='homepage'>
-      <div
-        hidden={!largeScreen()}
-        className='homepage__filter-icon'
-        onClick={() => setIsModalOpen(!isModalOpen)}
-      >
-        <FontAwesomeIcon icon={'filter'} />
-      </div>
+      <MobileSearchToggle />
 
       {/* Search box modal for small screens */}
-      {isModalOpen && (
-        <Modal
-          closeModal={() => setIsModalOpen(false)}
-          content={
-            <EventSearch
-              distance='30'
-              handleFieldChange={handleFieldChange}
-              handleSubmit={handleSearch}
-              setAddress={handleAddressChange}
-            />
-          }
-        />
-      )}
+      {!hideModal && <Modal content={<EventSearch distance='30' />} />}
 
-      <div className='homepage__left-column' hidden={largeScreen()}>
-        <EventSearch
-          distance='100'
-          handleFieldChange={handleFieldChange}
-          handleSubmit={handleSearch}
-          setAddress={handleAddressChange}
-        />
+      <div className='homepage__left-column' hidden={!screenGreaterThan(768)}>
+        <EventSearch distance='100' />
       </div>
+
       <div className='homepage__right-column'>
         {allEvents && allEvents.length > 0 ? (
           <EventList events={allEvents} />
