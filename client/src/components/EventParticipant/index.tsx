@@ -1,20 +1,23 @@
-import React from 'react'
-import axios from 'axios'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { EventParticipantProps } from '../../Types'
+import { deleteParticipant } from '../../redux/actions/participants'
 import './EventParticipant.scss'
 
 const EventParticipant = ({ participant }: EventParticipantProps) => {
+  const dispatch = useDispatch()
+  const [message, setMessage] = useState('')
   const { profile_image, user_id, first_name, last_name, ep_id } = participant
 
   const handleDelete = async (participantId: string) => {
     try {
-      await axios.delete(`/api/v1/requests/${participantId}/remove-participant`)
-      alert('Deleted')
+      dispatch(deleteParticipant(participantId))
+      setMessage(`${first_name} ${last_name} removed from your event.`)
     } catch (error) {
-      console.log(error)
+      setMessage('Something went wrong, please try again!')
     }
   }
 

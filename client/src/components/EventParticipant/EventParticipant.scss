@@ -2,24 +2,21 @@
 
 .participant {
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
+  @include flexSpaceBetween;
+  margin-bottom: $smallSpacing;
 
   &__user-info {
     width: 260px;
-    display: flex;
-    justify-content: flex-start;
+    @include flexStart;
     align-items: center;
   }
 
   &__image {
-    width: 30px;
-    height: 30px;
+    width: $profileImageSize;
+    height: $profileImageSize;
     object-fit: cover;
-    border-radius: 4px;
-    margin-right: 10px;
+    margin-right: $smallSpacingMobile;
+    @include borderRadiusSmall;
   }
 
   &__link {
@@ -32,18 +29,14 @@
     font-family: $nunito;
     font-size: $text;
     font-weight: bold;
-    margin: 0;
+    margin: 0 0 0 $smallSpacingMobile;
   }
 
   &__delete {
-    font-size: 20px;
+    font-size: $sub-head;
     color: $primary;
     cursor: pointer;
-    margin-left: 10px;
-    transition: 0.3s ease-in-out;
-  }
-
-  &__delete:hover {
-    transform: scale(1.3);
+    margin-left: $smallSpacingMobile;
+    @include iconHoverEffect;
   }
 }

@@ -40,7 +40,7 @@ const Homepage = () => {
       {/* Search box modal for small screens */}
       {isModalOpen && (
         <Modal
-          closeModal={() => setIsModalOpen(false)}
+          // closeModal={() => setIsModalOpen(false)}
           content={
             <EventSearch
               distance='30'

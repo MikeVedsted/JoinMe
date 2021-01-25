@@ -168,3 +168,11 @@ $pagePaddingMobile: calc(#{$navHeightMobile + $largeSpacingMobile})
   font-weight: 600;
   margin-bottom: 10px;
 }
+
+@mixin iconHoverEffect {
+  transition: 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.3);
+  }
+}

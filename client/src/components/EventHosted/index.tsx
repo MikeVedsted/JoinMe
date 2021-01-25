@@ -64,7 +64,7 @@ const EventHosted = ({ event }: EventProps) => {
     <div className='hosted-event'>
       {showModal && (
         <Modal
-          closeModal={() => setShowModal(false)}
+          // closeModal={() => setShowModal(false)}
           content={populateModal()}
         />
       )}

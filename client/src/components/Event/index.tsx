@@ -69,7 +69,7 @@ const Event = ({ event }: EventProps) => {
     <div className='event'>
       {isConfirmModalOpen && (
         <Modal
-          closeModal={() => setIsConfirmModalOpen(false)}
+          // closeModal={() => setIsConfirmModalOpen(false)}
           content={
             <ModalMessageCancel
               title={`Are you sure you want to cancel the event: ${title}?`}
@@ -83,7 +83,7 @@ const Event = ({ event }: EventProps) => {
 
       {isParticipantsModalOpen && (
         <Modal
-          closeModal={() => setIsParticipantsModalOpen(false)}
+          // closeModal={() => setIsParticipantsModalOpen(false)}
           content={
             <EventParticipantAndRequests
               participants={participants}

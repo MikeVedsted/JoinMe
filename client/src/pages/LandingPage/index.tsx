@@ -57,7 +57,7 @@ const LandingPage = () => {
     <div className='landing-page'>
       {isModalOpen && (
         <Modal
-          closeModal={() => setIsModalOpen(false)}
+          // closeModal={() => setIsModalOpen(false)}
           content={modalContent()}
         />
       )}
