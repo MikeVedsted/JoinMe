@@ -1,70 +1,50 @@
 @import '../../SCSS/config';
 
 .homepage {
-  width: 100vw;
-  max-width: 100%;
-  padding: 0 50px;
-  box-sizing: border-box;
-  margin-top: 100px;
+  padding: $pagePadding;
   display: flex;
-  justify-content: space-between;
+
+  &__left-column {
+    flex-grow: 1;
+  }
+
+  &__right-column {
+    @include flexCenter;
+    flex-grow: 4;
+    padding-left: $largeSpacing;
+  }
 
   &__filter-icon {
-    @include flexCenter;
+    @include borderRadiusSmall;
     color: $primary;
     position: fixed;
-    top: 80px;
-    left: 15px;
-    padding: 7px;
-    background-color: rgba(255, 255, 255, 0.836);
+    top: $navHeightMobile + $largeSpacingMobile;
+    right: $largeSpacing;
+    padding: $smallSpacingMobile;
     box-shadow: 0px 0px 2px $textDark;
-    border-radius: 2px;
-    display: none;
+    background-color: rgba(255, 255, 255, 0.836);
+    z-index: 800;
   }
+}
 
-  &__search-box {
-    width: 25vw;
-    height: 350px;
-    padding: 15px;
-    border-radius: 8px;
-    margin-top: 25px;
-    background-color: $textLight;
-  }
-
-  &__events {
-    width: 60vw;
-    margin-top: 12px;
+@media only screen and (max-width: 1024px) {
+  .homepage {
+    display: block;
+    padding: $pagePadding;
   }
 }
 
 @media only screen and (max-width: 768px) {
   .homepage {
-    justify-content: center;
-
-    &__filter-icon {
-      display: block;
-    }
-
-    &__search-box {
-      display: none;
-    }
-
-    &__events {
-      width: 100vw;
-    }
-  }
-
-  .actions {
-    flex-direction: column;
+    padding: $pagePaddingMobile;
   }
 }
 
 @media only screen and (max-width: 600px) {
   .homepage {
-    padding: 0;
-
-    &__events {
-      width: 100vw;
+    &__filter-icon {
+      top: $navHeightMobile;
+      right: $smallSpacingMobile;
     }
   }
 }

@@ -18,15 +18,24 @@ import useEventRequests from '../../hooks/useEventRequests'
 import { EventProps } from '../../Types'
 import './Event.scss'
 
+// TO DO
+// Move modal handling to state
+// Move ownership check to state - but do we really want those options here?
+// Add click outside logic to dropdown and modals
+// Load comments on click
+// Change button rendering, depending on join status (from state)
+// Change handlers to dispatches
+
 const Event = ({ event }: EventProps) => {
+  const [cookies] = useCookies(['user'])
   const history = useHistory()
-  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false)
-  const [isParticipantsModalOpen, setIsParticipantsModalOpen] = useState(false)
+  const { event_id, created_by, created_at, image, title, description } = event
+  const { user_id } = cookies.user || ''
   const [hideDetails, setHideDetails] = useState(true)
   const [showManageOptions, setShowManageOptions] = useState(false)
-  const [cookies] = useCookies(['user'])
-  const { user_id } = cookies.user || ''
-  const { event_id, created_by, created_at, image, title, description } = event
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false)
+  const [isParticipantsModalOpen, setIsParticipantsModalOpen] = useState(false)
+
   const [participants] = useEventParticipants(event_id)
   const [requests] = useEventRequests(event_id)
 

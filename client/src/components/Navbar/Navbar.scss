@@ -46,11 +46,11 @@
 
     &__icon {
       font-size: $sub-head;
-      margin: auto $mobileSmallSpacing;
+      margin: auto $smallSpacingMobile;
     }
 
     &__profile-image {
-      margin: auto $mobileSmallSpacing;
+      margin: auto $smallSpacingMobile;
     }
   }
 }
