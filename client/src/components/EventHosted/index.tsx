@@ -62,12 +62,7 @@ const EventHosted = ({ event }: EventProps) => {
 
   return (
     <div className='hosted-event'>
-      {showModal && (
-        <Modal
-          closeModal={() => setShowModal(false)}
-          content={populateModal()}
-        />
-      )}
+      {showModal && <Modal content={populateModal()} />}
 
       <EventTitle title={title} createdAt={created_at} />
 
