@@ -1,8 +1,9 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import { toggleModal } from '../../redux/actions'
-import { screenSizeMax } from '../../util/helperFunctions'
+import { screenGreaterThan } from '../../util/helperFunctions'
 import { AppState } from '../../Types'
 import './MobileSearchToggle.scss'
 
@@ -12,11 +13,11 @@ const MobileSearchToggle = () => {
 
   return (
     <div
-      hidden={screenSizeMax(768)}
+      hidden={screenGreaterThan(768)}
       className='mobile-search-toggle'
       onClick={() => dispatch(toggleModal(hideModal))}
     >
-      <FontAwesomeIcon icon={'filter'} />
+      <FontAwesomeIcon icon='filter' />
     </div>
   )
 }

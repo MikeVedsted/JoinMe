@@ -1,21 +1,18 @@
-import React, { useState, useEffect } from 'react'
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React from 'react'
+import { useSelector } from 'react-redux'
 
 import Modal from '../../components/Modal'
 import NotFound from '../../components/NotFound'
 import EventList from '../../components/EventList'
 import EventSearch from '../../components/EventSearch'
+import MobileSearchToggle from '../../components/MobileSearchToggle'
 import useEventDisplay from '../../hooks/useEventDisplay'
+import { screenGreaterThan } from '../../util/helperFunctions'
+import { AppState } from '../../Types'
 import './Homepage.scss'
 
-// TO DO
-// Move modal handling to state
-// Add loading for event list once ready
-
 const Homepage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
+  const { hideModal } = useSelector((state: AppState) => state.ui)
   const {
     allEvents,
     handleFieldChange,
@@ -23,24 +20,13 @@ const Homepage = () => {
     handleSearch
   } = useEventDisplay()
 
-  const largeScreen = () => {
-    return window.innerWidth < 769
-  }
-
   return (
     <div className='homepage'>
-      <div
-        hidden={!largeScreen()}
-        className='homepage__filter-icon'
-        onClick={() => setIsModalOpen(!isModalOpen)}
-      >
-        <FontAwesomeIcon icon={'filter'} />
-      </div>
+      <MobileSearchToggle />
 
       {/* Search box modal for small screens */}
-      {isModalOpen && (
+      {!hideModal && (
         <Modal
-          closeModal={() => setIsModalOpen(false)}
           content={
             <EventSearch
               distance='30'
@@ -52,7 +38,7 @@ const Homepage = () => {
         />
       )}
 
-      <div className='homepage__left-column' hidden={largeScreen()}>
+      <div className='homepage__left-column' hidden={!screenGreaterThan(768)}>
         <EventSearch
           distance='100'
           handleFieldChange={handleFieldChange}

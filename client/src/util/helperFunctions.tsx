@@ -34,6 +34,6 @@ export const formatAddress = (addressObject: Address) => {
   return street + num + pos + city
 }
 
-export const screenSizeMax = (width: number) => {
+export const screenGreaterThan = (width: number) => {
   return window.innerWidth > width
 }
