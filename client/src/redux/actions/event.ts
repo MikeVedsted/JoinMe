@@ -83,3 +83,20 @@ export const cancelJoinRequest = (requestId: string | undefined) => async (
     dispatch(setLoaded())
   }
 }
+
+export const leaveEvent = (participantId: string | undefined) => async (
+  dispatch: Dispatch
+) => {
+  try {
+    dispatch(setLoading())
+    await axios.delete(`/api/v1/requests/${participantId}/leave`)
+    dispatch(clearErrors())
+    dispatch(closeModal())
+    dispatch(setLoaded())
+  } catch (error) {
+    const { status, message } = error
+    dispatch(setErrors(status, message))
+    dispatch(closeModal())
+    dispatch(setLoaded())
+  }
+}

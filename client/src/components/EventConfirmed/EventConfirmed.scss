@@ -1,93 +1,62 @@
 @import '../../SCSS/config';
 
 .confirmed-event {
-  display: flex;
-  flex-direction: column;
+  @include flexColumn;
+  max-width: 800px;
+
+  &__content {
+    display: flex;
+  }
 
   &__details {
     display: flex;
   }
 
   &__description {
-    width: fit-content;
-    max-width: 400px;
-    margin: 0 0 0 20px;
-    padding-left: 20px;
+    @include text;
+    width: 66%;
+    margin: 0 0 0 $smallSpacing;
+    padding-left: $smallSpacing;
     border-left: 1.5px solid $textDim;
-    font-family: $nunito;
-    font-size: $text;
-    color: $textDark;
+  }
+
+  &__buttons {
+    & * {
+      margin: 0 0 calc(#{$eventImageSize}/ 4 / 2) 0;
+      width: 100%;
+      height: calc(#{$eventImageSize}/ 4);
+    }
   }
 
   &__line {
     @include separator;
-  }
-
-  &__content {
-    display: flex;
-    max-width: 60vw;
-  }
-
-  &__buttons {
-    $height: 194px;
-
-    & * {
-      margin: 0 0 calc(#{$height}/ 4 / 2) 0;
-      width: 100%;
-      height: calc(194px / 4);
-    }
-  }
-}
-
-@media only screen and (max-width: 1024px) {
-  .confirmed-event {
-    &__content {
-      display: block;
-    }
-
-    &__buttons {
-      @include threeButtonsInline;
-    }
-
-    &__details {
-      padding: 0 2%;
-    }
-
-    &__description {
-      width: 300px;
-      max-width: fit-content;
-    }
   }
 }
 
 @media only screen and (max-width: 768px) {
   .confirmed-event {
     &__content {
-      max-width: 98vw;
-    }
-
-    &__buttons {
-      flex-direction: column;
-
-      & * {
-        width: 100%;
-        margin-bottom: 15px;
-      }
+      display: block;
     }
 
     &__details {
-      flex-direction: column;
-
-      & div {
-        margin: 0;
-      }
+      display: block;
     }
 
     &__description {
-      width: fit-content;
-      border: none;
+      width: 100%;
+      margin: $smallSpacingMobile 0 0;
       padding: 0;
-      margin: 0;
+      border: none;
+    }
+
+    &__buttons {
+     @include columnFullWidthItems;
+     margin: $smallSpacingMobile 0;
+      & * {
+        margin: 0 0 $smallSpacingMobile;
+        height: $buttonStandardHeightMobile;
+      }
     }
   }
 }
