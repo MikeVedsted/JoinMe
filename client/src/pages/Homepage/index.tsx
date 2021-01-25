@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Modal from '../../components/Modal'
@@ -11,7 +12,7 @@ const Homepage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const {
-    events,
+    allEvents,
     handleFieldChange,
     handleAddressChange,
     handleSearch
@@ -51,9 +52,9 @@ const Homepage = () => {
         />
       )}
 
-      {events ? (
+      {allEvents ? (
         <div className='homepage__events'>
-          {events.map((event: any) => (
+          {allEvents.map((event: any) => (
             <Event key={event.created_at} event={event} />
           ))}
         </div>

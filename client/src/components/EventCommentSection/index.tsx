@@ -3,7 +3,8 @@ import React from 'react'
 import EventComment from '../EventComment'
 import EventCommentInput from '../EventCommentInput'
 import useEventComments from '../../hooks/useEventComments'
-import { CommentSectionProps } from '../../types'
+import { CommentSectionProps } from '../../Types'
+import './EventCommentSection.scss'
 
 const EventCommentSection = ({ eventId }: CommentSectionProps) => {
   const [comments] = useEventComments(eventId)
@@ -11,16 +12,22 @@ const EventCommentSection = ({ eventId }: CommentSectionProps) => {
   return (
     <div className='comment-section'>
       <h3 className='comment-section__title'>Comments</h3>
-      {comments &&
+      {comments.length > 0 ? (
         comments.map((comment) => (
           <EventComment
             key={comment.date}
             image={comment.profile_image}
-            user={comment.first_name}
+            name={comment.first_name}
             text={comment.comment}
             date={comment.commented_at}
+            id={comment.user_id}
           />
-        ))}
+        ))
+      ) : (
+        <p className='comment-section__placeholder'>
+          No comments yet. Have a question? Add it below!
+        </p>
+      )}
       <EventCommentInput eventId={eventId} />
     </div>
   )

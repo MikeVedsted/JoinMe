@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import useEventParticipants from '../../hooks/useEventParticipants'
-import { EventDataBoxProps } from '../../types'
+import { EventDataBoxProps } from '../../Types'
 import './EventDataBox.scss'
 
 const EventDataBox = ({ event }: EventDataBoxProps) => {

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { EventManageDropDownProps } from '../../types'
+import { EventManageDropDownProps } from '../../Types'
 import './EventManageDropDown.scss'
 
 const EventManageDropDown = ({

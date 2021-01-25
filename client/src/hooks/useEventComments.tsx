@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-import { EventId, Comment } from '../types'
+import { EventId, Comment } from '../Types'
 
 const useEventComments = (eventId: EventId) => {
   const [comments, setComments] = useState<Comment[]>([])

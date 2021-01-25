@@ -1,0 +1,9 @@
+@import '../../SCSS/config';
+
+.profile-image {
+  @include borderRadiusSmall;
+  @include shadow;
+  height: $profileImageSize;
+  width: $profileImageSize;
+  object-fit: cover;
+}

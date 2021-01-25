@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux'
+import thunk from 'redux-thunk'
 
 import createRootReducer from './reducers'
 
@@ -6,6 +7,7 @@ const initState = {}
 
 const makeStore = (initialState = initState) => {
   let composeEnhancers = compose
+  const middleware = [thunk]
 
   if (process.env.NODE_ENV === 'development') {
     if ((window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) {
@@ -16,7 +18,7 @@ const makeStore = (initialState = initState) => {
   const store = createStore(
     createRootReducer(),
     initialState,
-    composeEnhancers(applyMiddleware())
+    composeEnhancers(applyMiddleware(...middleware))
   )
 
   if ((module as any).hot) {

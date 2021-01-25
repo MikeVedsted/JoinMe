@@ -9,11 +9,11 @@ import FormDropdownField from '../FormDropdownField'
 import GoogleAutoComplete from '../GoogleAutoComplete'
 import { useFormFields } from '../../hooks/useFormFields'
 import { genderOptions } from '../../util/constants/genderOptions'
-import { AccountFormProps, AppState } from '../../types'
+import { AccountFormProps, AppState } from '../../Types'
 import './AccountForm.scss'
 
 const AccountForm = ({ userId }: AccountFormProps) => {
-  const { user } = useSelector((state: AppState) => state.user)
+  const { user } = useSelector((state: AppState) => state)
   const initAddress = user.street && {
     street: user.street,
     number: user.number,

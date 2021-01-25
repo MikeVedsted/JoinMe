@@ -14,7 +14,6 @@ const Routes = () => (
     <ProtectedRoute exact path='/' component={HomePage} />
     <ProtectedRoute exact path='/user/:userId' component={ProfilePage} />
 
-    {/* account-setup must be before dynamic path ending! Otherwise it will never match */}
     <ProtectedRoute
       exact
       path='/event/:eventId/edit'
