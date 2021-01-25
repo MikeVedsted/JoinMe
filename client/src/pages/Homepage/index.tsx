@@ -1,23 +1,16 @@
 import React, { useState, useEffect } from 'react'
-
+import { useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Modal from '../../components/Modal'
 import Event from '../../components/Event'
 import EventSearch from '../../components/EventSearch'
-import useEventDisplay from '../../hooks/useEventDisplay'
+import { AppState } from '../../Types'
 import './Homepage.scss'
 
 const Homepage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-
-  const {
-    allEvents,
-    handleFieldChange,
-    handleAddressChange,
-    handleSearch
-  } = useEventDisplay()
-
+  const { allEvents } = useSelector((state: AppState) => state.event)
   const toggleSearchModal = () => {
     setIsModalOpen(!isModalOpen)
   }
@@ -29,27 +22,11 @@ const Homepage = () => {
       </div>
 
       <div className='homepage__search-box'>
-        <EventSearch
-          distance='100'
-          handleFieldChange={handleFieldChange}
-          handleSubmit={handleSearch}
-          setAddress={handleAddressChange}
-        />
+        <EventSearch distance='100' />
       </div>
 
       {/* Search box modal for small screens */}
-      {isModalOpen && (
-        <Modal
-          content={
-            <EventSearch
-              distance='30'
-              handleFieldChange={handleFieldChange}
-              handleSubmit={handleSearch}
-              setAddress={handleAddressChange}
-            />
-          }
-        />
-      )}
+      {isModalOpen && <Modal content={<EventSearch distance='30' />} />}
 
       {allEvents ? (
         <div className='homepage__events'>
