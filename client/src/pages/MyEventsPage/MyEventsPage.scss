@@ -9,8 +9,9 @@
   }
 
   &__right-column {
+    @include flexColumnCenter;
     flex-grow: 4;
-    padding: 0 $largeSpacing;
+    padding-left: $largeSpacing;
   }
 }
 
@@ -18,5 +19,9 @@
   .my-events {
     display: block;
     padding: $pagePaddingMobile;
+
+    &__right-column {
+      padding-left: 0;
+    }
   }
 }

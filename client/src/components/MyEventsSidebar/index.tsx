@@ -14,30 +14,31 @@ const MyEventsSidebar = () => {
 
   return (
     <div className='side-bar'>
+      <h3 className='side-bar__title'>My events</h3>
       <Button
         type='button'
-        text='Hosted events'
+        text='Hosted'
         id='hosted'
         modifier={pathname.includes('/hosted') ? 'primary' : 'secondary'}
         onClick={(e) => handleClick(e.target.id)}
       />
       <Button
         type='button'
-        text='Interested events'
+        text='Interested'
         id='interested'
         modifier={pathname.includes('/interested') ? 'primary' : 'secondary'}
         onClick={(e) => handleClick(e.target.id)}
       />
       <Button
         type='button'
-        text='Confirmed events'
+        text='Confirmed'
         id='confirmed'
         modifier={pathname.includes('/confirmed') ? 'primary' : 'secondary'}
         onClick={(e) => handleClick(e.target.id)}
       />
       <Button
         type='button'
-        text='Create event'
+        text='Create'
         id='create-new'
         modifier={pathname.includes('/create-new') ? 'primary' : 'secondary'}
         onClick={(e) => handleClick(e.target.id)}

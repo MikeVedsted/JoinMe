@@ -9,7 +9,7 @@
   }
 
   &__right-column {
-    @include flexCenter;
+    @include flexColumnCenter;
     flex-grow: 4;
     padding-left: $largeSpacing;
   }

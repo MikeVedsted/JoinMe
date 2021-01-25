@@ -25,25 +25,6 @@ const EventHosted = ({ event }: EventProps) => {
   const dispatch = useDispatch()
   const history = useHistory()
 
-  const populateModal = (content: string) => {
-    if (content === 'participants')
-      return (
-        <EventParticipantsAndRequests
-          joinRequests={requests}
-          participants={participants}
-        />
-      )
-    if (content === 'cancel')
-      return (
-        <ModalMessageCancel
-          title={`Are you sure you want to cancel the event: ${title}?`}
-          additionalText='The event, including comments and participant information, will be permanently deleted and it cannot be undone.'
-          confirmFunction={() => dispatch(endEvent(event_id))}
-          cancelFunction={() => dispatch(closeModal())}
-        />
-      )
-  }
-
   const handleModal = (id: string) => {
     setModalContent(id)
     dispatch(toggleModal(hideModal))
@@ -51,7 +32,29 @@ const EventHosted = ({ event }: EventProps) => {
 
   return (
     <div className='hosted-event'>
-      {!hideModal && <Modal content={populateModal(modalContent)} />}
+      {!hideModal && modalContent === 'cancel' && (
+        <Modal
+          content={
+            <ModalMessageCancel
+              title={`Are you sure you want to cancel the event: ${title}?`}
+              additionalText='The event, including comments and participant information, will be permanently deleted and it cannot be undone.'
+              confirmFunction={() => dispatch(endEvent(event_id))}
+              cancelFunction={() => dispatch(closeModal())}
+            />
+          }
+        />
+      )}
+
+      {!hideModal && modalContent === 'participants' && (
+        <Modal
+          content={
+            <EventParticipantsAndRequests
+              joinRequests={requests}
+              participants={participants}
+            />
+          }
+        />
+      )}
 
       <EventTitle title={title} createdAt={created_at} />
 

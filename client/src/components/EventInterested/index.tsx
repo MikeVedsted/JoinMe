@@ -24,7 +24,7 @@ const EventInterested = ({ event }: EventProps) => {
         <Modal
           content={
             <ModalMessageCancel
-              title={`Are you sure you want to cancel you request?`}
+              title='Are you sure you want to cancel you request?'
               confirmFunction={() => dispatch(cancelJoinRequest(er_id))}
               cancelFunction={() => dispatch(closeModal())}
             />
