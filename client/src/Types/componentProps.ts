@@ -52,8 +52,7 @@ export type DropdownProps = {
 }
 
 export type ModalProps = {
-  closeModal: () => void
-  content?: any
+  content: any
 }
 
 export type FormSliderProps = {

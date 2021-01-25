@@ -21,7 +21,7 @@ export const toggleModal = (modalState: boolean) => {
   }
 }
 
-export const CloseNavDropdown = () => {
+export const closeNavDropdown = () => {
   return {
     type: CLOSE_NAV_DROPDOWN
   }
