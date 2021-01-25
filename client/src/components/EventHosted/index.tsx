@@ -11,7 +11,7 @@ import EventCommentSection from '../EventCommentSection'
 import EventParticipantsAndRequests from '../EventParticipantsAndRequests'
 import useEventParticipants from '../../hooks/useEventParticipants'
 import useEventRequests from '../../hooks/useEventRequests'
-import { EventProps } from '../../types'
+import { EventProps } from '../../Types'
 import './HostedEvent.scss'
 
 const EventHosted = ({ event }: EventProps) => {
@@ -62,12 +62,7 @@ const EventHosted = ({ event }: EventProps) => {
 
   return (
     <div className='hosted-event'>
-      {showModal && (
-        <Modal
-          closeModal={() => setShowModal(false)}
-          content={populateModal()}
-        />
-      )}
+      {showModal && <Modal content={populateModal()} />}
 
       <EventTitle title={title} createdAt={created_at} />
 

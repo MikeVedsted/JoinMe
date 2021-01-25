@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ButtonProps } from '../../types'
+import { ButtonProps } from '../../Types'
 import './Button.scss'
 
 const Button = ({ type, text, modifier, ...rest }: ButtonProps) => {

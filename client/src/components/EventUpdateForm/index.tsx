@@ -8,7 +8,7 @@ import DropdownField from '../FormDropdownField'
 import GoogleAutoComplete from '../GoogleAutoComplete'
 import { useFormFields } from '../../hooks/useFormFields'
 import { eventCategories } from '../../util/constants/eventCategories'
-import { EventUpdateFormProps } from '../../types'
+import { EventUpdateFormProps } from '../../Types'
 import './EventUpdateForm.scss'
 
 const EventUpdateForm = ({ data, eventId }: EventUpdateFormProps) => {
