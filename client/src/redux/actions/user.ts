@@ -1,6 +1,6 @@
-import { ADD_USER, REMOVE_USER, UserActions, User } from '../../types'
+import { ADD_USER, REMOVE_USER, UserActions, UserInState } from '../../Types'
 
-export function addUser(user: User): UserActions {
+export function setUser(user: UserInState): UserActions {
   return {
     type: ADD_USER,
     payload: {

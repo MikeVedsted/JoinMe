@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Route, Redirect, useLocation } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 
-import { ProtectedRouteProps } from '../types'
+import { ProtectedRouteProps } from '../Types'
 
 const ProtectedRoute = ({
   component: Component,

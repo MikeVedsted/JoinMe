@@ -1,11 +1,12 @@
 import React from 'react'
 
+import Button from '../Button'
+import FormSlider from '../FormSlider'
 import FormDropdownField from '../FormDropdownField'
 import GoogleAutoComplete from '../GoogleAutoComplete'
-import FormSlider from '../FormSlider'
 import { eventCategories } from '../../util/constants/eventCategories'
-import { EventSearchProps } from '../../types'
-import Button from '../Button'
+import { EventSearchProps } from '../../Types'
+
 import './EventSearch.scss'
 
 const EventSearch = ({
@@ -35,14 +36,12 @@ const EventSearch = ({
           onChange={handleFieldChange}
         />
       </label>
-      <div className='search-box__button'>
-        <Button
-          type='submit'
-          text='Search'
-          modifier='primary'
-          onClick={handleSubmit}
-        />
-      </div>
+      <Button
+        type='submit'
+        text='Search'
+        modifier='primary'
+        onClick={handleSubmit}
+      />
     </div>
   )
 }

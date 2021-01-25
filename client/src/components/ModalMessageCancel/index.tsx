@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Button from '../Button'
-import { ModalMessageCancelProps } from '../../types'
+import { ModalMessageCancelProps } from '../../Types'
 import './ModalMessageCancel.scss'
 
 const ModalMessageCancel = ({

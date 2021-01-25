@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ProfileImageProps } from '../../types'
+import { ProfileImageProps } from '../../Types'
 import './ProfileImage.scss'
 
 const ProfileImage = ({ image, alt, ...rest }: ProfileImageProps) => {

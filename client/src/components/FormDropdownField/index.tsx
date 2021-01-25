@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { DropdownProps } from '../../types'
+import { DropdownProps } from '../../Types'
 import './DropdownField.scss'
 
 const DropdownField = ({
