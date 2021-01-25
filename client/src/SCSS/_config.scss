@@ -24,6 +24,7 @@ $subtitle: 13px;
 $lineHeight: 140%;
 
 // SIZE CONSTANTS - LARGE SCREENS
+$buttonHeight: 40px;
 $largeSpacing: 40px;
 $smallSpacing: 20px;
 $profileImageSize: 50px;
@@ -41,7 +42,8 @@ $footerHeightMobile: 60px;
 $eventImageSizeMobile: 150px;
 $pagePaddingMobile: calc(#{$navHeightMobile + $largeSpacingMobile})
   $largeSpacingMobile calc(#{$footerHeightMobile + $largeSpacingMobile});
-$buttonStandardHeightMobile: 45px;
+$buttonHeightMobile: 45px;
+
 // FONT MIXINS
 @mixin header {
   font-family: $montserrat;
@@ -81,6 +83,12 @@ $buttonStandardHeightMobile: 45px;
   &:hover {
     color: $secondary;
   }
+}
+
+@mixin buttonText {
+  font-family: $roboto;
+  font-size: $text;
+  color: $textLight;
 }
 
 // LAYOUT MIXINS
@@ -148,6 +156,7 @@ $buttonStandardHeightMobile: 45px;
   width: 100%;
   background-color: $textDim;
   height: 1.5px;
+  margin: $smallSpacing 0;
 }
 
 @mixin borderRadiusSmall {
