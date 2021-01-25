@@ -100,3 +100,20 @@ export const leaveEvent = (participantId: string | undefined) => async (
     dispatch(setLoaded())
   }
 }
+
+export const requestToJoin = (eventId: string) => async (
+  dispatch: Dispatch
+) => {
+  try {
+    dispatch(setLoading())
+    await axios.post(`/api/v1/events/${eventId}/request`)
+    dispatch(clearErrors())
+    dispatch(closeModal())
+    dispatch(setLoaded())
+  } catch (error) {
+    const { status, message } = error
+    dispatch(setErrors(status, message))
+    dispatch(closeModal())
+    dispatch(setLoaded())
+  }
+}

@@ -110,10 +110,8 @@ export type EventJoinRequestProps = {
 }
 
 export type EventManageDropDownProps = {
-  showParticipants: () => void
-  endEvent: () => void
-  editEvent: () => void
-  modifier: string
+  eventId: EventId
+  hide: boolean
 }
 
 export type EventListProps = {

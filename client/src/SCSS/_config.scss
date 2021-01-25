@@ -126,6 +126,7 @@ $buttonHeightMobile: 45px;
   & * {
     flex-grow: 0;
     width: 49%;
+    margin-top: $smallSpacing;
   }
 }
 
