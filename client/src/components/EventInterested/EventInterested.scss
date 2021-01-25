@@ -1,14 +1,11 @@
 @import '../../SCSS/config';
 
 .interested-event {
-  display: flex;
-  flex-direction: column;
+  @include flexColumn;
+  max-width: 800px;
 
   &__description {
-    max-width: 60vw;
-    font-family: $nunito;
-    font-size: $text;
-    color: $textDark;
+    @include text;
   }
 
   &__line {
@@ -17,5 +14,13 @@
 
   &__buttons {
     @include twoButtonsInline;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .interested-event {
+    &__buttons {
+      @include columnFullWidthItems;
+    }
   }
 }

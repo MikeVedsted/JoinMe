@@ -23,18 +23,13 @@
 
   &__line {
     @include separator;
-    margin: $smallSpacing 0;
   }
 }
 
 @media only screen and (max-width: 768px) {
   .event {
     &__buttons {
-      @include flexColumn;
-
-      & * {
-        width: 100%;
-      }
+      @include columnFullWidthItems;
     }
   }
 }

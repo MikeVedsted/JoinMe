@@ -1,30 +1,37 @@
 import React, { useState } from 'react'
-import axios from 'axios'
+import { useSelector, useDispatch } from 'react-redux'
 
+import Modal from '../Modal'
 import Button from '../Button'
 import EventTitle from '../EventTitle'
 import EventImage from '../EventImage'
 import EventDataBox from '../EventDataBox'
+import ModalMessageCancel from '../ModalMessageCancel'
 import EventCommentSection from '../EventCommentSection'
-import { EventProps } from '../../Types'
+import { cancelJoinRequest, closeModal, toggleModal } from '../../redux/actions'
+import { EventProps, AppState } from '../../Types'
 import './EventInterested.scss'
 
 const EventInterested = ({ event }: EventProps) => {
   const { event_id, created_at, image, title, description, er_id } = event
+  const { hideModal } = useSelector((state: AppState) => state.ui)
   const [hideComments, setHideComment] = useState(true)
-
-  const handleCancelRequest = async () => {
-    try {
-      await axios.delete(`/api/v1/requests/${er_id}/cancel`)
-      alert('Successfully deleted')
-    } catch (error) {
-      alert('Something went wrong. Please try again or refresh the page.')
-      console.log(error)
-    }
-  }
+  const dispatch = useDispatch()
 
   return (
     <div className='interested-event'>
+      {!hideModal && (
+        <Modal
+          content={
+            <ModalMessageCancel
+              title='Are you sure you want to cancel you request?'
+              confirmFunction={() => dispatch(cancelJoinRequest(er_id))}
+              cancelFunction={() => dispatch(closeModal())}
+            />
+          }
+        />
+      )}
+
       <EventTitle title={title} createdAt={created_at} />
 
       <div>
@@ -39,7 +46,7 @@ const EventInterested = ({ event }: EventProps) => {
           type='button'
           text='Cancel request'
           modifier='primary'
-          onClick={handleCancelRequest}
+          onClick={() => dispatch(toggleModal(hideModal))}
         />
         <Button
           type='button'

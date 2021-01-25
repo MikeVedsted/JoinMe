@@ -7,6 +7,9 @@ import {
   SearchParams,
   CommentSubmission
 } from '../../Types'
+import { clearErrors, setErrors } from './error'
+import { setLoaded, setLoading } from './loading'
+import { closeModal } from './ui'
 
 export const fetchAllEvents = (searchParams: SearchParams) => async (
   dispatch: Dispatch
@@ -47,4 +50,53 @@ export const addCommentToEvent = async (
 ) => {
   const { data } = await axios.post(`/api/v1/comments/${eventId}`, comment)
   return data
+}
+
+export const endEvent = (event_id: string) => async (dispatch: Dispatch) => {
+  try {
+    dispatch(setLoading())
+    await axios.delete(`/api/v1/events/${event_id}`)
+    dispatch(clearErrors())
+    dispatch(closeModal())
+    dispatch(setLoaded())
+  } catch (error) {
+    const { status, message } = error
+    dispatch(setErrors(status, message))
+    dispatch(closeModal())
+    dispatch(setLoaded())
+  }
+}
+
+export const cancelJoinRequest = (requestId: string | undefined) => async (
+  dispatch: Dispatch
+) => {
+  try {
+    dispatch(setLoading())
+    await axios.delete(`/api/v1/requests/${requestId}/cancel`)
+    dispatch(clearErrors())
+    dispatch(closeModal())
+    dispatch(setLoaded())
+  } catch (error) {
+    const { status, message } = error
+    dispatch(setErrors(status, message))
+    dispatch(closeModal())
+    dispatch(setLoaded())
+  }
+}
+
+export const leaveEvent = (participantId: string | undefined) => async (
+  dispatch: Dispatch
+) => {
+  try {
+    dispatch(setLoading())
+    await axios.delete(`/api/v1/requests/${participantId}/leave`)
+    dispatch(clearErrors())
+    dispatch(closeModal())
+    dispatch(setLoaded())
+  } catch (error) {
+    const { status, message } = error
+    dispatch(setErrors(status, message))
+    dispatch(closeModal())
+    dispatch(setLoaded())
+  }
 }

@@ -41,7 +41,7 @@ $footerHeightMobile: 60px;
 $eventImageSizeMobile: 150px;
 $pagePaddingMobile: calc(#{$navHeightMobile + $largeSpacingMobile})
   $largeSpacingMobile calc(#{$footerHeightMobile + $largeSpacingMobile});
-
+$buttonStandardHeightMobile: 45px;
 // FONT MIXINS
 @mixin header {
   font-family: $montserrat;
