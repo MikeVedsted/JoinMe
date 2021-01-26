@@ -83,6 +83,7 @@ export type UserState = {
   profile_text: string
   profile_image: string
   created_at: string
+  interests?: string[]
 }
 
 export type AddUserAction = {

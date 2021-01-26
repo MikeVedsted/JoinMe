@@ -1,8 +1,7 @@
 @import '../../SCSS/config';
 
 .profile {
-  padding-top: 100px;
-  margin: 0 2.5em;
+  padding: $pagePadding;
   justify-content: stretch;
   align-items: flex-start;
   @include flexStart;
@@ -11,27 +10,21 @@
     @include flexCenter;
     flex-direction: column;
     flex-basis: 30%;
-    flex-shrink: 10%;
     height: fit-content;
     position: sticky;
-    top: 122px;
-
-    & * {
-      width: 100%;
-    }
 
     &--image {
+      @include borderRadiusSmall;
       width: auto;
       height: 30vh;
-      margin-bottom: 26px;
-      border-radius: 8px;
+      margin-bottom: $smallSpacing;
     }
   }
 
   &__main {
     @include flexStart;
     flex-direction: column;
-    margin-left: 40px;
+    margin-left: $largeSpacing;
     flex-basis: 70%;
   }
 
@@ -40,15 +33,12 @@
     flex-direction: row;
 
     &--text {
-      font-family: $montserrat;
-      font-size: $sub-head;
-      font-weight: 600;
+      @include header;
       flex-basis: 20vw;
     }
 
     &--divider {
-      border: 1px solid $lineDim;
-      width: 100%;
+      @include separator;
     }
 
     &--divider-optional {
@@ -58,7 +48,7 @@
 
   &__details {
     display: grid;
-    grid-template-columns: 20vh auto;
+    grid-template-columns: $largeSpacing auto;
     justify-items: start;
     align-items: center;
     column-gap: 10vh;
@@ -71,7 +61,8 @@
 
 @media only screen and (max-width: 1024px) {
   .profile {
-    flex-direction: column;
+    @include flexColumnCenter;
+    padding: $pagePadding;
 
     &__sidebar {
       position: static;
@@ -79,7 +70,7 @@
 
     &__main {
       margin-left: 0vh;
-      margin-top: 5vh;
+      margin-top: $largeSpacingMobile;
     }
 
     &__header {
@@ -90,24 +81,29 @@
   }
 
   .profile__sidebar button {
-    width: 30vw;
+    max-width: 40vw;
   }
 }
 
-@media only screen and (max-width: 765px) {
+@media only screen and (max-width: 768px) {
   .profile__header {
     > * {
       width: calc(100% / 3);
     }
 
     &--text {
-      font-size: 20px;
+      font-size: $sub-head;
+      margin: $smallSpacing;
       text-align: center;
     }
 
     &--divider-optional {
       display: block;
-      border: 1px solid $lineDim;
+      @include separator;
+    }
+
+    &--divider {
+      @include separator;
     }
   }
 
