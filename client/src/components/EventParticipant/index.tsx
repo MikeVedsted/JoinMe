@@ -1,22 +1,15 @@
-import React from 'react'
-import axios from 'axios'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { EventParticipantProps } from '../../Types'
+import { deleteParticipant } from '../../redux/actions/eventParticipants'
 import './EventParticipant.scss'
 
 const EventParticipant = ({ participant }: EventParticipantProps) => {
+  const dispatch = useDispatch()
   const { profile_image, user_id, first_name, last_name, ep_id } = participant
-
-  const handleDelete = async (participantId: string) => {
-    try {
-      await axios.delete(`/api/v1/requests/${participantId}/remove-participant`)
-      alert('Deleted')
-    } catch (error) {
-      console.log(error)
-    }
-  }
 
   return (
     <div className='participant'>
@@ -31,7 +24,7 @@ const EventParticipant = ({ participant }: EventParticipantProps) => {
         </Link>
       </div>
       <FontAwesomeIcon
-        onClick={() => handleDelete(ep_id)}
+        onClick={() => dispatch(deleteParticipant(ep_id))}
         className='participant__delete'
         icon={'trash'}
       />
