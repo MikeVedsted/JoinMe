@@ -1,43 +1,38 @@
 @import '../../SCSS/config';
 
 .hosted-event {
-  display: flex;
-  flex-direction: column;
-
-  &__title {
-    font-family: $montserrat;
-    font-size: $heading;
-    color: $textDark;
-    margin: 0;
-  }
-
-  &__line {
-    @include separator;
-  }
+  @include flexColumn;
+  max-width: 800px;
 
   &__content {
     display: flex;
   }
 
   &__buttons {
-    $height: 194px;
-
     & * {
-      margin: 0 0 calc(#{$height}/ 5 / 3) 0;
+      margin: 0 0 calc(#{$eventImageSize}/ 5 / 3) 0;
       width: 100%;
-      height: calc(194px / 5);
+      height: calc(#{$eventImageSize}/ 5);
     }
+  }
+
+  &__line {
+    @include separator;
   }
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 768px) {
   .hosted-event {
     &__content {
       display: block;
     }
 
     &__buttons {
-      margin: 0 2% 20px;
+      margin: $smallSpacingMobile 0;
+      & * {
+        margin: 0 0 $smallSpacingMobile;
+        height: $buttonHeightMobile;
+      }
     }
   }
 }

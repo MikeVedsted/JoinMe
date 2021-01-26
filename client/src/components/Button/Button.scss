@@ -1,16 +1,14 @@
 @import '../../SCSS/config';
 
 .button {
-  height: 40px;
-  font-family: $roboto;
-  font-size: $text;
-  color: $textLight;
+  @include buttonText;
+  @include borderRadiusSmall;
+  margin: calc(#{$smallSpacingMobile}/ 2) 0;
+  padding: $smallSpacingMobile;
   background-color: $default;
+  height: $buttonHeight;
   border: 1px solid $default;
-  border-radius: 4px;
   flex-grow: 1;
-  padding: 8px 10px;
-  margin: 5px 0;
   cursor: pointer;
   transition: 0.3s ease-in-out;
 
@@ -40,35 +38,19 @@
     border-color: $secondary;
   }
 
-  &--large-active {
-    background-color: $primary;
-    border-color: $primary;
-    font-size: $sub-head;
-    color: $textLight;
-    text-align: left;
-  }
-
-  &--large {
-    background-color: $secondary;
-    border-color: $secondary;
-    font-size: $sub-head;
-    color: $textDark;
-    text-align: left;
-  }
-
   &--inline {
     background-color: $primary;
     border-color: $secondary;
     width: auto;
     margin: 1em 0;
-    padding: 0 20px;
+    padding: 0 $smallSpacing;
     border: none;
   }
 }
 
 @media only screen and (max-width: 1024px) {
   .button {
-    height: 45px;
+    height: $buttonHeightMobile;
 
     &--inline {
       height: auto;

@@ -55,12 +55,7 @@ const LandingPage = () => {
 
   return (
     <div className='landing-page'>
-      {isModalOpen && (
-        <Modal
-          // closeModal={() => setIsModalOpen(false)}
-          content={modalContent()}
-        />
-      )}
+      {isModalOpen && <Modal content={modalContent()} />}
       <div className='landing-page__circles'>
         <div className='landing-page__circle'>
           <p className='landing-page__title'>

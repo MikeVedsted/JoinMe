@@ -1,3 +1,4 @@
+import { ChangeEvent, Dispatch, SetStateAction } from 'react'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { UserId, EventObject, EventId, Participant, Requester } from './index'
 
@@ -62,7 +63,7 @@ export type FormSliderProps = {
   maxRange?: number
   steps?: number
   initialValue?: number
-  onChange: (a: number) => void
+  onChange: (a: ChangeEvent<HTMLInputElement>) => void
 }
 
 export type NavDropdownLinkProps = {
@@ -85,7 +86,7 @@ export type ProfileImageProps = {
 
 export type ModalMessageCancelProps = {
   title: string
-  additionalText: string
+  additionalText?: string
   cancelFunction: () => void
   confirmFunction: () => void
 }
@@ -109,10 +110,8 @@ export type EventJoinRequestProps = {
 }
 
 export type EventManageDropDownProps = {
-  showParticipants: () => void
-  endEvent: () => void
-  editEvent: () => void
-  modifier: string
+  eventId: EventId
+  hide: boolean
 }
 
 export type EventListProps = {
@@ -177,8 +176,10 @@ export type InputTextAreaProps = {
 }
 
 export type EventSearchProps = {
-  handleSubmit: () => void
-  handleFieldChange: (e: any) => void
   distance: string
-  setAddress: (a: any) => void
+}
+
+export type MobileSearchToggleProps = {
+  toggle: Dispatch<SetStateAction<boolean>>
+  state: boolean
 }
