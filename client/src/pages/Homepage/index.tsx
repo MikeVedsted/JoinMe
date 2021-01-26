@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import Modal from '../../components/Modal'
+import Loading from '../../components/Loading'
 import NotFound from '../../components/NotFound'
 import EventList from '../../components/EventList'
 import EventSearch from '../../components/EventSearch'
@@ -9,7 +10,6 @@ import MobileSearchToggle from '../../components/MobileSearchToggle'
 import { screenGreaterThan } from '../../util/helperFunctions'
 import { AppState } from '../../Types'
 import './Homepage.scss'
-import Loading from '../../components/Loading'
 
 const Homepage = () => {
   const { allEvents } = useSelector((state: AppState) => state.event)

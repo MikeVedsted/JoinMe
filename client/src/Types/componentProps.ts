@@ -111,7 +111,6 @@ export type EventJoinRequestProps = {
 
 export type EventManageDropDownProps = {
   eventId: EventId
-  hide: boolean
 }
 
 export type EventListProps = {
@@ -182,4 +181,9 @@ export type EventSearchProps = {
 export type MobileSearchToggleProps = {
   toggle: Dispatch<SetStateAction<boolean>>
   state: boolean
+}
+
+export type CircleContainerProps = {
+  title: string
+  text: string
 }

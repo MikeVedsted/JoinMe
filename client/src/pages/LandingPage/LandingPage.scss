@@ -14,31 +14,6 @@
     display: flex;
   }
 
-  &__circle {
-    @include flexColumnCenter;
-    justify-content: center;
-    background-color: $primary;
-    opacity: 0.8;
-    text-align: center;
-    width: 30vw;
-    height: 30vw;
-    border-radius: 50%;
-    margin: auto -1vw;
-  }
-
-  &__title {
-    @include subheader;
-    color: $textLight;
-    margin-bottom: 0;
-    width: 80%;
-  }
-
-  &__text {
-    @include text;
-    color: $textLight;
-    width: 80%;
-  }
-
   &__button {
     width: 25%;
     height: 60px;
@@ -47,30 +22,10 @@
   }
 }
 
-.modal-content {
-  @include flexColumnCenter;
-
-  &__title {
-    @include header;
-    color: $primary;
-  }
-
-  &__text {
-    @include text;
-    margin-top: 0;
-    text-align: center;
-  }
-}
-
 @media only screen and (max-width: 1024px) {
   .landing-page {
     background-image: url(../../Assets/bicycle.jpg);
     background-position: center;
-
-    &__circle {
-      width: 45vw;
-      height: 45vw;
-    }
   }
 }
 
@@ -93,18 +48,6 @@
     &__circles {
       display: inline;
       margin-top: 40vh;
-    }
-
-    &__circle {
-      width: 80vw;
-      height: 80vw;
-      margin: $smallSpacingMobile;
-      background: rgb(224, 54, 0);
-      background: radial-gradient(
-        circle,
-        rgba(224, 54, 0, 0) 0%,
-        rgba(224, 54, 0, 0.8) 100%
-      );
     }
 
     &__button {

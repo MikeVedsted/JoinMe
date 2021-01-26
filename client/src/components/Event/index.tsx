@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Button from '../Button'
 import EventTitle from '../EventTitle'
@@ -15,20 +14,12 @@ import './Event.scss'
 const Event = ({ event }: EventProps) => {
   const { event_id, created_by, created_at, image, title, description } = event
   const { user_id } = useSelector((state: AppState) => state.user)
-  const [hideManageOptions, setHideManageOptions] = useState(true)
   const [hideDetails, setHideDetails] = useState(true)
   const dispatch = useDispatch()
 
   return (
     <div className='event'>
-      {user_id === created_by && (
-        <FontAwesomeIcon
-          onClick={() => setHideManageOptions(!hideManageOptions)}
-          className='event__manage'
-          icon='ellipsis-v'
-        />
-      )}
-      <EventManageDropDown eventId={event_id} hide={hideManageOptions} />
+      {user_id === created_by && <EventManageDropDown eventId={event_id} />}
 
       <EventTitle title={title} createdAt={created_at} />
 
