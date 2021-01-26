@@ -12,24 +12,23 @@ import './EventJoinRequest.scss'
 
 const EventJoinRequest = ({ requester }: EventJoinRequestProps) => {
   const dispatch = useDispatch()
-  const [message, setMessage] = useState('')
   const { profile_image, user_id, first_name, last_name, er_id } = requester
 
   const handleReject = () => {
     try {
       dispatch(rejectJoinRequest(er_id))
-      setMessage(`Join request by ${first_name} ${last_name} rejected.`)
+      alert(`Join request by ${first_name} ${last_name} rejected.`)
     } catch (error) {
-      setMessage('Something went wrong. Please try again.')
+      alert('Something went wrong. Please try again.')
     }
   }
 
   const handleApprove = async () => {
     try {
       dispatch(approveJoinRequest(er_id))
-      setMessage(`Join request by ${first_name} ${last_name} approved.`)
+      alert(`Join request by ${first_name} ${last_name} approved.`)
     } catch (error) {
-      setMessage('Something went wrong. Please try again.')
+      alert('Something went wrong. Please try again.')
     }
   }
 
