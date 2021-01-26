@@ -1,24 +1,19 @@
 @import '../../SCSS/config';
 
 .participant {
+  @include flexSpaceBetween;
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: $smallSpacing;
 
   &__user-info {
-    width: 260px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    @include flexStart;
   }
 
   &__image {
-    width: 30px;
-    height: 30px;
+    @include borderRadiusSmall;
+    width: $smallProfileImageSize;
+    height: $smallProfileImageSize;
     object-fit: cover;
-    border-radius: 4px;
   }
 
   &__link {
