@@ -1,22 +1,21 @@
 @import '../../SCSS/config';
 
 .participant {
-  width: 100%;
   @include flexSpaceBetween;
+  width: 100%;
   margin-bottom: $smallSpacing;
 
   &__user-info {
-    width: 260px;
     @include flexStart;
     align-items: center;
   }
 
   &__image {
+    @include borderRadiusSmall;
     width: $profileImageSize;
     height: $profileImageSize;
     object-fit: cover;
     margin-right: $smallSpacingMobile;
-    @include borderRadiusSmall;
   }
 
   &__link {
@@ -24,19 +23,15 @@
   }
 
   &__name {
-    text-align: left;
-    color: $link;
-    font-family: $nunito;
-    font-size: $text;
+    @include text;
+    @include link;
     font-weight: bold;
-    margin: 0 0 0 $smallSpacingMobile;
   }
 
   &__delete {
+    @include iconHoverEffect;
     font-size: $sub-head;
     color: $primary;
     cursor: pointer;
-    margin-left: $smallSpacingMobile;
-    @include iconHoverEffect;
   }
 }

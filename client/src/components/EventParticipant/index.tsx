@@ -4,22 +4,12 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { EventParticipantProps } from '../../Types'
-import { deleteParticipant } from '../../redux/actions/participants'
+import { deleteParticipant } from '../../redux/actions/eventParticipants'
 import './EventParticipant.scss'
 
 const EventParticipant = ({ participant }: EventParticipantProps) => {
   const dispatch = useDispatch()
-  const [message, setMessage] = useState('')
   const { profile_image, user_id, first_name, last_name, ep_id } = participant
-
-  const handleDelete = async (participantId: string) => {
-    try {
-      dispatch(deleteParticipant(participantId))
-      setMessage(`${first_name} ${last_name} removed from your event.`)
-    } catch (error) {
-      setMessage('Something went wrong, please try again!')
-    }
-  }
 
   return (
     <div className='participant'>
@@ -34,7 +24,7 @@ const EventParticipant = ({ participant }: EventParticipantProps) => {
         </Link>
       </div>
       <FontAwesomeIcon
-        onClick={() => handleDelete(ep_id)}
+        onClick={() => dispatch(deleteParticipant(ep_id))}
         className='participant__delete'
         icon={'trash'}
       />
