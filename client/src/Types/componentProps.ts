@@ -111,7 +111,6 @@ export type EventJoinRequestProps = {
 
 export type EventManageDropDownProps = {
   eventId: EventId
-  hide: boolean
 }
 
 export type EventListProps = {
