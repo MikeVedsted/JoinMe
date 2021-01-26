@@ -16,7 +16,8 @@
   right: $smallSpacing;
   padding: 0;
   overflow: hidden;
-
+  background-color: white;
+  
   &__item {
     @include text;
     font-size: 14px;
