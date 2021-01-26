@@ -1,28 +1,26 @@
 import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { useCookies } from 'react-cookie'
 import axios from 'axios'
 
 import Modal from '../../components/Modal'
 import Button from '../../components/Button'
-import GoogleLogin from '../../components/GoogleLogin'
+import CircleContainer from '../../components/CircleContainer'
+import ModalLogin from '../../components/ModalLogin'
 import { eventCategories } from '../../util/constants/eventCategories'
+import { AppState } from '../../Types'
 import './LandingPage.scss'
-
-// TO DO
-// Move userCount to dispatch
-// Move auth check to state instead of cookie
-// use clickOutside logic for modal
+import { closeModal } from '../../redux/actions'
 
 const LandingPage = () => {
   const history = useHistory()
+  const dispatch = useDispatch()
   const [users, setUsers] = useState('')
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [cookies] = useCookies(['user'])
-  const { user_id } = cookies.user || ''
+  const { user_id } = useSelector((state: AppState) => state.user)
+  const { hideModal } = useSelector((state: AppState) => state.ui)
 
   useEffect(() => {
-    user_id && setIsModalOpen(false)
+    user_id && dispatch(closeModal())
     user_id && history.push('/')
     getUserCount()
   }, [history, user_id])
@@ -37,50 +35,25 @@ const LandingPage = () => {
     }
   }
 
-  const modalContent = () => {
-    return (
-      <div className='modal-content'>
-        <h2 className='modal-content__title'>Get started</h2>
-        <p className='modal-content__text'>
-          We are excited you want to join us!
-        </p>
-        <p className='modal-content__text'>
-          You can log in with a Google account below and if you do not yet have
-          an account with us, we will create one for you.
-        </p>
-        <GoogleLogin />
-      </div>
-    )
-  }
-
   return (
     <div className='landing-page'>
-      {isModalOpen && <Modal content={modalContent()} />}
+      {!hideModal && <Modal content={<ModalLogin />} />}
       <div className='landing-page__circles'>
-        <div className='landing-page__circle'>
-          <p className='landing-page__title'>
-            {`${eventCategories.length} categories of events are waiting!`}
-          </p>
-          <p className='landing-page__text'>
-            ..invite others to your event or join theirs, all over Finland!
-          </p>
-        </div>
-
-        <div className='landing-page__circle'>
-          <p className='landing-page__title'>
-            {users} people have already joined
-          </p>
-          <p className='landing-page__text'>
-            ..join them in the search for great social sporting activities!
-          </p>
-        </div>
+        <CircleContainer
+          title={`${eventCategories.length} categories of events are waiting!`}
+          text='..invite others to your event or join theirs, all over Finland!'
+        />
+        <CircleContainer
+          title={`${users} people have already joined`}
+          text='..join them in the search for great social sporting activities!'
+        />
       </div>
       <div className='landing-page__button'>
         <Button
           type='button'
           text='Get started!'
           modifier='secondary'
-          onClick={() => setIsModalOpen(!isModalOpen)}
+          onClick={() => console.log('setIsModalOpen(!isModalOpen)')}
         />
       </div>
     </div>

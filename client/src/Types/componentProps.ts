@@ -182,3 +182,8 @@ export type MobileSearchToggleProps = {
   toggle: Dispatch<SetStateAction<boolean>>
   state: boolean
 }
+
+export type CircleContainerProps = {
+  title: string
+  text: string
+}
