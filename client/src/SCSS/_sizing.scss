@@ -3,6 +3,7 @@ $buttonHeight: 40px;
 $largeSpacing: 40px;
 $smallSpacing: 20px;
 $profileImageSize: 50px;
+$logoSize: 60px;
 $eventImageSize: 200px;
 $navHeight: 100px;
 $footerHeight: 65px;
@@ -15,6 +16,6 @@ $largeSpacingMobile: 20px;
 $smallSpacingMobile: 10px;
 $eventImageSizeMobile: 150px;
 $navHeightMobile: 100px;
-$footerHeightMobile: 60px;
+$footerHeightMobile: fit-content;
 $pagePaddingMobile: calc(#{$navHeightMobile + $largeSpacingMobile})
-  $largeSpacingMobile calc(#{$footerHeightMobile + $largeSpacingMobile});
+  $largeSpacingMobile 0;
