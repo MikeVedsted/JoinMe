@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { EventJoinRequestProps } from '../../Types'
 import {
   rejectJoinRequest,
   approveJoinRequest
 } from '../../redux/actions/eventJoinRequest'
+import ProfileImage from '../ProfileImage'
+import { EventJoinRequestProps } from '../../Types'
 import './EventJoinRequest.scss'
 
 const EventJoinRequest = ({ requester }: EventJoinRequestProps) => {
@@ -35,11 +36,7 @@ const EventJoinRequest = ({ requester }: EventJoinRequestProps) => {
   return (
     <div className='participant'>
       <div className='participant__user-info'>
-        <img
-          className='participant__image'
-          src={profile_image}
-          alt={first_name}
-        />
+        <ProfileImage image={profile_image} alt={first_name} />
         <Link className='participant__link' to={`/user/${user_id}`}>
           <p className='participant__name'>{`${first_name} ${last_name}`}</p>
         </Link>

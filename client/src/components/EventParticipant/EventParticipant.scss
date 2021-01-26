@@ -3,19 +3,12 @@
 .participant {
   @include flexSpaceBetween;
   width: 100%;
-  margin-bottom: $smallSpacing;
+  margin-bottom: $smallSpacingMobile;
 
   &__user-info {
     @include flexStart;
     align-items: center;
-  }
-
-  &__image {
-    @include borderRadiusSmall;
-    width: $profileImageSize;
-    height: $profileImageSize;
-    object-fit: cover;
-    margin-right: $smallSpacingMobile;
+    width: 300px;
   }
 
   &__link {
@@ -26,6 +19,7 @@
     @include text;
     @include link;
     font-weight: bold;
+    margin-left: $smallSpacingMobile;
   }
 
   &__delete {
