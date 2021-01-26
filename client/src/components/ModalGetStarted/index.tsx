@@ -1,9 +1,9 @@
 import React from 'react'
 
-import GoogleLogin from '../../components/GoogleLogin'
-import './ModalLogin.scss'
+import GoogleLogin from '../GoogleLogin'
+import './ModalGetStarted.scss'
 
-const ModalLogin = () => {
+const ModalGetStarted = () => {
   return (
     <div className='login-modal'>
       <h2 className='login-modal__title'>Get started</h2>
@@ -17,4 +17,4 @@ const ModalLogin = () => {
   )
 }
 
-export default ModalLogin
+export default ModalGetStarted
