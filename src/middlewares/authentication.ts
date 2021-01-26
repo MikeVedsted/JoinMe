@@ -38,7 +38,7 @@ export const isAuthenticated = async (req: AuthRequest, res: Response, next: Nex
       })
     }
   } catch (error) {
-    res.json({ message: error })
+    res.json({ status: 'error', message: error })
   }
 }
 

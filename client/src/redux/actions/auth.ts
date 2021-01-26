@@ -44,7 +44,7 @@ export const verifyToken = () => async (dispatch: Dispatch) => {
   try {
     dispatch(setLoading())
     const { data } = await axios.get('/api/v1/users/verify-token')
-    console.log(data)
+
     if (data.message === 'jwt expired') {
       dispatch(removeUser())
       dispatch(setUnauthorized())

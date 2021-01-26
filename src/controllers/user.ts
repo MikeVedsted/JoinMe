@@ -36,6 +36,7 @@ export const findAllUsers = async (req: Request, res: Response, next: NextFuncti
 export const findUserById = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { userId } = req.params
+    console.log('PARAMS', userId)
     return res.json(await UserService.findUserById(userId))
   } catch (error) {
     next(new NotFoundError('User not found', error))
@@ -74,6 +75,6 @@ export const findPublicUserInfo = async (req: Request, res: Response, next: Next
     const { userId } = req.params
     return res.json(await UserService.findPublicUserInfo(userId))
   } catch (error) {
-    next(new NotFoundError('User not found', error))
+    res.json({ status: 'error', message: 'No found user' })
   }
 }
