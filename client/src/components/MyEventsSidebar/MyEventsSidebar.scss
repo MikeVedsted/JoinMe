@@ -2,4 +2,12 @@
 
 .side-bar {
   @include flexColumn;
+  position: sticky;
+  top: calc(#{$navHeight + $largeSpacing});
+
+  &__title {
+    @include subheader;
+    text-align: center;
+    margin: 0 0 calc(#{$smallSpacing / 2});
+  }
 }

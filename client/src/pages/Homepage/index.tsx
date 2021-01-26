@@ -1,66 +1,43 @@
-import React, { useState, useEffect } from 'react'
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 import Modal from '../../components/Modal'
-import Event from '../../components/Event'
+import NotFound from '../../components/NotFound'
+import EventList from '../../components/EventList'
 import EventSearch from '../../components/EventSearch'
-import useEventDisplay from '../../hooks/useEventDisplay'
+import MobileSearchToggle from '../../components/MobileSearchToggle'
+import { screenGreaterThan } from '../../util/helperFunctions'
+import { AppState } from '../../Types'
 import './Homepage.scss'
+import Loading from '../../components/Loading'
 
 const Homepage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
-  const {
-    allEvents,
-    handleFieldChange,
-    handleAddressChange,
-    handleSearch
-  } = useEventDisplay()
-
-  const toggleSearchModal = () => {
-    setIsModalOpen(!isModalOpen)
-  }
+  const { allEvents } = useSelector((state: AppState) => state.event)
+  const { hideModal } = useSelector((state: AppState) => state.ui)
+  const { loading } = useSelector((state: AppState) => state.loading)
+  const [mobileSearch, setMobileSearch] = useState(false)
 
   return (
     <div className='homepage'>
-      <div className='homepage__filter-icon' onClick={toggleSearchModal}>
-        <FontAwesomeIcon icon={'filter'} />
-      </div>
+      <MobileSearchToggle toggle={setMobileSearch} state={mobileSearch} />
 
-      <div className='homepage__search-box'>
-        <EventSearch
-          distance='100'
-          handleFieldChange={handleFieldChange}
-          handleSubmit={handleSearch}
-          setAddress={handleAddressChange}
-        />
-      </div>
-
-      {/* Search box modal for small screens */}
-      {isModalOpen && (
-        <Modal
-          closeModal={() => setIsModalOpen(false)}
-          content={
-            <EventSearch
-              distance='30'
-              handleFieldChange={handleFieldChange}
-              handleSubmit={handleSearch}
-              setAddress={handleAddressChange}
-            />
-          }
-        />
+      {!hideModal && mobileSearch && (
+        <Modal content={<EventSearch distance='30' />} />
       )}
 
-      {allEvents ? (
-        <div className='homepage__events'>
-          {allEvents.map((event: any) => (
-            <Event key={event.created_at} event={event} />
-          ))}
-        </div>
-      ) : (
-        <h1>Sorry! no events found!!</h1>
-      )}
+      <div className='homepage__left-column' hidden={!screenGreaterThan(768)}>
+        <EventSearch distance='100' />
+      </div>
+
+      <div className='homepage__right-column'>
+        {loading ? (
+          <Loading />
+        ) : allEvents && allEvents.length > 0 ? (
+          <EventList events={allEvents} />
+        ) : (
+          <NotFound message='Sorry, no events found.' />
+        )}
+      </div>
     </div>
   )
 }

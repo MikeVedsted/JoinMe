@@ -1,15 +1,16 @@
+@import '../../SCSS/config';
+
 .event-image {
-  display: inline-block;
-  width: 230px;
-  height: 194px;
+  @include borderRadiusSmall;
+  width: 49%;
+  height: $eventImageSize;
   object-fit: cover;
-  border-radius: 6px;
-  margin-right: 25px;
+  margin-right: 2%;
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 768px) {
   .event-image {
-    margin: 0 2% 15px;
-    width: 96%;
+    width: 100%;
+    height: $eventImageSizeMobile;
   }
 }

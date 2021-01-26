@@ -2,10 +2,9 @@
 
 .event-title {
   @include subheader;
+  margin-top: $smallSpacingMobile;
 
   &__time {
-    font-family: $nunito;
-    font-size: $text;
-    color: $textDim;
+    @include dimmedText;
   }
 }

@@ -2,9 +2,7 @@
 
 .form {
   &__label {
-    font-family: $montserrat;
-    color: $textDark;
-    font-weight: 600;
+    @include inputLabel;
 
     &--required {
       color: $primary;
@@ -17,8 +15,7 @@
     display: block;
     outline: none;
     border-bottom: 2px solid $primary;
-    margin-bottom: 25px;
-    padding-top: 10px;
+    padding-top: $smallSpacingMobile;
 
     &:read-only {
       border: none;

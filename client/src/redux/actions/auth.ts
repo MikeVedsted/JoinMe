@@ -4,7 +4,7 @@ import axios from 'axios'
 import { setErrors } from './error'
 import { setUser, removeUser } from './user'
 import { setLoaded, setLoading } from './loading'
-import { closeModal, CloseNavDropdown } from './ui'
+import { closeModal, closeNavDropdown } from './ui'
 import { SET_AUTHORIZED, SET_UNAUTHORIZED } from '../../Types'
 
 export const authenticateUser = (id_token: string) => async (
@@ -17,7 +17,7 @@ export const authenticateUser = (id_token: string) => async (
     })
     dispatch(setUser(data))
     dispatch(setAuthorized())
-    dispatch(CloseNavDropdown())
+    dispatch(closeNavDropdown())
     dispatch(closeModal())
     dispatch(setLoaded())
     const { created_at, user_id } = data
