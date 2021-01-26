@@ -10,14 +10,6 @@
     align-items: center;
   }
 
-  &__image {
-    @include borderRadiusSmall;
-    width: $profileImageSize;
-    height: $profileImageSize;
-    object-fit: cover;
-    margin-right: $smallSpacingMobile;
-  }
-
   &__link {
     text-decoration: none;
   }
