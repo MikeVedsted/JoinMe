@@ -1,0 +1,20 @@
+// LARGE SCREENS
+$buttonHeight: 40px;
+$largeSpacing: 40px;
+$smallSpacing: 20px;
+$profileImageSize: 50px;
+$eventImageSize: 200px;
+$navHeight: 100px;
+$footerHeight: 65px;
+$pagePadding: calc(#{$navHeight + $largeSpacing}) $largeSpacing
+  calc(#{$footerHeight + $largeSpacing});
+
+// MOBILE SCREENS
+$buttonHeightMobile: 45px;
+$largeSpacingMobile: 20px;
+$smallSpacingMobile: 10px;
+$eventImageSizeMobile: 150px;
+$navHeightMobile: 100px;
+$footerHeightMobile: 60px;
+$pagePaddingMobile: calc(#{$navHeightMobile + $largeSpacingMobile})
+  $largeSpacingMobile calc(#{$footerHeightMobile + $largeSpacingMobile});
