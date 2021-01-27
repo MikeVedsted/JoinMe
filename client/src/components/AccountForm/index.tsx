@@ -14,15 +14,16 @@ import './AccountForm.scss'
 
 const AccountForm = ({ userId }: AccountFormProps) => {
   const { user } = useSelector((state: AppState) => state)
-  const initAddress = user.street && {
-    street: user.street,
-    number: user.number,
-    postal_code: user.postal_code,
-    city: user.city,
-    country: user.country,
-    lat: user.lat,
-    lng: user.lng
+  const initAddress = {
+    street: user.street ? user.street : '',
+    number: user.number ? user.number : '',
+    postal_code: user.postal_code ? user.postal_code : '',
+    city: user.city ? user.city : '',
+    country: user.country ? user.country : '',
+    lat: user.lat ? user.lat : '',
+    lng: user.lng ? user.lng : ''
   }
+
   const [address, setAddress] = useState<any>(initAddress)
   const [fields, handleFieldChange] = useFormFields({
     email: user.email,
@@ -33,13 +34,14 @@ const AccountForm = ({ userId }: AccountFormProps) => {
     profile_text: user.profile_text,
     profile_image: user.profile_image
   })
-  const userAddress = `${user.street} ${user.number}, ${user.postal_code} ${user.city}`
+  const [userAddress, setUserAdress] = useState(initAddress)
 
   const handleSubmit = async (event: any) => {
     event.preventDefault()
     try {
       const update = { ...fields, address }
       const res = await axios.put(`/api/v1/users/${userId}`, update)
+      setUserAdress(address)
       res.status === 200 &&
         alert(
           'Thank you!\nThe changes have been saved and you can now safely leave this page, or make further changes if you spotted a mistake.'
@@ -94,7 +96,9 @@ const AccountForm = ({ userId }: AccountFormProps) => {
       <label className='form__label'>
         Address
         <p className='form__label form__label--address'>
-          Current address: {user.street ? userAddress : '-'}
+          Current address:{' '}
+          {userAddress.street &&
+            `${userAddress.street} ${userAddress.number}, ${userAddress.postal_code} ${userAddress.city}`}
         </p>
         <GoogleAutoComplete handleAddress={setAddress} />
       </label>

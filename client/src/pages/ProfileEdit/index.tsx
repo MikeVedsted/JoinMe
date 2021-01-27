@@ -1,16 +1,14 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useParams, useHistory, useLocation } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 
-import { fetchUser, setLoading } from '../../redux/actions'
 import AccountForm from '../../components/AccountForm'
 import { AppState, ProfilePageParams } from '../../Types'
 import './ProfileEdit.scss'
 
 const ProfileEdit = () => {
   let history = useHistory()
-  const dispatch = useDispatch()
   const { loading } = useSelector((state: AppState) => state.loading)
   const { pathname } = useLocation()
   const { userId } = useParams<ProfilePageParams>()
@@ -26,9 +24,7 @@ const ProfileEdit = () => {
 
   useEffect(() => {
     userId !== user_id && history.push(`/user/${userId}`)
-    dispatch(setLoading())
-    dispatch(fetchUser(userId))
-  }, [dispatch, history, userId, user_id])
+  }, [history, userId, user_id])
 
   return (
     !loading && (
