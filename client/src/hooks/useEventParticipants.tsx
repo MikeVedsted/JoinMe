@@ -1,23 +1,18 @@
-import { useState, useEffect } from 'react'
-import axios from 'axios'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { EventId } from '../Types'
+import { fetchAllParticipants } from '../redux/actions/participants'
+import { AppState } from '../Types'
 
-const useEventParticipants = (eventId: EventId) => {
-  const [participants, setParticipants] = useState([])
+const useEventParticipants = (eventId: String) => {
+  const dispatch = useDispatch()
+
+  const { participants } = useSelector((state: AppState) => state.participants)
 
   useEffect(() => {
-    fetchParticipants()
+    dispatch(fetchAllParticipants(eventId))
   }, [])
 
-  const fetchParticipants = async () => {
-    try {
-      const { data } = await axios.get(`/api/v1/events/${eventId}/participants`)
-      setParticipants(data)
-    } catch (error) {
-      console.log(error)
-    }
-  }
   return [participants]
 }
 

@@ -1,4 +1,4 @@
-import { UserInState, EventObject } from './index'
+import { UserInState, EventObject, Participant, Requester } from './index'
 
 // ==== //
 // @APP //
@@ -11,6 +11,7 @@ export type AppState = {
   user: UserState
   auth: AuthState
   ui: UIState
+  participants: ParticipantsState
 }
 
 // ====== //
@@ -194,4 +195,40 @@ export type SetLoading = {
 
 export type SetLoaded = {
   type: typeof SET_LOADED
+}
+
+// ======== //
+// @Participants //
+// ======== //
+
+export const FETCH_PARTICIPANTS_FAILED = 'FETCH_PARTICIPANTS_FAILED'
+export const FETCH_PARTICIPANTS_SUCCEED = 'FETCH_PARTICIPANTS_SUCCEED'
+export const FETCH_PARTICIPANTS_REQUESTED = 'FETCH_PARTICIPANTS_REQUESTED'
+
+export type ParticipantsActions = FetchParticipantsActions
+
+export type ParticipantsState = {
+  participants: Participant[]
+}
+
+export type FetchParticipantsActions =
+  | FetchParticipantRequested
+  | FetchParticipantSucceed
+  | FetchParticipantFailed
+
+export type FetchParticipantRequested = {
+  type: typeof FETCH_PARTICIPANTS_REQUESTED
+}
+
+export type FetchParticipantSucceed = {
+  type: typeof FETCH_PARTICIPANTS_SUCCEED
+  payload: Participant[]
+}
+
+export type FetchParticipantFailed = {
+  type: typeof FETCH_PARTICIPANTS_FAILED
+  payload: {
+    status: string | ''
+    message: string
+  }
 }

@@ -6,6 +6,7 @@ import error from './error'
 import user from './user'
 import auth from './auth'
 import ui from './ui'
+import participants from './participants'
 
 const createRootReducer = () =>
   combineReducers({
@@ -14,7 +15,8 @@ const createRootReducer = () =>
     error,
     user,
     auth,
-    ui
+    ui,
+    participants
   })
 
 export default createRootReducer
