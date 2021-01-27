@@ -106,3 +106,15 @@ export type Participant = {
   profile_image: string
   user_id: string
 }
+
+export type EventSubmission = {
+  category: any
+  title: any
+  date: any
+  time: any
+  description: any
+  max_participants: any
+  image: any
+  expires_at: any
+  address: any
+}

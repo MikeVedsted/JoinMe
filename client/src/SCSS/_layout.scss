@@ -3,6 +3,11 @@
   justify-content: flex-start;
 }
 
+@mixin flexEnd {
+  display: flex;
+  align-items: flex-end;
+}
+
 @mixin flexCenter {
   display: flex;
   justify-content: center;

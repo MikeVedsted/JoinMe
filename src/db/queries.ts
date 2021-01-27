@@ -235,9 +235,14 @@ export const findEventsByCreatorQ = `
   INNER JOIN address ON address.address_id = event.address
   INNER JOIN category ON category.category_id = event.category
   INNER JOIN userk ON userk.user_id = event.created_by
-  WHERE created_by = $1;
+  WHERE created_by = $1
 `
 
+export const findRawEventByIdQ = `
+  SELECT *
+  FROM event
+  WHERE event_id = $1
+`
 export const updateEventQ = `
   UPDATE event
   SET
@@ -247,9 +252,9 @@ export const updateEventQ = `
     description = $5,
     max_participants = $6,
     expires_at = $7,
-    image = $8
+    image = $8,
     category = (SELECT category_id FROM category WHERE name = $9),
-    address=$10
+    address= $10
   WHERE event_id = $1
   RETURNING *
 `

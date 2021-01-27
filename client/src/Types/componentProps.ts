@@ -91,9 +91,8 @@ export type ModalMessageCancelProps = {
   confirmFunction: () => void
 }
 
-export type EventUpdateFormProps = {
-  data: EventObject
-  eventId: EventId
+export type EventFormProps = {
+  event?: EventObject
 }
 
 export type EventParticipantsAndRequestsProps = {
