@@ -108,13 +108,13 @@ export type Participant = {
 }
 
 export type EventSubmission = {
-  category: any
-  title: any
-  date: any
-  time: any
-  description: any
-  max_participants: any
-  image: any
-  expires_at: any
-  address: any
+  category: string
+  title: string
+  date: string
+  time: string
+  description: string
+  max_participants: number
+  image: string
+  expires_at: string
+  address: Address
 }
