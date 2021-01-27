@@ -44,12 +44,11 @@ export const createEvent = async (req: AuthRequest, res: Response, next: NextFun
       date,
       time,
       description,
-      maxParticipants,
+      max_participants,
       image,
       expires_at,
       address
     } = req.body
-    const max_participants = parseInt(maxParticipants)
     const created_by = req.user?.user_id
 
     const event: Event = {
