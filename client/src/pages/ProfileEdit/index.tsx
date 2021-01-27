@@ -1,19 +1,21 @@
 import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams, useHistory, useLocation } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 
+import { fetchUser, setLoading } from '../../redux/actions'
 import AccountForm from '../../components/AccountForm'
-import useUser from '../../hooks/useUser'
-import { ProfilePageParams } from '../../Types'
+import { AppState, ProfilePageParams } from '../../Types'
 import './ProfileEdit.scss'
 
 const ProfileEdit = () => {
+  let history = useHistory()
+  const dispatch = useDispatch()
+  const { loading } = useSelector((state: AppState) => state.loading)
   const { pathname } = useLocation()
   const { userId } = useParams<ProfilePageParams>()
-  let history = useHistory()
   const [cookies] = useCookies(['user'])
   const { first_name, user_id } = cookies.user
-  const [loading] = useUser(userId)
   const heading = pathname.includes('/account-setup')
     ? `Hi ${first_name}! Welcome to JoinMe!`
     : `Hi ${first_name}! Let's make some changes.`
@@ -24,7 +26,9 @@ const ProfileEdit = () => {
 
   useEffect(() => {
     userId !== user_id && history.push(`/user/${userId}`)
-  }, [history, userId, user_id])
+    dispatch(setLoading())
+    dispatch(fetchUser(userId))
+  }, [dispatch, history, userId, user_id])
 
   return (
     !loading && (
