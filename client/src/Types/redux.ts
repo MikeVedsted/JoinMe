@@ -1,4 +1,4 @@
-import { UserInState, EventObject, Participant, Requester } from './index'
+import { UserInState, EventObject, Participant } from './index'
 
 // ==== //
 // @APP //

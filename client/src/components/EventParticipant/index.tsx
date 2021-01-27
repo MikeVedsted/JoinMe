@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import ProfileImage from '../ProfileImage'
-import { deleteParticipant } from '../../redux/actions/eventParticipants'
+import { deleteParticipant } from '../../redux/actions/participants'
 import { EventParticipantProps } from '../../Types'
 import './EventParticipant.scss'
 

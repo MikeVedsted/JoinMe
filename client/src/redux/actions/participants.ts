@@ -6,7 +6,8 @@ import {
   FETCH_PARTICIPANTS_FAILED
 } from '../../Types'
 
-import { Participant } from '../../Types/index'
+import { setLoaded, setLoading } from './loading'
+import { clearErrors, setErrors } from './error'
 
 export const fetchAllParticipants = (eventId: String) => async (
   dispatch: Dispatch
@@ -31,5 +32,20 @@ const fetchParticipantsFailed = (error: any) => {
   return {
     type: FETCH_PARTICIPANTS_FAILED,
     payload: error
+  }
+}
+
+export const deleteParticipant = (participantId: string) => async (
+  dispatch: Dispatch
+) => {
+  try {
+    dispatch(setLoading())
+    await axios.delete(`/api/v1/requests/${participantId}/remove-participant`)
+    dispatch(clearErrors())
+    dispatch(setLoaded())
+  } catch (error) {
+    const { status, message } = error
+    dispatch(setErrors(status, message))
+    dispatch(setLoaded())
   }
 }
