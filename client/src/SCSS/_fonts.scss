@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Nunito&display=swap');
+
+// FONTS
+$montserrat: 'Montserrat', sans-serif;
+$nunito: 'Nunito', sans-serif;
+$roboto: 'Roboto', sans-serif;
+
+// FONT SIZES
+$heading: 30px;
+$sub-head: 22px;
+$text: 18px;
+$subtitle: 13px;
+$lineHeight: 140%;
+
+// FONT MIXINS
+@mixin header {
+  font-family: $montserrat;
+  font-size: $heading;
+  color: $textDark;
+  font-weight: 600;
+}
+
+@mixin subheader {
+  font-family: $montserrat;
+  font-size: $sub-head;
+  color: $textDark;
+}
+
+@mixin text {
+  font-family: $nunito;
+  font-size: $text;
+  color: $textDark;
+  line-height: $lineHeight;
+}
+
+@mixin subtitle {
+  font-family: $montserrat;
+  font-size: $subtitle;
+  color: $textDark;
+}
+
+@mixin dimmedText {
+  font-family: $nunito;
+  font-size: $text;
+  color: $textDim;
+}
+
+@mixin link {
+  text-decoration: none;
+
+  &:hover {
+    color: $secondary;
+    text-decoration: underline;
+  }
+}
+
+@mixin buttonText {
+  font-family: $roboto;
+  font-size: $text;
+  color: $textLight;
+}

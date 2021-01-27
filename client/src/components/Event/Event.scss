@@ -5,20 +5,12 @@
   position: relative;
   max-width: 800px;
 
-  &__manage {
-    color: $textDark;
-    position: absolute;
-    top: 0;
-    right: 0;
-    cursor: pointer;
-  }
-
   &__description {
     @include text;
   }
 
   &__buttons {
-    @include twoButtonsInline;
+    @include twoItemsInline;
   }
 
   &__line {

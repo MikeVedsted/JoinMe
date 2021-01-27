@@ -8,36 +8,27 @@ import './Footer.scss'
 const Footer = () => {
   return (
     <div className='footer'>
-      <div className='footer__container'>
-        <Link to='/'>
-          <img
-            className='footer__image footer__image--logo'
-            src={logo}
-            alt='logo'
-          />
-        </Link>
-      </div>
-      <div className='footer__container'>
-        <p className='footer__paragraph'>&#169; copyright JoinMe 2020</p>
-      </div>
-      <div className='footer__container'>
-        <p className='footer__paragraph'>
-          Contact us:{' '}
-          <a
-            className='footer__link'
-            href='mailto: contact.joinme2020@gmail.com'
-          >
-            contact.joinme2020@gmail.com
-          </a>
-        </p>
+      <Link to='/'>
+        <img className='footer__logo' src={logo} alt='logo' />
+      </Link>
+
+      <p className='footer__text'>&#169; copyright JoinMe 2020</p>
+
+      <p className='footer__text'>
         <a
-          className='footer__link'
+          className='footer__text--link'
+          href='mailto: contact.joinme2020@gmail.com'
+        >
+          contact.joinme2020@gmail.com
+        </a>
+        <a
+          className='footer__text--link'
           href='https://github.com/MikeVedsted/JoinMe'
           target='a_blank'
         >
           <FontAwesomeIcon className='footer__icon' icon={['fab', 'github']} />
         </a>
-      </div>
+      </p>
     </div>
   )
 }

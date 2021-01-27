@@ -28,7 +28,7 @@ const EventList = ({ events, title, type }: EventListProps) => {
       {title && <h2 className='event-list__title'>{title}</h2>}
       {loading ? (
         <Loading />
-      ) : events.length > 10 ? (
+      ) : events.length > 0 ? (
         events.map((event: EventObject) => content(event))
       ) : (
         <NotFound message='No events found.' />
