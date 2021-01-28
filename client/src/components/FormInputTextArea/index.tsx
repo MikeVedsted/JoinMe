@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { InputTextAreaProps } from '../../Types'
-import './Textarea.scss'
 
 const Textarea = ({ id, label, modifier, ...rest }: InputTextAreaProps) => {
   const handleAutoSize = (e: any) => {
@@ -10,22 +9,16 @@ const Textarea = ({ id, label, modifier, ...rest }: InputTextAreaProps) => {
   }
 
   return (
-    <div className='textarea'>
-      <p className='textarea__label'>
-        {rest.required && (
-          <span className=' textarea__label textarea__label--required'>
-            {'*'}
-          </span>
-        )}
-        {label}
-      </p>
+    <label className='form__label'>
+      {label}
+      {rest.required && <span className='form__label--required'>{'*'}</span>}
       <textarea
         id={id}
         onKeyDown={handleAutoSize}
-        className='textarea__field'
+        className='form__field--text-area'
         {...rest}
       />
-    </div>
+    </label>
   )
 }
 

@@ -50,7 +50,6 @@ export type DropdownProps = {
   id: string
   options: string[]
   onBlur: (searchValue: any) => void
-  modifier?: string
   required?: boolean
   selectedValue?: string
 }

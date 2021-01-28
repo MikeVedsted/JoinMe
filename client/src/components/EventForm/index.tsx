@@ -48,8 +48,8 @@ const EventForm = ({ event }: EventFormProps) => {
   } = fields
 
   return (
-    <form className='event-form' onSubmit={handleSubmit}>
-      <h2 className='event-form__title'>
+    <form className='form' onSubmit={handleSubmit}>
+      <h2 className='form__title'>
         {event ? 'Update event' : 'Create an event'}
       </h2>
       <DropdownField
@@ -119,7 +119,7 @@ const EventForm = ({ event }: EventFormProps) => {
         onChange={handleFields}
         placeholder='Describe your event. Include whatever information might be relevant to know before requesting to join.'
       />
-      <div className='event-form__image-upload'>
+      <div className='form__image-upload'>
         <FormInputField
           type='url'
           id='image'
@@ -130,7 +130,7 @@ const EventForm = ({ event }: EventFormProps) => {
         />
         {image && <EventImage src={image} alt='What we currently display' />}
       </div>
-      <div className='event-form__buttons'>
+      <div className='form__buttons'>
         {!event && <Button type='reset' text='Reset' modifier='secondary' />}
         <Button
           type='submit'
