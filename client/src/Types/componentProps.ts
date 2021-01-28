@@ -25,6 +25,9 @@ export type ButtonProps = {
 
 export type AutoCompleteProps = {
   handleAddress: (a: any) => void
+  label: string
+  required?: boolean
+  currentAddress?: string
 }
 
 export type InputFieldProps = {
