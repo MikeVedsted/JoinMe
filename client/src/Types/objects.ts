@@ -61,7 +61,6 @@ export type EventObject = {
 }
 
 export type AddressSelection = {
-  address_components: AddressComponent[]
   place_id: string
 }
 

@@ -93,15 +93,15 @@ const EventForm = ({ event }: EventFormProps) => {
         onChange={handleFields}
         required={event ? false : true}
       />
-      <label className='event-form__label'>
-        Address
-        {event && (
-          <p className='event-form__address-display'>
-            {`Current address: ${event?.street} ${event?.number} ${event?.postal_code} ${event?.city}. Type in to change new address.`}
-          </p>
-        )}
-        <GoogleAutoComplete handleAddress={setAddress} />
-      </label>
+      <GoogleAutoComplete
+        handleAddress={setAddress}
+        required={true}
+        label='address'
+        currentAddress={
+          event &&
+          `${event?.street} ${event?.number} ${event?.postal_code} ${event?.city}`
+        }
+      />
       <FormInputField
         type='number'
         id='max_participants'

@@ -10,6 +10,7 @@
   }
 
   &__field {
+    @include text;
     width: 100%;
     background-color: transparent;
     display: block;
