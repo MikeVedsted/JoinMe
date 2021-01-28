@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { DropdownProps } from '../../Types'
-import './DropdownField.scss'
 
 const DropdownField = ({
   label,
@@ -18,14 +17,13 @@ const DropdownField = ({
         onChange={onBlur}
         id={id}
         className='form__field'
-        value={selectedValue}
-        defaultValue='Select an option'
+        value={selectedValue ? selectedValue : 'Select an option'}
       >
-        <option disabled hidden className='form__field--option'>
+        <option disabled hidden className='form__field'>
           {selectedValue ? selectedValue : 'Select an option'}
         </option>
         {options.map((optionValue) => (
-          <option key={optionValue} className='form__field--option'>
+          <option key={optionValue} className='form__field'>
             {optionValue}
           </option>
         ))}
