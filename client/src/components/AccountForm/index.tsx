@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 
 import Button from '../Button'
+import { setUser } from '../../redux/actions'
 import FormInputField from '../FormInputField'
 import FormInputTextArea from '../FormInputTextArea'
 import FormDropdownField from '../FormDropdownField'
@@ -14,6 +15,7 @@ import './AccountForm.scss'
 
 const AccountForm = ({ userId }: AccountFormProps) => {
   const { user } = useSelector((state: AppState) => state)
+  const dispatch = useDispatch()
   const initAddress = {
     street: user.street ? user.street : '',
     number: user.number ? user.number : '',
@@ -42,6 +44,7 @@ const AccountForm = ({ userId }: AccountFormProps) => {
       const update = { ...fields, address }
       const res = await axios.put(`/api/v1/users/${userId}`, update)
       setUserAdress(address)
+      dispatch(setUser(res.data))
       res.status === 200 &&
         alert(
           'Thank you!\nThe changes have been saved and you can now safely leave this page, or make further changes if you spotted a mistake.'

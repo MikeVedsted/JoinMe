@@ -119,7 +119,8 @@ const updateUser = async (userId: string, update: Partial<User>) => {
       date_of_birth,
       gender
     ])
-    const updatedUser: User = updateUser.rows[0]
+    const DBResponse = await db.query(findUserByIdQ, [updateUser.rows[0].user_id])
+    const updatedUser: User = DBResponse.rows[0]
     return updatedUser
   } catch (error) {
     return error
