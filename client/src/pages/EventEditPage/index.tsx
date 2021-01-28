@@ -1,28 +1,26 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { useCookies } from 'react-cookie'
 
-import EventUpdateForm from '../../components/EventUpdateForm'
+import EventForm from '../../components/EventForm'
+import Loading from '../../components/Loading'
 import useEventDetails from '../../hooks/useEventDetails'
-import { EventEditPageParams } from '../../Types'
+import { AppState, EventEditPageParams } from '../../Types'
 import './EventEditPage.scss'
 
 const EventEditPage = () => {
+  const { user_id } = useSelector((state: AppState) => state.user)
+  const { loading } = useSelector((state: AppState) => state.loading)
   const { eventId } = useParams<EventEditPageParams>()
-  const [data] = useEventDetails(eventId)
-  const [cookies] = useCookies(['user'])
-  const { user_id } = cookies.user
+  const [event] = useEventDetails(eventId)
 
-  if (!data)
-    return <div className='loading'>Hold on! we are loading the data...</div>
   return (
-    data && (
-      <div className='event-edit-page'>
-        {user_id === data?.created_by && (
-          <EventUpdateForm data={data} eventId={eventId} />
-        )}
-      </div>
-    )
+    <div className='event-edit-page'>
+      {loading && <Loading />}
+      {!loading && event && user_id === event.created_by && (
+        <EventForm event={event} />
+      )}
+    </div>
   )
 }
 
