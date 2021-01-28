@@ -4,6 +4,7 @@ import axios from 'axios'
 
 import Button from '../Button'
 import FormInputField from '../FormInputField'
+import ProfileImage from '../ProfileImage'
 import FormInputTextArea from '../FormInputTextArea'
 import FormDropdownField from '../FormDropdownField'
 import GoogleAutoComplete from '../GoogleAutoComplete'
@@ -105,7 +106,6 @@ const AccountForm = ({ userId }: AccountFormProps) => {
       />
       <div className='image-upload'>
         <FormInputField
-          className='image-upload__field'
           type='url'
           id='profile_image'
           label='Image url'
@@ -113,9 +113,8 @@ const AccountForm = ({ userId }: AccountFormProps) => {
           onChange={handleFieldChange}
         />
         {fields.profile_image && (
-          <img
-            className='image-upload__image'
-            src={fields.profile_image}
+          <ProfileImage
+            image={fields.profile_image}
             alt='What we currently display'
           />
         )}

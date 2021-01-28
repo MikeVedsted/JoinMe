@@ -3,12 +3,12 @@ import axios from 'axios'
 import { useDispatch } from 'react-redux'
 import Autocomplete from 'react-google-autocomplete'
 
+import { setErrors } from '../../redux/actions'
 import {
   AutoCompleteProps,
   AddressSelection,
   AddressComponent
 } from '../../Types'
-import { setErrors } from '../../redux/actions'
 
 const AddressAutoComplete = ({
   handleAddress,
@@ -64,7 +64,7 @@ const AddressAutoComplete = ({
       {label}
       {required && <span className='form__label--required'>{'*'}</span>}
       {currentAddress && (
-        <p className='form__label--address'>
+        <p className='form__address-display'>
           Current address: {currentAddress}
         </p>
       )}

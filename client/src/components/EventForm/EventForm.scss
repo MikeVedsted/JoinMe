@@ -1,47 +1,5 @@
 @import '../../SCSS/config';
 
-.event-form {
-  @include borderRadiusSmall;
-  border: 2px solid $secondary;
-  padding: 0 $largeSpacing $largeSpacing;
-  min-width: 40%;
-  max-width: 50%;
-
-  &__title {
-    @include header;
-    text-align: center;
-    position: relative;
-    top: -$smallSpacing;
-    background-color: white;
-    width: fit-content;
-    margin: 0 auto;
-    padding: 0 $smallSpacing;
-  }
-
-  &__address-display {
-    margin: 0;
-    font-size: $subtitle * 0.75;
-    font-style: italic;
-    color: $primary;
-  }
-
-  &__image-upload {
-    @include flexEnd;
-  }
-
-  &__buttons {
-    @include flexSpaceBetween;
-  }
-}
-
-@media only screen and (max-width: 1024px) {
-  .event-form {
-    margin: $largeSpacing auto;
-    min-width: 50%;
-    max-width: 80%;
-
-    &__image-upload {
-      display: inline;
-    }
-  }
+.form {
+  @include formStandard;
 }
