@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { deleteParticipant } from '../../redux/actions/eventParticipants'
 import ProfileImage from '../ProfileImage'
+import { deleteParticipant } from '../../redux/actions/eventParticipants'
 import { EventParticipantProps } from '../../Types'
 import './EventParticipant.scss'
 
@@ -15,7 +15,10 @@ const EventParticipant = ({ participant }: EventParticipantProps) => {
   return (
     <div className='participant'>
       <div className='participant__user-info'>
-        <ProfileImage image={profile_image} alt='participant' />
+        <ProfileImage
+          image={profile_image}
+          alt={`${first_name} ${last_name}`}
+        />
         <Link className='participant__link' to={`/user/${user_id}`}>
           <p className='participant__name'>{`${first_name} ${last_name}`}</p>
         </Link>

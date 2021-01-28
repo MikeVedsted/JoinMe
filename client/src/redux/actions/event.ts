@@ -5,7 +5,8 @@ import {
   FETCH_EVENTS_SUCCEED,
   FETCH_EVENTS_FAILED,
   SearchParams,
-  CommentSubmission
+  CommentSubmission,
+  EventSubmission
 } from '../../Types'
 import { clearErrors, setErrors } from './error'
 import { setLoaded, setLoading } from './loading'
@@ -108,6 +109,39 @@ export const requestToJoin = (eventId: string) => async (
     dispatch(setLoading())
     await axios.post(`/api/v1/events/${eventId}/request`)
     dispatch(clearErrors())
+    dispatch(closeModal())
+    dispatch(setLoaded())
+  } catch (error) {
+    const { status, message } = error
+    dispatch(setErrors(status, message))
+    dispatch(closeModal())
+    dispatch(setLoaded())
+  }
+}
+
+export const createEvent = (submission: EventSubmission) => async (
+  dispatch: Dispatch
+) => {
+  try {
+    dispatch(setLoading())
+    dispatch(clearErrors())
+    await axios.post('/api/v1/events', submission)
+    dispatch(setLoaded())
+  } catch (error) {
+    const { status, message } = error
+    dispatch(setErrors(status, message))
+    dispatch(setLoaded())
+  }
+}
+
+export const updateEvent = (
+  submission: Partial<EventSubmission>,
+  eventId: string
+) => async (dispatch: Dispatch) => {
+  try {
+    dispatch(setLoading())
+    dispatch(clearErrors())
+    await axios.put(`/api/v1/events/${eventId}`, submission)
     dispatch(closeModal())
     dispatch(setLoaded())
   } catch (error) {

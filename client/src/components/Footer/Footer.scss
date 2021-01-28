@@ -1,39 +1,35 @@
 @import '../../SCSS/config';
 
 .footer {
+  @include flexSpaceBetween;
   background-color: $default;
-  color: $textLight;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  height: $footerHeight;
+  width: 100%;
   position: fixed;
   bottom: 0;
-  width: 100%;
+  color: $textLight;
 
-  &__container {
-    margin: 0 auto;
+  &__logo {
+    height: $logoSize;
+    margin: 0 $largeSpacing;
+  }
+
+  &__text {
     @include flexCenter;
-  }
-
-  &__link {
+    @include text;
     color: $textLight;
-    text-decoration: none;
-  }
+    font-size: $subtitle;
+    margin: 0 $largeSpacing;
 
-  &__link:hover {
-    text-decoration: underline;
-  }
-
-  &__image {
-    &--logo {
-      height: 60px;
+    &--link {
+      @include link;
+      color: $textLight;
     }
   }
 
   &__icon {
-    font-size: $heading;
-    margin: 0px 40px;
-    cursor: pointer;
+    font-size: $sub-head;
+    margin: 0px $smallSpacing;
   }
 }
 
@@ -45,16 +41,20 @@
 
 @media only screen and (max-width: 600px) {
   .footer {
-    background-color: $default;
-    display: block;
-    text-align: center;
+    @include flexColumn;
+    height: $footerHeightMobile;
 
-    &__container {
-      display: block;
+    &__logo {
+      margin: $smallSpacingMobile;
+    }
+
+    &__text {
+      margin: 0 0 $smallSpacingMobile;
     }
 
     &__icon {
-      margin-bottom: 10px;
+      font-size: $text;
+      margin: 0px $smallSpacingMobile;
     }
   }
 }
