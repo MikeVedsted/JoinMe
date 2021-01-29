@@ -11,7 +11,7 @@ import './MyEventsPage.scss'
 
 const MyEventsPage = () => {
   const { pathname } = useLocation()
-  const { hostedEvents, interestedEvents, confirmedEvents } = useSelector(
+  const { hostedEvents, requestedEvents, confirmedEvents } = useSelector(
     (state: AppState) => state.event
   )
 
@@ -29,7 +29,7 @@ const MyEventsPage = () => {
         <EventList
           type='interested'
           title='Events you have requested to join'
-          events={interestedEvents}
+          events={requestedEvents}
         />
       )
     if (pathname.includes('/confirmed'))
