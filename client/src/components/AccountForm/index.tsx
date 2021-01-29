@@ -36,14 +36,14 @@ const AccountForm = ({ userId }: AccountFormProps) => {
     profile_text: user.profile_text,
     profile_image: user.profile_image
   })
-  const [userAddress, setUserAdress] = useState(initAddress)
+  const [userAddress, setUserAddress] = useState(initAddress)
 
   const handleSubmit = async (event: any) => {
     event.preventDefault()
     try {
       const update = { ...fields, address }
       const res = await axios.put(`/api/v1/users/${userId}`, update)
-      setUserAdress(address)
+      setUserAddress(address)
       dispatch(setUser(res.data))
       res.status === 200 &&
         alert(
@@ -111,7 +111,7 @@ const AccountForm = ({ userId }: AccountFormProps) => {
         onChange={handleFieldChange}
         rows={1}
       />
-      <div className='image-upload'>
+      <div className='form__image-upload'>
         <FormInputField
           type='url'
           id='profile_image'
@@ -126,7 +126,7 @@ const AccountForm = ({ userId }: AccountFormProps) => {
           />
         )}
       </div>
-      <Button type='submit' text='Submit' />
+      <Button type='submit' text='Submit' modifier='primary' />
     </form>
   )
 }
