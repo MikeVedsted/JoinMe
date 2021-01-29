@@ -12,6 +12,10 @@
   border-radius: 6px;
 }
 
+@mixin borderRadiusLarge {
+  border-radius: 12px;
+}
+
 @mixin shadow {
   box-shadow: 0px 0px 2px rgb(41, 41, 41);
 }
@@ -24,18 +28,102 @@
   left: 100px;
 }
 
-@mixin inputLabel {
-  width: 100%;
-  font-family: $montserrat;
-  color: $textDark;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
 @mixin iconHoverEffect {
   transition: 0.3s ease-in-out;
 
   &:hover {
     transform: scale(1.3);
+  }
+}
+
+@mixin setFormField {
+  background-color: transparent;
+  padding-top: calc(#{$smallSpacing/4});
+  display: block;
+  outline: none;
+  width: 100%;
+  border: none;
+  border-bottom: $mediumBorder;
+}
+
+@mixin formStandard {
+  @include flexColumn;
+  @include borderRadiusLarge;
+  border: $heavyBorder;
+  margin: auto;
+  padding: 0 $largeSpacing $largeSpacing;
+  min-width: 40%;
+  max-width: 50%;
+
+  &__title {
+    @include header;
+    text-align: center;
+    position: relative;
+    top: -$smallSpacing;
+    background-color: white;
+    width: fit-content;
+    margin: 0 auto;
+    padding: 0 $smallSpacing;
+  }
+
+  &__label {
+    @include formLabel;
+    margin-bottom: $smallSpacing;
+
+    &--required {
+      color: $primary;
+    }
+  }
+
+  &__field {
+    @include formFieldText;
+    @include setFormField;
+
+    &:read-only {
+      border: none;
+      color: $textDim;
+    }
+
+    &--text-area {
+      @include formFieldText;
+      @include setFormField;
+      resize: vertical;
+    }
+  }
+
+  &__address-display {
+    font-size: $subtitle;
+    font-style: italic;
+    color: $primary;
+    margin: 0;
+  }
+
+  &__image-upload {
+    @include flexEnd;
+    justify-content: space-between;
+    margin-bottom: $smallSpacing;
+
+    & label {
+      width: 100%;
+      margin: 0 $smallSpacing 0 0;
+    }
+  }
+
+  &__buttons {
+    @include flexSpaceBetween;
+  }
+
+  @media only screen and (max-width: 1024px) {
+    margin: $largeSpacing auto;
+    min-width: 50%;
+    max-width: 80%;
+
+    &__image-upload {
+      display: inline;
+
+      & label {
+        margin: 0 0 $smallSpacing;
+      }
+    }
   }
 }

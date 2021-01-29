@@ -112,10 +112,11 @@ const findAllEvents = async (
     const query = `
       ${locationQuery}
       SELECT 
-  	    event_id, title, date, time, description, max_participants, created_by, event.created_at, expires_at, image,
-        address.street, address.number, address.postal_code, address.city, address.country, address.lat, address.lng,
+        event_id, title, date, time, description, max_participants, created_by, event.created_at, expires_at, image,
+        address.street, address.number, address.postal_code, address.city, address.lat, address.lng,
 	      name as category, 
-	      first_name, last_name
+        first_name, last_name,
+        count(ep_id) as participants        
       FROM event
       ${distanceJoinQuery}
       LEFT JOIN address on event.address = address.address_id
@@ -123,6 +124,7 @@ const findAllEvents = async (
       LEFT JOIN userk on event.created_by = userk.user_id
       LEFT JOIN event_participant on event.event_id = event_participant.event
       ${categoryCondition}
+      group by event_id, address.street, address.number, address.postal_code, address.city, address.lat, address.lng, name, first_name, last_name
     `
     const DBResponse = await db.query(query)
     const events: Event[] = DBResponse.rows

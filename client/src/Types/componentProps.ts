@@ -25,6 +25,9 @@ export type ButtonProps = {
 
 export type AutoCompleteProps = {
   handleAddress: (a: any) => void
+  label: string
+  required?: boolean
+  currentAddress?: string
 }
 
 export type InputFieldProps = {
@@ -47,7 +50,6 @@ export type DropdownProps = {
   id: string
   options: string[]
   onBlur: (searchValue: any) => void
-  modifier?: string
   required?: boolean
   selectedValue?: string
 }

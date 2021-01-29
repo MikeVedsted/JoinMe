@@ -5,6 +5,7 @@ import axios from 'axios'
 import Button from '../Button'
 import { setUser } from '../../redux/actions'
 import FormInputField from '../FormInputField'
+import ProfileImage from '../ProfileImage'
 import FormInputTextArea from '../FormInputTextArea'
 import FormDropdownField from '../FormDropdownField'
 import GoogleAutoComplete from '../GoogleAutoComplete'
@@ -25,7 +26,6 @@ const AccountForm = ({ userId }: AccountFormProps) => {
     lat: user.lat ? user.lat : '',
     lng: user.lng ? user.lng : ''
   }
-
   const [address, setAddress] = useState<any>(initAddress)
   const [fields, handleFieldChange] = useFormFields({
     email: user.email,
@@ -96,15 +96,14 @@ const AccountForm = ({ userId }: AccountFormProps) => {
         selectedValue={fields.gender}
         onBlur={handleFieldChange}
       />
-      <label className='form__label'>
-        Address
-        <p className='form__label form__label--address'>
-          Current address:{' '}
-          {userAddress.street &&
-            `${userAddress.street} ${userAddress.number}, ${userAddress.postal_code} ${userAddress.city}`}
-        </p>
-        <GoogleAutoComplete handleAddress={setAddress} />
-      </label>
+      <GoogleAutoComplete
+        handleAddress={setAddress}
+        label='Address'
+        currentAddress={
+          user.street &&
+          `${userAddress.street} ${userAddress.number}, ${userAddress.postal_code} ${userAddress.city}`
+        }
+      />
       <FormInputTextArea
         id='profile_text'
         label='Profile text'
@@ -114,7 +113,6 @@ const AccountForm = ({ userId }: AccountFormProps) => {
       />
       <div className='image-upload'>
         <FormInputField
-          className='image-upload__field'
           type='url'
           id='profile_image'
           label='Image url'
@@ -122,9 +120,8 @@ const AccountForm = ({ userId }: AccountFormProps) => {
           onChange={handleFieldChange}
         />
         {fields.profile_image && (
-          <img
-            className='image-upload__image'
-            src={fields.profile_image}
+          <ProfileImage
+            image={fields.profile_image}
             alt='What we currently display'
           />
         )}
