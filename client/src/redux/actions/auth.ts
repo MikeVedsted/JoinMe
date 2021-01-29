@@ -6,7 +6,6 @@ import { setUser, removeUser } from './user'
 import { setLoaded, setLoading } from './loading'
 import { closeModal, closeNavDropdown } from './ui'
 import { SET_AUTHORIZED, SET_UNAUTHORIZED } from '../../Types'
-import { getMyEvents } from './event'
 
 export const authenticateUser = (id_token: string) => async (
   dispatch: Dispatch
@@ -33,6 +32,8 @@ export const logout = () => (dispatch: Dispatch) => {
   try {
     dispatch(setLoading())
     // ADD ASYNC POST REQUEST TO LOG OUT WHEN BUILT ON BACKEND
+    dispatch(removeUser())
+    dispatch(closeNavDropdown())
     dispatch(setUnauthorized())
     dispatch(setLoaded())
   } catch (error) {

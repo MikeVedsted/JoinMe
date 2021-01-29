@@ -21,8 +21,16 @@ export const FETCH_ALL_EVENTS_SUCCESS = 'FETCH_ALL_EVENTS_SUCCESS'
 export const FETCH_HOSTED_EVENT_SUCCESS = 'FETCH_HOSTED_EVENT_SUCCESS'
 export const FETCH_REQUESTED_EVENT_SUCCESS = 'FETCH_REQUESTED_EVENT_SUCCESS'
 export const FETCH_CONFIRMED_EVENT_SUCCESS = 'FETCH_CONFIRMED_EVENT_SUCCESS'
+export const END_EVENT_SUCCESS = 'END_EVENT_SUCCESS'
+export const CANCEL_REQUEST_SUCCESS = 'CANCEL_REQUEST_SUCCESS'
 
-export type EventActions = FetchEventActions
+export type EventActions =
+  | FetchAllEventSuccess
+  | FetchHostedEventSuccess
+  | FetchRequestedEventSuccess
+  | FetchConfirmedEventSuccess
+  | EndEventSuccess
+  | CancelRequestSuccess
 
 export type EventState = {
   allEvents: EventObject[]
@@ -30,12 +38,6 @@ export type EventState = {
   requestedEvents: EventObject[]
   confirmedEvents: EventObject[]
 }
-
-export type FetchEventActions =
-  | FetchAllEventSuccess
-  | FetchHostedEventSuccess
-  | FetchRequestedEventSuccess
-  | FetchConfirmedEventSuccess
 
 export type FetchAllEventSuccess = {
   type: typeof FETCH_ALL_EVENTS_SUCCESS
@@ -65,6 +67,19 @@ export type FetchConfirmedEventSuccess = {
   }
 }
 
+export type EndEventSuccess = {
+  type: typeof END_EVENT_SUCCESS
+  payload: {
+    eventId: string
+  }
+}
+
+export type CancelRequestSuccess = {
+  type: typeof CANCEL_REQUEST_SUCCESS
+  payload: {
+    requestId: string
+  }
+}
 // ===== //
 // @USER //
 // ===== //
@@ -92,6 +107,7 @@ export type UserState = {
   profile_text: string
   profile_image: string
   created_at: string
+  interests: string[]
 }
 
 export type AddUserAction = {
