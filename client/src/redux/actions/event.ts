@@ -1,22 +1,28 @@
 import { Dispatch } from 'redux'
 import axios from 'axios'
+
 import {
-  FETCH_EVENTS_REQUESTED,
-  FETCH_EVENTS_SUCCEED,
-  FETCH_EVENTS_FAILED,
+  clearErrors,
+  setErrors,
+  setLoaded,
+  setLoading,
+  closeModal
+} from './index'
+import {
+  FETCH_ALL_EVENTS_SUCCESS,
   SearchParams,
   CommentSubmission,
-  EventSubmission
+  EventSubmission,
+  FETCH_HOSTED_EVENT_SUCCESS,
+  FETCH_REQUESTED_EVENT_SUCCESS,
+  FETCH_CONFIRMED_EVENT_SUCCESS,
+  EventObject
 } from '../../Types'
-import { clearErrors, setErrors } from './error'
-import { setLoaded, setLoading } from './loading'
-import { closeModal } from './ui'
 
 export const fetchAllEvents = (searchParams: SearchParams) => async (
   dispatch: Dispatch
 ) => {
   try {
-    dispatch({ type: FETCH_EVENTS_REQUESTED })
     const { data } = await axios.get('/api/v1/events', {
       params: {
         category: searchParams.category,
@@ -25,23 +31,62 @@ export const fetchAllEvents = (searchParams: SearchParams) => async (
         distance: searchParams.distance
       }
     })
-    return dispatch(fetchEventsSucceed(data))
+    return dispatch(fetchAllEventsSuccess(data.events))
   } catch (error) {
-    return dispatch(fetchEventsFailed(error))
+    const { status, message } = error
+    return dispatch(setErrors(status, message))
   }
 }
 
-const fetchEventsSucceed = (data: any) => {
-  return {
-    type: FETCH_EVENTS_SUCCEED,
-    payload: data
+export const getMyEvents = (userId: string) => async (dispatch: Dispatch) => {
+  try {
+    dispatch(setLoading())
+    dispatch(clearErrors())
+    let { data } = await axios.get(`/api/v1/events/creator/${userId}`)
+    dispatch(fetchHostedEventsSuccess(data))
+    data = await axios.get(`/api/v1/events/requested`)
+    dispatch(fetchRequestedEventsSuccess(data.data))
+    data = await axios.get(`/api/v1/events/participant`)
+    dispatch(fetchConfirmedEventsSuccess(data.data))
+    dispatch(setLoaded())
+  } catch (error) {
+    const { status, message } = error
+    dispatch(setErrors(status, message))
+    dispatch(setLoaded())
   }
 }
 
-const fetchEventsFailed = (error: any) => {
+const fetchAllEventsSuccess = (allEvents: EventObject[]) => {
   return {
-    type: FETCH_EVENTS_FAILED,
-    payload: error
+    type: FETCH_ALL_EVENTS_SUCCESS,
+    payload: {
+      allEvents: allEvents
+    }
+  }
+}
+
+const fetchHostedEventsSuccess = (hostedEvents: EventObject[]) => {
+  return {
+    type: FETCH_HOSTED_EVENT_SUCCESS,
+    payload: {
+      hostedEvents: hostedEvents
+    }
+  }
+}
+const fetchRequestedEventsSuccess = (requestedEvents: EventObject[]) => {
+  return {
+    type: FETCH_REQUESTED_EVENT_SUCCESS,
+    payload: {
+      requestedEvents: requestedEvents
+    }
+  }
+}
+const fetchConfirmedEventsSuccess = (confirmedEvents: EventObject[]) => {
+  return {
+    type: FETCH_CONFIRMED_EVENT_SUCCESS,
+    payload: {
+      confirmedEvents: confirmedEvents
+    }
   }
 }
 

@@ -1,15 +1,16 @@
 import {
   EventState,
   EventActions,
-  FETCH_EVENTS_REQUESTED,
-  FETCH_EVENTS_SUCCEED,
-  FETCH_EVENTS_FAILED
+  FETCH_ALL_EVENTS_SUCCESS,
+  FETCH_HOSTED_EVENT_SUCCESS,
+  FETCH_REQUESTED_EVENT_SUCCESS,
+  FETCH_CONFIRMED_EVENT_SUCCESS
 } from '../../Types'
 
 const initState: EventState = {
   allEvents: [],
   hostedEvents: [],
-  interestedEvents: [],
+  requestedEvents: [],
   confirmedEvents: []
 }
 
@@ -18,14 +19,19 @@ export default function event(
   action: EventActions
 ): EventState {
   switch (action.type) {
-    case FETCH_EVENTS_REQUESTED:
-      return { ...state }
-
-    case FETCH_EVENTS_SUCCEED:
-      const eventResponse = action.payload
-      return { ...state, allEvents: eventResponse.events }
-    case FETCH_EVENTS_FAILED:
-      return { ...state }
+    case FETCH_ALL_EVENTS_SUCCESS:
+      const { allEvents } = action.payload
+      console.log(allEvents, action.payload)
+      return { ...state, allEvents: allEvents }
+    case FETCH_HOSTED_EVENT_SUCCESS:
+      const hostedEvents = action.payload
+      return { ...state, hostedEvents: hostedEvents.hostedEvents }
+    case FETCH_REQUESTED_EVENT_SUCCESS:
+      const { requestedEvents } = action.payload
+      return { ...state, requestedEvents: requestedEvents }
+    case FETCH_CONFIRMED_EVENT_SUCCESS:
+      const { confirmedEvents } = action.payload
+      return { ...state, confirmedEvents: confirmedEvents }
     default:
       return state
   }

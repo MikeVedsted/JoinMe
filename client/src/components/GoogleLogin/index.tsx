@@ -12,7 +12,7 @@ const GoogleUserLogin = () => {
   const history = useHistory()
   const dispatch = useDispatch()
 
-  const responseSuccessGoogle = async (response: any) => {
+  const responseSuccessGoogle = (response: any) => {
     const { id_token } = response.tokenObj
     dispatch(authenticateUser(id_token))
   }

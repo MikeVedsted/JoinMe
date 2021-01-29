@@ -18,7 +18,7 @@ const router = express.Router()
 
 router.post('/', isAuthenticated, createEvent)
 router.post('/:eventId/request', isAuthenticated, requestToJoin)
-router.get('/', isAuthenticated, findAllEvents)
+router.get('/', findAllEvents)
 router.get('/requested', isAuthenticated, findRequestedEvents)
 router.get('/participant', isAuthenticated, findParticipatingEvents)
 router.get('/creator/:userId', isAuthenticated, findEventsByCreator)

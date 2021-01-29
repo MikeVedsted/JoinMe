@@ -127,8 +127,8 @@ const findAllEvents = async (
       group by event_id, address.street, address.number, address.postal_code, address.city, address.lat, address.lng, name, first_name, last_name
     `
     const DBResponse = await db.query(query)
-    const events: Event[] = DBResponse.rows
-    return events
+    const allEvents: Event[] = DBResponse.rows
+    return allEvents
   } catch (error) {
     return error
   }
