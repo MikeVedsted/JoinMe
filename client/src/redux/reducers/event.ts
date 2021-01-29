@@ -21,6 +21,7 @@ export default function event(
   switch (action.type) {
     case FETCH_ALL_EVENTS_SUCCESS:
       const { allEvents } = action.payload
+      console.log(allEvents, action.payload)
       return { ...state, allEvents: allEvents }
     case FETCH_HOSTED_EVENT_SUCCESS:
       const hostedEvents = action.payload

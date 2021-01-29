@@ -31,7 +31,7 @@ export const fetchAllEvents = (searchParams: SearchParams) => async (
         distance: searchParams.distance
       }
     })
-    return dispatch(fetchAllEventsSuccess(data))
+    return dispatch(fetchAllEventsSuccess(data.events))
   } catch (error) {
     const { status, message } = error
     return dispatch(setErrors(status, message))
