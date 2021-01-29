@@ -18,14 +18,13 @@ export default function event(
   state: EventState = initState,
   action: EventActions
 ): EventState {
-  console.log('xoxo--', state)
   switch (action.type) {
     case FETCH_ALL_EVENTS_SUCCESS:
       const { allEvents } = action.payload
+      console.log(allEvents, action.payload)
       return { ...state, allEvents: allEvents }
     case FETCH_HOSTED_EVENT_SUCCESS:
       const hostedEvents = action.payload
-      console.log('in reducer--', hostedEvents, action.payload)
       return { ...state, hostedEvents: hostedEvents.hostedEvents }
     case FETCH_REQUESTED_EVENT_SUCCESS:
       const { requestedEvents } = action.payload
