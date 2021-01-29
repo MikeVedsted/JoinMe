@@ -1,5 +1,13 @@
 import { Dispatch } from 'redux'
 import axios from 'axios'
+
+import {
+  clearErrors,
+  setErrors,
+  setLoaded,
+  setLoading,
+  closeModal
+} from './index'
 import {
   FETCH_ALL_EVENTS_SUCCESS,
   SearchParams,
@@ -7,11 +15,9 @@ import {
   EventSubmission,
   FETCH_HOSTED_EVENT_SUCCESS,
   FETCH_REQUESTED_EVENT_SUCCESS,
-  FETCH_CONFIRMED_EVENT_SUCCESS
+  FETCH_CONFIRMED_EVENT_SUCCESS,
+  EventObject
 } from '../../Types'
-import { clearErrors, setErrors } from './error'
-import { setLoaded, setLoading } from './loading'
-import { closeModal } from './ui'
 
 export const fetchAllEvents = (searchParams: SearchParams) => async (
   dispatch: Dispatch
@@ -32,10 +38,55 @@ export const fetchAllEvents = (searchParams: SearchParams) => async (
   }
 }
 
-const fetchAllEventsSuccess = (data: any) => {
+export const getMyEvents = (userId: string) => async (dispatch: Dispatch) => {
+  try {
+    dispatch(setLoading())
+    dispatch(clearErrors())
+    let { data } = await axios.get(`/api/v1/events/creator/${userId}`)
+    dispatch(fetchHostedEventsSuccess(data))
+    data = await axios.get(`/api/v1/events/requested`)
+    dispatch(fetchRequestedEventsSuccess(data.data))
+    data = await axios.get(`/api/v1/events/participant`)
+    dispatch(fetchConfirmedEventsSuccess(data.data))
+    dispatch(setLoaded())
+  } catch (error) {
+    const { status, message } = error
+    dispatch(setErrors(status, message))
+    dispatch(setLoaded())
+  }
+}
+
+const fetchAllEventsSuccess = (allEvents: EventObject[]) => {
   return {
     type: FETCH_ALL_EVENTS_SUCCESS,
-    payload: data
+    payload: {
+      allEvents: allEvents
+    }
+  }
+}
+
+const fetchHostedEventsSuccess = (hostedEvents: EventObject[]) => {
+  return {
+    type: FETCH_HOSTED_EVENT_SUCCESS,
+    payload: {
+      hostedEvents: hostedEvents
+    }
+  }
+}
+const fetchRequestedEventsSuccess = (requestedEvents: EventObject[]) => {
+  return {
+    type: FETCH_REQUESTED_EVENT_SUCCESS,
+    payload: {
+      requestedEvents: requestedEvents
+    }
+  }
+}
+const fetchConfirmedEventsSuccess = (confirmedEvents: EventObject[]) => {
+  return {
+    type: FETCH_CONFIRMED_EVENT_SUCCESS,
+    payload: {
+      confirmedEvents: confirmedEvents
+    }
   }
 }
 
@@ -143,43 +194,5 @@ export const updateEvent = (
     dispatch(setErrors(status, message))
     dispatch(closeModal())
     dispatch(setLoaded())
-  }
-}
-
-export const getMyEvents = (userId: string) => async (dispatch: Dispatch) => {
-  console.log('xxxxxx---', userId)
-  try {
-    dispatch(setLoading())
-    dispatch(clearErrors())
-    let { data } = await axios.get(`/api/v1/events/creator/${userId}`)
-    dispatch(fetchHostedEventsSuccess(data))
-    data = await axios.get(`/api/v1/events/requested`)
-    dispatch(fetchRequestedEventsSuccess(data))
-    data = await axios.get(`/api/v1/events/participant`)
-    dispatch(fetchConfirmedEventsSuccess(data))
-    dispatch(setLoaded())
-  } catch (error) {
-    const { status, message } = error
-    dispatch(setErrors(status, message))
-    dispatch(setLoaded())
-  }
-}
-
-const fetchHostedEventsSuccess = (data: any) => {
-  return {
-    type: FETCH_HOSTED_EVENT_SUCCESS,
-    payload: data
-  }
-}
-const fetchRequestedEventsSuccess = (data: any) => {
-  return {
-    type: FETCH_REQUESTED_EVENT_SUCCESS,
-    payload: data
-  }
-}
-const fetchConfirmedEventsSuccess = (data: any) => {
-  return {
-    type: FETCH_CONFIRMED_EVENT_SUCCESS,
-    payload: data
   }
 }
