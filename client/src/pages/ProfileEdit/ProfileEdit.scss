@@ -1,18 +1,31 @@
 @import '../../SCSS/config';
 
 .edit-page {
-  padding-top: 100px;
-  padding-bottom: 100px;
-  display: flex;
-  flex-direction: column;
+  @include flexColumn;
+  padding: $pagePadding;
 
   &__title {
+    @include header;
     color: $primary;
     text-align: center;
+    margin: 0
   }
 
   &__text {
+    @include text;
     text-align: center;
-    margin-bottom: 40px;
+    margin: $smallSpacing 0 $largeSpacing;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .edit-page {
+    &__title {
+      margin-bottom: $smallSpacingMobile;
+    }
+
+    &__text {
+      margin: 0;
+    }
   }
 }
