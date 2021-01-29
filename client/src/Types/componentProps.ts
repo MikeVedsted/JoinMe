@@ -65,7 +65,8 @@ export type FormSliderProps = {
   maxRange?: number
   steps?: number
   initialValue?: number
-  onChange: (a: ChangeEvent<HTMLInputElement>) => void
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void
+  label: string
 }
 
 export type NavDropdownLinkProps = {

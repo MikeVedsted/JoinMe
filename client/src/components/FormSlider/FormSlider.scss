@@ -1,12 +1,17 @@
 @import '../../SCSS/config';
 
 .slider {
-  font-size: $text;
-  font-family: $montserrat;
-  color: $textDark;
-  font-weight: 600;
+  @include text;
   position: relative;
-  padding-top: 10px;
+
+  &__value {
+    font-size: $subtitle;
+    color: $primary;
+    position: absolute;
+    top: $smallSpacing;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 
   &__range {
     -webkit-appearance: none;
@@ -14,49 +19,37 @@
     width: 100%;
     height: 2px;
     outline: none;
-    border-radius: 3px;
-    margin: 0;
+    margin: $smallSpacing 0 0;
 
     &::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 13px;
-      height: 13px;
-      border-radius: 3px;
       background: $primary;
+      border-radius: 3px;
+      height: 13px;
+      width: 17px;
       cursor: pointer;
     }
 
     &::-moz-range-thumb {
       appearance: none;
-      width: 13px;
-      height: 13px;
-      border-radius: 3px;
       background: $primary;
+      border-radius: 3px;
+      height: 13px;
+      width: 17px;
       cursor: pointer;
     }
   }
 
   &__subset-labels {
-    display: flex;
-    justify-content: space-between;
+    @include flexSpaceBetween;
     font-size: $subtitle;
     font-style: italic;
 
     &--text {
-      margin: 5px 0;
+      margin:0;
     }
   }
 
-  &__value {
-    padding: 0;
-    margin: 10px 0;
-    position: absolute;
-    left: 50%;
-    bottom: 30px;
-    transform: translateX(-50%);
-    font-size: $subtitle;
-    color: $primary;
-    text-align: center;
-  }
+  
 }
