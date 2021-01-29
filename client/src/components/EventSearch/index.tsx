@@ -28,16 +28,14 @@ const EventSearch = ({ distance }: EventSearchProps) => {
       />
       <GoogleAutoComplete
         handleAddress={handleAddressChange}
-        label='location'
+        label='Location'
       />
-      <label className='form__label'>
-        Distance from location
-        <FormSlider
-          id='distance'
-          value={distance}
-          onChange={handleFieldChange}
-        />
-      </label>
+      <FormSlider
+        id='distance'
+        value={distance}
+        onChange={handleFieldChange}
+        label='Distance from location'
+      />
       <Button
         type='submit'
         text='Search'
