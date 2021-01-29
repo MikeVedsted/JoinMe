@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 
 import Button from '../Button'
+import { setUser } from '../../redux/actions'
 import FormInputField from '../FormInputField'
 import ProfileImage from '../ProfileImage'
 import FormInputTextArea from '../FormInputTextArea'
@@ -15,14 +16,15 @@ import './AccountForm.scss'
 
 const AccountForm = ({ userId }: AccountFormProps) => {
   const { user } = useSelector((state: AppState) => state)
-  const initAddress = user.street && {
-    street: user.street,
-    number: user.number,
-    postal_code: user.postal_code,
-    city: user.city,
-    country: user.country,
-    lat: user.lat,
-    lng: user.lng
+  const dispatch = useDispatch()
+  const initAddress = {
+    street: user.street ? user.street : '',
+    number: user.number ? user.number : '',
+    postal_code: user.postal_code ? user.postal_code : '',
+    city: user.city ? user.city : '',
+    country: user.country ? user.country : '',
+    lat: user.lat ? user.lat : '',
+    lng: user.lng ? user.lng : ''
   }
   const [address, setAddress] = useState<any>(initAddress)
   const [fields, handleFieldChange] = useFormFields({
@@ -34,13 +36,15 @@ const AccountForm = ({ userId }: AccountFormProps) => {
     profile_text: user.profile_text,
     profile_image: user.profile_image
   })
-  const userAddress = `${user.street} ${user.number}, ${user.postal_code} ${user.city}`
+  const [userAddress, setUserAdress] = useState(initAddress)
 
   const handleSubmit = async (event: any) => {
     event.preventDefault()
     try {
       const update = { ...fields, address }
       const res = await axios.put(`/api/v1/users/${userId}`, update)
+      setUserAdress(address)
+      dispatch(setUser(res.data))
       res.status === 200 &&
         alert(
           'Thank you!\nThe changes have been saved and you can now safely leave this page, or make further changes if you spotted a mistake.'
@@ -95,7 +99,10 @@ const AccountForm = ({ userId }: AccountFormProps) => {
       <GoogleAutoComplete
         handleAddress={setAddress}
         label='Address'
-        currentAddress={user.street && userAddress}
+        currentAddress={
+          user.street &&
+          `${userAddress.street} ${userAddress.number}, ${userAddress.postal_code} ${userAddress.city}`
+        }
       />
       <FormInputTextArea
         id='profile_text'
