@@ -14,7 +14,10 @@ const EventComment = ({ image, name, id, text, date }: CommentProps) => {
         <Link to={`/user/${id}`} className='comment__link'>
           <h3 className='comment__user'>
             {name + ' '}
-            <span className='comment__date'>{calculateEventAge(date)}</span>
+            <span className='comment__date'>
+              {calculateEventAge(date)}
+              {' ago'}
+            </span>
           </h3>
         </Link>
         <p className='comment__text'>{text}</p>
