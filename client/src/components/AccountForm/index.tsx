@@ -1,22 +1,22 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import axios from 'axios'
 
 import Button from '../Button'
-import { setUser } from '../../redux/actions'
-import FormInputField from '../FormInputField'
+import Loading from '../Loading'
 import ProfileImage from '../ProfileImage'
+import FormInputField from '../FormInputField'
 import FormInputTextArea from '../FormInputTextArea'
 import FormDropdownField from '../FormDropdownField'
 import GoogleAutoComplete from '../GoogleAutoComplete'
 import { useFormFields } from '../../hooks/useFormFields'
 import { genderOptions } from '../../util/constants/genderOptions'
+import { updateUser } from '../../redux/actions'
 import { AccountFormProps, AppState } from '../../Types'
 import './AccountForm.scss'
 
 const AccountForm = ({ userId }: AccountFormProps) => {
-  const { user } = useSelector((state: AppState) => state)
   const dispatch = useDispatch()
+  const { user } = useSelector((state: AppState) => state)
   const initAddress = {
     street: user.street ? user.street : '',
     number: user.number ? user.number : '',
@@ -38,20 +38,11 @@ const AccountForm = ({ userId }: AccountFormProps) => {
   })
   const [userAddress, setUserAddress] = useState(initAddress)
 
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = (event: any) => {
     event.preventDefault()
-    try {
-      const update = { ...fields, address }
-      const res = await axios.put(`/api/v1/users/${userId}`, update)
-      setUserAddress(address)
-      dispatch(setUser(res.data))
-      res.status === 200 &&
-        alert(
-          'Thank you!\nThe changes have been saved and you can now safely leave this page, or make further changes if you spotted a mistake.'
-        )
-    } catch (error) {
-      console.log(error)
-    }
+    const update = { ...fields, address }
+    setUserAddress(address)
+    dispatch(updateUser(userId, update))
   }
 
   return (

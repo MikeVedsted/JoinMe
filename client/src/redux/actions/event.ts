@@ -9,14 +9,16 @@ import {
   closeModal
 } from './index'
 import {
-  FETCH_ALL_EVENTS_SUCCESS,
   SearchParams,
   CommentSubmission,
   EventSubmission,
+  EventObject,
+  FETCH_ALL_EVENTS_SUCCESS,
   FETCH_HOSTED_EVENT_SUCCESS,
   FETCH_REQUESTED_EVENT_SUCCESS,
   FETCH_CONFIRMED_EVENT_SUCCESS,
-  EventObject
+  END_EVENT_SUCCESS,
+  CANCEL_REQUEST_SUCCESS
 } from '../../Types'
 
 export const fetchAllEvents = (searchParams: SearchParams) => async (
@@ -60,7 +62,7 @@ const fetchAllEventsSuccess = (allEvents: EventObject[]) => {
   return {
     type: FETCH_ALL_EVENTS_SUCCESS,
     payload: {
-      allEvents: allEvents
+      allEvents
     }
   }
 }
@@ -69,15 +71,16 @@ const fetchHostedEventsSuccess = (hostedEvents: EventObject[]) => {
   return {
     type: FETCH_HOSTED_EVENT_SUCCESS,
     payload: {
-      hostedEvents: hostedEvents
+      hostedEvents
     }
   }
 }
+
 const fetchRequestedEventsSuccess = (requestedEvents: EventObject[]) => {
   return {
     type: FETCH_REQUESTED_EVENT_SUCCESS,
     payload: {
-      requestedEvents: requestedEvents
+      requestedEvents
     }
   }
 }
@@ -85,7 +88,7 @@ const fetchConfirmedEventsSuccess = (confirmedEvents: EventObject[]) => {
   return {
     type: FETCH_CONFIRMED_EVENT_SUCCESS,
     payload: {
-      confirmedEvents: confirmedEvents
+      confirmedEvents
     }
   }
 }
@@ -102,6 +105,7 @@ export const endEvent = (event_id: string) => async (dispatch: Dispatch) => {
   try {
     dispatch(setLoading())
     await axios.delete(`/api/v1/events/${event_id}`)
+    dispatch(endEventSuccess(event_id))
     dispatch(clearErrors())
     dispatch(closeModal())
     dispatch(setLoaded())
@@ -113,12 +117,26 @@ export const endEvent = (event_id: string) => async (dispatch: Dispatch) => {
   }
 }
 
+export const endEventSuccess = (eventId: string) => {
+  return {
+    type: END_EVENT_SUCCESS,
+    payload: {
+      eventId
+    }
+  }
+}
+
 export const cancelJoinRequest = (requestId: string | undefined) => async (
   dispatch: Dispatch
 ) => {
   try {
+    if (!requestId) {
+      throw new Error('Bad request. Missing id.')
+    }
+
     dispatch(setLoading())
     await axios.delete(`/api/v1/requests/${requestId}/cancel`)
+    dispatch(cancelJoinRequestAction(requestId))
     dispatch(clearErrors())
     dispatch(closeModal())
     dispatch(setLoaded())
@@ -127,6 +145,15 @@ export const cancelJoinRequest = (requestId: string | undefined) => async (
     dispatch(setErrors(status, message))
     dispatch(closeModal())
     dispatch(setLoaded())
+  }
+}
+
+export const cancelJoinRequestAction = (requestId: string) => {
+  return {
+    type: CANCEL_REQUEST_SUCCESS,
+    payload: {
+      requestId
+    }
   }
 }
 

@@ -72,7 +72,7 @@ export const deleteParticipantQ = `
 export const findUserByEmailQ = `
   SELECT 
     u.*, 
-    a.*, 
+    street, number, city, postal_code, country, lat, lng,
     array_agg(c.name) as interests
   FROM userk u
   LEFT JOIN user_interest ui ON u.user_id = ui.userk
