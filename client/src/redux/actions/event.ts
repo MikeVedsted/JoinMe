@@ -1,21 +1,30 @@
 import { Dispatch } from 'redux'
 import axios from 'axios'
+
 import {
-  FETCH_EVENTS_REQUESTED,
-  FETCH_EVENTS_SUCCEED,
-  FETCH_EVENTS_FAILED,
+  clearErrors,
+  setErrors,
+  setLoaded,
+  setLoading,
+  closeModal
+} from './index'
+import {
   SearchParams,
-  CommentSubmission
+  CommentSubmission,
+  EventSubmission,
+  EventObject,
+  FETCH_ALL_EVENTS_SUCCESS,
+  FETCH_HOSTED_EVENT_SUCCESS,
+  FETCH_REQUESTED_EVENT_SUCCESS,
+  FETCH_CONFIRMED_EVENT_SUCCESS,
+  END_EVENT_SUCCESS,
+  CANCEL_REQUEST_SUCCESS
 } from '../../Types'
-import { clearErrors, setErrors } from './error'
-import { setLoaded, setLoading } from './loading'
-import { closeModal } from './ui'
 
 export const fetchAllEvents = (searchParams: SearchParams) => async (
   dispatch: Dispatch
 ) => {
   try {
-    dispatch({ type: FETCH_EVENTS_REQUESTED })
     const { data } = await axios.get('/api/v1/events', {
       params: {
         category: searchParams.category,
@@ -24,23 +33,63 @@ export const fetchAllEvents = (searchParams: SearchParams) => async (
         distance: searchParams.distance
       }
     })
-    return dispatch(fetchEventsSucceed(data))
+    return dispatch(fetchAllEventsSuccess(data.events))
   } catch (error) {
-    return dispatch(fetchEventsFailed(error))
+    const { status, message } = error
+    return dispatch(setErrors(status, message))
   }
 }
 
-const fetchEventsSucceed = (data: any) => {
-  return {
-    type: FETCH_EVENTS_SUCCEED,
-    payload: data
+export const getMyEvents = (userId: string) => async (dispatch: Dispatch) => {
+  try {
+    dispatch(setLoading())
+    dispatch(clearErrors())
+    let { data } = await axios.get(`/api/v1/events/creator/${userId}`)
+    dispatch(fetchHostedEventsSuccess(data))
+    data = await axios.get(`/api/v1/events/requested`)
+    dispatch(fetchRequestedEventsSuccess(data.data))
+    data = await axios.get(`/api/v1/events/participant`)
+    dispatch(fetchConfirmedEventsSuccess(data.data))
+    dispatch(setLoaded())
+  } catch (error) {
+    const { status, message } = error
+    dispatch(setErrors(status, message))
+    dispatch(setLoaded())
   }
 }
 
-const fetchEventsFailed = (error: any) => {
+const fetchAllEventsSuccess = (allEvents: EventObject[]) => {
   return {
-    type: FETCH_EVENTS_FAILED,
-    payload: error
+    type: FETCH_ALL_EVENTS_SUCCESS,
+    payload: {
+      allEvents
+    }
+  }
+}
+
+const fetchHostedEventsSuccess = (hostedEvents: EventObject[]) => {
+  return {
+    type: FETCH_HOSTED_EVENT_SUCCESS,
+    payload: {
+      hostedEvents
+    }
+  }
+}
+
+const fetchRequestedEventsSuccess = (requestedEvents: EventObject[]) => {
+  return {
+    type: FETCH_REQUESTED_EVENT_SUCCESS,
+    payload: {
+      requestedEvents
+    }
+  }
+}
+const fetchConfirmedEventsSuccess = (confirmedEvents: EventObject[]) => {
+  return {
+    type: FETCH_CONFIRMED_EVENT_SUCCESS,
+    payload: {
+      confirmedEvents
+    }
   }
 }
 
@@ -56,6 +105,7 @@ export const endEvent = (event_id: string) => async (dispatch: Dispatch) => {
   try {
     dispatch(setLoading())
     await axios.delete(`/api/v1/events/${event_id}`)
+    dispatch(endEventSuccess(event_id))
     dispatch(clearErrors())
     dispatch(closeModal())
     dispatch(setLoaded())
@@ -67,12 +117,26 @@ export const endEvent = (event_id: string) => async (dispatch: Dispatch) => {
   }
 }
 
+export const endEventSuccess = (eventId: string) => {
+  return {
+    type: END_EVENT_SUCCESS,
+    payload: {
+      eventId
+    }
+  }
+}
+
 export const cancelJoinRequest = (requestId: string | undefined) => async (
   dispatch: Dispatch
 ) => {
   try {
+    if (!requestId) {
+      throw new Error('Bad request. Missing id.')
+    }
+
     dispatch(setLoading())
     await axios.delete(`/api/v1/requests/${requestId}/cancel`)
+    dispatch(cancelJoinRequestAction(requestId))
     dispatch(clearErrors())
     dispatch(closeModal())
     dispatch(setLoaded())
@@ -81,6 +145,15 @@ export const cancelJoinRequest = (requestId: string | undefined) => async (
     dispatch(setErrors(status, message))
     dispatch(closeModal())
     dispatch(setLoaded())
+  }
+}
+
+export const cancelJoinRequestAction = (requestId: string) => {
+  return {
+    type: CANCEL_REQUEST_SUCCESS,
+    payload: {
+      requestId
+    }
   }
 }
 
@@ -108,6 +181,39 @@ export const requestToJoin = (eventId: string) => async (
     dispatch(setLoading())
     await axios.post(`/api/v1/events/${eventId}/request`)
     dispatch(clearErrors())
+    dispatch(closeModal())
+    dispatch(setLoaded())
+  } catch (error) {
+    const { status, message } = error
+    dispatch(setErrors(status, message))
+    dispatch(closeModal())
+    dispatch(setLoaded())
+  }
+}
+
+export const createEvent = (submission: EventSubmission) => async (
+  dispatch: Dispatch
+) => {
+  try {
+    dispatch(setLoading())
+    dispatch(clearErrors())
+    await axios.post('/api/v1/events', submission)
+    dispatch(setLoaded())
+  } catch (error) {
+    const { status, message } = error
+    dispatch(setErrors(status, message))
+    dispatch(setLoaded())
+  }
+}
+
+export const updateEvent = (
+  submission: Partial<EventSubmission>,
+  eventId: string
+) => async (dispatch: Dispatch) => {
+  try {
+    dispatch(setLoading())
+    dispatch(clearErrors())
+    await axios.put(`/api/v1/events/${eventId}`, submission)
     dispatch(closeModal())
     dispatch(setLoaded())
   } catch (error) {

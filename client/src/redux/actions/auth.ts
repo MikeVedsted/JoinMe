@@ -32,6 +32,8 @@ export const logout = () => (dispatch: Dispatch) => {
   try {
     dispatch(setLoading())
     // ADD ASYNC POST REQUEST TO LOG OUT WHEN BUILT ON BACKEND
+    dispatch(removeUser())
+    dispatch(closeNavDropdown())
     dispatch(setUnauthorized())
     dispatch(setLoaded())
   } catch (error) {

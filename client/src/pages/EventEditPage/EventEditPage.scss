@@ -1,21 +1,12 @@
 @import '../../SCSS/config';
 
 .event-edit-page {
-  min-width: 100vw;
-  display: flex;
-  justify-content: center;
-  margin: 130px 0px 100px 0px;
+  @include flexCenter;
+  padding: $pagePadding;
 }
 
-.loading {
-  margin-top: 45vh;
-  text-align: center;
-  font-size: $heading;
-  color: $primary;
-}
-
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
   .event-edit-page {
-    margin: 100px 0px 50px 0px;
+    padding: $pagePaddingMobile;
   }
 }

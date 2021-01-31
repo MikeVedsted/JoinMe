@@ -1,27 +1,30 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
-import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
 
 import Button from '../Button'
+import Loading from '../Loading'
+import ProfileImage from '../ProfileImage'
 import FormInputField from '../FormInputField'
 import FormInputTextArea from '../FormInputTextArea'
 import FormDropdownField from '../FormDropdownField'
 import GoogleAutoComplete from '../GoogleAutoComplete'
 import { useFormFields } from '../../hooks/useFormFields'
 import { genderOptions } from '../../util/constants/genderOptions'
+import { updateUser } from '../../redux/actions'
 import { AccountFormProps, AppState } from '../../Types'
 import './AccountForm.scss'
 
 const AccountForm = ({ userId }: AccountFormProps) => {
+  const dispatch = useDispatch()
   const { user } = useSelector((state: AppState) => state)
-  const initAddress = user.street && {
-    street: user.street,
-    number: user.number,
-    postal_code: user.postal_code,
-    city: user.city,
-    country: user.country,
-    lat: user.lat,
-    lng: user.lng
+  const initAddress = {
+    street: user.street ? user.street : '',
+    number: user.number ? user.number : '',
+    postal_code: user.postal_code ? user.postal_code : '',
+    city: user.city ? user.city : '',
+    country: user.country ? user.country : '',
+    lat: user.lat ? user.lat : '',
+    lng: user.lng ? user.lng : ''
   }
   const [address, setAddress] = useState<any>(initAddress)
   const [fields, handleFieldChange] = useFormFields({
@@ -33,20 +36,13 @@ const AccountForm = ({ userId }: AccountFormProps) => {
     profile_text: user.profile_text,
     profile_image: user.profile_image
   })
-  const userAddress = `${user.street} ${user.number}, ${user.postal_code} ${user.city}`
+  const [userAddress, setUserAddress] = useState(initAddress)
 
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = (event: any) => {
     event.preventDefault()
-    try {
-      const update = { ...fields, address }
-      const res = await axios.put(`/api/v1/users/${userId}`, update)
-      res.status === 200 &&
-        alert(
-          'Thank you!\nThe changes have been saved and you can now safely leave this page, or make further changes if you spotted a mistake.'
-        )
-    } catch (error) {
-      console.log(error)
-    }
+    const update = { ...fields, address }
+    setUserAddress(address)
+    dispatch(updateUser(userId, update))
   }
 
   return (
@@ -91,13 +87,14 @@ const AccountForm = ({ userId }: AccountFormProps) => {
         selectedValue={fields.gender}
         onBlur={handleFieldChange}
       />
-      <label className='form__label'>
-        Address
-        <p className='form__label form__label--address'>
-          Current address: {user.street ? userAddress : '-'}
-        </p>
-        <GoogleAutoComplete handleAddress={setAddress} />
-      </label>
+      <GoogleAutoComplete
+        handleAddress={setAddress}
+        label='Address'
+        currentAddress={
+          user.street &&
+          `${userAddress.street} ${userAddress.number}, ${userAddress.postal_code} ${userAddress.city}`
+        }
+      />
       <FormInputTextArea
         id='profile_text'
         label='Profile text'
@@ -105,9 +102,8 @@ const AccountForm = ({ userId }: AccountFormProps) => {
         onChange={handleFieldChange}
         rows={1}
       />
-      <div className='image-upload'>
+      <div className='form__image-upload'>
         <FormInputField
-          className='image-upload__field'
           type='url'
           id='profile_image'
           label='Image url'
@@ -115,14 +111,13 @@ const AccountForm = ({ userId }: AccountFormProps) => {
           onChange={handleFieldChange}
         />
         {fields.profile_image && (
-          <img
-            className='image-upload__image'
-            src={fields.profile_image}
+          <ProfileImage
+            image={fields.profile_image}
             alt='What we currently display'
           />
         )}
       </div>
-      <Button type='submit' text='Submit' />
+      <Button type='submit' text='Submit' modifier='primary' />
     </form>
   )
 }

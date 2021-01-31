@@ -1,0 +1,61 @@
+@mixin flexStart {
+  display: flex;
+  justify-content: flex-start;
+}
+
+@mixin flexEnd {
+  display: flex;
+  align-items: flex-end;
+}
+
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flexSpaceBetween {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flexColumnCenter {
+  @include flexColumn;
+  align-items: center;
+}
+
+@mixin twoItemsInline {
+  @include flexSpaceBetween;
+  width: 100%;
+
+  & * {
+    flex-grow: 0;
+    width: 49%;
+    margin-top: $smallSpacing;
+  }
+}
+
+@mixin threeItemsInline {
+  width: 96%;
+  padding: 0 2%;
+  display: flex;
+  justify-content: space-between;
+
+  & * {
+    flex-grow: 0;
+    width: 30%;
+  }
+}
+
+@mixin columnFullWidthItems {
+  flex-direction: column;
+  & * {
+    width: 100%;
+  }
+}

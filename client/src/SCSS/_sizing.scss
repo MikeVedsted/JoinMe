@@ -1,0 +1,26 @@
+// UNIVERSAL
+$lightBorder: 1px solid $secondary;
+$mediumBorder: 2px solid $secondary;
+$heavyBorder: 4px solid $secondary;
+$profileImageSize: 50px;
+$logoSize: 60px;
+
+// LARGE SCREENS
+$buttonHeight: 40px;
+$largeSpacing: 40px;
+$smallSpacing: 20px;
+$eventImageSize: 200px;
+$navHeight: 100px;
+$footerHeight: 65px;
+$pagePadding: calc(#{$navHeight + $largeSpacing}) $largeSpacing
+  calc(#{$footerHeight + $largeSpacing});
+
+// MOBILE SCREENS
+$buttonHeightMobile: 45px;
+$largeSpacingMobile: 20px;
+$smallSpacingMobile: 10px;
+$eventImageSizeMobile: 150px;
+$navHeightMobile: 100px;
+$footerHeightMobile: fit-content;
+$pagePaddingMobile: calc(#{$navHeightMobile + $largeSpacingMobile})
+  $largeSpacingMobile 0;

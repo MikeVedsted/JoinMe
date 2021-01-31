@@ -28,7 +28,8 @@ const googleLogin = async (id_token: string, res: Response) => {
 
     if (!user) {
       const createUser = await db.query(createUserQ, [picture, given_name, family_name, email])
-      const newUser: User = createUser.rows[0]
+      const DBResponse = await db.query(findUserByIdQ, [createUser.rows[0].user_id])
+      const newUser: User = DBResponse.rows[0]
       const accessToken = generateAccessToken(newUser.user_id)
       const refreshToken = generateRefreshToken(newUser.user_id)
       res.cookie('x-auth-access-token', accessToken)
@@ -118,7 +119,8 @@ const updateUser = async (userId: string, update: Partial<User>) => {
       date_of_birth,
       gender
     ])
-    const updatedUser: User = updateUser.rows[0]
+    const DBResponse = await db.query(findUserByIdQ, [updateUser.rows[0].user_id])
+    const updatedUser: User = DBResponse.rows[0]
     return updatedUser
   } catch (error) {
     return error

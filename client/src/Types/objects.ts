@@ -61,7 +61,6 @@ export type EventObject = {
 }
 
 export type AddressSelection = {
-  address_components: AddressComponent[]
   place_id: string
 }
 
@@ -105,4 +104,16 @@ export type Participant = {
   last_name: string
   profile_image: string
   user_id: string
+}
+
+export type EventSubmission = {
+  category: string
+  title: string
+  date: string
+  time: string
+  description: string
+  max_participants: number
+  image: string
+  expires_at: string
+  address: Address
 }

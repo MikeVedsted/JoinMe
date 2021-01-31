@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { InputFieldProps } from '../../Types'
-import './InputField.scss'
 
 const InputField = ({
   type,
@@ -14,12 +13,7 @@ const InputField = ({
     <label className='form__label'>
       {label}
       {rest.required && <span className='form__label--required'>{'*'}</span>}
-      <input
-        type={type}
-        id={id}
-        className={`form__field form__field${modifier}`}
-        {...rest}
-      />
+      <input type={type} id={id} className='form__field' {...rest} />
     </label>
   )
 }

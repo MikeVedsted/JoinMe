@@ -17,45 +17,69 @@ export type AppState = {
 // @EVENT //
 // ====== //
 
-export const FETCH_EVENTS_FAILED = 'FETCH_EVENTS_FAILED'
-export const FETCH_EVENTS_SUCCEED = 'FETCH_EVENTS_SUCCEED'
-export const FETCH_EVENTS_REQUESTED = 'FETCH_EVENTS_REQUESTED'
+export const FETCH_ALL_EVENTS_SUCCESS = 'FETCH_ALL_EVENTS_SUCCESS'
+export const FETCH_HOSTED_EVENT_SUCCESS = 'FETCH_HOSTED_EVENT_SUCCESS'
+export const FETCH_REQUESTED_EVENT_SUCCESS = 'FETCH_REQUESTED_EVENT_SUCCESS'
+export const FETCH_CONFIRMED_EVENT_SUCCESS = 'FETCH_CONFIRMED_EVENT_SUCCESS'
+export const END_EVENT_SUCCESS = 'END_EVENT_SUCCESS'
+export const CANCEL_REQUEST_SUCCESS = 'CANCEL_REQUEST_SUCCESS'
 
-export type EventActions = FetchEventActions
+export type EventActions =
+  | FetchAllEventSuccess
+  | FetchHostedEventSuccess
+  | FetchRequestedEventSuccess
+  | FetchConfirmedEventSuccess
+  | EndEventSuccess
+  | CancelRequestSuccess
 
 export type EventState = {
   allEvents: EventObject[]
   hostedEvents: EventObject[]
-  interestedEvents: EventObject[]
+  requestedEvents: EventObject[]
   confirmedEvents: EventObject[]
 }
 
-export type FetchEventActions =
-  | FetchEventRequested
-  | FetchEventSucceed
-  | FetchEventFailed
-
-export type FetchEventRequested = {
-  type: typeof FETCH_EVENTS_REQUESTED
-}
-
-export type FetchEventSucceed = {
-  type: typeof FETCH_EVENTS_SUCCEED
+export type FetchAllEventSuccess = {
+  type: typeof FETCH_ALL_EVENTS_SUCCESS
   payload: {
-    events: EventObject[]
-    status: string | ''
-    message: string
+    allEvents: EventObject[]
   }
 }
 
-export type FetchEventFailed = {
-  type: typeof FETCH_EVENTS_FAILED
+export type FetchHostedEventSuccess = {
+  type: typeof FETCH_HOSTED_EVENT_SUCCESS
   payload: {
-    status: string | ''
-    message: string
+    hostedEvents: EventObject[]
   }
 }
 
+export type FetchRequestedEventSuccess = {
+  type: typeof FETCH_REQUESTED_EVENT_SUCCESS
+  payload: {
+    requestedEvents: EventObject[]
+  }
+}
+
+export type FetchConfirmedEventSuccess = {
+  type: typeof FETCH_CONFIRMED_EVENT_SUCCESS
+  payload: {
+    confirmedEvents: EventObject[]
+  }
+}
+
+export type EndEventSuccess = {
+  type: typeof END_EVENT_SUCCESS
+  payload: {
+    eventId: string
+  }
+}
+
+export type CancelRequestSuccess = {
+  type: typeof CANCEL_REQUEST_SUCCESS
+  payload: {
+    requestId: string
+  }
+}
 // ===== //
 // @USER //
 // ===== //
@@ -83,7 +107,7 @@ export type UserState = {
   profile_text: string
   profile_image: string
   created_at: string
-  interests?: string[]
+  interests: string[]
 }
 
 export type AddUserAction = {
