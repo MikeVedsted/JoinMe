@@ -1,22 +1,20 @@
 @import '../../SCSS/config';
 
 .profile {
+  @include flexStart;
   padding: $pagePadding;
   justify-content: stretch;
   align-items: flex-start;
-  @include flexStart;
 
   &__sidebar {
     @include flexCenter;
     flex-direction: column;
     flex-basis: 30%;
     height: fit-content;
-    position: sticky;
 
     &--image {
-      @include borderRadiusSmall;
       width: auto;
-      height: 30vh;
+      height: 200px;
       margin-bottom: $smallSpacing;
     }
   }
@@ -48,29 +46,36 @@
 
   &__details {
     display: grid;
-    grid-template-columns: $largeSpacing auto;
+    grid-template-columns: 49% auto;
     justify-items: start;
     align-items: center;
-    column-gap: 10vh;
+    max-width: 800px;
+    column-gap: 2%;
 
     &--header {
       font-family: $nunito;
     }
+
+    &--text {
+      margin-left: $smallSpacing * 1.5;
+    }
   }
+}
+
+.event-list {
+  margin-top: $largeSpacing;
 }
 
 @media only screen and (max-width: 1024px) {
   .profile {
     @include flexColumnCenter;
-    padding: $pagePadding;
 
     &__sidebar {
       position: static;
     }
 
     &__main {
-      margin-left: 0vh;
-      margin-top: $largeSpacingMobile;
+      margin: $largeSpacingMobile 0;
     }
 
     &__header {
@@ -98,12 +103,9 @@
     }
 
     &--divider-optional {
+      @include separator;
       display: block;
-      @include separator;
-    }
-
-    &--divider {
-      @include separator;
+      width: calc(100% / 3);
     }
   }
 
