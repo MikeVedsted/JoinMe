@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, ChangeEvent } from 'react'
 
 import { FormSliderProps } from '../../Types'
 import './FormSlider.scss'
@@ -10,13 +10,14 @@ const FormSlider = ({
   initialValue = 20,
   id,
   value,
-  onChange
+  onChange,
+  label
 }: FormSliderProps) => {
   const [relativeValue, setRelativeValue] = useState(initialValue)
   const [thumbPosition, setThumbPosition] = useState('')
 
-  const handleSliderChange = (e: any) => {
-    setRelativeValue(e.target.value)
+  const handleSliderChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setRelativeValue(parseInt(e.target.value))
     onChange(e)
   }
 
@@ -31,7 +32,8 @@ const FormSlider = ({
   }, [value, maxRange, minRange, relativeValue])
 
   return (
-    <div className='slider'>
+    <label className='form__label slider'>
+      {label}
       <output style={{ left: `${thumbPosition}` }} className='slider__value'>
         {relativeValue}
       </output>
@@ -58,7 +60,7 @@ const FormSlider = ({
         <p className='slider__subset-labels--text'>{minRange} km</p>
         <p className='slider__subset-labels--text'>{maxRange} km</p>
       </div>
-    </div>
+    </label>
   )
 }
 

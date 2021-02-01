@@ -70,9 +70,16 @@ export const deleteParticipantQ = `
 // ------------
 
 export const findUserByEmailQ = `
-  SELECT * 
-  FROM userk 
-  WHERE email = $1
+  SELECT 
+    u.*, 
+    street, number, city, postal_code, country, lat, lng,
+    array_agg(c.name) as interests
+  FROM userk u
+  LEFT JOIN user_interest ui ON u.user_id = ui.userk
+  LEFT JOIN category c ON c.category_id = ui.interest
+  LEFT JOIN address a ON u.base_address = a.address_id
+  WHERE u.email = $1
+  GROUP BY u.user_id, a.address_id;  
 `
 
 export const createUserQ = `

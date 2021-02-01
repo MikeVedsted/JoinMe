@@ -17,7 +17,8 @@ const initState: UserState = {
   lng: parseInt(''),
   profile_text: '',
   profile_image: '',
-  created_at: ''
+  created_at: '',
+  interests: []
 }
 
 export default function user(

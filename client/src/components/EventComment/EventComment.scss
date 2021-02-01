@@ -23,8 +23,8 @@
   }
 
   &__text {
+    @include text;
     margin: 0;
-    padding-left: $smallSpacing;
-    font-family: $nunito;
+    padding: 0 $smallSpacing;
   }
 }
