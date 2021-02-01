@@ -1,15 +1,16 @@
 import React from 'react'
 
-// import Routes from './Routes'
-import GoogleUserLogin from './components/GoogleUserLogin'
+import Navbar from './components/Navbar'
+import Routes from './Routes'
+import Footer from './components/Footer'
 import './App.scss'
 
 const App = () => {
   return (
     <>
-      <h1>Moro Moro!</h1>
-      <p>Now start developing!</p>
-      <GoogleUserLogin />
+      <Navbar />
+      <Routes />
+      <Footer />
     </>
   )
 }

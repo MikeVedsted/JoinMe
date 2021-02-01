@@ -1,27 +1,51 @@
 import React from 'react'
-import { GoogleLogin } from 'react-google-login'
 import axios from 'axios'
+import { useHistory } from 'react-router-dom'
+import { useCookies } from 'react-cookie'
+import { GoogleLogin } from 'react-google-login'
 
 const GoogleUserLogin = () => {
   const GOOGLE_CLIENT = process.env.REACT_APP_GOOGLE_API_KEY as string
+  const [, setCookies] = useCookies(['user'])
+  const history = useHistory()
+
+  const checkIfNew = (date: string, userId: string) => {
+    const diff = new Date().getTime() - new Date(date).getTime()
+
+    if (diff < 60000) history.push(`/user/${userId}/account-setup`)
+  }
 
   const responseSuccessGoogle = async (response: any) => {
     const userToken = await response.tokenObj.id_token
-    axios
-      .post('http://localhost:5000/api/v1/users/google-authenticate', userToken)
-      .then((response: any) => {
-        console.log(response)
+    try {
+      const res = await axios.post('/api/v1/users/google-authenticate', {
+        id_token: userToken
       })
+      const {
+        user_id,
+        first_name,
+        last_name,
+        profile_image,
+        created_at
+      } = res.data
+      setCookies('user', { user_id, first_name, last_name, profile_image })
+      checkIfNew(created_at, user_id)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const responseFailGoogle = (response: any) => {
+    alert(
+      'Oh no 😢\nSomething went wrong with your login.\n\nTry again, or let us know at contact.joinme2020@gmail.com that there is an issue.'
+    )
     console.log(response)
   }
 
   return (
     <GoogleLogin
       clientId={GOOGLE_CLIENT}
-      buttonText="Login with Google"
+      buttonText='Google Login'
       onSuccess={responseSuccessGoogle}
       onFailure={responseFailGoogle}
       cookiePolicy={'single_host_origin'}

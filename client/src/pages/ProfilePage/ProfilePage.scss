@@ -1,0 +1,118 @@
+@import '../../SCSS/config';
+
+.profile {
+  padding-top: 100px;
+  margin: 0 2.5em;
+  justify-content: stretch;
+  align-items: flex-start;
+  @include flexStart;
+
+  &__sidebar {
+    @include flexCenter;
+    flex-direction: column;
+    flex-basis: 30%;
+    flex-shrink: 10%;
+    height: fit-content;
+    position: sticky;
+    top: 122px;
+
+    & * {
+      width: 100%;
+    }
+
+    &--image {
+      width: auto;
+      height: 30vh;
+      margin-bottom: 26px;
+      border-radius: 8px;
+    }
+  }
+
+  &__main {
+    @include flexStart;
+    flex-direction: column;
+    margin-left: 40px;
+    flex-basis: 70%;
+  }
+
+  &__header {
+    @include flexCenter;
+    flex-direction: row;
+
+    &--text {
+      font-family: $montserrat;
+      font-size: $sub-head;
+      font-weight: 600;
+      flex-basis: 20vw;
+    }
+
+    &--divider {
+      border: 1px solid $lineDim;
+      width: 100%;
+    }
+
+    &--divider-optional {
+      display: none;
+    }
+  }
+
+  &__details {
+    display: grid;
+    grid-template-columns: 20vh auto;
+    justify-items: start;
+    align-items: center;
+    column-gap: 10vh;
+
+    &--header {
+      font-family: $nunito;
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .profile {
+    flex-direction: column;
+
+    &__sidebar {
+      position: static;
+    }
+
+    &__main {
+      margin-left: 0vh;
+      margin-top: 5vh;
+    }
+
+    &__header {
+      &--text {
+        flex-basis: 40vw;
+      }
+    }
+  }
+
+  .profile__sidebar button {
+    width: 30vw;
+  }
+}
+
+@media only screen and (max-width: 765px) {
+  .profile__header {
+    > * {
+      width: calc(100% / 3);
+    }
+
+    &--text {
+      font-size: 20px;
+      text-align: center;
+    }
+
+    &--divider-optional {
+      display: block;
+      border: 1px solid $lineDim;
+    }
+  }
+
+  .profile__details {
+    grid-template-columns: 12vh auto;
+    column-gap: 2vh;
+  }
+}

@@ -1,0 +1,21 @@
+@import '../../SCSS/config';
+
+.interested-event {
+  display: flex;
+  flex-direction: column;
+
+  &__description {
+    max-width: 60vw;
+    font-family: $nunito;
+    font-size: $text;
+    color: $textDark;
+  }
+
+  &__line {
+    @include separator;
+  }
+
+  &__buttons {
+    @include twoButtonsInline;
+  }
+}

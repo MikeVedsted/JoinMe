@@ -1,0 +1,57 @@
+@import '../../SCSS/config';
+
+.event {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  &__manage {
+    color: $textDark;
+    cursor: pointer;
+    position: absolute;
+    top: 30px;
+    right: 0;
+  }
+
+  &__description {
+    width: 100%;
+    font-family: $nunito;
+    font-size: $text;
+    color: $textDark;
+  }
+
+  &__buttons {
+    @include twoButtonsInline;
+  }
+
+  &__line {
+    @include separator;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .event {
+    &__buttons {
+      display: inline;
+
+      & * {
+        margin-top: 5px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .event {
+    width: 100vw;
+
+    &__buttons {
+      padding: 0 2%;
+      display: inline;
+
+      & * {
+        margin-top: 5px;
+      }
+    }
+  }
+}

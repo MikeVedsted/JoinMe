@@ -1,0 +1,15 @@
+.event-image {
+  display: inline-block;
+  width: 230px;
+  height: 194px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 25px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .event-image {
+    margin: 0 2% 15px;
+    width: 96%;
+  }
+}

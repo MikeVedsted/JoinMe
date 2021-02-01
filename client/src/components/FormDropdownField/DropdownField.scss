@@ -1,0 +1,26 @@
+@import '../../SCSS/config';
+
+.form {
+  &__label {
+    font-family: $montserrat;
+    color: $textDark;
+    font-weight: 600;
+
+    &--required {
+      color: $primary;
+    }
+  }
+
+  &__field {
+    width: 100%;
+    display: block;
+    border: none;
+    border-bottom: 2px solid $primary;
+    margin: 0 0 20px 0;
+    padding: 5px 0;
+
+    &--option {
+      padding: 0;
+    }
+  }
+}

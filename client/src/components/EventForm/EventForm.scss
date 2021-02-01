@@ -1,0 +1,31 @@
+@import '../../SCSS/config';
+
+.form {
+  border: 2px solid $secondary;
+  border-radius: 8px;
+  padding: 0 40px 40px;
+  display: inline-block;
+
+  &__title {
+    font-family: $montserrat;
+    font-size: $heading;
+    width: fit-content;
+    position: relative;
+    top: -20px;
+    background-color: white;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media only screen and (max-width: 1024px) {
+  .form-buttons {
+    display: flex;
+    flex-direction: column;
+  }
+}

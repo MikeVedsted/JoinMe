@@ -1,0 +1,18 @@
+@import '../../SCSS/config';
+
+.search-box {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+
+  &__button {
+    @include flexCenter;
+    margin-top: 20px;
+  }
+
+  &__title {
+    font-size: $sub-head;
+    text-align: center;
+    margin-top: 0;
+  }
+}

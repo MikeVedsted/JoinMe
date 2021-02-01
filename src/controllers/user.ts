@@ -1,87 +1,79 @@
 import { Request, Response, NextFunction } from 'express'
 
 import UserService from '../services/user'
+import { NotFoundError, BadRequestError } from '../helpers/apiError'
+import { AuthRequest } from '../types'
 
-export const findAllUsers = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const googleLogin = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    console.log('something should happen when this is called. Req: ', req)
+    const { id_token } = req.body
+    return res.json(await UserService.googleLogin(id_token, res))
   } catch (error) {
-    console.log(error)
+    next(new BadRequestError('Unexpected error', error))
   }
 }
 
-export const findUserById = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const getTokenInfo = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
-    console.log('something should happen when this is called. Req: ', req)
+    if (!req.user) {
+      throw Error
+    }
+    const { user_id } = req.user
+    return res.json(await UserService.findUserById(user_id))
   } catch (error) {
-    console.log(error)
+    next(new BadRequestError('Unexpected error', error))
   }
 }
 
-export const findUserByEmail = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const findAllUsers = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    console.log('something should happen when this is called. Req: ', req)
+    return res.json(await UserService.findAllUsers())
   } catch (error) {
-    console.log(error)
+    next(new NotFoundError('No users found', error))
   }
 }
 
-export const googleCreate = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const findUserById = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    console.log('something should happen when this is called. Req: ', req)
+    const { userId } = req.params
+    return res.json(await UserService.findUserById(userId))
   } catch (error) {
-    console.log(error)
+    next(new NotFoundError('User not found', error))
   }
 }
 
-export const googleLogin = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const updateUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    await UserService.googleLogin(req, res)
+    const { userId } = req.params
+    const update = req.body
+    return res.json(await UserService.updateUser(userId, update))
   } catch (error) {
-    console.log(error)
+    next(new NotFoundError('User not found', error))
   }
 }
 
-export const updateUser = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    console.log('something should happen when this is called. Req: ', req)
+    const { userId } = req.params
+    return res.json(await UserService.deleteUser(userId))
   } catch (error) {
-    console.log(error)
+    next(new NotFoundError('User not found', error))
   }
 }
 
-export const deleteUser = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const getUserCount = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    console.log('something should happen when this is called. Req: ', req)
+    return res.json(await UserService.getUserCount())
   } catch (error) {
-    console.log(error)
+    next(new NotFoundError('No users found', error))
+  }
+}
+
+export const findPublicUserInfo = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { userId } = req.params
+    return res.json(await UserService.findPublicUserInfo(userId))
+  } catch (error) {
+    next(new NotFoundError('User not found', error))
   }
 }

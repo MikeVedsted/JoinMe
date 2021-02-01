@@ -1,0 +1,76 @@
+@import '../../SCSS/config';
+
+.button {
+  font-family: $roboto;
+  font-size: $text;
+  color: $textLight;
+  background-color: $default;
+  border: 1px solid $default;
+  border-radius: 4px;
+  flex-grow: 1;
+  padding: 5px 10px;
+  margin: 5px 0;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+
+  &--disabled {
+    opacity: 0.7;
+  }
+
+  &--primary {
+    background-color: $primary;
+    border-color: $primary;
+  }
+
+  &--primary:hover {
+    background-color: white;
+    border-color: $primary;
+    color: $primary;
+  }
+
+  &--secondary {
+    background-color: $secondary;
+    border-color: $secondary;
+    color: $textDark;
+  }
+
+  &--secondary:hover {
+    background-color: white;
+    border-color: $secondary;
+  }
+
+  &--large-active {
+    background-color: $primary;
+    border-color: $primary;
+    font-size: $sub-head;
+    color: $textLight;
+    text-align: left;
+  }
+
+  &--large {
+    background-color: $secondary;
+    border-color: $secondary;
+    font-size: $sub-head;
+    color: $textDark;
+    text-align: left;
+  }
+
+  &--inline {
+    background-color: $primary;
+    border-color: $secondary;
+    width: auto;
+    margin: 1em 0;
+    padding: 0 20px;
+    border: none;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .button {
+    height: 45px;
+
+    &--inline {
+      height: auto;
+    }
+  }
+}

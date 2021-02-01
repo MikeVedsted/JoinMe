@@ -1,0 +1,53 @@
+@import '../../SCSS/config';
+
+.participants {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__buttons {
+    @include twoButtonsInline;
+  }
+
+  &__hr {
+    width: 100%;
+    height: 0.5px;
+    background-color: $textDark;
+    margin-bottom: 20px;
+  }
+
+  &__list {
+    width: 60%;
+    margin: 0px 100px;
+
+    &--new-requests {
+      width: 75%;
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .participants {
+    &__buttons {
+      flex-direction: column;
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .participants {
+    &__buttons {
+      margin-top: 40px;
+    }
+
+    &__list {
+      width: 90%;
+      margin: 0px;
+
+      &--new-request {
+        width: 100%;
+      }
+    }
+  }
+}
