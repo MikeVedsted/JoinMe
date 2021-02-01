@@ -170,13 +170,12 @@ const findParticipatingEvents = async (user_id: string) => {
 }
 
 const findPublicUserInfo = async (userId: string) => {
-  try {
-    const DBResponse = await db.query(findPublicUserQ, [userId])
+  const DBResponse = await db.query(findPublicUserQ, [userId])
+  if (DBResponse.rows.length > 0) {
     const publicInfo: Partial<User> = DBResponse.rows[0]
-
     return publicInfo
-  } catch (error) {
-    return error
+  } else {
+    throw 'No found user'
   }
 }
 
