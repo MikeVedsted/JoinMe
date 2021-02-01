@@ -8,7 +8,7 @@
   &__user-info {
     @include flexStart;
     align-items: center;
-    width: 300px;
+    width: 260px;
   }
 
   &__link {
@@ -33,6 +33,6 @@
     @include iconHoverEffect;
     font-size: $sub-head;
     cursor: pointer;
-    color: #259242;
+    color: $success;
   }
 }
