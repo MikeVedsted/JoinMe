@@ -9,7 +9,6 @@ import { useFormFields } from '../../hooks/useFormFields'
 import { addCommentToEvent } from '../../redux/actions/event'
 import { EventCommentInputProps, AppState } from '../../Types'
 import './EventCommentInput.scss'
-import { setErrors } from '../../redux/actions'
 
 const EventCommentInput = ({ eventId }: EventCommentInputProps) => {
   const dispatch = useDispatch()
@@ -18,14 +17,9 @@ const EventCommentInput = ({ eventId }: EventCommentInputProps) => {
   )
   const [fields, handleFields] = useFormFields({ comment: '' })
 
-  const handleSubmit = async (event: React.FormEvent) => {
+  const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
-    try {
-      dispatch(addCommentToEvent(eventId, fields))
-    } catch (error) {
-      const { status, message } = error
-      dispatch(setErrors(status, message))
-    }
+    dispatch(addCommentToEvent(eventId, fields))
   }
 
   return (

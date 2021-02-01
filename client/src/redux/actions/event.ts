@@ -18,7 +18,9 @@ import {
   FETCH_REQUESTED_EVENT_SUCCESS,
   FETCH_CONFIRMED_EVENT_SUCCESS,
   END_EVENT_SUCCESS,
-  CANCEL_REQUEST_SUCCESS
+  CANCEL_REQUEST_SUCCESS,
+  GET_EVENT_COMMENTS_SUCCESS,
+  ADD_COMMENT
 } from '../../Types'
 
 export const fetchAllEvents = (searchParams: SearchParams) => async (
@@ -93,12 +95,51 @@ const fetchConfirmedEventsSuccess = (confirmedEvents: EventObject[]) => {
   }
 }
 
-export const addCommentToEvent = async (
+export const getEventComments = (eventId: string) => async (
+  dispatch: Dispatch
+) => {
+  try {
+    const { data } = await axios.get(`/api/v1/comments/${eventId}`)
+    dispatch(getEventCommentsSuccess(data, eventId))
+  } catch (error) {
+    const { status, message } = error
+    dispatch(setErrors(status, message))
+  }
+}
+
+export const getEventCommentsSuccess = (
+  comments: Comment[],
+  eventId: string
+) => {
+  return {
+    type: GET_EVENT_COMMENTS_SUCCESS,
+    payload: {
+      comments,
+      eventId
+    }
+  }
+}
+
+export const addCommentToEvent = (
   eventId: string,
   comment: CommentSubmission
-) => {
-  const { data } = await axios.post(`/api/v1/comments/${eventId}`, comment)
-  return data
+) => async (dispatch: Dispatch) => {
+  try {
+    const { data } = await axios.post(`/api/v1/comments/${eventId}`, comment)
+    dispatch(addComment(data))
+  } catch (error) {
+    const { status, message } = error
+    dispatch(setErrors(status, message))
+  }
+}
+
+export const addComment = (comment: Comment) => {
+  return {
+    type: ADD_COMMENT,
+    payload: {
+      comment
+    }
+  }
 }
 
 export const endEvent = (event_id: string) => async (dispatch: Dispatch) => {
