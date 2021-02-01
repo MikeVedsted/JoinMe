@@ -36,6 +36,14 @@
   }
 }
 
+@mixin iconButton {
+  background-color: transparent;
+    
+  &:hover {
+    background-color: rgba(226, 226, 226, 0.5);
+  }
+}
+
 @mixin setFormField {
   background-color: transparent;
   padding-top: calc(#{$smallSpacing/4});
