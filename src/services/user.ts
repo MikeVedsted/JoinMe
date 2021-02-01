@@ -50,10 +50,19 @@ const googleLogin = async (id_token: string, res: Response) => {
 const findUserById = async (userId: string) => {
   try {
     const DBResponse = await db.query(findUserByIdQ, [userId])
-    const user: User = DBResponse.rows[0]
-    return user
+    console.log(DBResponse)
+    if (DBResponse.rows.length === 0) {
+      throw { status: 404, message: 'No found user' }
+    } else {
+      const user: User = DBResponse.rows[0]
+      return user
+    }
   } catch (error) {
-    return error
+    if (error.status) {
+      return error
+    } else {
+      return { status: 500, message: 'Bad Request', error: error }
+    }
   }
 }
 
