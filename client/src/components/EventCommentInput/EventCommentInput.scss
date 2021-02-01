@@ -3,7 +3,7 @@
 .comment-input {
   @include twoItemsInline;
   align-items: flex-end;
-  
+
   & label {
     margin-bottom: 5px;
   }
