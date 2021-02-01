@@ -1,24 +1,14 @@
 @import '../../SCSS/config';
 
 .participant {
+  @include flexSpaceBetween;
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: $smallSpacingMobile;
 
   &__user-info {
-    width: 260px;
-    display: flex;
-    justify-content: flex-start;
+    @include flexStart;
     align-items: center;
-  }
-
-  &__image {
-    width: 30px;
-    height: 30px;
-    object-fit: cover;
-    border-radius: 4px;
+    width: 260px;
   }
 
   &__link {
@@ -26,25 +16,23 @@
   }
 
   &__name {
-    text-align: left;
-    color: $link;
-    font-family: $nunito;
-    font-size: $text;
+    @include text;
+    @include link;
     font-weight: bold;
-    margin: 0;
+    margin-left: $smallSpacingMobile;
   }
 
   &__delete {
+    @include iconHoverEffect;
+    font-size: $sub-head;
     color: $primary;
     cursor: pointer;
-    margin-left: 10px;
   }
 
   &__approve {
-    color: #259242;
+    @include iconHoverEffect;
+    font-size: $sub-head;
     cursor: pointer;
+    color: $success;
   }
-}
-
-@media only screen and (max-width: 600px) {
 }

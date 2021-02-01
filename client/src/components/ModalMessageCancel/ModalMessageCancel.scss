@@ -2,37 +2,29 @@
 
 .modal {
   &__title {
+    @include subheader;
     color: $secondary;
-    font-family: $montserrat;
-    font-size: $sub-head;
+    text-align: center;
+  }
+
+  &__text {
+    @include text;
     text-align: center;
   }
 
   &__buttons {
-    @include twoButtonsInline;
-  }
-
-  &__warning {
-    color: $textDark;
-    font-size: $subtitle;
-    font-family: $nunito;
-    font-weight: 100;
-    text-align: center;
+    @include twoItemsInline;
   }
 }
 
 @media only screen and (max-width: 600px) {
   .modal {
     &__title {
-      margin-top: 40px;
-      font-size: $text;
+      margin-top: $largeSpacing;
     }
 
     &__buttons {
-      flex-direction: column;
-      & * {
-        width: 100%;
-      }
+      @include columnFullWidthItems;
     }
   }
 }

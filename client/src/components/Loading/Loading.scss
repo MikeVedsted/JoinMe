@@ -1,0 +1,86 @@
+@import '../../SCSS/config';
+
+.loading {
+  height: 240px;
+  width: 240px;
+  margin: auto;
+  position: relative;
+
+  &__futbol {
+    @include animatedIcon;
+    animation: futbol 3s linear infinite;
+  }
+
+  &__volley {
+    @include animatedIcon;
+    animation: volley 3s linear infinite;
+  }
+
+  &__basket {
+    @include animatedIcon;
+    animation: basket 3s linear infinite;
+  }
+
+  &__text {
+    @include header;
+    color: $primary;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    top: 100px;
+    margin: 0;
+    animation: text 1.5s linear infinite;
+  }
+}
+
+@keyframes futbol {
+  0%,
+  50%,
+  100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(0, 100px);
+  }
+  75% {
+    transform: translate(0, -100px);
+  }
+}
+
+@keyframes volley {
+  0%,
+  50%,
+  100% {
+    transform: translate(0, -0);
+  }
+  25% {
+    transform: translate(-100px, -100px);
+  }
+  75% {
+    transform: translate(100px, 100px);
+  }
+}
+
+@keyframes basket {
+  0%,
+  50%,
+  100% {
+    transform: translate(-0, -0);
+  }
+  25% {
+    transform: translate(100px, -100px);
+  }
+  75% {
+    transform: translate(-100px, 100px);
+  }
+}
+
+@keyframes text {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}

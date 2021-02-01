@@ -1,7 +1,10 @@
 @import '../../SCSS/config';
 
 .comment-input {
-  width: 100%;
-  margin: 10px 0;
-  display: flex;
+  @include twoItemsInline;
+  align-items: flex-end;
+  
+  & label {
+    margin-bottom: 5px;
+  }
 }

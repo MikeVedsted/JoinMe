@@ -1,25 +1,25 @@
 import React from 'react'
-import { useCookies } from 'react-cookie'
-import axios from 'axios'
+import { useDispatch } from 'react-redux'
 
 import Button from '../Button'
 import FormInputTextArea from '../FormInputTextArea'
 import { useFormFields } from '../../hooks/useFormFields'
-import { EventCommentInputProps } from '../../types'
+import { addCommentToEvent } from '../../redux/actions/event'
+import { EventCommentInputProps } from '../../Types'
 import './EventCommentInput.scss'
+import { setErrors } from '../../redux/actions'
 
 const EventCommentInput = ({ eventId }: EventCommentInputProps) => {
-  const [cookies] = useCookies(['user'])
+  const dispatch = useDispatch()
   const [fields, handleFields] = useFormFields({ comment: '' })
-  const { user_id } = cookies.user
 
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
     try {
-      const data = { comment: fields.comment, userId: user_id }
-      await axios.post(`/api/v1/comments/${eventId}`, data)
+      dispatch(addCommentToEvent(eventId, fields))
     } catch (error) {
-      console.log(error)
+      const { status, message } = error
+      dispatch(setErrors(status, message))
     }
   }
 
@@ -32,7 +32,7 @@ const EventCommentInput = ({ eventId }: EventCommentInputProps) => {
         onChange={handleFields}
         placeholder='Write a comment or ask a question to the creator'
       />
-      <Button type='submit' text='Send' modifier='inline' />
+      <Button type='submit' text='Send' modifier='secondary' />
     </form>
   )
 }

@@ -1,18 +1,26 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-import { CommentProps } from '../../types'
+import ProfileImage from '../ProfileImage'
+import { calculateEventAge } from '../../util/helperFunctions'
+import { CommentProps } from '../../Types'
 import './EventComment.scss'
 
-const EventComment = ({ image, user, text, date }: CommentProps) => {
+const EventComment = ({ image, name, id, text, date }: CommentProps) => {
   return (
     <div className='comment'>
-      <img src={image} alt={user} className='comment__image' />
-      <div className='comment__text'>
-        <h3 className='comment__text--user'>
-          {user + ' '}
-          <span className='comment__text--date'>({date})</span>
-        </h3>
-        <p className='comment__text--comment'>{text}</p>
+      <ProfileImage image={image} alt={name} />
+      <div>
+        <Link to={`/user/${id}`} className='comment__link'>
+          <h3 className='comment__user'>
+            {name + ' '}
+            <span className='comment__date'>
+              {calculateEventAge(date)}
+              {' ago'}
+            </span>
+          </h3>
+        </Link>
+        <p className='comment__text'>{text}</p>
       </div>
     </div>
   )
