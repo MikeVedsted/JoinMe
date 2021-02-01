@@ -6,11 +6,14 @@ import {
   FETCH_REQUESTED_EVENT_SUCCESS,
   FETCH_CONFIRMED_EVENT_SUCCESS,
   END_EVENT_SUCCESS,
-  CANCEL_REQUEST_SUCCESS
+  CANCEL_REQUEST_SUCCESS,
+  GET_EVENT_COMMENTS_SUCCESS,
+  ADD_COMMENT,
+  EventObject
 } from '../../Types'
 
 const initState: EventState = {
-  allEvents: [],
+  allEvents: [] as EventObject[],
   hostedEvents: [],
   requestedEvents: [],
   confirmedEvents: []
@@ -25,8 +28,8 @@ export default function event(
       const { allEvents } = action.payload
       return { ...state, allEvents: allEvents }
     case FETCH_HOSTED_EVENT_SUCCESS:
-      const hostedEvents = action.payload
-      return { ...state, hostedEvents: hostedEvents.hostedEvents }
+      const { hostedEvents } = action.payload
+      return { ...state, hostedEvents: hostedEvents }
     case FETCH_REQUESTED_EVENT_SUCCESS:
       const { requestedEvents } = action.payload
       return { ...state, requestedEvents: requestedEvents }
@@ -67,14 +70,25 @@ export default function event(
         ...state,
         requestedEvents: requestedWithoutRequest
       }
+    case GET_EVENT_COMMENTS_SUCCESS:
+      const id = action.payload.eventId
+      const eventIndex = state.allEvents.findIndex(
+        (toCheck) => toCheck.event_id === id
+      )
+      const { comments } = action.payload
+      const allWithComments = state.allEvents
+      allWithComments[eventIndex].comments = comments
+      return { ...state, allEvents: allWithComments }
+    case ADD_COMMENT:
+      const { comment } = action.payload
+      const { event } = action.payload.comment
+      const indexToAddTo = state.allEvents.findIndex(
+        (toCheck) => toCheck.event_id === event
+      )
+      let events = [...state.allEvents]
+      events[indexToAddTo].comments.push(comment)
+      return { ...state, allEvents: events }
     default:
       return state
   }
 }
-
-// const index = state.inCart.findIndex((p) => p.name === hat.name)
-// if (index >= 0) {
-//   state.inCart.splice(index, 1)
-//   return { ...state, inCart: [...state.inCart] }
-// }
-// return state

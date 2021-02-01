@@ -1,4 +1,5 @@
 import { UserInState, EventObject } from './index'
+import { CommentResponse } from './objects'
 
 // ==== //
 // @APP //
@@ -23,6 +24,8 @@ export const FETCH_REQUESTED_EVENT_SUCCESS = 'FETCH_REQUESTED_EVENT_SUCCESS'
 export const FETCH_CONFIRMED_EVENT_SUCCESS = 'FETCH_CONFIRMED_EVENT_SUCCESS'
 export const END_EVENT_SUCCESS = 'END_EVENT_SUCCESS'
 export const CANCEL_REQUEST_SUCCESS = 'CANCEL_REQUEST_SUCCESS'
+export const ADD_COMMENT = 'ADD_COMMENT'
+export const GET_EVENT_COMMENTS_SUCCESS = 'GET_EVENT_COMMENTS_SUCCESS'
 
 export type EventActions =
   | FetchAllEventSuccess
@@ -31,6 +34,8 @@ export type EventActions =
   | FetchConfirmedEventSuccess
   | EndEventSuccess
   | CancelRequestSuccess
+  | GetEventCommentsSuccess
+  | AddComment
 
 export type EventState = {
   allEvents: EventObject[]
@@ -80,6 +85,22 @@ export type CancelRequestSuccess = {
     requestId: string
   }
 }
+
+export type GetEventCommentsSuccess = {
+  type: typeof GET_EVENT_COMMENTS_SUCCESS
+  payload: {
+    comments: CommentResponse[]
+    eventId: string
+  }
+}
+
+export type AddComment = {
+  type: typeof ADD_COMMENT
+  payload: {
+    comment: CommentResponse
+  }
+}
+
 // ===== //
 // @USER //
 // ===== //
