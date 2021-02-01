@@ -144,14 +144,14 @@
       > * {
         width: calc(100% / 3);
       }
-  
+
       &--text {
         font-size: $sub-head;
         margin: $smallSpacing;
         text-align: center;
         flex-basis: 7em;
       }
-  
+
       &--divider-optional {
         @include separator;
         display: block;

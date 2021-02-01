@@ -50,7 +50,6 @@ const googleLogin = async (id_token: string, res: Response) => {
 const findUserById = async (userId: string) => {
   try {
     const DBResponse = await db.query(findUserByIdQ, [userId])
-    console.log(DBResponse)
     if (DBResponse.rows.length === 0) {
       throw { status: 404, message: 'No found user' }
     } else {
