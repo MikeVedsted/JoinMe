@@ -23,6 +23,28 @@ export type ButtonProps = {
   id?: string
 }
 
+export type IconButtonProps = {
+  type: 'button' | 'submit' | 'reset'
+  icon: IconProp
+  size?:
+    | 'xs'
+    | 'lg'
+    | 'sm'
+    | '1x'
+    | '2x'
+    | '3x'
+    | '4x'
+    | '5x'
+    | '6x'
+    | '7x'
+    | '8x'
+    | '9x'
+    | '10x'
+  modifier?: 'primary' | 'secondary'
+  onClick?: (() => void) | ((id: any) => void)
+  id?: string
+}
+
 export type AutoCompleteProps = {
   handleAddress: (a: any) => void
   label: string

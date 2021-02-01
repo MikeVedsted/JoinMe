@@ -1,0 +1,19 @@
+@import '../../SCSS/config';
+
+.icon {
+  border: none;
+  padding: 12px;
+  border-radius: 100%;
+  position: absolute;
+  right: 0;
+
+  &--primary {
+    @include iconButton;
+    color: $primary;
+  }
+
+  &--secondary {
+    @include iconButton;
+    color: $textDark;
+  }
+}
