@@ -74,6 +74,6 @@ export const findPublicUserInfo = async (req: Request, res: Response, next: Next
     const { userId } = req.params
     return res.json(await UserService.findPublicUserInfo(userId))
   } catch (error) {
-    next(new NotFoundError('User not found', error))
+    res.json({ status: 'error', message: 'No found user' })
   }
 }

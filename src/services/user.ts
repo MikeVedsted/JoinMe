@@ -50,10 +50,18 @@ const googleLogin = async (id_token: string, res: Response) => {
 const findUserById = async (userId: string) => {
   try {
     const DBResponse = await db.query(findUserByIdQ, [userId])
-    const user: User = DBResponse.rows[0]
-    return user
+    if (DBResponse.rows.length === 0) {
+      throw { status: 404, message: 'No found user' }
+    } else {
+      const user: User = DBResponse.rows[0]
+      return user
+    }
   } catch (error) {
-    return error
+    if (error.status) {
+      return error
+    } else {
+      return { status: 500, message: 'Bad Request', error: error }
+    }
   }
 }
 
@@ -170,13 +178,12 @@ const findParticipatingEvents = async (user_id: string) => {
 }
 
 const findPublicUserInfo = async (userId: string) => {
-  try {
-    const DBResponse = await db.query(findPublicUserQ, [userId])
+  const DBResponse = await db.query(findPublicUserQ, [userId])
+  if (DBResponse.rows.length > 0) {
     const publicInfo: Partial<User> = DBResponse.rows[0]
-
     return publicInfo
-  } catch (error) {
-    return error
+  } else {
+    throw 'No found user'
   }
 }
 

@@ -1,7 +1,7 @@
 import { ErrorState, ErrorActions, SET_ERRORS, CLEAR_ERRORS } from '../../Types'
 
 const initState = {
-  status: NaN,
+  status: '',
   message: ''
 }
 
@@ -14,7 +14,7 @@ export default function error(
       const { status, message } = action.payload
       return { ...state, status: status, message: message }
     case CLEAR_ERRORS:
-      return { ...state, status: NaN, message: '' }
+      return { ...state, status: '', message: '' }
     default:
       return state
   }

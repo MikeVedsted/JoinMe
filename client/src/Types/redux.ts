@@ -108,6 +108,7 @@ export type UserState = {
   profile_image: string
   created_at: string
   interests: string[]
+  full_address?: string
 }
 
 export type AddUserAction = {
@@ -196,7 +197,7 @@ export const CLEAR_ERRORS = 'CLEAR_ERRORS'
 export type ErrorActions = any
 
 export type ErrorState = {
-  status: number
+  status: string
   message: string
 }
 
