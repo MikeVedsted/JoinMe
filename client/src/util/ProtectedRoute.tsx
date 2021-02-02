@@ -12,8 +12,8 @@ const ProtectedRoute = ({
 }: ProtectedRouteProps) => {
   const location = useLocation()
   const dispatch = useDispatch()
+  const { user } = useSelector((state: AppState) => state)
   const { isAuthenticated } = useSelector((state: AppState) => state.auth)
-  const user = useSelector((state: AppState) => state.user)
 
   useEffect(() => {
     dispatch(clearErrors())
@@ -24,8 +24,8 @@ const ProtectedRoute = ({
     <Route
       {...rest}
       render={(props) =>
-        user ? (
-          isAuthenticated && <Component {...props} />
+        isAuthenticated ? (
+          <Component {...props} />
         ) : (
           <Redirect to={{ pathname: '/get-started' }} />
         )
