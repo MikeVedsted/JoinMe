@@ -1,12 +1,8 @@
 import { Pool } from 'pg'
-import { PG_USER, PG_HOST, PG_DB, PG_PW, PG_PORT } from '../../src/util/secrets'
+import { PG_URI } from '../../src/util/secrets'
 
 const pool = new Pool({
-  user: PG_USER,
-  host: PG_HOST,
-  database: PG_DB,
-  password: PG_PW,
-  port: PG_PORT,
+  connectionString: process.env.DATABASE_URL || PG_URI,
   ssl: {
     rejectUnauthorized: false
   }

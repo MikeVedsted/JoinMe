@@ -16,7 +16,8 @@
     "prettier-format": "prettier --config .prettierrc \"src/**/*.ts\" --write",
     "format-backend": "npm run prettier-format && npm run lint",
     "format-client": "cd client && npm run format-client",
-    "format-all": "npm run format-client && npm run format-backend"
+    "format-all": "npm run format-client && npm run format-backend",
+    "heroku-postbuild": "npm run install-client && cd client && npm run build"
   },
   "repository": {
     "type": "git",
