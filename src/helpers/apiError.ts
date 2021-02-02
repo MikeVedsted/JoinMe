@@ -1,3 +1,5 @@
+import { Response } from 'express'
+
 export default class ApiError extends Error {
   constructor(readonly statusCode: number, readonly message: string, readonly source?: Error) {
     super()
@@ -31,5 +33,21 @@ export class UnauthorizedError extends ApiError {
 export class BadRequestError extends ApiError {
   constructor(readonly message: string = 'Bad Request', source?: Error) {
     super(400, message, source)
+  }
+}
+
+export class CustomError {
+  constructor(readonly res: Response, readonly statusCode: number, readonly message: string) {
+    this.res = res
+    this.statusCode = statusCode
+    this.message = message
+  }
+
+  get sendError() {
+    return this.returnError()
+  }
+  // Method
+  returnError() {
+    return this.res.json({ status: this.statusCode, message: this.message })
   }
 }

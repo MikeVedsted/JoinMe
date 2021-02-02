@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 
 import UserService from '../services/user'
-import { NotFoundError, BadRequestError } from '../helpers/apiError'
+import { NotFoundError, BadRequestError, CustomError } from '../helpers/apiError'
 import { AuthRequest } from '../types'
 
 export const googleLogin = async (req: Request, res: Response, next: NextFunction) => {
@@ -38,7 +38,7 @@ export const findUserById = async (req: Request, res: Response, next: NextFuncti
     const { userId } = req.params
     return res.json(await UserService.findUserById(userId))
   } catch (error) {
-    next(new NotFoundError('User not found', error))
+    next(new CustomError(res, error.status, error.message).sendError)
   }
 }
 
