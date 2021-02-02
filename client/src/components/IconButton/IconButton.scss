@@ -16,4 +16,12 @@
     @include iconButton;
     color: $textDark;
   }
+
+  &:disabled {
+    color: $textDim;
+
+    &:hover {
+      background-color: white;
+    }
+  }
 }
