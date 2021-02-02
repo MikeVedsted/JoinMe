@@ -20,8 +20,6 @@ export const authenticateUser = (id_token: string) => async (
     dispatch(closeNavDropdown())
     dispatch(closeModal())
     dispatch(setLoaded())
-    const { created_at, user_id } = data
-    return { created_at, user_id }
   } catch (error) {
     const { status, message } = error
     dispatch(setErrors(status, message))
