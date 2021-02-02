@@ -58,9 +58,9 @@ const findUserById = async (userId: string) => {
     }
   } catch (error) {
     if (error.status) {
-      return error
+      throw error
     } else {
-      return { status: 500, message: 'Bad Request', error: error }
+      throw { status: 500, message: 'Bad Request', error: error }
     }
   }
 }
