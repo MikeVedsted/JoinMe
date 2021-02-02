@@ -34,7 +34,6 @@ yarn.lock
 package-lock.json
 
 # compiled output
-/dist
 
 # eslintcache
 client/.eslintcache
