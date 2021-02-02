@@ -22,7 +22,9 @@ const GoogleUserLogin = () => {
 
   return (
     <GoogleLogin
-      clientId={GOOGLE_CLIENT}
+      clientId={
+        '830151949816-6fdv9tqs8h1e9me2rs2aa5l6h9f57lrd.apps.googleusercontent.com'
+      }
       buttonText='Google Login'
       onSuccess={responseSuccessGoogle}
       onFailure={responseFailGoogle}
