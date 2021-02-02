@@ -10,7 +10,7 @@
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "install-client": "cd client && npm install",
     "install-all": "concurrently --kill-others-on-fail \"npm install\" \"npm run install-client\"",
-    "start": "node ./build/server.ts",
+    "start": "node ./dist/server.js",
     "build": "tsc",
     "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix",
     "prettier-format": "prettier --config .prettierrc \"src/**/*.ts\" --write",

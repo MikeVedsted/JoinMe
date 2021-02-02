@@ -1,8 +1,7 @@
 import { Pool } from 'pg'
-import { PG_URI } from '../../src/util/secrets'
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL || PG_URI,
+  connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false
   }
