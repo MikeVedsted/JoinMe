@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { EventType } from '../types'
+import { fetchAllEvents } from '../redux/actions/event'
+import { AppState } from '../Types'
 
 const useEventDisplay = () => {
-  const [events, setEvents] = useState<EventType[]>([])
+  const dispatch = useDispatch()
+  const { allEvents } = useSelector((state: AppState) => state.event)
+
   const [searchConditions, setSearchConditions] = useState({
     category: '',
     location: {
@@ -29,29 +32,14 @@ const useEventDisplay = () => {
   }
 
   const handleSearch = () => {
-    fetchEvents()
+    dispatch(fetchAllEvents(searchConditions))
   }
 
   useEffect(() => {
-    fetchEvents()
+    dispatch(fetchAllEvents(searchConditions))
   }, [])
 
-  const fetchEvents = async () => {
-    try {
-      const { data } = await axios.get('/api/v1/events', {
-        params: {
-          category: searchConditions.category,
-          lat: searchConditions.location.lat,
-          lng: searchConditions.location.lng,
-          distance: searchConditions.distance
-        }
-      })
-      setEvents(data)
-    } catch (error) {
-      throw error
-    }
-  }
-  return { events, handleFieldChange, handleAddressChange, handleSearch }
+  return { allEvents, handleFieldChange, handleAddressChange, handleSearch }
 }
 
 export default useEventDisplay

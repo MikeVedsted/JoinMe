@@ -1,23 +1,19 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
-import { useCookies } from 'react-cookie'
 
 import NotFound from '../../components/NotFound'
 import EventList from '../../components/EventList'
 import EventForm from '../../components/EventForm'
 import MyEventsSidebar from '../../components/MyEventsSidebar'
-import useParticipatingEvents from '../../hooks/useParticipatingEvents'
-import useRequestedEvents from '../../hooks/useRequestedEvents'
-import useHostedEvents from '../../hooks/useHostedEvents'
+import { AppState } from '../../Types'
 import './MyEventsPage.scss'
 
 const MyEventsPage = () => {
   const { pathname } = useLocation()
-  const [cookies] = useCookies(['user'])
-  const { user_id } = cookies.user
-  const [requestedEvents] = useRequestedEvents()
-  const [participatingEvents] = useParticipatingEvents()
-  const [hostedEvents] = useHostedEvents(user_id)
+  const { hostedEvents, requestedEvents, confirmedEvents } = useSelector(
+    (state: AppState) => state.event
+  )
 
   const addContent = () => {
     if (pathname.includes('/hosted'))
@@ -41,7 +37,7 @@ const MyEventsPage = () => {
         <EventList
           type='confirmed'
           title='Events you are registered for'
-          events={participatingEvents}
+          events={confirmedEvents}
         />
       )
     if (pathname.includes('/create-new')) return <EventForm />
@@ -52,10 +48,10 @@ const MyEventsPage = () => {
 
   return (
     <div className='my-events'>
-      <div className='my-events__controls'>
+      <div className='my-events__left-column'>
         <MyEventsSidebar />
       </div>
-      <div className='my-events__content'>{addContent()}</div>
+      <div className='my-events__right-column'>{addContent()}</div>
     </div>
   )
 }

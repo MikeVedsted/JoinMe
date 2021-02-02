@@ -28,7 +28,8 @@ const googleLogin = async (id_token: string, res: Response) => {
 
     if (!user) {
       const createUser = await db.query(createUserQ, [picture, given_name, family_name, email])
-      const newUser: User = createUser.rows[0]
+      const DBResponse = await db.query(findUserByIdQ, [createUser.rows[0].user_id])
+      const newUser: User = DBResponse.rows[0]
       const accessToken = generateAccessToken(newUser.user_id)
       const refreshToken = generateRefreshToken(newUser.user_id)
       res.cookie('x-auth-access-token', accessToken)
@@ -49,10 +50,18 @@ const googleLogin = async (id_token: string, res: Response) => {
 const findUserById = async (userId: string) => {
   try {
     const DBResponse = await db.query(findUserByIdQ, [userId])
-    const user: User = DBResponse.rows[0]
-    return user
+    if (DBResponse.rows.length === 0) {
+      throw { status: 404, message: 'No found user' }
+    } else {
+      const user: User = DBResponse.rows[0]
+      return user
+    }
   } catch (error) {
-    return error
+    if (error.status) {
+      return error
+    } else {
+      return { status: 500, message: 'Bad Request', error: error }
+    }
   }
 }
 
@@ -118,7 +127,8 @@ const updateUser = async (userId: string, update: Partial<User>) => {
       date_of_birth,
       gender
     ])
-    const updatedUser: User = updateUser.rows[0]
+    const DBResponse = await db.query(findUserByIdQ, [updateUser.rows[0].user_id])
+    const updatedUser: User = DBResponse.rows[0]
     return updatedUser
   } catch (error) {
     return error
@@ -168,13 +178,12 @@ const findParticipatingEvents = async (user_id: string) => {
 }
 
 const findPublicUserInfo = async (userId: string) => {
-  try {
-    const DBResponse = await db.query(findPublicUserQ, [userId])
+  const DBResponse = await db.query(findPublicUserQ, [userId])
+  if (DBResponse.rows.length > 0) {
     const publicInfo: Partial<User> = DBResponse.rows[0]
-
     return publicInfo
-  } catch (error) {
-    return error
+  } else {
+    throw 'No found user'
   }
 }
 

@@ -14,7 +14,10 @@ import {
   faFilter,
   faTrash,
   faEllipsisV,
-  faUserCheck
+  faUserCheck,
+  faBasketballBall,
+  faFutbol,
+  faVolleyballBall
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -32,5 +35,8 @@ library.add(
   faFilter,
   faTrash,
   faEllipsisV,
-  faUserCheck
+  faUserCheck,
+  faBasketballBall,
+  faFutbol,
+  faVolleyballBall
 )

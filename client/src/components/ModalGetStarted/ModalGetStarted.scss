@@ -1,0 +1,16 @@
+@import '../../SCSS/config';
+
+.login-modal {
+  @include flexColumnCenter;
+  text-align: center;
+
+  &__title {
+    @include header;
+    color: $primary;
+  }
+
+  &__text {
+    @include text;
+    margin-top: 0;
+  }
+}

@@ -1,37 +1,28 @@
 @import '../../SCSS/config';
 
 .profile {
-  padding-top: 100px;
-  margin: 0 2.5em;
+  @include flexStart;
+  padding: $pagePadding;
   justify-content: stretch;
   align-items: flex-start;
-  @include flexStart;
 
   &__sidebar {
     @include flexCenter;
     flex-direction: column;
     flex-basis: 30%;
-    flex-shrink: 10%;
     height: fit-content;
-    position: sticky;
-    top: 122px;
-
-    & * {
-      width: 100%;
-    }
 
     &--image {
       width: auto;
-      height: 30vh;
-      margin-bottom: 26px;
-      border-radius: 8px;
+      height: 200px;
+      margin-bottom: $smallSpacing;
     }
   }
 
   &__main {
     @include flexStart;
     flex-direction: column;
-    margin-left: 40px;
+    margin-left: $largeSpacing;
     flex-basis: 70%;
   }
 
@@ -40,15 +31,12 @@
     flex-direction: row;
 
     &--text {
-      font-family: $montserrat;
-      font-size: $sub-head;
-      font-weight: 600;
-      flex-basis: 20vw;
+      @include header;
+      flex-basis: 15em;
     }
 
     &--divider {
-      border: 1px solid $lineDim;
-      width: 100%;
+      @include separator;
     }
 
     &--divider-optional {
@@ -58,61 +46,122 @@
 
   &__details {
     display: grid;
-    grid-template-columns: 20vh auto;
+    grid-template-columns: 49% auto;
     justify-items: start;
     align-items: center;
-    column-gap: 10vh;
+    max-width: 800px;
+    column-gap: 2%;
 
     &--header {
       font-family: $nunito;
+    }
+
+    &--text {
+      margin-left: $smallSpacing * 1.5;
+    }
+  }
+
+  & .event-list {
+    &__title {
+      @include flexRowCenter;
+      text-align: left;
+      font-size: 30px;
+      margin: revert;
+      justify-content: space-between;
+
+      &::after {
+        @include separator;
+        content: '';
+        flex-basis: calc(100% - 13em);
+      }
     }
   }
 }
 
 @media only screen and (max-width: 1024px) {
   .profile {
-    flex-direction: column;
+    @include flexColumnCenter;
+
+    & .event-list {
+      &__title {
+        @include flexRowCenter;
+        justify-content: space-between;
+        text-align: center;
+
+        &::after {
+          @include separator;
+          content: '';
+          flex-basis: calc(100% - 13em);
+        }
+      }
+    }
 
     &__sidebar {
       position: static;
     }
 
     &__main {
-      margin-left: 0vh;
-      margin-top: 5vh;
+      margin: $largeSpacingMobile 0;
     }
 
     &__header {
       &--text {
-        flex-basis: 40vw;
+        flex-basis: 15em;
       }
     }
   }
 
   .profile__sidebar button {
-    width: 30vw;
+    max-width: 40vw;
   }
 }
 
-@media only screen and (max-width: 765px) {
-  .profile__header {
-    > * {
-      width: calc(100% / 3);
+@media only screen and (max-width: 768px) {
+  .profile {
+    & .event-list {
+      &__title {
+        @include flexRowCenter;
+        font-size: $sub-head;
+        text-align: center;
+
+        &::after {
+          @include separator;
+          content: '';
+          flex-basis: calc(100% / 3);
+          margin-left: 10px;
+        }
+
+        &::before {
+          @include separator;
+          content: '';
+          flex-basis: calc(100% / 3);
+          margin-right: 10px;
+        }
+      }
     }
 
-    &--text {
-      font-size: 20px;
-      text-align: center;
+    &__header {
+      > * {
+        width: calc(100% / 3);
+      }
+
+      &--text {
+        font-size: $sub-head;
+        margin: $smallSpacing;
+        text-align: center;
+        flex-basis: 7em;
+      }
+
+      &--divider-optional {
+        @include separator;
+        display: block;
+        width: calc(100% / 3);
+      }
     }
 
-    &--divider-optional {
-      display: block;
-      border: 1px solid $lineDim;
+    &__details {
+      grid-template-columns: 12vh auto;
+      column-gap: 2vh;
     }
-  }
-
-  .profile__details {
-    grid-template-columns: 12vh auto;
-    column-gap: 2vh;
   }
 }

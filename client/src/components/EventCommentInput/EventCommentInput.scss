@@ -1,7 +1,12 @@
 @import '../../SCSS/config';
 
 .comment-input {
-  width: 100%;
-  margin: 10px 0;
-  display: flex;
+  @include flexEnd;
+  padding: $smallSpacing;
+
+  & label {
+    flex-basis: 85%;
+    margin-bottom: 0;
+    padding: 0 $smallSpacing;
+  }
 }

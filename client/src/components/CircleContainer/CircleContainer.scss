@@ -1,0 +1,47 @@
+@import '../../SCSS/config';
+
+.circle {
+  @include flexColumnCenter;
+  justify-content: center;
+  background-color: $primary;
+  text-align: center;
+  border-radius: 50%;
+  opacity: 0.8;
+  height: 30vw;
+  width: 30vw;
+  margin: auto -1vw;
+
+  &__title {
+    @include subheader;
+    color: $textLight;
+    margin-bottom: 0;
+    width: 80%;
+  }
+
+  &__text {
+    @include text;
+    color: $textLight;
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .circle {
+    width: 45vw;
+    height: 45vw;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .circle {
+    width: 80vw;
+    height: 80vw;
+    margin: $smallSpacingMobile;
+    background: $primary;
+    background: radial-gradient(
+      circle,
+      rgba(224, 54, 0, 0) 0%,
+      rgba(224, 54, 0, 0.8) 100%
+    );
+  }
+}

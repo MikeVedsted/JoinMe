@@ -54,8 +54,8 @@ export type AuthRequest = Request & {
 
 export type Address = {
   street: string
-  number: number
-  postal_code: number
+  number: string
+  postal_code: string
   city: string
   country: string
   lat: number

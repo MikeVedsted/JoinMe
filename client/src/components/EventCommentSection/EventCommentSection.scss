@@ -1,0 +1,14 @@
+@import '../../SCSS/config';
+
+.comment-section {
+  width: 100%;
+
+  &__title {
+    @include subheader;
+    color: $primary;
+  }
+
+  &__placeholder {
+    @include subtitle;
+  }
+}

@@ -1,39 +1,29 @@
 @import '../../SCSS/config';
 
 .comment {
-  width: 100%;
-  background-color: $backgroundDim;
-  margin: 10px 0;
+  @include borderRadiusSmall;
   display: flex;
-  border-radius: 8px;
+  padding: $smallSpacing;
+  background-color: $backgroundDim;
 
-  &__image {
-    max-height: 40px;
-    margin: 15px;
-    border-radius: 8px;
+  &__link {
+    @include link;
+  }
+
+  &__user {
+    @include text;
+    margin: 0;
+    padding: 0 $smallSpacing;
+  }
+
+  &__date {
+    color: $textDim;
+    font-size: $subtitle;
   }
 
   &__text {
-    color: $textDark;
-    display: flex;
-    flex-direction: column;
-    margin: 15px;
-
-    &--user {
-      font: $nunito;
-      font-size: $sub-head;
-      margin: 0;
-    }
-
-    &--date {
-      color: $textDim;
-      font-size: $subtitle;
-    }
-
-    &--comment {
-      font: $montserrat;
-      font-size: $text;
-      margin: 0;
-    }
+    @include text;
+    margin: 0;
+    padding: 0 $smallSpacing;
   }
 }

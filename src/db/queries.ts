@@ -70,9 +70,16 @@ export const deleteParticipantQ = `
 // ------------
 
 export const findUserByEmailQ = `
-  SELECT * 
-  FROM userk 
-  WHERE email = $1
+  SELECT 
+    u.*, 
+    street, number, city, postal_code, country, lat, lng,
+    array_agg(c.name) as interests
+  FROM userk u
+  LEFT JOIN user_interest ui ON u.user_id = ui.userk
+  LEFT JOIN category c ON c.category_id = ui.interest
+  LEFT JOIN address a ON u.base_address = a.address_id
+  WHERE u.email = $1
+  GROUP BY u.user_id, a.address_id;  
 `
 
 export const createUserQ = `
@@ -235,9 +242,14 @@ export const findEventsByCreatorQ = `
   INNER JOIN address ON address.address_id = event.address
   INNER JOIN category ON category.category_id = event.category
   INNER JOIN userk ON userk.user_id = event.created_by
-  WHERE created_by = $1;
+  WHERE created_by = $1
 `
 
+export const findRawEventByIdQ = `
+  SELECT *
+  FROM event
+  WHERE event_id = $1
+`
 export const updateEventQ = `
   UPDATE event
   SET
@@ -247,9 +259,9 @@ export const updateEventQ = `
     description = $5,
     max_participants = $6,
     expires_at = $7,
-    image = $8
+    image = $8,
     category = (SELECT category_id FROM category WHERE name = $9),
-    address=$10
+    address= $10
   WHERE event_id = $1
   RETURNING *
 `

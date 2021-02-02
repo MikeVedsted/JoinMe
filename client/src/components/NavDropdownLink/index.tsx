@@ -1,20 +1,20 @@
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { NavDropdownLinkProps } from '../../types'
+import { toggleNavDropdown } from '../../redux/actions'
+import { NavDropdownLinkProps, AppState } from '../../Types'
 
-const NavDropdownLink = ({
-  text,
-  icon,
-  destination,
-  setDropdownHidden
-}: NavDropdownLinkProps) => {
+const NavDropdownLink = ({ text, icon, destination }: NavDropdownLinkProps) => {
+  const { hideNavDropdown } = useSelector((state: AppState) => state.ui)
+  const dispatch = useDispatch()
+
   return (
     <Link
       to={destination}
       className='nav-dropdown__link'
-      onClick={() => setDropdownHidden(true)}
+      onClick={() => dispatch(toggleNavDropdown(hideNavDropdown))}
     >
       <li className='nav-dropdown__item'>
         <FontAwesomeIcon icon={icon} className='nav-dropdown__item--icon' />
