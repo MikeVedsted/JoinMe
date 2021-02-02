@@ -58,6 +58,7 @@ export type EventObject = {
   is_owner?: boolean
   is_requested?: boolean
   is_confirmed?: boolean
+  comments: CommentResponse[]
 }
 
 export type AddressSelection = {
@@ -88,6 +89,17 @@ export type Comment = {
 
 export type CommentSubmission = {
   comment: string
+}
+
+export type CommentResponse = {
+  comment: string
+  comment_id: string
+  commented_at: string
+  event: string
+  first_name: string
+  last_name: string
+  profile_image: string
+  user_id: string
 }
 
 export type Requester = {

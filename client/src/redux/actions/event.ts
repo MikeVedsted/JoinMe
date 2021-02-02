@@ -14,11 +14,13 @@ import {
   EventSubmission,
   EventObject,
   FETCH_ALL_EVENTS_SUCCESS,
-  FETCH_HOSTED_EVENT_SUCCESS,
-  FETCH_REQUESTED_EVENT_SUCCESS,
-  FETCH_CONFIRMED_EVENT_SUCCESS,
+  FETCH_HOSTED_EVENTS_SUCCESS,
+  FETCH_REQUESTED_EVENTS_SUCCESS,
+  FETCH_CONFIRMED_EVENTS_SUCCESS,
   END_EVENT_SUCCESS,
-  CANCEL_REQUEST_SUCCESS
+  CANCEL_REQUEST_SUCCESS,
+  GET_EVENT_COMMENTS_SUCCESS,
+  ADD_COMMENT
 } from '../../Types'
 
 export const fetchAllEvents = (searchParams: SearchParams) => async (
@@ -69,7 +71,7 @@ const fetchAllEventsSuccess = (allEvents: EventObject[]) => {
 
 const fetchHostedEventsSuccess = (hostedEvents: EventObject[]) => {
   return {
-    type: FETCH_HOSTED_EVENT_SUCCESS,
+    type: FETCH_HOSTED_EVENTS_SUCCESS,
     payload: {
       hostedEvents
     }
@@ -78,7 +80,7 @@ const fetchHostedEventsSuccess = (hostedEvents: EventObject[]) => {
 
 const fetchRequestedEventsSuccess = (requestedEvents: EventObject[]) => {
   return {
-    type: FETCH_REQUESTED_EVENT_SUCCESS,
+    type: FETCH_REQUESTED_EVENTS_SUCCESS,
     payload: {
       requestedEvents
     }
@@ -86,19 +88,58 @@ const fetchRequestedEventsSuccess = (requestedEvents: EventObject[]) => {
 }
 const fetchConfirmedEventsSuccess = (confirmedEvents: EventObject[]) => {
   return {
-    type: FETCH_CONFIRMED_EVENT_SUCCESS,
+    type: FETCH_CONFIRMED_EVENTS_SUCCESS,
     payload: {
       confirmedEvents
     }
   }
 }
 
-export const addCommentToEvent = async (
+export const getEventComments = (eventId: string) => async (
+  dispatch: Dispatch
+) => {
+  try {
+    const { data } = await axios.get(`/api/v1/comments/${eventId}`)
+    dispatch(getEventCommentsSuccess(data, eventId))
+  } catch (error) {
+    const { status, message } = error
+    dispatch(setErrors(status, message))
+  }
+}
+
+export const getEventCommentsSuccess = (
+  comments: Comment[],
+  eventId: string
+) => {
+  return {
+    type: GET_EVENT_COMMENTS_SUCCESS,
+    payload: {
+      comments,
+      eventId
+    }
+  }
+}
+
+export const addCommentToEvent = (
   eventId: string,
   comment: CommentSubmission
-) => {
-  const { data } = await axios.post(`/api/v1/comments/${eventId}`, comment)
-  return data
+) => async (dispatch: Dispatch) => {
+  try {
+    const { data } = await axios.post(`/api/v1/comments/${eventId}`, comment)
+    dispatch(addComment(data))
+  } catch (error) {
+    const { status, message } = error
+    dispatch(setErrors(status, message))
+  }
+}
+
+export const addComment = (comment: Comment) => {
+  return {
+    type: ADD_COMMENT,
+    payload: {
+      comment
+    }
+  }
 }
 
 export const endEvent = (event_id: string) => async (dispatch: Dispatch) => {

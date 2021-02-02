@@ -3,7 +3,6 @@
 .comment {
   @include borderRadiusSmall;
   display: flex;
-  margin: $smallSpacing 0 0;
   padding: $smallSpacing;
   background-color: $backgroundDim;
 

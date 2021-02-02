@@ -32,7 +32,7 @@
 
     &--text {
       @include header;
-      flex-basis: 20vw;
+      flex-basis: 15em;
     }
 
     &--divider {
@@ -60,15 +60,41 @@
       margin-left: $smallSpacing * 1.5;
     }
   }
-}
 
-.event-list {
-  margin-top: $largeSpacing;
+  & .event-list {
+    &__title {
+      @include flexRowCenter;
+      text-align: left;
+      font-size: 30px;
+      margin: revert;
+      justify-content: space-between;
+
+      &::after {
+        @include separator;
+        content: '';
+        flex-basis: calc(100% - 13em);
+      }
+    }
+  }
 }
 
 @media only screen and (max-width: 1024px) {
   .profile {
     @include flexColumnCenter;
+
+    & .event-list {
+      &__title {
+        @include flexRowCenter;
+        justify-content: space-between;
+        text-align: center;
+
+        &::after {
+          @include separator;
+          content: '';
+          flex-basis: calc(100% - 13em);
+        }
+      }
+    }
 
     &__sidebar {
       position: static;
@@ -80,7 +106,7 @@
 
     &__header {
       &--text {
-        flex-basis: 40vw;
+        flex-basis: 15em;
       }
     }
   }
@@ -91,26 +117,51 @@
 }
 
 @media only screen and (max-width: 768px) {
-  .profile__header {
-    > * {
-      width: calc(100% / 3);
+  .profile {
+    & .event-list {
+      &__title {
+        @include flexRowCenter;
+        font-size: $sub-head;
+        text-align: center;
+
+        &::after {
+          @include separator;
+          content: '';
+          flex-basis: calc(100% / 3);
+          margin-left: 10px;
+        }
+
+        &::before {
+          @include separator;
+          content: '';
+          flex-basis: calc(100% / 3);
+          margin-right: 10px;
+        }
+      }
     }
 
-    &--text {
-      font-size: $sub-head;
-      margin: $smallSpacing;
-      text-align: center;
+    &__header {
+      > * {
+        width: calc(100% / 3);
+      }
+
+      &--text {
+        font-size: $sub-head;
+        margin: $smallSpacing;
+        text-align: center;
+        flex-basis: 7em;
+      }
+
+      &--divider-optional {
+        @include separator;
+        display: block;
+        width: calc(100% / 3);
+      }
     }
 
-    &--divider-optional {
-      @include separator;
-      display: block;
-      width: calc(100% / 3);
+    &__details {
+      grid-template-columns: 12vh auto;
+      column-gap: 2vh;
     }
-  }
-
-  .profile__details {
-    grid-template-columns: 12vh auto;
-    column-gap: 2vh;
   }
 }
