@@ -1,15 +1,11 @@
-import React, { useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import React from 'react'
 import { GoogleLogin } from 'react-google-login'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import { authenticateUser } from '../../redux/actions'
-import { AppState } from '../../Types'
 
 const GoogleUserLogin = () => {
   const GOOGLE_CLIENT = process.env.REACT_APP_GOOGLE_API_KEY as string
-  const { created_at, user_id } = useSelector((state: AppState) => state.user)
-  const history = useHistory()
   const dispatch = useDispatch()
 
   const responseSuccessGoogle = (response: any) => {
@@ -23,11 +19,6 @@ const GoogleUserLogin = () => {
     )
     console.log(response)
   }
-
-  useEffect(() => {
-    const diff = new Date().getTime() - new Date(created_at).getTime()
-    if (diff < 6000) history.push(`/user/${user_id}/account-setup`)
-  }, [created_at])
 
   return (
     <GoogleLogin
