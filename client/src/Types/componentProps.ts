@@ -43,6 +43,7 @@ export type IconButtonProps = {
   modifier?: 'primary' | 'secondary'
   onClick?: (() => void) | ((id: any) => void)
   id?: string
+  disabled?: boolean
 }
 
 export type AutoCompleteProps = {

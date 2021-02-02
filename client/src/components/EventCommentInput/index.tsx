@@ -37,6 +37,7 @@ const EventCommentInput = ({ eventId }: EventCommentInputProps) => {
         icon={faPaperPlane}
         modifier='secondary'
         size='lg'
+        disabled={fields.comment.length === 0}
       />
     </form>
   )
