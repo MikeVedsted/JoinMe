@@ -1,0 +1,56 @@
+@import '../../SCSS/config';
+
+.nav {
+  @include flexSpaceBetween;
+  width: 100%;
+  max-width: 100vw;
+  height: 100px;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+
+  &__overlay {
+    background: rgba(255, 255, 255, 0.925);
+    border-bottom: 1.5px solid $textDark;
+  }
+
+  &__logo {
+    height: $logoSize;
+    margin-left: $largeSpacing;
+  }
+
+  &__options {
+    @include flexCenter;
+    padding: 0 $largeSpacing;
+  }
+
+  &__icon {
+    color: $secondary;
+    font-size: $heading;
+    margin: auto $smallSpacing auto 0;
+    cursor: pointer;
+  }
+
+  &__login {
+    margin-right: $largeSpacing;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .nav {
+    height: 80px;
+
+    &__logo {
+      margin-left: $smallSpacing;
+    }
+
+    &__icon {
+      font-size: $sub-head;
+      margin: auto $smallSpacingMobile;
+    }
+
+    &__profile-image {
+      margin: auto $smallSpacingMobile;
+    }
+  }
+}

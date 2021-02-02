@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 
 import App from './App'
 import makeStore from './redux/store'
+import './util/fontawesome'
 import './index.scss'
 
 const store = makeStore()

@@ -1,13 +1,24 @@
-import React from 'react'
-import { Route, Redirect } from 'react-router-dom'
-import { ProtectedRouteProps, AppState } from '../types'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Route, Redirect, useLocation } from 'react-router-dom'
+
+import { clearErrors } from '../redux/actions/error'
+import { verifyToken } from '../redux/actions/auth'
+import { ProtectedRouteProps, AppState } from '../Types'
 
 const ProtectedRoute = ({
   component: Component,
   ...rest
 }: ProtectedRouteProps) => {
-  let { isAuthenticated } = useSelector((state: AppState) => state.auth)
+  const location = useLocation()
+  const dispatch = useDispatch()
+  const { user } = useSelector((state: AppState) => state)
+  const { isAuthenticated } = useSelector((state: AppState) => state.auth)
+
+  useEffect(() => {
+    dispatch(clearErrors())
+    dispatch(verifyToken())
+  }, [location.pathname, dispatch])
 
   return (
     <Route
@@ -16,9 +27,7 @@ const ProtectedRoute = ({
         isAuthenticated ? (
           <Component {...props} />
         ) : (
-          <Redirect
-            to={{ pathname: '/login', state: { from: props.location } }}
-          />
+          <Redirect to={{ pathname: '/get-started' }} />
         )
       }
     />

@@ -1,0 +1,29 @@
+@import '../../SCSS/config';
+
+.comment {
+  @include borderRadiusSmall;
+  display: flex;
+  padding: $smallSpacing;
+  background-color: $backgroundDim;
+
+  &__link {
+    @include link;
+  }
+
+  &__user {
+    @include text;
+    margin: 0;
+    padding: 0 $smallSpacing;
+  }
+
+  &__date {
+    color: $textDim;
+    font-size: $subtitle;
+  }
+
+  &__text {
+    @include text;
+    margin: 0;
+    padding: 0 $smallSpacing;
+  }
+}

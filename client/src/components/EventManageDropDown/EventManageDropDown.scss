@@ -1,0 +1,34 @@
+@import '../../SCSS/config';
+
+.manage-control {
+  color: $textDark;
+  position: absolute;
+  top: $smallSpacing;
+  right: 0;
+  cursor: pointer;
+}
+
+.manage-dropdown {
+  @include borderRadiusSmall;
+  @include shadow;
+  width: fit-content;
+  position: absolute;
+  right: $smallSpacing;
+  padding: 0;
+  overflow: hidden;
+  background-color: white;
+
+  &__item {
+    @include text;
+    font-size: 14px;
+    font-weight: bold;
+    padding: $smallSpacingMobile $smallSpacing;
+    cursor: pointer;
+    list-style: none;
+    transition: 0.3s ease-in-out;
+
+    &:hover {
+      background-color: $secondary;
+    }
+  }
+}

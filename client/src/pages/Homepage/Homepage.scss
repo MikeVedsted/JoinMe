@@ -1,0 +1,33 @@
+@import '../../SCSS/config';
+
+.homepage {
+  padding: $pagePadding;
+  display: flex;
+
+  &__left-column {
+    flex-grow: 1;
+  }
+
+  &__right-column {
+    @include flexColumnCenter;
+    flex-grow: 4;
+    padding-left: $largeSpacing;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .homepage {
+    display: block;
+    padding: $pagePadding;
+
+    &__right-column {
+      padding: 0;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .homepage {
+    padding: $pagePaddingMobile;
+  }
+}

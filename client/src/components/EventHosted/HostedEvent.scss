@@ -1,0 +1,38 @@
+@import '../../SCSS/config';
+
+.hosted-event {
+  @include flexColumn;
+  max-width: 800px;
+
+  &__content {
+    display: flex;
+  }
+
+  &__buttons {
+    & * {
+      margin: 0 0 calc(#{$eventImageSize}/ 5 / 3) 0;
+      width: 100%;
+      height: calc(#{$eventImageSize}/ 5);
+    }
+  }
+
+  &__line {
+    @include separator;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .hosted-event {
+    &__content {
+      display: block;
+    }
+
+    &__buttons {
+      margin: $smallSpacingMobile 0;
+      & * {
+        margin: 0 0 $smallSpacingMobile;
+        height: $buttonHeightMobile;
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+@import '../../SCSS/config';
+
+.my-events {
+  padding: $pagePadding;
+  display: flex;
+
+  &__left-column {
+    flex-grow: 1;
+  }
+
+  &__right-column {
+    @include flexColumnCenter;
+    flex-grow: 4;
+    padding-left: $largeSpacing;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .my-events {
+    display: block;
+    padding: $pagePaddingMobile;
+
+    &__right-column {
+      padding-left: 0;
+    }
+  }
+}

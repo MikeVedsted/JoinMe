@@ -1,0 +1,31 @@
+@import '../../SCSS/config';
+
+.participant {
+  @include flexSpaceBetween;
+  width: 100%;
+  margin-bottom: $smallSpacingMobile;
+
+  &__user-info {
+    @include flexStart;
+    align-items: center;
+    width: 260px;
+  }
+
+  &__link {
+    text-decoration: none;
+  }
+
+  &__name {
+    @include text;
+    @include link;
+    font-weight: bold;
+    margin-left: $smallSpacingMobile;
+  }
+
+  &__delete {
+    @include iconHoverEffect;
+    font-size: $sub-head;
+    color: $primary;
+    cursor: pointer;
+  }
+}

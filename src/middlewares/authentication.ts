@@ -1,24 +1,44 @@
 import { Request, Response, NextFunction } from 'express'
 import JWT from 'jsonwebtoken'
-import { JWT_SECRET } from '../util/secrets'
 
-export const isAuthenticated = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  const token = req.header('x-auth-token')
-  if (!token) {
-    return res.status(401).json({
-      message: 'No id token, authorization denied'
-    })
-  }
+import { AuthRequest } from '../types'
+import { JWT_SECRET, JWT_REFRESH_SECRET } from '../util/secrets'
+import { generateAccessToken } from '../helpers/generateToken'
+import db from '../db'
+
+export const isAuthenticated = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
-    // const decoded = JWT.verify(token, JWT_SECRET);
-    // req.user = decoded;
-    next()
-  } catch (err) {
-    res.status(400).json({ message: 'Token invalid' })
+    const accessToken = req.cookies['x-auth-access-token']
+    const refreshToken = req.cookies['x-auth-refresh-token']
+    if (!accessToken || !refreshToken) {
+      throw 'No Valid Token!'
+    } else {
+      JWT.verify(accessToken, JWT_SECRET, async (err: any, decoded: any) => {
+        if (err) {
+          JWT.verify(refreshToken, JWT_REFRESH_SECRET, async (err: any, decoded: any) => {
+            if (err) {
+              res.json({ message: err.message })
+            } else {
+              const newAccessToken = generateAccessToken(decoded.sub)
+              res.cookie('x-auth-access-token', newAccessToken)
+              const DBResponse = await db.query('SELECT * FROM userk WHERE user_id = $1', [
+                decoded.sub
+              ])
+              const authenticatedUser = DBResponse.rows[0]
+              req.user = authenticatedUser
+              next()
+            }
+          })
+        } else {
+          const DBResponse = await db.query('SELECT * FROM userk WHERE user_id = $1', [decoded.sub])
+          const authenticatedUser = DBResponse.rows[0]
+          req.user = authenticatedUser
+          next()
+        }
+      })
+    }
+  } catch (error) {
+    res.json({ status: 'error', message: error })
   }
 }
 

@@ -1,0 +1,26 @@
+@import '../../SCSS/config';
+
+.interested-event {
+  @include flexColumn;
+  max-width: 800px;
+
+  &__description {
+    @include text;
+  }
+
+  &__line {
+    @include separator;
+  }
+
+  &__buttons {
+    @include twoItemsInline;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .interested-event {
+    &__buttons {
+      @include columnFullWidthItems;
+    }
+  }
+}

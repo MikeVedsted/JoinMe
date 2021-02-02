@@ -1,0 +1,59 @@
+@import '../../SCSS/config';
+
+.button {
+  @include buttonText;
+  @include borderRadiusSmall;
+  margin: calc(#{$smallSpacingMobile}/ 2) 0;
+  padding: $smallSpacingMobile;
+  background-color: $default;
+  height: $buttonHeight;
+  border: 1px solid $default;
+  flex-grow: 1;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+
+  &--disabled {
+    opacity: 0.7;
+  }
+
+  &--primary {
+    background-color: $primary;
+    border-color: $primary;
+  }
+
+  &--primary:hover {
+    background-color: white;
+    border-color: $primary;
+    color: $primary;
+  }
+
+  &--secondary {
+    background-color: $secondary;
+    border-color: $secondary;
+    color: $textDark;
+  }
+
+  &--secondary:hover {
+    background-color: white;
+    border-color: $secondary;
+  }
+
+  &--inline {
+    background-color: $primary;
+    border-color: $secondary;
+    width: auto;
+    margin: 1em 0;
+    padding: 0 $smallSpacing;
+    border: none;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .button {
+    height: $buttonHeightMobile;
+
+    &--inline {
+      height: auto;
+    }
+  }
+}

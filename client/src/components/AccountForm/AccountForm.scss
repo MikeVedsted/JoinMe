@@ -1,0 +1,5 @@
+@import '../../SCSS/config';
+
+.form {
+  @include formStandard;
+}

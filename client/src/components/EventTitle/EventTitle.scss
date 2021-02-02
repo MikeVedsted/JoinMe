@@ -1,0 +1,10 @@
+@import '../../SCSS/config';
+
+.event-title {
+  @include subheader;
+  margin-top: $smallSpacingMobile;
+
+  &__time {
+    @include dimmedText;
+  }
+}

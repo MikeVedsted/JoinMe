@@ -1,92 +1,200 @@
-import { Response, Request } from 'express'
-import { Pool } from 'pg'
+import { Response } from 'express'
 import jwt from 'jsonwebtoken'
 
-import { PG_USER, PG_HOST, PG_DB, PG_PW, PG_PORT } from '../util/secrets'
-import { GoogleToken } from '../types'
+import {
+  findUserByEmailQ,
+  createUserQ,
+  findUserByIdQ,
+  findAllUsersQ,
+  rawUserkByIdQ,
+  addressIdByLocQ,
+  createAddressQ,
+  updateUserQ,
+  deleteUserQ,
+  findEventRequestsByUserQ,
+  findEventParticipatingQ,
+  findPublicUserQ
+} from '../db/queries'
+import db from '../db'
+import { generateAccessToken, generateRefreshToken } from '../helpers/generateToken'
+import { Address, GoogleToken, User } from '../types'
 
-const pool = new Pool({
-  user: PG_USER,
-  host: PG_HOST,
-  database: PG_DB,
-  password: PG_PW,
-  port: PG_PORT,
-  ssl: {
-    rejectUnauthorized: false
+const googleLogin = async (id_token: string, res: Response) => {
+  const decodedToken = jwt.decode(id_token)
+  const { given_name, family_name, picture, email } = decodedToken as GoogleToken
+  try {
+    const DBResponse = await db.query(findUserByEmailQ, [email])
+    const user: User = DBResponse.rows[0]
+
+    if (!user) {
+      const createUser = await db.query(createUserQ, [picture, given_name, family_name, email])
+      const DBResponse = await db.query(findUserByIdQ, [createUser.rows[0].user_id])
+      const newUser: User = DBResponse.rows[0]
+      const accessToken = generateAccessToken(newUser.user_id)
+      const refreshToken = generateRefreshToken(newUser.user_id)
+      res.cookie('x-auth-access-token', accessToken)
+      res.cookie('x-auth-refresh-token', refreshToken)
+      return newUser
+    } else {
+      const accessToken = generateAccessToken(user.user_id)
+      const refreshToken = generateRefreshToken(user.user_id)
+      res.cookie('x-auth-access-token', accessToken)
+      res.cookie('x-auth-refresh-token', refreshToken)
+      return user
+    }
+  } catch (error) {
+    return error
   }
-})
-
-// FIX: Add correct type to user
-const googleCreate = (user: unknown) => {
-  console.log('googleCreate fired:', user)
 }
 
 const findUserById = async (userId: string) => {
-  console.log('findUserByID fired for id: ', userId)
-}
-
-const findAllUsers = () => {
-  console.log('findAllUsers fired')
-}
-
-const updateUser = async (userId: string, update: string) => {
-  console.log(
-    'Update user fired for userId: ',
-    userId,
-    'update(should be changed from string): ',
-    update
-  )
-}
-
-const deleteUser = (userId: string) => {
-  console.log('Delete user fired for id: ', userId)
-}
-
-const googleLogin = async (req: Request, res: Response) => {
-  const googleToken = req.body
-  const decodedToken = jwt.decode(googleToken)
-  const {
-    given_name,
-    family_name,
-    picture,
-    email
-  } = decodedToken as GoogleToken
   try {
-    const user = await (
-      await pool.query('SELECT * FROM users WHERE email = $1', [email])
-    ).rows
-    if (user.length === 0) {
-      const newUser = await (
-        await pool.query(
-          'INSERT INTO users (profile_image, first_name, last_name, email) VALUES ($1, $2, $3, $4) RETURNING *',
-          [picture, given_name, family_name, email]
-        )
-      ).rows
-      return res.json({
-        user: newUser[0]
-      })
+    const DBResponse = await db.query(findUserByIdQ, [userId])
+    if (DBResponse.rows.length === 0) {
+      throw { status: 404, message: 'No found user' }
     } else {
-      return res.json({
-        user: user[0]
-      })
+      const user: User = DBResponse.rows[0]
+      return user
     }
   } catch (error) {
-    return res.status(404).json({
-      error: error.message
-    })
+    if (error.status) {
+      return error
+    } else {
+      return { status: 500, message: 'Bad Request', error: error }
+    }
   }
 }
 
-const findUserByEmail = async (userEmail: string) => {
-  console.log('Find user fired for email: ', userEmail)
+const findAllUsers = async () => {
+  try {
+    const DBResponse = await db.query(findAllUsersQ)
+    const users: User[] = DBResponse.rows
+    return users
+  } catch (error) {
+    return error
+  }
+}
+
+const updateUser = async (userId: string, update: Partial<User>) => {
+  try {
+    const userResponse = await db.query(rawUserkByIdQ, [userId])
+    const user: User = userResponse.rows[0]
+
+    if (!user) {
+      throw new Error('User not found')
+    }
+
+    const {
+      first_name = user.first_name,
+      last_name = user.last_name,
+      profile_image = user.profile_image,
+      profile_text = user.profile_text,
+      date_of_birth = user.date_of_birth,
+      gender = user.gender
+    } = update
+    const { base_address } = user
+    let addressId: string | Address | undefined = base_address
+
+    if (update.address) {
+      const address: Address = update.address
+      const { street, number, postal_code, city, country, lat, lng } = address
+
+      const addressResponse = await db.query(addressIdByLocQ, [lat, lng])
+
+      if (addressResponse.rowCount === 0) {
+        const newAddress = await db.query(createAddressQ, [
+          street,
+          number,
+          postal_code,
+          city,
+          country,
+          lat,
+          lng
+        ])
+        addressId = newAddress.rows[0].address_id
+      } else {
+        addressId = addressResponse.rows[0].address_id
+      }
+    }
+
+    const updateUser = await db.query(updateUserQ, [
+      userId,
+      first_name,
+      last_name,
+      profile_image,
+      profile_text,
+      addressId,
+      date_of_birth,
+      gender
+    ])
+    const DBResponse = await db.query(findUserByIdQ, [updateUser.rows[0].user_id])
+    const updatedUser: User = DBResponse.rows[0]
+    return updatedUser
+  } catch (error) {
+    return error
+  }
+}
+
+const deleteUser = async (userId: string) => {
+  const DBResponse = await db.query(rawUserkByIdQ, [userId])
+  const user: User = DBResponse.rows[0]
+
+  if (!user) {
+    throw new Error()
+  }
+
+  await db.query(deleteUserQ, [userId])
+  return { message: 'User deleted' }
+}
+
+const getUserCount = async () => {
+  try {
+    const DBResponse = await db.query(findAllUsersQ)
+    const count: number = DBResponse.rows.length
+    return count
+  } catch (error) {
+    return error
+  }
+}
+
+const getInterestedEvents = async (user_id: string) => {
+  try {
+    const DBResponse = await db.query(findEventRequestsByUserQ, [user_id])
+    const events: Event[] = DBResponse.rows
+    return events
+  } catch (error) {
+    return error
+  }
+}
+
+const findParticipatingEvents = async (user_id: string) => {
+  try {
+    const DBResponse = await db.query(findEventParticipatingQ, [user_id])
+    const events: Event[] = DBResponse.rows
+    return events
+  } catch (error) {
+    return error
+  }
+}
+
+const findPublicUserInfo = async (userId: string) => {
+  const DBResponse = await db.query(findPublicUserQ, [userId])
+  if (DBResponse.rows.length > 0) {
+    const publicInfo: Partial<User> = DBResponse.rows[0]
+    return publicInfo
+  } else {
+    throw 'No found user'
+  }
 }
 
 export default {
-  googleCreate,
   findUserById,
-  findUserByEmail,
   findAllUsers,
   updateUser,
   googleLogin,
-  deleteUser
+  deleteUser,
+  getUserCount,
+  getInterestedEvents,
+  findParticipatingEvents,
+  findPublicUserInfo
 }

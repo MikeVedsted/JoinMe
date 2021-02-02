@@ -1,0 +1,14 @@
+@import '../../SCSS/config';
+
+.search-box {
+  @include borderRadiusSmall;
+  @include flexColumn;
+  padding: $smallSpacing;
+  background-color: $textLight;
+
+  &__title {
+    @include subheader;
+    text-align: center;
+    margin: 0 0 $smallSpacing;
+  }
+}

@@ -1,6 +1,7 @@
-import logger from './logger'
 import dotenv from 'dotenv'
 import fs from 'fs'
+
+import logger from './logger'
 
 if (fs.existsSync('.env')) {
   logger.debug('Using .env file to supply config environment variables')
@@ -14,7 +15,8 @@ export const ENVIRONMENT = process.env.NODE_ENV
 const prod = ENVIRONMENT === 'production'
 
 export const SESSION_SECRET = process.env['SESSION_SECRET'] as string
-export const JWT_SECRET = process.env['JWT_SECRET']
+export const JWT_SECRET = process.env['JWT_SECRET'] as string
+export const JWT_REFRESH_SECRET = process.env['JWT_REFRESH_SECRET'] as string
 export const GOOGLE_CLIENT_ID = process.env['GOOGLE_CLIENT_ID']
 export const GOOGLE_CLIENT_SECRET = process.env['GOOGLE_CLIENT_SECRET']
 export const PG_USER = process.env['PG_USER']
@@ -27,6 +29,7 @@ export const PG_URI = process.env['PG_URI']
 if (
   !SESSION_SECRET ||
   !JWT_SECRET ||
+  !JWT_REFRESH_SECRET ||
   !GOOGLE_CLIENT_ID ||
   !GOOGLE_CLIENT_SECRET ||
   !PG_USER ||
@@ -46,9 +49,7 @@ if (!PG_URI) {
   if (prod) {
     logger.error('No PG connection string. Set PG_URI environment variable.')
   } else {
-    logger.error(
-      'No PG connection string. Set PG_URI_LOCAL environment variable.'
-    )
+    logger.error('No PG connection string. Set PG_URI_LOCAL environment variable.')
   }
   process.exit(1)
 }

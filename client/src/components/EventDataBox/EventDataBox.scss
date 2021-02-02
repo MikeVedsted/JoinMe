@@ -1,0 +1,38 @@
+@import '../../SCSS/config';
+
+.data-box {
+  @include text;
+  display: inline-block;
+
+  &__link {
+    text-decoration: none;
+    margin: 0 auto 0 ($smallSpacing * 1.5);
+    position: relative;
+
+    &:hover {
+      color: $secondary;
+    }
+
+    &:visited {
+      color: $primary;
+    }
+  }
+
+  &__line {
+    margin: $smallSpacing auto 0 ($smallSpacing * 1.5);
+    position: relative;
+  }
+
+  &__icon {
+    color: $secondary;
+    position: absolute;
+    left: -($smallSpacing * 1.5);
+    bottom: 5px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .data-box {
+    padding: $smallSpacingMobile;
+  }
+}

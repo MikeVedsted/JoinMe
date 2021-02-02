@@ -1,0 +1,42 @@
+@import '../../SCSS/config';
+
+.nav-dropdown {
+  @include borderRadiusSmall;
+  @include text;
+  color: $textLight;
+  background-color: $default;
+  position: absolute;
+  top: $navHeight;
+  right: $largeSpacing;
+
+  &__list {
+    overflow: hidden;
+    width: fit-content;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__separator {
+    margin: 0;
+  }
+
+  &__link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    padding: $smallSpacingMobile $smallSpacing;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $secondary;
+    }
+
+    &--icon {
+      margin: 0 $smallSpacingMobile 0 0;
+    }
+  }
+}

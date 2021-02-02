@@ -1,0 +1,167 @@
+@import '../../SCSS/config';
+
+.profile {
+  @include flexStart;
+  padding: $pagePadding;
+  justify-content: stretch;
+  align-items: flex-start;
+
+  &__sidebar {
+    @include flexCenter;
+    flex-direction: column;
+    flex-basis: 30%;
+    height: fit-content;
+
+    &--image {
+      width: auto;
+      height: 200px;
+      margin-bottom: $smallSpacing;
+    }
+  }
+
+  &__main {
+    @include flexStart;
+    flex-direction: column;
+    margin-left: $largeSpacing;
+    flex-basis: 70%;
+  }
+
+  &__header {
+    @include flexCenter;
+    flex-direction: row;
+
+    &--text {
+      @include header;
+      flex-basis: 15em;
+    }
+
+    &--divider {
+      @include separator;
+    }
+
+    &--divider-optional {
+      display: none;
+    }
+  }
+
+  &__details {
+    display: grid;
+    grid-template-columns: 49% auto;
+    justify-items: start;
+    align-items: center;
+    max-width: 800px;
+    column-gap: 2%;
+
+    &--header {
+      font-family: $nunito;
+    }
+
+    &--text {
+      margin-left: $smallSpacing * 1.5;
+    }
+  }
+
+  & .event-list {
+    &__title {
+      @include flexRowCenter;
+      text-align: left;
+      font-size: 30px;
+      margin: revert;
+      justify-content: space-between;
+
+      &::after {
+        @include separator;
+        content: '';
+        flex-basis: calc(100% - 13em);
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .profile {
+    @include flexColumnCenter;
+
+    & .event-list {
+      &__title {
+        @include flexRowCenter;
+        justify-content: space-between;
+        text-align: center;
+
+        &::after {
+          @include separator;
+          content: '';
+          flex-basis: calc(100% - 13em);
+        }
+      }
+    }
+
+    &__sidebar {
+      position: static;
+    }
+
+    &__main {
+      margin: $largeSpacingMobile 0;
+    }
+
+    &__header {
+      &--text {
+        flex-basis: 15em;
+      }
+    }
+  }
+
+  .profile__sidebar button {
+    max-width: 40vw;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .profile {
+    & .event-list {
+      &__title {
+        @include flexRowCenter;
+        font-size: $sub-head;
+        text-align: center;
+
+        &::after {
+          @include separator;
+          content: '';
+          flex-basis: calc(100% / 3);
+          margin-left: 10px;
+        }
+
+        &::before {
+          @include separator;
+          content: '';
+          flex-basis: calc(100% / 3);
+          margin-right: 10px;
+        }
+      }
+    }
+
+    &__header {
+      > * {
+        width: calc(100% / 3);
+      }
+
+      &--text {
+        font-size: $sub-head;
+        margin: $smallSpacing;
+        text-align: center;
+        flex-basis: 7em;
+      }
+
+      &--divider-optional {
+        @include separator;
+        display: block;
+        width: calc(100% / 3);
+      }
+    }
+
+    &__details {
+      grid-template-columns: 12vh auto;
+      column-gap: 2vh;
+    }
+  }
+}

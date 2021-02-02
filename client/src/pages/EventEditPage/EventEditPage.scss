@@ -1,0 +1,12 @@
+@import '../../SCSS/config';
+
+.event-edit-page {
+  @include flexCenter;
+  padding: $pagePadding;
+}
+
+@media only screen and (max-width: 768px) {
+  .event-edit-page {
+    padding: $pagePaddingMobile;
+  }
+}

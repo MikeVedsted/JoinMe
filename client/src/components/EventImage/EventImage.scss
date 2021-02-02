@@ -1,0 +1,16 @@
+@import '../../SCSS/config';
+
+.event-image {
+  @include borderRadiusSmall;
+  width: 49%;
+  height: $eventImageSize;
+  object-fit: cover;
+  margin-right: 2%;
+}
+
+@media only screen and (max-width: 768px) {
+  .event-image {
+    width: 100%;
+    height: $eventImageSizeMobile;
+  }
+}

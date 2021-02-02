@@ -4,14 +4,19 @@
   "description": "We're a group of full-stack developers, trying our hand at building a social app.  \r Stay tuned as this amazing project is about to take off 🚀  \r <br/>",
   "main": "server.js",
   "scripts": {
-    "test": "test",
+    "test": "jest --forceExit --coverage --verbose false",
     "client": "cd client && npm run start",
     "server": "nodemon ./src/server.ts",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "install-client": "cd client && npm install",
+    "install-all": "concurrently --kill-others-on-fail \"npm install\" \"npm run install-client\"",
     "start": "node ./build/server.ts",
     "build": "tsc",
     "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix",
-    "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write"
+    "prettier-format": "prettier --config .prettierrc \"src/**/*.ts\" --write",
+    "format-backend": "npm run prettier-format && npm run lint",
+    "format-client": "cd client && npm run format-client",
+    "format-all": "npm run format-client && npm run format-backend"
   },
   "repository": {
     "type": "git",
@@ -28,6 +33,8 @@
     "@types/body-parser": "^1.19.0",
     "@types/compression": "^1.7.0",
     "@types/concurrently": "^5.2.1",
+    "@types/cookie-parser": "^1.4.2",
+    "@types/cors": "^2.8.8",
     "@types/eslint": "^7.2.5",
     "@types/express": "^4.17.9",
     "@types/express-session": "^1.17.3",
@@ -35,9 +42,6 @@
     "@types/jsonwebtoken": "^8.5.0",
     "@types/lusca": "^1.6.2",
     "@types/pg": "^7.14.7",
-    "@types/react-dom": "^17.0.0",
-    "@types/react-redux": "^7.1.11",
-    "@types/react-router-dom": "^5.1.6",
     "@types/request": "^2.48.5",
     "@types/request-promise": "^4.1.46",
     "@types/winston": "^2.4.4",
@@ -47,17 +51,16 @@
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",
     "concurrently": "^5.3.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "jest": "26.6.0",
     "jsonwebtoken": "^8.5.1",
-    "knex": "^0.21.12",
     "lusca": "^1.6.1",
     "nodemon": "^2.0.6",
-    "passport-google-id-token": "^0.4.7",
     "pg": "^8.5.1",
-    "react-google-login": "^5.1.25",
     "ts-jest": "^26.4.4",
     "ts-node": "^9.0.0",
     "typescript": "^4.1.2",
@@ -65,16 +68,23 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run prettier-format && npm run lint"
+      "pre-commit": "npm run format-all"
     }
   },
   "devDependencies": {
+    "@types/supertest": "^2.0.10",
+    "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^4.9.0",
     "@typescript-eslint/parser": "^4.9.0",
     "eslint": "^7.14.0",
     "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-jest": "^24.1.3",
     "eslint-plugin-prettier": "^3.1.4",
     "husky": "^4.3.0",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "supertest": "^6.0.1"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }

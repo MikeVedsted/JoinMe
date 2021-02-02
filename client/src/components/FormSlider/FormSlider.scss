@@ -1,0 +1,53 @@
+@import '../../SCSS/config';
+
+.slider {
+  @include text;
+  position: relative;
+
+  &__value {
+    font-size: $subtitle;
+    color: $primary;
+    position: absolute;
+    top: $smallSpacing;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &__range {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 2px;
+    outline: none;
+    margin: $smallSpacing 0 0;
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      background: $primary;
+      border-radius: 3px;
+      height: 13px;
+      width: 17px;
+      cursor: pointer;
+    }
+
+    &::-moz-range-thumb {
+      appearance: none;
+      background: $primary;
+      border-radius: 3px;
+      height: 13px;
+      width: 17px;
+      cursor: pointer;
+    }
+  }
+
+  &__subset-labels {
+    @include flexSpaceBetween;
+    font-size: $subtitle;
+    font-style: italic;
+
+    &--text {
+      margin: 0;
+    }
+  }
+}

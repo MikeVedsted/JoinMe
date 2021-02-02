@@ -1,0 +1,62 @@
+@import '../../SCSS/config';
+
+.confirmed-event {
+  @include flexColumn;
+  max-width: 800px;
+
+  &__content {
+    display: flex;
+  }
+
+  &__details {
+    display: flex;
+  }
+
+  &__description {
+    @include text;
+    width: 66%;
+    margin: 0 0 0 $smallSpacing;
+    padding-left: $smallSpacing;
+    border-left: 1.5px solid $textDim;
+  }
+
+  &__buttons {
+    & * {
+      margin: 0 0 calc(#{$eventImageSize}/ 4 / 2) 0;
+      width: 100%;
+      height: calc(#{$eventImageSize}/ 4);
+    }
+  }
+
+  &__line {
+    @include separator;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .confirmed-event {
+    &__content {
+      display: block;
+    }
+
+    &__details {
+      display: block;
+    }
+
+    &__description {
+      width: 100%;
+      margin: $smallSpacingMobile 0 0;
+      padding: 0;
+      border: none;
+    }
+
+    &__buttons {
+      @include columnFullWidthItems;
+      margin: $smallSpacingMobile 0;
+      & * {
+        margin: 0 0 $smallSpacingMobile;
+        height: $buttonHeightMobile;
+      }
+    }
+  }
+}
