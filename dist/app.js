@@ -10,13 +10,12 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const lusca_1 = __importDefault(require("lusca"));
 const cors_1 = __importDefault(require("cors"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
-const secrets_1 = require("./util/secrets");
 const user_1 = __importDefault(require("./routers/user"));
 const event_1 = __importDefault(require("./routers/event"));
 const comment_1 = __importDefault(require("./routers/comment"));
 const request_1 = __importDefault(require("./routers/request"));
 const app = express_1.default();
-app.set('port', process.env.PORT || 5000);
+app.set('port', process.env.PORT);
 app.use(express_session_1.default({
     secret: process.env.SESSION_SECRET || secrets_1.SESSION_SECRET,
     resave: false,

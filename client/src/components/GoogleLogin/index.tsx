@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { authenticateUser } from '../../redux/actions'
 
 const GoogleUserLogin = () => {
-  const GOOGLE_CLIENT = process.env.REACT_APP_GOOGLE_API_KEY as string
+  const GOOGLE_CLIENT = process.env.GOOGLE_CLIENT_ID as string
   const dispatch = useDispatch()
 
   const responseSuccessGoogle = (response: any) => {
