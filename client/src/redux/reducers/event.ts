@@ -2,9 +2,9 @@ import {
   EventState,
   EventActions,
   FETCH_ALL_EVENTS_SUCCESS,
-  FETCH_HOSTED_EVENT_SUCCESS,
-  FETCH_REQUESTED_EVENT_SUCCESS,
-  FETCH_CONFIRMED_EVENT_SUCCESS,
+  FETCH_HOSTED_EVENTS_SUCCESS,
+  FETCH_REQUESTED_EVENTS_SUCCESS,
+  FETCH_CONFIRMED_EVENTS_SUCCESS,
   END_EVENT_SUCCESS,
   CANCEL_REQUEST_SUCCESS,
   GET_EVENT_COMMENTS_SUCCESS,
@@ -27,31 +27,31 @@ export default function event(
     case FETCH_ALL_EVENTS_SUCCESS:
       let { allEvents } = action.payload
       return { ...state, allEvents: allEvents }
-    case FETCH_HOSTED_EVENT_SUCCESS:
+    case FETCH_HOSTED_EVENTS_SUCCESS:
       let { hostedEvents } = action.payload
       return { ...state, hostedEvents: hostedEvents }
-    case FETCH_REQUESTED_EVENT_SUCCESS:
+    case FETCH_REQUESTED_EVENTS_SUCCESS:
       let { requestedEvents } = action.payload
       return { ...state, requestedEvents: requestedEvents }
-    case FETCH_CONFIRMED_EVENT_SUCCESS:
+    case FETCH_CONFIRMED_EVENTS_SUCCESS:
       let { confirmedEvents } = action.payload
       return { ...state, confirmedEvents: confirmedEvents }
     case END_EVENT_SUCCESS:
-      let { eventId } = action.payload
-      let all = state.allEvents
-      let hosted = state.hostedEvents
-      let indexAll = state.allEvents.findIndex(
-        (event) => (event.event_id = eventId)
+      const endId = action.payload.eventId
+      let allWithoutEnded = [...state.allEvents]
+      let hostedWithoutEnded = [...state.hostedEvents]
+      const indexAll = state.allEvents.findIndex(
+        (event) => (event.event_id = endId)
       )
       const indexHosted = state.hostedEvents.findIndex(
-        (event) => (event.event_id = eventId)
+        (event) => (event.event_id = endId)
       )
-      all.splice(indexAll, 1)
-      hosted.splice(indexHosted, 1)
+      allWithoutEnded.splice(indexAll, 1)
+      hostedWithoutEnded.splice(indexHosted, 1)
       return {
         ...state,
-        allEvents: all,
-        hostedEvents: hosted
+        allEvents: allWithoutEnded,
+        hostedEvents: hostedWithoutEnded
       }
     case CANCEL_REQUEST_SUCCESS:
       let { requestId } = action.payload
@@ -65,23 +65,23 @@ export default function event(
         requestedEvents: requested
       }
     case GET_EVENT_COMMENTS_SUCCESS:
-      eventId = action.payload.eventId
-      indexAll = state.allEvents.findIndex(
-        (event) => event.event_id === eventId
+      const eventToPopulate = action.payload.eventId
+      const { comments } = action.payload
+      const eventIndex = state.allEvents.findIndex(
+        (event) => event.event_id === eventToPopulate
       )
-      let { comments } = action.payload
-      all = state.allEvents
-      all[indexAll].comments = comments
-      return { ...state, allEvents: all }
+      const allWithComments = [...state.allEvents]
+      allWithComments[eventIndex].comments = comments
+      return { ...state, allEvents: allWithComments }
     case ADD_COMMENT:
-      let { comment } = action.payload
-      eventId = action.payload.comment.event
-      indexAll = state.allEvents.findIndex(
-        (event) => event.event_id === eventId
+      const { comment } = action.payload
+      const eventToAddTo = action.payload.comment.event
+      const eventIndexAll = state.allEvents.findIndex(
+        (event) => event.event_id === eventToAddTo
       )
-      all = [...state.allEvents]
-      all[indexAll].comments.push(comment)
-      return { ...state, allEvents: all }
+      const allWithComment = [...state.allEvents]
+      allWithComment[eventIndexAll].comments.push(comment)
+      return { ...state, allEvents: allWithComment }
     default:
       return state
   }

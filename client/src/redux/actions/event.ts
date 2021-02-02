@@ -14,9 +14,9 @@ import {
   EventSubmission,
   EventObject,
   FETCH_ALL_EVENTS_SUCCESS,
-  FETCH_HOSTED_EVENT_SUCCESS,
-  FETCH_REQUESTED_EVENT_SUCCESS,
-  FETCH_CONFIRMED_EVENT_SUCCESS,
+  FETCH_HOSTED_EVENTS_SUCCESS,
+  FETCH_REQUESTED_EVENTS_SUCCESS,
+  FETCH_CONFIRMED_EVENTS_SUCCESS,
   END_EVENT_SUCCESS,
   CANCEL_REQUEST_SUCCESS,
   GET_EVENT_COMMENTS_SUCCESS,
@@ -71,7 +71,7 @@ const fetchAllEventsSuccess = (allEvents: EventObject[]) => {
 
 const fetchHostedEventsSuccess = (hostedEvents: EventObject[]) => {
   return {
-    type: FETCH_HOSTED_EVENT_SUCCESS,
+    type: FETCH_HOSTED_EVENTS_SUCCESS,
     payload: {
       hostedEvents
     }
@@ -80,7 +80,7 @@ const fetchHostedEventsSuccess = (hostedEvents: EventObject[]) => {
 
 const fetchRequestedEventsSuccess = (requestedEvents: EventObject[]) => {
   return {
-    type: FETCH_REQUESTED_EVENT_SUCCESS,
+    type: FETCH_REQUESTED_EVENTS_SUCCESS,
     payload: {
       requestedEvents
     }
@@ -88,7 +88,7 @@ const fetchRequestedEventsSuccess = (requestedEvents: EventObject[]) => {
 }
 const fetchConfirmedEventsSuccess = (confirmedEvents: EventObject[]) => {
   return {
-    type: FETCH_CONFIRMED_EVENT_SUCCESS,
+    type: FETCH_CONFIRMED_EVENTS_SUCCESS,
     payload: {
       confirmedEvents
     }

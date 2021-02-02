@@ -19,9 +19,9 @@ export type AppState = {
 // ====== //
 
 export const FETCH_ALL_EVENTS_SUCCESS = 'FETCH_ALL_EVENTS_SUCCESS'
-export const FETCH_HOSTED_EVENT_SUCCESS = 'FETCH_HOSTED_EVENT_SUCCESS'
-export const FETCH_REQUESTED_EVENT_SUCCESS = 'FETCH_REQUESTED_EVENT_SUCCESS'
-export const FETCH_CONFIRMED_EVENT_SUCCESS = 'FETCH_CONFIRMED_EVENT_SUCCESS'
+export const FETCH_HOSTED_EVENTS_SUCCESS = 'FETCH_HOSTED_EVENTS_SUCCESS'
+export const FETCH_REQUESTED_EVENTS_SUCCESS = 'FETCH_REQUESTED_EVENTS_SUCCESS'
+export const FETCH_CONFIRMED_EVENTS_SUCCESS = 'FETCH_CONFIRMED_EVENTS_SUCCESS'
 export const END_EVENT_SUCCESS = 'END_EVENT_SUCCESS'
 export const CANCEL_REQUEST_SUCCESS = 'CANCEL_REQUEST_SUCCESS'
 export const ADD_COMMENT = 'ADD_COMMENT'
@@ -52,21 +52,21 @@ export type FetchAllEventSuccess = {
 }
 
 export type FetchHostedEventSuccess = {
-  type: typeof FETCH_HOSTED_EVENT_SUCCESS
+  type: typeof FETCH_HOSTED_EVENTS_SUCCESS
   payload: {
     hostedEvents: EventObject[]
   }
 }
 
 export type FetchRequestedEventSuccess = {
-  type: typeof FETCH_REQUESTED_EVENT_SUCCESS
+  type: typeof FETCH_REQUESTED_EVENTS_SUCCESS
   payload: {
     requestedEvents: EventObject[]
   }
 }
 
 export type FetchConfirmedEventSuccess = {
-  type: typeof FETCH_CONFIRMED_EVENT_SUCCESS
+  type: typeof FETCH_CONFIRMED_EVENTS_SUCCESS
   payload: {
     confirmedEvents: EventObject[]
   }
