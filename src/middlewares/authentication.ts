@@ -20,7 +20,7 @@ export const isAuthenticated = async (req: AuthRequest, res: Response, next: Nex
               res.json({ message: err.message })
             } else {
               const newAccessToken = generateAccessToken(decoded.sub)
-              res.cookie('x-auth-access-token', newAccessToken)
+              res.cookie('x-auth-access-token', newAccessToken, { sameSite: 'none', secure: true })
               const DBResponse = await db.query('SELECT * FROM userk WHERE user_id = $1', [
                 decoded.sub
               ])
