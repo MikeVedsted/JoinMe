@@ -32,14 +32,24 @@ const googleLogin = async (id_token: string, res: Response) => {
       const newUser: User = DBResponse.rows[0]
       const accessToken = generateAccessToken(newUser.user_id)
       const refreshToken = generateRefreshToken(newUser.user_id)
-      res.cookie('x-auth-access-token', accessToken, { sameSite: 'none', secure: true })
-      res.cookie('x-auth-refresh-token', refreshToken, { sameSite: 'none', secure: true })
+      if (process.env.NODE_ENV === 'production') {
+        res.cookie('x-auth-access-token', accessToken, { sameSite: 'none', secure: true })
+        res.cookie('x-auth-refresh-token', refreshToken, { sameSite: 'none', secure: true })
+      } else {
+        res.cookie('x-auth-access-token', accessToken)
+        res.cookie('x-auth-refresh-token', refreshToken)
+      }
       return newUser
     } else {
       const accessToken = generateAccessToken(user.user_id)
       const refreshToken = generateRefreshToken(user.user_id)
-      res.cookie('x-auth-access-token', accessToken, { sameSite: 'none', secure: true })
-      res.cookie('x-auth-refresh-token', refreshToken, { sameSite: 'none', secure: true })
+      if (process.env.NODE_ENV === 'production') {
+        res.cookie('x-auth-access-token', accessToken, { sameSite: 'none', secure: true })
+        res.cookie('x-auth-refresh-token', refreshToken, { sameSite: 'none', secure: true })
+      } else {
+        res.cookie('x-auth-access-token', accessToken)
+        res.cookie('x-auth-refresh-token', refreshToken)
+      }
       return user
     }
   } catch (error) {
