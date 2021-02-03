@@ -40,7 +40,7 @@ app.use(lusca.xframe('SAMEORIGIN'))
 app.use(lusca.xssProtection(true))
 
 if (process.env.NODE_ENV === 'production') {
-  app.use('/static', express.static(path.join(__dirname, 'client/build')))
+  app.use(express.static('client/build'))
 }
 
 app.use('/api/v1/users', userRouter)
