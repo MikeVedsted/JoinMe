@@ -16,15 +16,15 @@ const AddressAutoComplete = ({
   required,
   currentAddress
 }: AutoCompleteProps) => {
-  const MAPS_API_KEY =
-    (process.env.GOOGLE_MAPS_KEY as string) ||
-    (process.env.REACT_APP_GOOGLE_MAPS_KEY as string)
+  // const MAPS_API_KEY =
+  //   (process.env.GOOGLE_MAPS_KEY as string) ||
+  //   (process.env.REACT_APP_GOOGLE_MAPS_KEY as string)
 
   const dispatch = useDispatch()
 
   const extractDetails = async (placeId: string) => {
     try {
-      const detailsUrl = `https://maps.googleapis.com/maps/api/geocode/json?place_id=${placeId}&key=${MAPS_API_KEY}`
+      const detailsUrl = `https://maps.googleapis.com/maps/api/geocode/json?place_id=${placeId}&key=AIzaSyDdpyPOcC-0uJRkisYDVkKBp75kVcuE1BY`
       const { data } = await axios.get(detailsUrl)
       const { lat, lng } = data.results[0].geometry.location
       const components = data.results[0].address_components
