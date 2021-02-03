@@ -2,8 +2,7 @@ import { Pool } from 'pg'
 import { PG_URI, PG_URI_LOCAL } from '../../src/util/secrets'
 
 const pool = new Pool({
-  connectionString:
-    process.env.DATABASE_URL || PG_URI || PG_URI_LOCAL
+  connectionString: process.env.DATABASE_URL || PG_URI || PG_URI_LOCAL,
   ssl: {
     rejectUnauthorized: false
   }

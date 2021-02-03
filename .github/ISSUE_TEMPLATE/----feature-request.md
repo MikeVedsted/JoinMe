@@ -4,7 +4,7 @@ about: Have an idea? Let us know!
 title: "[FEAT]"
 labels: 'Priority: Medium :zap:, Status: Received :inbox_tray:, Type: Enhancement
   :rocket:'
-assignees: Chiranjibichapagain
+assignees: MikeVedsted
 
 ---
 
