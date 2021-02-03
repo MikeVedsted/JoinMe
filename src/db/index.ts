@@ -1,5 +1,5 @@
 import { Pool } from 'pg'
-import { PG_URI, PG_URI_LOCAL } from '../../src/util/secrets'
+import { PG_URI, PG_URI_LOCAL } from '../util/secrets'
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL || PG_URI || PG_URI_LOCAL,
