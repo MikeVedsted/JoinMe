@@ -11,16 +11,21 @@ import userRouter from './routers/user'
 import eventRouter from './routers/event'
 import commentRouter from './routers/comment'
 import requestRouter from './routers/request'
-import { SESSION_SECRET } from './util/secrets'
+import { SESSION_SECRET, SESSION_NAME } from './util/secrets'
 
 const app = express()
 
 app.set('port', process.env.PORT || 5000)
 app.use(
   session({
+    name: process.env.SESSION_NAME,
     secret: process.env.SESSION_SECRET || SESSION_SECRET,
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: {
+      secure: true,
+      httpOnly: true
+    }
   })
 )
 
