@@ -6,8 +6,8 @@ import { authenticateUser } from '../../redux/actions'
 
 const GoogleUserLogin = () => {
   const GOOGLE_CLIENT =
-    (process.env.GOOGLE_CLIENT_ID as string) ||
-    (process.env.REACT_APP_GOOGLE_API_KEY as string)
+    (process.env.REACT_APP_GOOGLE_API_KEY as string) ||
+    '830151949816-6fdv9tqs8h1e9me2rs2aa5l6h9f57lrd.apps.googleusercontent.com'
   const dispatch = useDispatch()
 
   const responseSuccessGoogle = (response: any) => {
