@@ -9,6 +9,7 @@ const express_session_1 = __importDefault(require("express-session"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const lusca_1 = __importDefault(require("lusca"));
 const cors_1 = __importDefault(require("cors"));
+const path_1 = __importDefault(require("path"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const secrets_1 = require("./util/secrets");
 const user_1 = __importDefault(require("./routers/user"));
@@ -34,7 +35,7 @@ app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use(lusca_1.default.xframe('SAMEORIGIN'));
 app.use(lusca_1.default.xssProtection(true));
 if (process.env.NODE_ENV === 'production') {
-    app.use(express_1.default.static('client/build'));
+    app.use('/static', express_1.default.static(path_1.default.join(__dirname, 'client/build')));
 }
 app.use('/api/v1/users', user_1.default);
 app.use('/api/v1/events', event_1.default);

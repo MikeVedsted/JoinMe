@@ -4,6 +4,7 @@ import session from 'express-session'
 import bodyParser from 'body-parser'
 import lusca from 'lusca'
 import cors from 'cors'
+import path from 'path'
 import cookieparser from 'cookie-parser'
 
 import { SESSION_SECRET } from './util/secrets'
@@ -39,7 +40,7 @@ app.use(lusca.xframe('SAMEORIGIN'))
 app.use(lusca.xssProtection(true))
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'))
+  app.use('/static', express.static(path.join(__dirname, 'client/build')))
 }
 
 app.use('/api/v1/users', userRouter)
