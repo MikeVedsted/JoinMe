@@ -39,13 +39,13 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(lusca.xframe('SAMEORIGIN'))
 app.use(lusca.xssProtection(true))
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'))
-}
-
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/events', eventRouter)
 app.use('/api/v1/comments', commentRouter)
 app.use('/api/v1/requests', requestRouter)
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'))
+}
 
 export default app
