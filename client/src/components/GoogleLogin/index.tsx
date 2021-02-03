@@ -5,7 +5,9 @@ import { useDispatch } from 'react-redux'
 import { authenticateUser } from '../../redux/actions'
 
 const GoogleUserLogin = () => {
-  const GOOGLE_CLIENT = process.env.GOOGLE_CLIENT_ID as string
+  const GOOGLE_CLIENT =
+    (process.env.GOOGLE_CLIENT_ID as string) ||
+    (process.env.REACT_APP_GOOGLE_API_KEY as string)
   const dispatch = useDispatch()
 
   const responseSuccessGoogle = (response: any) => {
@@ -22,9 +24,7 @@ const GoogleUserLogin = () => {
 
   return (
     <GoogleLogin
-      clientId={
-        '830151949816-6fdv9tqs8h1e9me2rs2aa5l6h9f57lrd.apps.googleusercontent.com'
-      }
+      clientId={GOOGLE_CLIENT}
       buttonText='Google Login'
       onSuccess={responseSuccessGoogle}
       onFailure={responseFailGoogle}

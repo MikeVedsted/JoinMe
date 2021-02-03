@@ -25,6 +25,7 @@ export const PG_DB = process.env['PG_DB']
 export const PG_PW = process.env['PG_PW']
 export const PG_PORT = process.env['PG_PORT'] as number | undefined
 export const PG_URI = process.env['PG_URI']
+export const PG_URI_LOCAL = process.env['PG_URI_LOCAL']
 
 if (
   !SESSION_SECRET ||
@@ -37,7 +38,8 @@ if (
   !PG_DB ||
   !PG_PW ||
   !PG_PORT ||
-  !PG_URI
+  !PG_URI ||
+  !PG_URI_LOCAL
 ) {
   logger.error(
     'Some environment variable is missing. Make sure to provide all of the following: SESSION_SECRET, JWT_SECRET, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, PG_USER, PG_HOST, PG_DB, PG_PW, PG_PORT, PG_URI'

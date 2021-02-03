@@ -16,7 +16,10 @@ const AddressAutoComplete = ({
   required,
   currentAddress
 }: AutoCompleteProps) => {
-  const MAPS_API_KEY = process.env.GOOGLE_MAPS_KEY
+  const MAPS_API_KEY =
+    (process.env.GOOGLE_MAPS_KEY as string) ||
+    (process.env.REACT_APP_GOOGLE_MAPS_KEY as string)
+
   const dispatch = useDispatch()
 
   const extractDetails = async (placeId: string) => {

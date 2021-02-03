@@ -1,17 +1,17 @@
 import express from 'express'
-import compression from 'compression'
-import session from 'express-session'
-import bodyParser from 'body-parser'
-import lusca from 'lusca'
 import cors from 'cors'
 import path from 'path'
+import lusca from 'lusca'
+import bodyParser from 'body-parser'
+import compression from 'compression'
+import session from 'express-session'
 import cookieparser from 'cookie-parser'
 
-import { SESSION_SECRET } from './util/secrets'
 import userRouter from './routers/user'
 import eventRouter from './routers/event'
 import commentRouter from './routers/comment'
 import requestRouter from './routers/request'
+import { SESSION_SECRET } from './util/secrets'
 
 const app = express()
 
@@ -39,12 +39,11 @@ app.use('/api/v1/events', eventRouter)
 app.use('/api/v1/comments', commentRouter)
 app.use('/api/v1/requests', requestRouter)
 
-// if (process.env.NODE_ENV === 'production') {
-app.use(express.static(path.join(__dirname, 'client/')))
-console.log(__dirname)
-app.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'client/index.html'))
-})
-// }
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'client/')))
+  app.get('/*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'client/index.html'))
+  })
+}
 
 export default app
