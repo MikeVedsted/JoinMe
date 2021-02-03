@@ -28,7 +28,7 @@
   "bugs": {
     "url": "https://github.com/MikeVedsted/JoinMe/issues"
   },
-  "homepage": "https://github.com/MikeVedsted/JoinMe#readme",
+  "homepage": "https://joinme-integrify.herokuapp.com/",
   "dependencies": {
     "@types/async": "^3.2.4",
     "@types/body-parser": "^1.19.0",
