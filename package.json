@@ -11,13 +11,15 @@
     "install-client": "cd client && npm install",
     "install-all": "concurrently --kill-others-on-fail \"npm install\" \"npm run install-client\"",
     "start": "node dist/server.js",
-    "build": "tsc",
+    "build": "tsc && npm run copy-static-assets",
     "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix",
     "prettier-format": "prettier --config .prettierrc \"src/**/*.ts\" --write",
     "format-backend": "npm run prettier-format && npm run lint",
     "format-client": "cd client && npm run format-client",
     "format-all": "npm run format-client && npm run format-backend",
-    "heroku-postbuild": "npm run build && npm run install-client  && cd client && npm run build"
+    "copy-static-assets": "ts-node copyStaticAssets.ts",
+    "build-client": "cd client && npm run build",
+    "heroku-postbuild": "npm run install-client && npm run build-client && npm run build"
   },
   "repository": {
     "type": "git",
@@ -45,6 +47,7 @@
     "@types/pg": "^7.14.7",
     "@types/request": "^2.48.5",
     "@types/request-promise": "^4.1.46",
+    "@types/shelljs": "^0.8.8",
     "@types/winston": "^2.4.4",
     "async": "^3.2.0",
     "axios": "^0.21.0",
@@ -62,8 +65,9 @@
     "lusca": "^1.6.1",
     "nodemon": "^2.0.6",
     "pg": "^8.5.1",
+    "shelljs": "^0.8.4",
     "ts-jest": "^26.4.4",
-    "ts-node": "^9.0.0",
+    "ts-node": "^9.1.1",
     "typescript": "^4.1.2",
     "winston": "^3.3.3"
   },

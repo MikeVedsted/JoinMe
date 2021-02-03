@@ -24,12 +24,7 @@ app.use(
   })
 )
 
-app.use(
-  cors({
-    credentials: true,
-    origin: ['http://localhost:3000']
-  })
-)
+app.use(cors())
 
 app.use(compression())
 app.use(bodyParser.json())
@@ -39,15 +34,16 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(lusca.xframe('SAMEORIGIN'))
 app.use(lusca.xssProtection(true))
 
-// app.use('/api/v1/users', userRouter)
-// app.use('/api/v1/events', eventRouter)
-// app.use('/api/v1/comments', commentRouter)
-// app.use('/api/v1/requests', requestRouter)
+app.use('/api/v1/users', userRouter)
+app.use('/api/v1/events', eventRouter)
+app.use('/api/v1/comments', commentRouter)
+app.use('/api/v1/requests', requestRouter)
 
 // if (process.env.NODE_ENV === 'production') {
-app.use(express.static(path.join(__dirname, 'client/build')))
+app.use(express.static(path.join(__dirname, 'client/')))
+console.log(__dirname)
 app.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'client/build', 'index.html'))
+  res.sendFile(path.join(__dirname, 'client/index.html'))
 })
 // }
 
