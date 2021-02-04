@@ -1,10 +1,10 @@
-name: PR to develop check
+name: PR to master check
 
 on:
   push:
-    branches: [develop]
+    branches: [master]
   pull_request:
-    branches: [develop]
+    branches: [master]
 
 jobs:
   Build:
@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        node-version: [10.x, 12.x, 14.x]
+        node-version: [12.x]
 
     steps:
       - name: Set up Node.js version ${{ matrix.node-version }}
@@ -31,9 +31,21 @@ jobs:
             ${{ runner.os }}-
       - name: Install
         run: npm run install-all
-      - name: Format, lint
-        run: npm run format-all
       # - name: Test
       #   run: npm run test
-      - name: Check postbuild (no install-client)
-        run: npm run build-client && npm run build
+      - name: Check postbuild
+        run: npm run heroku-postbuild
+
+  Deploy:
+    needs: [build]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Deploy
+        uses: akhileshns/heroku-deploy@v3.9.9
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "YOUR APP's NAME" #Must be unique in Heroku
+          heroku_email: "YOUR EMAIL"
