@@ -14,4 +14,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Greeting
-        run: echo 'You just interacted with and action on ${{EXAMPLE_VALUE}}'
+        run: echo 'You just interacted with and action on ${{ env.EXAMPLE_VALUE }}'
