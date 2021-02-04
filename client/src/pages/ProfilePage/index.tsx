@@ -20,7 +20,6 @@ const ProfilePage = () => {
   const user = useSelector((state: AppState) => state.user)
   const { loading } = useSelector((state: AppState) => state.loading)
   const { error } = useSelector((state: AppState) => state)
-  const [publicMode, setPublicMode] = useState<boolean>()
   const [userInfo, setUserInfo] = useState<Partial<UserState>>({
     user_id: '',
     profile_image: '',
