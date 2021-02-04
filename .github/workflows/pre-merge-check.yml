@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Clean  install
         run: npm ci
-      - name: Format and lint
+      - name: Format, lint
         run: npm run format-all
       - name: Check postbuild
         run: npm run heroku-postbuild
