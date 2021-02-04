@@ -33,5 +33,5 @@ jobs:
       - name: npm ci
         run: npm ci
       - name: build
-        run: npm run build
+        run: npm run heroku-postbuild
       
