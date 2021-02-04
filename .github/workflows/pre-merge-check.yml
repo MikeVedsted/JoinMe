@@ -38,6 +38,14 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Set up cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-modules-
+            ${{ runner.os }}-
       - name: Install
         run: npm run install-all
       # - name: Test
