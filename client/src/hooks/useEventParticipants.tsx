@@ -8,7 +8,7 @@ const useEventParticipants = (eventId: EventId) => {
 
   useEffect(() => {
     fetchParticipants()
-  }, [])
+  })
 
   const fetchParticipants = async () => {
     try {

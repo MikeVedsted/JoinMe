@@ -37,7 +37,7 @@ const useEventDisplay = () => {
 
   useEffect(() => {
     dispatch(fetchAllEvents(searchConditions))
-  }, [])
+  })
 
   return { allEvents, handleFieldChange, handleAddressChange, handleSearch }
 }

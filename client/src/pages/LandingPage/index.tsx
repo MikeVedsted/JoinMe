@@ -23,7 +23,7 @@ const LandingPage = () => {
     user_id && dispatch(closeModal())
     user_id && history.push('/')
     getUserCount()
-  }, [user_id])
+  })
 
   const getUserCount = async () => {
     try {

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import Button from '../Button'
-import Loading from '../Loading'
 import ProfileImage from '../ProfileImage'
 import FormInputField from '../FormInputField'
 import FormInputTextArea from '../FormInputTextArea'
