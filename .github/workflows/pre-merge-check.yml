@@ -23,7 +23,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Clean  install
-        run: npm ci
+        run: npm run install-all
       - name: Format, lint
         run: npm run format-all
       # - name: Check postbuild
