@@ -1,8 +1,6 @@
 name: PR to master check
 
 on:
-  push:
-    branches: [master]
   pull_request:
     branches: [master]
 
@@ -35,17 +33,3 @@ jobs:
       #   run: npm run test
       - name: Check postbuild
         run: npm run heroku-postbuild
-
-  Deploy:
-    needs: [build]
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Deploy
-        uses: akhileshns/heroku-deploy@v3.9.9
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "joinme-integrify"
-          heroku_email: "mikevedsted@gmail.com"
