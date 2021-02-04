@@ -1,0 +1,17 @@
+name: Example CI
+
+on:
+  push:
+    branches: [master, develop]
+  pull_request:
+    branches: [master, develop]
+
+env:
+  EXAMPLE_VALUE: JoinMe
+
+jobs:
+  greeting:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Greeting
+        run: echo 'You just interacted with and action on ${{EXAMPLE_VALUE}}'
