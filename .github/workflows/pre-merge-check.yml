@@ -7,7 +7,7 @@ on:
     branches: [master, develop]
 
 jobs:
-  SetUpNode:
+  Build:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: true
@@ -23,13 +23,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Clean  install
         run: npm ci
-        
-  Build:
-    needs: [SetUpNode]
-    runs-on: ubuntu-latest
-
-    steps:
       - name: Format, lint
         run: npm run format-all
-      - name: Check postbuild
-        run: npm run heroku-postbuild
+      # - name: Check postbuild
+      #   run: npm run heroku-postbuild
