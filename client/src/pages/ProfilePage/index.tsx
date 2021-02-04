@@ -20,7 +20,6 @@ const ProfilePage = () => {
   const user = useSelector((state: AppState) => state.user)
   const { loading } = useSelector((state: AppState) => state.loading)
   const { error } = useSelector((state: AppState) => state)
-  const [publicMode, setPublicMode] = useState<boolean>()
   const [userInfo, setUserInfo] = useState<Partial<UserState>>({
     user_id: '',
     profile_image: '',
@@ -42,13 +41,12 @@ const ProfilePage = () => {
   const handleEditClick = () => {
     history.push(`/user/${userId}/edit`)
   }
-
   async function getUserInfo() {
     try {
       dispatch(setLoading())
       const { data } = await axios.get(`/api/v1/users/${userId}/public`)
       if (data.status === 'error') {
-        throw { status: data.status, message: data.message }
+        dispatch(setErrors(data.status, data.message))
       } else {
         setUserInfo(data)
         dispatch(setLoaded())
@@ -62,12 +60,11 @@ const ProfilePage = () => {
   useEffect(() => {
     dispatch(clearErrors())
     if (userId === user.user_id) {
-      setPublicMode(false)
       setUserInfo(user)
     } else {
-      setPublicMode(true)
       getUserInfo()
     }
+    // eslint-disable-next-line
   }, [userId, user.user_id])
 
   return (

@@ -8,6 +8,7 @@ const useHostedEvents = (userId: UserId) => {
 
   useEffect(() => {
     userId && fetchHostedEvents()
+    // eslint-disable-next-line
   }, [userId])
 
   const fetchHostedEvents = async () => {

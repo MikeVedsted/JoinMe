@@ -1,0 +1,39 @@
+name: PR to develop check
+
+on:
+  push:
+    branches: [develop]
+  pull_request:
+    branches: [develop]
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        node-version: [10.x, 12.x, 14.x]
+
+    steps:
+      - name: Set up Node.js version ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-modules-
+            ${{ runner.os }}-
+      - name: Install
+        run: npm run install-all
+      - name: Format, lint
+        run: npm run format-all
+      # - name: Test
+      #   run: npm run test
+      - name: Check postbuild (no install-client)
+        run: npm run build-client && npm run build

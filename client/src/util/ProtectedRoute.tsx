@@ -24,8 +24,8 @@ const ProtectedRoute = ({
     <Route
       {...rest}
       render={(props) =>
-        isAuthenticated ? (
-          <Component {...props} />
+        user ? (
+          isAuthenticated && <Component {...props} />
         ) : (
           <Redirect to={{ pathname: '/get-started' }} />
         )

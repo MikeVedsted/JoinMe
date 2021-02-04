@@ -8,6 +8,7 @@ const useEventRequests = (eventId: EventId) => {
 
   useEffect(() => {
     fetchRequests()
+    // eslint-disable-next-line
   }, [])
 
   const fetchRequests = async () => {
