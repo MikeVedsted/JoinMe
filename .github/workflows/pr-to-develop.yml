@@ -1,10 +1,10 @@
-name: Pre-merge check
+name: PR to develop check
 
 on:
   push:
-    branches: [master, develop]
+    branches: [develop]
   pull_request:
-    branches: [master, develop]
+    branches: [develop]
 
 jobs:
   Build:
@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        node-version: [10.x, 12.x, 14.x, 15.x]
+        node-version: [10.x, 12.x, 14.x]
 
     env:
       SESSION_SECRET: ${{ secrets.SESSION_SECRET}}
@@ -48,9 +48,9 @@ jobs:
             ${{ runner.os }}-
       - name: Install
         run: npm run install-all
-      # - name: Test
-      #   run: npm run test
       - name: Format, lint
         run: npm run format-all
-      - name: Check postbuild
-        run: npm run heroku-postbuild
+      # - name: Test
+      #   run: npm run test
+      - name: Check postbuild (no install-client)
+        run: npm run build-client && npm run build
