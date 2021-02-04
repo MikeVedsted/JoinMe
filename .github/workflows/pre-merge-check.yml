@@ -15,6 +15,23 @@ jobs:
         node-version: [12.x]
         # node-version: [10.x, 12.x, 14.x, 15.x]
 
+    env:
+      SESSION_SECRET: ${{ secrets.SESSION_SECRET}}
+      SESSION_NAME: ${{ secrets.SESSION_NAME}}
+      JWT_SECRET: ${{ secrets.JWT_SECRET}}
+      PORT: ${{ secrets.PORT}}
+      GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID}}
+      GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET}}
+      GOOGLE_APIS_KEY: ${{ secrets.GOOGLE_APIS_KEY}}
+      PG_USER: ${{ secrets.PG_USER}}
+      PG_HOST: ${{ secrets.PG_HOST}}
+      PG_DB: ${{ secrets.PG_DB}}
+      PG_PW: ${{ secrets.PG_PW}}
+      PG_PORT: ${{ secrets.PG_PORT}}
+      PG_URI: ${{ secrets.PG_URI}}
+      PG_URI_LOCAL: ${{ secrets.PG_URI_LOCAL}}
+      JWT_REFRESH_SECRET: ${{ secrets.JWT_REFRESH_SECRET}}
+
     steps:
       - name: Set up Node.js version ${{ matrix.node-version }}
         uses: actions/setup-node@v1
@@ -26,7 +43,7 @@ jobs:
         run: npm run install-all
       - name: Test
         run: npm run test
-     
+          
         # - name: Format, lint
       #   run: npm run format-all
       # - name: Check postbuild
