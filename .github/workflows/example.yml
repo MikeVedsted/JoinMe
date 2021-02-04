@@ -30,9 +30,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Checkout
         uses: actions/checkout@v2
-      - name: install
-      - run: npm ci
-      - run: npm run install-all
+      - name: npm ci
+        run: npm ci
+      - name: install-all
+        run: npm run install-all
       - name: build
         run: npm run heroku-postbuild
       
