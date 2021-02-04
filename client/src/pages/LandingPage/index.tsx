@@ -23,7 +23,8 @@ const LandingPage = () => {
     user_id && dispatch(closeModal())
     user_id && history.push('/')
     getUserCount()
-  })
+    // eslint-disable-next-line
+  }, [user_id])
 
   const getUserCount = async () => {
     try {

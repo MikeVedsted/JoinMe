@@ -37,7 +37,8 @@ const useEventDisplay = () => {
 
   useEffect(() => {
     dispatch(fetchAllEvents(searchConditions))
-  })
+    // eslint-disable-next-line
+  }, [])
 
   return { allEvents, handleFieldChange, handleAddressChange, handleSearch }
 }

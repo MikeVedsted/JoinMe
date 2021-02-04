@@ -41,30 +41,31 @@ const ProfilePage = () => {
   const handleEditClick = () => {
     history.push(`/user/${userId}/edit`)
   }
-
-  useEffect(() => {
-    async function getUserInfo() {
-      try {
-        dispatch(setLoading())
-        const { data } = await axios.get(`/api/v1/users/${userId}/public`)
-        if (data.status === 'error') {
-          dispatch(setErrors(data.status, data.message))
-        } else {
-          setUserInfo(data)
-          dispatch(setLoaded())
-        }
-      } catch (error) {
-        dispatch(setErrors(error.status, error.message))
+  async function getUserInfo() {
+    try {
+      dispatch(setLoading())
+      const { data } = await axios.get(`/api/v1/users/${userId}/public`)
+      if (data.status === 'error') {
+        dispatch(setErrors(data.status, data.message))
+      } else {
+        setUserInfo(data)
         dispatch(setLoaded())
       }
+    } catch (error) {
+      dispatch(setErrors(error.status, error.message))
+      dispatch(setLoaded())
     }
+  }
+
+  useEffect(() => {
     dispatch(clearErrors())
     if (userId === user.user_id) {
       setUserInfo(user)
     } else {
       getUserInfo()
     }
-  }, [userId, user.user_id, dispatch, user])
+    // eslint-disable-next-line
+  }, [userId, user.user_id])
 
   return (
     <>

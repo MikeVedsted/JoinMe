@@ -8,7 +8,8 @@ const useEventParticipants = (eventId: EventId) => {
 
   useEffect(() => {
     fetchParticipants()
-  })
+    // eslint-disable-next-line
+  }, [])
 
   const fetchParticipants = async () => {
     try {
@@ -18,6 +19,7 @@ const useEventParticipants = (eventId: EventId) => {
       console.log(error)
     }
   }
+
   return [participants]
 }
 
