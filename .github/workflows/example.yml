@@ -31,7 +31,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: install
-        run: npm run install-all
+      - run: npm ci
+      - run: npm run install-all
       - name: build
         run: npm run heroku-postbuild
       
