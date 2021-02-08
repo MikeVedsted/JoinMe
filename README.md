@@ -3,6 +3,8 @@ We're a group of full-stack developers, trying our hand at building a social app
 Stay tuned as this amazing project is about to take off 🚀  
 <br/>
 
+A working demo can be found [here](https://joinme-integrify.herokuapp.com/)!
+
 ## Intention ✨  
 This project is first and foremost intended as a demo project.   
 The intention is to gain experience working on a project as a group, while working towards a product built on technologies that are (at the start of the project) both familiar and unfamiliar to the contributing developers.  
